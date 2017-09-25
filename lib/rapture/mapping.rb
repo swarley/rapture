@@ -29,7 +29,7 @@ module Rapture::Mapping
              elsif data.is_a?(String)
                Oj.load(data, symbol_keys: true)
              else
-               raise ArugmentError, 'Must pass a hash or a JSON string'
+               raise ArgumentError, 'Must pass a hash or a JSON string'
              end
 
       instance = new
