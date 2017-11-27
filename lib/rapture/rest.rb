@@ -13,6 +13,11 @@ module Rapture::REST
     BASE_URL
   end
 
+  # Returns the required User-Agent string
+  def user_agent
+    "DiscordBot (https://github.com/z64/rapture, #{Rapture::VERSION})"
+  end
+
   # Faraday client to issue all requests.
   private def faraday
     @faraday ||= Faraday.new(url: base_url) do |faraday|
@@ -22,7 +27,7 @@ module Rapture::REST
         logger.filter(/Authorization: .*/, 'REDACTED')
       end
 
-      faraday.headers['User-Agent'] = "DiscordBot (https://github.com/z64/rapture, #{Rapture::VERSION})"
+      faraday.headers['User-Agent'] = user_agent
 
       faraday.adapter Faraday.default_adapter
     end
