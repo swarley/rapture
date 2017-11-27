@@ -1,4 +1,4 @@
-require 'rapture/mappings/user'
+# frozen_string_literal: true
 
 module Rapture
   # The `Client` abstracts away the token from making REST API requests
