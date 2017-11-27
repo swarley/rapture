@@ -36,11 +36,12 @@ module Rapture::Mapping
 
     # Creates a new instance of this object from a hash
     # @param hash [Hash] hash to convert into a new object
-    def from_h(hash)
+    # @param converter [Symbol] converter to use on the hash values, i.e. :from_json
+    def from_h(hash, converter = nil)
       instance = new
 
       hash.each do |k, v|
-        # value = instance.convert(v, k, :from_json)
+        v = instance.convert(v, k, converter) if converter
         instance.send(:"#{k}=", v)
       end
 
