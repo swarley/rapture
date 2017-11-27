@@ -6,7 +6,7 @@ Oj.mimic_JSON
 
 # DSL module for mapping objects to JSON
 module Rapture::Mapping
-  # Hook to extend DSL methods onto including class
+  # @!visibility private
   def self.included(object)
     object.extend(DSL)
   end
