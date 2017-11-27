@@ -13,9 +13,24 @@ module Rapture::REST
     BASE_URL
   end
 
+  # Faraday client to issue all requests.
+  private def faraday
+    @faraday ||= Faraday.new(url: base_url) do |faraday|
+      faraday.authorization(@type, @token)
+
+      faraday.response :logger do |logger|
+        logger.filter(/Authorization: .*/, 'REDACTED')
+      end
+
+      faraday.headers['User-Agent'] = "DiscordBot (https://github.com/z64/rapture, #{Rapture::VERSION})"
+
+      faraday.adapter Faraday.default_adapter
+    end
+  end
+
   # Makes a raw request to the API, without any rate limit handling
   def raw_request(method, endpoint, body = nil, headers = {})
-    @faraday.run_request(method, endpoint, body, headers)
+    faraday.run_request(method, endpoint, body, headers)
   end
 
   # Makes a request to the API, applying handling for preemptive rate limits
