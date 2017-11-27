@@ -45,9 +45,9 @@ module Rapture::HTTP
     def headers=(headers)
       @global = headers['x-ratelimit-global']
 
-      @limit = headers['X-rateLimit-limit']&.to_i
+      @limit = headers['x-ratelimit-limit']&.to_i
 
-      @remaining = headers['x-rateLimit-remaining']&.to_i
+      @remaining = headers['x-ratelimit-remaining']&.to_i
 
       @now = Time.rfc2822(headers['date'])
 
