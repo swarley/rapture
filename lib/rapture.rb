@@ -2,6 +2,7 @@
 
 require 'rapture/version'
 require 'rapture/mapping'
+require 'rapture/http'
 require 'rapture/rest'
 require 'rapture/client'
 
