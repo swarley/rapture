@@ -8,7 +8,7 @@ module Rapture::REST
   include Rapture::HTTP
 
   # Gets the current working gateway URL
-  #
+  # https://discordapp.com/developers/docs/topics/gateway#get-gateway
   # @return [GatewayInfo]
   def get_gateway
     response = request(:get, 'gateway')
@@ -17,7 +17,7 @@ module Rapture::REST
 
   # Gets the current working gateway URL, with additional sharding
   # recommendation
-  #
+  # https://discordapp.com/developers/docs/topics/gateway#get-gateway-bot
   # @return [GatewayInfo]
   def get_gateway_bot
     response = request(:get, 'gateway/bot')
