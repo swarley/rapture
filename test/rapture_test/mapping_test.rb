@@ -29,16 +29,16 @@ describe Rapture::Mapping do
     end
   end
 
-  # FIXME: This currently fails because it doesn't take the converters into account.
-  # Not sure how to fix this at the moment.
-  # describe '#to_h' do
-  #   it 'converts to a hash correctly' do
-  #     assert_equal(
-  #       Oj.load(@raw_json, symbol_keys: true),
-  #       @object.to_h
-  #     )
-  #   end
-  # end
+  # TODO: Probably refactor this to use another Example class
+  # that doesn't involve converters. This is fine for now.
+  describe '#to_h' do
+    it 'converts to a hash correctly' do
+      assert_equal(
+        @object.to_h,
+        {foo: 'bar', bar: true, baz: 1}
+      )
+    end
+  end
 
   describe '#to_json' do
     it 'serializes correctly' do
