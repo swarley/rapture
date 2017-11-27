@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 describe Rapture::Mapping do
   class Example
     include Rapture::Mapping
     property :foo
     property :bar
     property(:baz,
-      to_json: proc { |i| i.to_s },
-      from_json: :to_i
-    )
+             to_json: proc { |i| i.to_s },
+             from_json: :to_i)
   end
 
   before do
@@ -24,7 +25,7 @@ describe Rapture::Mapping do
     it 'set the correct values' do
       assert_equal(
         ['bar', true, 1],
-        [:foo, :bar, :baz].map { |m| @object.send(m) }
+        %i[foo bar baz].map { |m| @object.send(m) }
       )
     end
   end
@@ -35,7 +36,7 @@ describe Rapture::Mapping do
     it 'converts to a hash correctly' do
       assert_equal(
         @object.to_h,
-        {foo: 'bar', bar: true, baz: 1}
+        foo: 'bar', bar: true, baz: 1
       )
     end
   end
