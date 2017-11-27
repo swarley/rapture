@@ -8,7 +8,7 @@ module Rapture
     # @return [String] the URL of the gateway
     property :url
 
-    # return [Integer, nil] the recommended amount of shards for this client
+    # @return [Integer, nil] the recommended amount of shards for this client
     property :shards
   end
 end
