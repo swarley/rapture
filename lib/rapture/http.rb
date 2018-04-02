@@ -145,9 +145,25 @@ module Rapture::HTTP
     end
   end
 
+  # Helper method for optional JSON body params. `nil` valued keys are
+  # removed, and `:null` value keys serialize to JSON `null`.
+  # @!visbility private
+  def encode_json(object = {})
+    object.delete_if { |_, v| v.nil? }
+    object.each do |k, v|
+      object[k] = nil if v == :null
+    end
+    Oj.dump(object)
+  end
+
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
   def request(method, endpoint, body = nil, headers = {})
+    case method
+    when :post, :put
+      headers['Content-type'] = 'application/json'
+      body = encode_json(body) if body
+    end
     faraday.run_request(method, endpoint, body, headers)
   end
 end
