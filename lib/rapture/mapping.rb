@@ -36,8 +36,12 @@ module Rapture::Mapping
       instance = new
 
       hash.each do |k, v|
-        v = instance.convert(v, k, converter) if converter
-        instance.send(:"#{k}=", v)
+        v = convert(v, k, converter) if converter
+        begin
+          instance.send(:"#{k}=", v)
+        rescue NoMethodError
+          puts "WARN: #{self} missing property: #{k} (raw value: #{v.inspect})"
+        end
       end
 
       instance
