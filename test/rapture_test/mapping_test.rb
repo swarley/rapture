@@ -30,8 +30,6 @@ describe Rapture::Mapping do
     end
   end
 
-  # TODO: Probably refactor this to use another Example class
-  # that doesn't involve converters. This is fine for now.
   describe '#to_h' do
     it 'converts to a hash correctly' do
       assert_equal(

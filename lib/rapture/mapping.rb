@@ -26,12 +26,7 @@ module Rapture::Mapping
     # @param data [String] the raw JSON string
     def from_json(data)
       hash = Oj.load(data, symbol_keys: true)
-
-      hash.each do |k, v|
-        hash[k] = convert(v, k, :from_json)
-      end
-
-      from_h(hash)
+      from_h(hash, :from_json)
     end
 
     # Creates a new instance of this object from a hash
@@ -66,11 +61,16 @@ module Rapture::Mapping
 
   # Utility method to convert this object into a hash
   # @return [Hash]
-  def to_h
+  def to_h(converter = nil)
     data = {}
 
     self.class.properties.each_key do |prop|
-      data[prop] = send(prop)
+      v = send(prop)
+      data[prop] = if converter
+                     self.class.convert(v, prop, converter)
+                   else
+                     v
+                   end
     end
 
     data
@@ -79,12 +79,7 @@ module Rapture::Mapping
   # Converts this object into a JSON string
   # @return [String]
   def to_json
-    hash = to_h
-
-    hash.each do |k, v|
-      hash[k] = self.class.convert(v, k, :to_json)
-    end
-
+    hash = to_h(:to_json)
     Oj.dump(hash, omit_nil: true)
   end
 end
