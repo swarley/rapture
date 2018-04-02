@@ -40,7 +40,7 @@ module Rapture::Mapping
         begin
           instance.send(:"#{k}=", v)
         rescue NoMethodError
-          puts "WARN: #{self} missing property: #{k} (raw value: #{v.inspect})"
+          # puts "WARN: #{self} missing property: #{k} (raw value: #{v.inspect})"
         end
       end
 

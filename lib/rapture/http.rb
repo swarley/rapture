@@ -23,9 +23,9 @@ module Rapture::HTTP
     @faraday ||= Faraday.new(url: base_url) do |faraday|
       faraday.authorization(@type, @token)
 
-      faraday.response :logger do |logger|
-        logger.filter(/Authorization: .*/, "Authorization: #{@type} REDACTED")
-      end
+      # faraday.response :logger do |logger|
+      #   logger.filter(/Authorization: .*/, "Authorization: #{@type} REDACTED")
+      # end
 
       faraday.use RateLimiter
 

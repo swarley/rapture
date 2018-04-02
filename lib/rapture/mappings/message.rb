@@ -7,6 +7,9 @@ module Rapture
     # @return [Integer] ID
     property :id, to_json: :to_s, from_json: proc { |id| Integer(id) }
 
+    # @return [Integer] Channel ID of where this message was sent
+    property :channel_id, from_json: proc { |id| Integer(id) }
+
     # @return [User] the message author
     property :author, from_json: User
 
