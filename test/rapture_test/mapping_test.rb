@@ -58,5 +58,11 @@ describe Rapture::Mapping do
     it 'serializes correctly' do
       assert_equal(@raw_json, @object.to_json)
     end
+
+    it 'serializes an inner object' do
+      json = %({"inner":#{@raw_json}})
+      object = ClassExample.from_json(json)
+      assert_equal(object.to_json, json)
+    end
   end
 end

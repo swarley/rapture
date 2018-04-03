@@ -53,7 +53,11 @@ module Rapture::Mapping
         value = if action.is_a?(Symbol)
                   value.send(action)
                 elsif action.is_a?(Class)
-                  action.from_h(value, option_method)
+                  if value.is_a?(Hash)
+                    action.from_h(value, option_method)
+                  elsif value.is_a?(action)
+                    value.to_h(option_method)
+                  end
                 elsif action.respond_to?(:call)
                   action.call(value)
                 else
