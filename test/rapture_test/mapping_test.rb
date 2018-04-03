@@ -10,6 +10,11 @@ describe Rapture::Mapping do
              from_json: :to_i)
   end
 
+  class ClassExample
+    include Rapture::Mapping
+    property :inner, from_json: Example, to_json: Example
+  end
+
   before do
     @raw_json = %({"foo":"bar","bar":true,"baz":"1"})
     @object = Example.from_json(@raw_json)
@@ -26,6 +31,16 @@ describe Rapture::Mapping do
       assert_equal(
         ['bar', true, 1],
         %i[foo bar baz].map { |m| @object.send(m) }
+      )
+    end
+
+    it 'converts an inner object' do
+      json = %({"inner":#{@raw_json}})
+      object = ClassExample.from_json(json)
+      inner_object = Example.from_h(Oj.load(json, symbol_keys: true)[:inner], :from_json)
+      assert_equal(
+        %i[foo bar baz].map { |m| inner_object.send(m) },
+        %i[foo bar baz].map { |m| object.inner.send(m) }
       )
     end
   end

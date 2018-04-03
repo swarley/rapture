@@ -52,6 +52,8 @@ module Rapture::Mapping
       if (action = @properties.dig(prop, option_method))
         value = if action.is_a?(Symbol)
                   value.send(action)
+                elsif action.is_a?(Class)
+                  action.from_h(value, option_method)
                 elsif action.respond_to?(:call)
                   action.call(value)
                 else
