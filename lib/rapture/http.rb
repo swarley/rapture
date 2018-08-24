@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'faraday'
+require "faraday"
 
 # Module containing Faraday and HTTP "wetworks"
 module Rapture::HTTP
   # Base URL to Discord's API for all requests
-  BASE_URL = 'https://discordapp.com/api/v6'
+  BASE_URL = "https://discordapp.com/api/v6"
 
   # Yields the {BASE_URL} constant. Can be redefined to point at a custom
   # API location.
@@ -29,7 +29,7 @@ module Rapture::HTTP
 
       faraday.use RateLimiter
 
-      faraday.headers['User-Agent'] = user_agent
+      faraday.headers["User-Agent"] = user_agent
 
       faraday.adapter Faraday.default_adapter
     end
@@ -43,15 +43,15 @@ module Rapture::HTTP
 
     # Caches new headers
     def headers=(headers)
-      @global = headers['x-ratelimit-global']
+      @global = headers["x-ratelimit-global"]
 
-      @limit = headers['x-ratelimit-limit']&.to_i
+      @limit = headers["x-ratelimit-limit"]&.to_i
 
-      @remaining = headers['x-ratelimit-remaining']&.to_i
+      @remaining = headers["x-ratelimit-remaining"]&.to_i
 
-      @now = Time.rfc2822(headers['date'])
+      @now = Time.rfc2822(headers["date"])
 
-      reset_time = headers['x-ratelimit-reset']&.to_i
+      reset_time = headers["x-ratelimit-reset"]&.to_i
       @reset = Time.at(reset_time) if reset_time
     end
 
@@ -109,12 +109,12 @@ module Rapture::HTTP
     # Parses a URI path into the relevant component for rate limiting
     # @return [Symbol]
     private def parse_path(path)
-      parts = path.split('/')
+      parts = path.split("/")
       if MAJOR_PARAMETERS.include? parts[4]
         parts.take(5)
       else
         parts.take(4)
-      end.join('_').to_sym
+      end.join("_").to_sym
     end
 
     # Handle requests
@@ -161,7 +161,7 @@ module Rapture::HTTP
   def request(method, endpoint, body = nil, headers = {})
     case method
     when :post, :put
-      headers['Content-type'] = 'application/json'
+      headers["Content-type"] = "application/json"
       body = encode_json(body) if body
     end
     faraday.run_request(method, endpoint, body, headers)

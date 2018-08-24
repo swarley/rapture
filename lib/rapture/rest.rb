@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'rapture/mappings/user'
-require 'rapture/mappings/gateway'
-require 'rapture/mappings/message'
+require "rapture/mappings/user"
+require "rapture/mappings/gateway"
+require "rapture/mappings/message"
 
 # Binding to Discord's HTTPS REST API
 module Rapture::REST
@@ -12,7 +12,7 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/topics/gateway#get-gateway
   # @return [GatewayInfo]
   def get_gateway
-    response = request(:get, 'gateway')
+    response = request(:get, "gateway")
     Rapture::GatewayInfo.from_json(response.body)
   end
 
@@ -21,7 +21,7 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/topics/gateway#get-gateway-bot
   # @return [GatewayInfo]
   def get_gateway_bot
-    response = request(:get, 'gateway/bot')
+    response = request(:get, "gateway/bot")
     Rapture::GatewayInfo.from_json(response.body)
   end
 
@@ -37,7 +37,7 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/user#get-current-user
   # @return [User]
   def get_current_user
-    get_user('@me')
+    get_user("@me")
   end
 
   # Creates a message in a channel.
@@ -47,7 +47,7 @@ module Rapture::REST
     response = request(
       :post,
       "channels/#{channel_id}/messages",
-      content: content, embed: embed, tts: tts
+      content: content, embed: embed, tts: tts,
     )
     Rapture::Message.from_json(response.body)
   end

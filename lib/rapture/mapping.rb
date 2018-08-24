@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'oj'
+require "oj"
 
 Oj.mimic_JSON
 
@@ -61,7 +61,7 @@ module Rapture::Mapping
                 elsif action.respond_to?(:call)
                   action.call(value)
                 else
-                  raise ArgumentError, 'Action must be a symbol or respond to :call'
+                  raise ArgumentError, "Action must be a symbol or respond to :call"
                 end
       end
 

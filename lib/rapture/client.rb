@@ -7,7 +7,7 @@ module Rapture
     include REST
 
     def initialize(token)
-      @type, @token = token.split(' ')
+      @type, @token = token.split(" ")
       @heartbeat_interval = 1
       @send_heartbeats = false
       @event_handlers = Hash.new { |hash, key| hash[key] = Array.new }
@@ -39,18 +39,18 @@ module Rapture
 
     private def on_open(event); end
 
-    OP_DISPATCH              =  0
-    OP_HEARTBEAT             =  1
-    OP_IDENTIFY              =  2
-    OP_STATUS_UPDATE         =  3
-    OP_VOICE_STATE_UPDATE    =  4
-    OP_VOICE_SERVER_PING     =  5
-    OP_RESUME                =  6
-    OP_RECONNECT             =  7
-    OP_REQUEST_GUILD_MEMBERS =  8
-    OP_INVALID_SESSION       =  9
-    OP_HELLO                 = 10
-    OP_HEARTBEAT_ACK         = 11
+    OP_DISPATCH = 0
+    OP_HEARTBEAT = 1
+    OP_IDENTIFY = 2
+    OP_STATUS_UPDATE = 3
+    OP_VOICE_STATE_UPDATE = 4
+    OP_VOICE_SERVER_PING = 5
+    OP_RESUME = 6
+    OP_RECONNECT = 7
+    OP_REQUEST_GUILD_MEMBERS = 8
+    OP_INVALID_SESSION = 9
+    OP_HELLO = 10
+    OP_HEARTBEAT_ACK = 11
 
     Session = Struct.new(:sequence, :suspend, :invalid, :resume, :id)
 
@@ -101,9 +101,10 @@ module Rapture
 
     def self.__event(name, klass)
       define_method(:"on_#{name}") do |&block|
-        @event_handlers[klass].push ->(payload) do
+        handler = -> (payload) do
           block.call(payload)
         end
+        @event_handlers[klass].push(handler)
       end
     end
 
@@ -115,7 +116,7 @@ module Rapture
       browser: "rapture",
       device: "rapture",
       referrer: "",
-      referring_domain: ""
+      referring_domain: "",
     }.freeze
 
     private def identify
@@ -125,7 +126,8 @@ module Rapture
         @token,
         IDENTIFY_PROPERTIES,
         150,
-        [0, 1])
+        [0, 1]
+      )
       @websocket.send({op: 2, d: payload}.to_json)
     end
 

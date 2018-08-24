@@ -1,6 +1,6 @@
 # frozen-string-literal: true
 
-require 'faye/websocket'
+require "faye/websocket"
 
 module Rapture
   # Websocket abstraction
