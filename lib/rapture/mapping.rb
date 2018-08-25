@@ -55,6 +55,14 @@ module Rapture::Mapping
                 elsif action.is_a?(Class)
                   if value.is_a?(Hash)
                     action.from_h(value, option_method)
+                  elsif value.is_a?(Array)
+                    value.map do |element|
+                      if element.is_a?(action)
+                        element.to_h(option_method)
+                      else
+                        action.from_h(element, option_method)
+                      end
+                    end
                   elsif value.is_a?(action)
                     value.to_h(option_method)
                   end
