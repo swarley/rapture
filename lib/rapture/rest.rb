@@ -3,6 +3,7 @@
 require "rapture/mappings/user"
 require "rapture/mappings/gateway"
 require "rapture/mappings/message"
+require "rapture/mappings/channel"
 
 # Binding to Discord's HTTPS REST API
 module Rapture::REST
@@ -38,6 +39,14 @@ module Rapture::REST
   # @return [User]
   def get_current_user
     get_user("@me")
+  end
+
+  # Returns a {Channel{ object for a given channel ID
+  # https://discordapp.com/developers/docs/resources/channel#get-channel
+  # @return [Channel]
+  def get_channel(id)
+    response = request(:get, "channels/#{id}")
+    Rapture::Channel.from_json(response.body)
   end
 
   # Creates a message in a channel.
