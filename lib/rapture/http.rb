@@ -158,7 +158,7 @@ module Rapture::HTTP
   # and additional exception handling
   def request(method, endpoint, body = nil, headers = {})
     case method
-    when :post, :put
+    when :post, :put, :patch
       headers["Content-type"] = "application/json"
       body = encode_json(body) if body
     end
