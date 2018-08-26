@@ -55,4 +55,16 @@ module Rapture::REST
     )
     Rapture::Message.from_json(response.body)
   end
+
+  # Edits a message in a channel.
+  # https://discordapp.com/developers/docs/resources/channel#edit-message
+  # @return [Message] the edited message
+  def edit_message(channel_id, message_id, content: nil, embed: nil)
+    response = request(
+      :patch,
+      "channels/#{channel_id}/messages/#{message_id}",
+      content: content, embed: embed,
+    )
+    Rapture::Message.from_json(response.body)
+  end
 end
