@@ -45,7 +45,7 @@ module Rapture::REST
   end
 
   # Creates a message in a channel.
-  # (api docs link)
+  # https://discordapp.com/developers/docs/resources/channel#create-message
   # @return [Message] the created message
   def create_message(channel_id, content: nil, embed: nil, tts: false)
     response = request(
