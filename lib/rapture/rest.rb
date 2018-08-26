@@ -67,4 +67,10 @@ module Rapture::REST
     )
     Rapture::Message.from_json(response.body)
   end
+
+  # Deletes a message in a channel.
+  # https://discordapp.com/developers/docs/resources/channel#delete-message
+  def delete_message(channel_id, message_id)
+    request(:delete, "channels/#{channel_id}/messages/#{message_id}")
+  end
 end
