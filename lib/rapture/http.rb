@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "faraday"
-
 # Module containing Faraday and HTTP "wetworks"
 module Rapture::HTTP
   # Base URL to Discord's API for all requests

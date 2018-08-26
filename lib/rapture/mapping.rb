@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "oj"
-
 Oj.mimic_JSON
 
 # DSL module for mapping objects to JSON

@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require "rapture/mappings/user"
-require "rapture/mappings/gateway"
-require "rapture/mappings/message"
-require "rapture/mappings/channel"
-
 # Binding to Discord's HTTPS REST API
 module Rapture::REST
   include Rapture::HTTP
