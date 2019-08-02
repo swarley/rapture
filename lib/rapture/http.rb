@@ -72,7 +72,7 @@ module Rapture::HTTP
     end
 
     # Locks the mutex for the specified amount of time
-    # @param [Integer] amount of time to sleep during synchronization
+    # @param time [Integer] amount of time to sleep during synchronization
     def sleep_for(time)
       @mutex.synchronize { sleep time }
     end
@@ -85,13 +85,13 @@ module Rapture::HTTP
       include Rapture::Mapping
 
       # @return [String] Rate limit message
-      property :message
+      getter :message
 
       # @return [Integer] seconds until a retry can be performed
-      property :retry_after, from_json: proc { |v| v / 1000.0 }
+      getter :retry_after, from_json: proc { |v| v / 1000.0 }
 
       # @return [true, false] if this request exceeded the global rate limit
-      property :global
+      getter :global
     end
 
     # Major parameters to consider
@@ -145,7 +145,7 @@ module Rapture::HTTP
 
   # Helper method for optional JSON body params. `nil` valued keys are
   # removed, and `:null` value keys serialize to JSON `null`.
-  # @!visbility private
+  # @!visibility private
   def encode_json(object = {})
     object.delete_if { |_, v| v.nil? }
     object.each do |k, v|

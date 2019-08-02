@@ -4,6 +4,50 @@ Oj.mimic_JSON
 
 # DSL module for mapping objects to JSON
 module Rapture::Mapping
+  module Converters
+    Converter = Struct.new(:to_json, :from_json)
+    NilableConverter = Struct.new(:to_json_proc, :from_json_proc) do
+      def to_json()
+        proc { |data| to_json_proc.call(data) if data }
+      end
+
+      def from_json()
+        proc { |data| from_json_proc.call(data) if data }
+      end
+    end
+
+    def self.converter(name, nilable: false, to_json: nil, from_json: nil)
+      conv = Converter.new(to_json, from_json)
+
+      define_singleton_method(name) { conv }
+      return unless nilable
+
+      nilable_conv = NilableConverter.new(to_json, from_json)
+
+      define_singleton_method(:"#{name}?") { nilable_conv }
+    end
+
+    # @!group Converters
+
+    # Snowflake serde
+    converter(
+      :Snowflake,
+      nilable: true,
+      from_json: proc { |id| Integer(id) },
+      to_json: proc { |int| int.to_s },
+    )
+
+    # Timestamp serde
+    converter(
+      :Timestamp,
+      nilable: true,
+      from_json: proc { |data| Time.parse(data) },
+      to_json: proc { |time| time.iso8601(3) },
+    )
+
+    # @!endgroup
+  end
+
   # @!visibility private
   def self.included(object)
     object.extend(DSL)
@@ -15,8 +59,14 @@ module Rapture::Mapping
     attr_reader :properties
 
     # Adds a property to this model
-    def property(name, options = {})
-      attr_accessor name
+    def getter(name, converter: nil, **options)
+      attr_reader name
+
+      # @todo Fix this to actually be included in options
+      if converter
+        options = {from_json: converter.from_json, to_json: converter.to_json}.merge(options)
+      end
+
       (@properties ||= {})[name] = options
     end
 
@@ -36,7 +86,7 @@ module Rapture::Mapping
       hash.each do |k, v|
         v = convert(v, k, converter) if converter
         begin
-          instance.send(:"#{k}=", v)
+          instance.instance_variable_set(:"@#{k}", v)
         rescue NoMethodError
           # puts "WARN: #{self} missing property: #{k} (raw value: #{v.inspect})"
         end
@@ -94,7 +144,7 @@ module Rapture::Mapping
 
   # Converts this object into a JSON string
   # @return [String]
-  def to_json
+  def to_json(_json_state = nil)
     hash = to_h(:to_json)
     Oj.dump(hash, omit_nil: true)
   end

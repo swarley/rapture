@@ -7,19 +7,26 @@ module Rapture
     class Packet
       include Mapping
 
-      property :op
+      # @!attribute [r] op
+      # @return [Integer] this packet's opcode
+      # @see https://discordapp.com/developers/docs/topics/opcodes-and-status-codes
+      getter :op
       alias_method :opcode, :op
 
-      property :s
+      # @!attribute [r] s
+      getter :s
       alias_method :sequence, :s
 
-      property :d
+      # @!attribute [r] d
+      getter :d
       alias_method :data, :d
 
-      property :t
+      # @!attribute [r] t
+      getter :t
       alias_method :type, :t
 
-      property :code
+      # @!attribute [r] code
+      getter :code
 
       def inspect
         "<Rapture::WebSocket::Packet @op=#{op} @s=#{s} @d=#{d} @t=#{t} @code=#{code}>"
@@ -57,7 +64,7 @@ module Rapture
         end
 
         @ws.on :message do |event|
-          # puts "[MESSAGE] #{event.data}"
+          puts "[MESSAGE] #{event.data}"
           packet = Packet.from_json(event.data)
           @on_message_handler.call(packet)
         end

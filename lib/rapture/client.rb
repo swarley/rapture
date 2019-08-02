@@ -62,6 +62,8 @@ module Rapture
       when OP_DISPATCH
         handle_dispatch(packet.type, packet.data)
         @session.sequence = packet.sequence
+      when OP_INVALID_SESSION
+        handle_invalidate_session(packet.data)
       else
         # puts "Unknown opcode: #{packet.inspect}"
       end
@@ -77,6 +79,20 @@ module Rapture
       # TODO: Heartbeat ack checking
 
       # TODO: resume
+      if @session.nil? || @session.invalid
+        identify
+      else
+        resume
+      end
+    end
+
+    private def handle_invalidate_session
+      if @session
+        @session.invalid = true
+      else
+        # TODO: panic?
+      end
+
       identify
     end
 
@@ -129,6 +145,14 @@ module Rapture
         [0, 1]
       )
       @websocket.send({op: 2, d: payload}.to_json)
+    end
+
+    private def resume
+      payload = Gateway::Resume.new(
+        @token,
+        @session
+      )
+      @websocket.send({op: 6, d: payload}.to_json)
     end
 
     private def setup_heartbeats

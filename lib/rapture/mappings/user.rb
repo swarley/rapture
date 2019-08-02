@@ -5,35 +5,57 @@ module Rapture
   class User
     include Mapping
 
+    # @!attribute [r] id
     # @return [Integer] ID
-    property :id, to_json: :to_s, from_json: proc { |id| Integer(id) }
+    getter :id, converter: Converters.Snowflake
 
+    # @!attribute [r] discriminator
     # @return [String] 4-digit discriminator
-    property :discriminator
+    getter :discriminator
 
+    # @!attribute [r] username
     # @return [String] this user's name
-    property :username
+    getter :username
 
+    # @!attribute [r] avatar
     # @return [String, nil] avatar hash
-    property :avatar
+    getter :avatar
 
+    # @!attribute [r] bot
     # @return [true, false] whether this user belongs to an OAuth2 application
-    property :bot
+    getter :bot
 
     alias_method :bot?, :bot
 
+    # @!attribute [r] verified
     # @return [true, false] whether this user's account has a registered email address
-    property :verified
+    getter :verified
 
     alias_method :verified?, :verified
 
+    # @!attribute [r] email
     # @return [String, nil] email address, if this user is verified
-    property :email
+    getter :email
 
+    # @!attribute [r] mfa_enabled
     # @return [true, false] whether this user has mfa enabled
-    property :mfa_enabled
+    getter :mfa_enabled
 
     alias_method :mfa_enabled?, :mfa_enabled
+
+    # @!attribute [r] locale
+    # @return [String, nil] the user's chosen language option
+    getter :locale
+
+    # @!attribute [r] flags
+    # @return [Integer, nil] flags on a user's account
+    # @see Rapture::UserFlags
+    getter :flags
+
+    # @!attribute [r] premium_type
+    # @return [Integer, nil] the type of nitro a user has, if any.
+    # @see https://discordapp.com/developers/docs/resources/user#user-object-premium-types
+    getter :premium_type
 
     # This user's name and discriminator, that uniquely identifies them on Discord
     # @return [String]
@@ -41,4 +63,5 @@ module Rapture
       "#{username}##{discriminator}"
     end
   end
+
 end

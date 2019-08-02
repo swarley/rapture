@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+require "rapture/mappings/user"
+require "rapture/mappings/member"
+require "rapture/mappings/permissions"
+require "rapture/mappings/channel"
 
 module Rapture
   # Information about the location of Discord's gateway host
@@ -6,10 +10,10 @@ module Rapture
     include Mapping
 
     # @return [String] the URL of the gateway
-    property :url
+    getter :url
 
     # @return [Integer, nil] the recommended amount of shards for this client
-    property :shards
+    getter :shards
   end
 
   module Gateway
@@ -17,26 +21,26 @@ module Rapture
       include Mapping
 
       # @return [Integer] heartbeat interval
-      property :heartbeat_interval
+      getter :heartbeat_interval
 
       # @return [Array<String>] Discord debug information
-      property :_trace
+      getter :_trace
     end
 
     class Identify
       include Mapping
 
       # @return [String] Authorization token
-      property :token
+      getter :token
 
       # @return [Hash] Identify metadata
-      property :properties
+      getter :properties
 
       # @return [Integer] Large guild threshold
-      property :large_threshold
+      getter :large_threshold
 
       # @return [{Integer, Integer}] Shard key
-      property :shard
+      getter :shard
 
       def initialize(token, properties, large_threshold, shard)
         @token = token
@@ -46,23 +50,119 @@ module Rapture
       end
     end
 
+    class Resume
+      include Mapping
+
+      # @!attribute [r] token
+      getter :token
+
+      # @!attribute [r] session_id
+      getter :session_id
+
+      # @!attribute [r] seq
+      getter :seq
+
+      def initialize(token, session)
+        @token = token
+        @session_id = session.id
+        @seq = session.seq
+      end
+    end
+
     class Ready
       include Mapping
 
+      # @!attribute [r] v
       # @return [Integer] Accepted Discord gateway version
-      property :v
+      getter :v
 
+      # @!attribute [r] user
       # @return [User] the identified user
-      property :user, from_json: User
+      getter :user, from_json: User
 
+      # @!attribute [r] private_channels
       # @return [Array] the private channels for this user (always an empty array)
-      property :private_channels
+      getter :private_channels
 
+      # @!attribute [r] guilds
       # @return [Array<Hash>] unavailable guilds
-      property :guilds
+      getter :guilds
 
+      # @!attribute [r] session_id
       # @return [String]
-      property :session_id
+      getter :session_id
+    end
+
+    class VoiceState
+      include Mapping
+
+      # @!attribute [r] guild_id
+      getter :guild_id, converter: Converters.Snowflake
+
+      # @!attribute [r] channel_id
+      getter :channel_id, converter: Converters.Snowflake?
+
+      # @!attribute [r] user_id
+      getter :user_id, converter: Converters.Snowflake
+
+      # @!attribute [r] member
+      getter :member, from_json: Member
+
+      # @!attribute [r] session_id
+      getter :session_id
+
+      # @!attribute [r] deaf
+      getter :deaf
+
+      # @!attribute [r] mute
+      getter :mute
+
+      # @!attribute [r] self_deaf
+      getter :self_deaf
+
+      # @!attribute [r] self_mute
+      getter :self_mute
+
+      # @!attribute [r] suppress
+      getter :suppress
+    end
+
+    class ClientStatus
+      include Mapping
+
+      # @!attribute [r] desktop
+      getter :desktop
+
+      # @!attribute [r] mobile
+      getter :mobile
+
+      # @!attribute [r] web
+      getter :web
+    end
+
+    class PresenceUpdate
+      include Mapping
+
+      # @!attribute [r] user
+      getter :user, from_json: User
+
+      # @!attribute [r] roles
+      getter :roles, from_json: Role
+
+      # @!attribute [r] game
+      getter :game, from_json: proc { |data| Activity.new(data) if data }
+
+      # @!attribute [r] guild_id     
+      getter :guild_id, converter: Converters.Snowflake
+
+      # @!attribute [r] status      
+      getter :status
+
+      # @!attribute [r] activities
+      getter :activities, from_json: Activity
+
+      # @!attribute [r] client_status      
+      getter :client_status, from_json: ClientStatus
     end
   end
 end

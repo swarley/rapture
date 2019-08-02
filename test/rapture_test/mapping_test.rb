@@ -3,21 +3,21 @@
 describe Rapture::Mapping do
   class Example
     include Rapture::Mapping
-    property :foo
-    property :bar
-    property(:baz,
+    getter :foo
+    getter :bar
+    getter(:baz,
              to_json: proc { |i| i.to_s },
              from_json: :to_i)
   end
 
   class ClassExample
     include Rapture::Mapping
-    property :inner, from_json: Example, to_json: Example
+    getter :inner, from_json: Example, to_json: Example
   end
 
   class ArrayExample
     include Rapture::Mapping
-    property :values, from_json: Example
+    getter :values, from_json: Example
   end
 
   before do
