@@ -298,7 +298,7 @@ module Rapture
     # @!attribute [r] timestamp
     # @return [Time, nil] the timestamp of the embed
     getter :timestamp, converter: Converters.Timestamp
-    
+
     # @!attribute [r] color
     # @return [Integer, nil] color code of the embed
     getter :color

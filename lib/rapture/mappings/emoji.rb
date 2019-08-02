@@ -27,7 +27,7 @@ module Rapture
     # @!attribute [r] managed
     # @return [true, false] whether this emoji is managed
     getter :managed
-    
+
     # @!attribute [r] animated
     # @return [true, false] whether this emoji is animated
     getter :animated

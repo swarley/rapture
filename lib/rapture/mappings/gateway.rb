@@ -152,16 +152,16 @@ module Rapture
       # @!attribute [r] game
       getter :game, from_json: proc { |data| Activity.new(data) if data }
 
-      # @!attribute [r] guild_id     
+      # @!attribute [r] guild_id
       getter :guild_id, converter: Converters.Snowflake
 
-      # @!attribute [r] status      
+      # @!attribute [r] status
       getter :status
 
       # @!attribute [r] activities
       getter :activities, from_json: Activity
 
-      # @!attribute [r] client_status      
+      # @!attribute [r] client_status
       getter :client_status, from_json: ClientStatus
     end
   end

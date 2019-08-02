@@ -19,7 +19,7 @@ module Rapture
 
     # @!attribute [r] id
     getter :id, converter: Converters.Snowflake
-    
+
     # @!attribute [r] name
     getter :name
 

@@ -63,5 +63,4 @@ module Rapture
       "#{username}##{discriminator}"
     end
   end
-
 end
