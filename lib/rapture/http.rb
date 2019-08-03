@@ -7,8 +7,11 @@ module Rapture::HTTP
 
     # @!attribute [r] code
     # @return [Integer] JSON Error code
-    # @see
+    # @see https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes
     getter :code
+
+    # @!attribute [r] message
+    # @return [String]
     getter :message
   end
 
@@ -17,7 +20,6 @@ module Rapture::HTTP
 
     # @!attribute [r] code
     # @return [Integer] The JSON error code associated with this exception.
-    # @see https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes
     getter :code
 
     # @!attribute [r] errors
