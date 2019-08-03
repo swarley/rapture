@@ -2,8 +2,41 @@
 
 # Module containing Faraday and HTTP "wetworks"
 module Rapture::HTTP
+  class JSONError
+    include Rapture::Mapping
+
+    # @!attribute [r] code
+    # @return [Integer] JSON Error code
+    # @see
+    getter :code
+    getter :message
+  end
+
+  class HTTPException < Exception
+    include Rapture::Mapping
+
+    # @!attribute [r] code
+    # @return [Integer] The JSON error code associated with this exception.
+    # @see https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes
+    getter :code
+
+    # @!attribute [r] errors
+    # @return [Array<JSONError>]
+    getter :errors, from_json: proc { |data|
+               data[:content][:_errors].collect { |err| JSONError.from_h(err) }
+             }
+
+    # @!attribute [r] message
+    # @return [String]
+    getter :message
+
+    def inspect
+      "#<Rapture::HTTP::HTTPException @code=#{@code} @message=#{message.inspect}>"
+    end
+  end
+
   # Base URL to Discord's API for all requests
-  BASE_URL = "https://discordapp.com/api/v6"
+  BASE_URL = "https://discordapp.com/api/v7"
 
   # Yields the {BASE_URL} constant. Can be redefined to point at a custom
   # API location.
@@ -84,12 +117,15 @@ module Rapture::HTTP
     class TooManyRequests < RuntimeError
       include Rapture::Mapping
 
+      # @!attribute [r] message
       # @return [String] Rate limit message
       getter :message
 
+      # @!attribute [r] retry_after
       # @return [Integer] seconds until a retry can be performed
       getter :retry_after, from_json: proc { |v| v / 1000.0 }
 
+      # @!attribute [r] global
       # @return [true, false] if this request exceeded the global rate limit
       getter :global
     end
@@ -162,6 +198,15 @@ module Rapture::HTTP
       headers["Content-type"] = "application/json"
       body = encode_json(body) if body
     end
-    faraday.run_request(method, endpoint, body, headers)
+    resp = faraday.run_request(method, endpoint, body, headers)
+
+    case resp.status
+    when 200, 201
+      resp
+    when 400..502
+      raise HTTPException.from_json(resp.body)
+    else
+      # @todo unknown response code
+    end
   end
 end

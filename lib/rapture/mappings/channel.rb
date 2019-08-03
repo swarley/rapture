@@ -7,17 +7,21 @@ module Rapture
   class Overwrite
     include Mapping
 
+    # @!attribute [r] id
     # @return [Integer] role or user ID
     getter :id, converters: Converters.Snowflake
 
+    # @!attribute [r] type
     # @return [String] either "role" or "member"
     getter :type
 
-    # TODO: permissions
+    # @!attribute [r] allow
+    # @todo permissions
     # @return [Integer] permission bit set
     getter :allow
 
-    # TODO: permissions
+    # @!attribute [r] deny
+    # @todo permissions
     # @return [Integer] premission bit set
     getter :deny
   end
@@ -127,7 +131,6 @@ module Rapture
     getter :name
   end
 
-  # @see https://discordapp.com/developers/docs/resources/channel#attachment-object-attachment-structure
   class Attachment
     include Mapping
 
@@ -176,159 +179,169 @@ module Rapture
     getter :emoji, from_json: Emoji
   end
 
-  class EmbedImage
-    include Mapping
-
-    # @!attribute [r] url
-    # @return [String] source url of the image
-    getter :url
-
-    # @!attribute [r] proxy_url
-    # @return [String] a proxied url of the image
-    getter :proxy_url
-
-    # @!attribute [r] height
-    # @return [Integer, nil] height of the image
-    getter :height
-
-    # @!attribute [r] width
-    # @return [Integer, nil] width of the image
-    getter :width
-  end
-
-  class EmbedVideo
-    include Mapping
-
-    # @!attribute [r] url
-    # @return [String, nil] source url of video
-    getter :url
-
-    # @!attribute [r] height
-    # @return [Integer, nil] height of the video
-    getter :height
-
-    # @!attribute [r] width
-    # @return [Integer, nil] width of the video
-    getter :width
-  end
-
-  class EmbedProvider
-    include Mapping
-
-    # @!attribute [r] name
-    # @return [String, nil] name of provider
-    getter :name
-
-    # @!attribute [r] url
-    # @return [String, nil] url of provider
-    getter :url
-  end
-
-  class EmbedAuthor
-    include Mapping
-
-    # @!attribute [r] name
-    # @return [String, nil] name of author
-    getter :name
-
-    # @!attribute [r] url
-    # @return [String, nil] url of author
-    getter :url
-
-    # @!attribute [r] icon_url
-    # @return [String, nil] url of author icon
-    getter :icon_url
-
-    # @!attribute [r] proxy_icon_url
-    # @return a proxied url of author icon
-    getter :proxy_icon_url
-  end
-
-  class EmbedFooter
-    include Mapping
-
-    # @!attribute [r] text
-    # @return [String] footer text
-    getter :text
-
-    # @!attribute [r] icon_url
-    # @return [String, nil] url of footer icon
-    getter :icon_url
-
-    # @!attribute [r] proxy_icon_url
-    # @return [String, nil] proxied url of footer icon
-    getter :proxy_icon_url
-  end
-
-  class EmbedField
-    include Mapping
-
-    # @!attribute [r] name
-    # @return [String] name of the field
-    getter :name
-
-    # @!attribute [r] value
-    # @return [String] value of the field
-    getter :value
-
-    # @!attribute [r] inline
-    # @return [true, false]
-    getter :inline
-  end
-
+  # @note The sum of all characters in an embed structure cannot exceed 6000 characters.
   class Embed
     include Mapping
 
+    class Image
+      include Mapping
+
+      # @!attribute [r] url
+      # @return [String] source url of the image
+      getter :url
+
+      # @!attribute [r] proxy_url
+      # @return [String] a proxied url of the image
+      getter :proxy_url
+
+      # @!attribute [r] height
+      # @return [Integer, nil] height of the image
+      getter :height
+
+      # @!attribute [r] width
+      # @return [Integer, nil] width of the image
+      getter :width
+    end
+
+    class Video
+      include Mapping
+
+      # @!attribute [r] url
+      # @return [String, nil] source url of video
+      getter :url
+
+      # @!attribute [r] height
+      # @return [Integer, nil] height of the video
+      getter :height
+
+      # @!attribute [r] width
+      # @return [Integer, nil] width of the video
+      getter :width
+    end
+
+    class Provider
+      include Mapping
+
+      # @!attribute [r] name
+      # @return [String, nil] name of provider
+      getter :name
+
+      # @!attribute [r] url
+      # @return [String, nil] url of provider
+      getter :url
+    end
+
+    class Author
+      include Mapping
+
+      # @note An author's name can contain up to 256 characters
+      # @!attribute [r] name
+      # @return [String, nil] name of author
+      getter :name
+
+      # @!attribute [r] url
+      # @return [String, nil] url of author
+      getter :url
+
+      # @!attribute [r] icon_url
+      # @return [String, nil] url of author icon
+      getter :icon_url
+
+      # @!attribute [r] proxy_icon_url
+      # @return a proxied url of author icon
+      getter :proxy_icon_url
+    end
+
+    # Embed footer object
+    class Footer
+      include Mapping
+
+      # @note Footer text can contain up to 2048 characters
+      # @!attribute [r] text
+      # @return [String] footer text
+      getter :text
+
+      # @!attribute [r] icon_url
+      # @return [String, nil] url of footer icon
+      getter :icon_url
+
+      # @!attribute [r] proxy_icon_url
+      # @return [String, nil] proxied url of footer icon
+      getter :proxy_icon_url
+    end
+
+    # Embed field object
+    class Field
+      include Mapping
+
+      # @note The name field may contain up to 256 characters
+      # @!attribute [r] name
+      # @return [String] name of the field
+      getter :name
+
+      # @note The value field may contain up to 1024 characters.
+      # @!attribute [r] value
+      # @return [String] value of the field
+      getter :value
+
+      # @!attribute [r] inline
+      # @return [true, false]
+      getter :inline
+    end
+
+    # @note A title field can contain up to 256 characters
     # @!attribute [r] title
-    # @return [String, nil] title of the embed
+    # @return [String, nil]
     getter :title
 
     # @!attribute [r] type
-    # @return [String, nil] type of the embed
+    # @return [String, nil]
     getter :type
 
+    # @note A description field can contain up to 2048 characters
     # @!attribute [r] description
-    # @return [String, nil] description of the embed
+    # @return [String, nil]
     getter :description
 
     # @!attribute [r] url
-    # @return [String, nil] url of the embed
+    # @return [String, nil]
     getter :url
 
     # @!attribute [r] timestamp
-    # @return [Time, nil] the timestamp of the embed
+    # @return [Time, nil]
     getter :timestamp, converter: Converters.Timestamp
 
     # @!attribute [r] color
-    # @return [Integer, nil] color code of the embed
+    # @return [Integer, nil]
     getter :color
 
     # @!attribute [r] footer
-    # @return [EmbedFooter, nil] footer information
-    getter :footer, from_json: EmbedFooter
+    # @return [EmbedFooter, nil]
+    getter :footer, from_json: Footer
 
     # @!attribute [r] image
-    # @return [EmbedImage, nil] image information
-    getter :image, from_json: EmbedImage
+    # @return [EmbedImage, nil]
+    getter :image, from_json: Image
 
     # @!attribute [r] thumbnail
-    # @return [EmbedImage, nil] thumbnail information
-    getter :thumbnail, from_json: EmbedImage
+    # @return [EmbedImage, nil]
+    getter :thumbnail, from_json: Image
 
     # @!attribute [r] video
-    # @return [EmbedVideo, nil] video information
-    getter :video, from_json: EmbedVideo
+    # @return [EmbedVideo, nil]
+    getter :video, from_json: Video
 
     # @!attribute [r] provider
-    # @return [EmbedProvider, nil] provider information
-    getter :provider, from_json: EmbedProvider
+    # @return [EmbedProvider, nil]
+    getter :provider, from_json: Provider
 
     # @!attribute [r] author
-    # @return [EmbedAuthor, nil] author information
-    getter :author, from_json: EmbedAuthor
+    # @return [EmbedAuthor, nil]
+    getter :author, from_json: Author
 
+    # @note There may be up to 25 field objects in a single embed
     # @!attribute [r] fields
     # @return [Array<EmbedField>, nil]
-    getter :fields, from_json: EmbedField
+    getter :fields, from_json: Field
   end
 end

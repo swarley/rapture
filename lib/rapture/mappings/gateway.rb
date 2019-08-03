@@ -30,15 +30,19 @@ module Rapture
     class Identify
       include Mapping
 
+      # @!attribute [r] token
       # @return [String] Authorization token
       getter :token
 
+      # @!attribute [r] properties
       # @return [Hash] Identify metadata
       getter :properties
 
+      # @!attribute [r] large_threshold
       # @return [Integer] Large guild threshold
       getter :large_threshold
 
+      # @!attribute [r] shard
       # @return [{Integer, Integer}] Shard key
       getter :shard
 
@@ -54,12 +58,15 @@ module Rapture
       include Mapping
 
       # @!attribute [r] token
+      # @return [String]
       getter :token
 
       # @!attribute [r] session_id
+      # @return [String]
       getter :session_id
 
       # @!attribute [r] seq
+      # @return [Integer]
       getter :seq
 
       def initialize(token, session)
@@ -93,50 +100,19 @@ module Rapture
       getter :session_id
     end
 
-    class VoiceState
-      include Mapping
-
-      # @!attribute [r] guild_id
-      getter :guild_id, converter: Converters.Snowflake
-
-      # @!attribute [r] channel_id
-      getter :channel_id, converter: Converters.Snowflake?
-
-      # @!attribute [r] user_id
-      getter :user_id, converter: Converters.Snowflake
-
-      # @!attribute [r] member
-      getter :member, from_json: Member
-
-      # @!attribute [r] session_id
-      getter :session_id
-
-      # @!attribute [r] deaf
-      getter :deaf
-
-      # @!attribute [r] mute
-      getter :mute
-
-      # @!attribute [r] self_deaf
-      getter :self_deaf
-
-      # @!attribute [r] self_mute
-      getter :self_mute
-
-      # @!attribute [r] suppress
-      getter :suppress
-    end
-
     class ClientStatus
       include Mapping
 
       # @!attribute [r] desktop
+      # @return [String, nil]
       getter :desktop
 
       # @!attribute [r] mobile
+      # @return [String, nil]
       getter :mobile
 
       # @!attribute [r] web
+      # @return [String, nil]
       getter :web
     end
 
@@ -144,24 +120,31 @@ module Rapture
       include Mapping
 
       # @!attribute [r] user
+      # @return [User]
       getter :user, from_json: User
 
       # @!attribute [r] roles
-      getter :roles, from_json: Role
+      # @return [Array<Integer>]
+      getter :roles, converter: Converters.Snowflake
 
       # @!attribute [r] game
+      # @return [Activity, nil]
       getter :game, from_json: proc { |data| Activity.new(data) if data }
 
       # @!attribute [r] guild_id
+      # @return [Integer]
       getter :guild_id, converter: Converters.Snowflake
 
       # @!attribute [r] status
+      # @return [String]
       getter :status
 
       # @!attribute [r] activities
+      # @return [Array<Activity>]
       getter :activities, from_json: Activity
 
       # @!attribute [r] client_status
+      # @return [ClientStatus]
       getter :client_status, from_json: ClientStatus
     end
   end

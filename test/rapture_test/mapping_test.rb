@@ -6,8 +6,8 @@ describe Rapture::Mapping do
     getter :foo
     getter :bar
     getter(:baz,
-             to_json: proc { |i| i.to_s },
-             from_json: :to_i)
+           to_json: proc { |i| i.to_s },
+           from_json: :to_i)
   end
 
   class ClassExample

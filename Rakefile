@@ -10,3 +10,9 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task default: :test
+
+desc "Format ruby code"
+task :format do |_task, rake_args|
+  require "rufo"
+  Rufo::Command.run(%w[lib test])
+end

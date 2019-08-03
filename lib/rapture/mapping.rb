@@ -5,14 +5,42 @@ Oj.mimic_JSON
 # DSL module for mapping objects to JSON
 module Rapture::Mapping
   module Converters
-    Converter = Struct.new(:to_json, :from_json)
-    NilableConverter = Struct.new(:to_json_proc, :from_json_proc) do
+    Converter = Struct.new(:to_json_proc, :from_json_proc) do
       def to_json()
-        proc { |data| to_json_proc.call(data) if data }
+        to_json_proc
       end
 
       def from_json()
-        proc { |data| from_json_proc.call(data) if data }
+        proc do |data|
+          if data.is_a? Array
+            data.collect { |elem| from_json_proc.call(elem) }
+          else
+            from_json_proc.call(data)
+          end
+        end
+      end
+    end
+
+    NilableConverter = Struct.new(:to_json_proc, :from_json_proc) do
+      def to_json()
+        proc do |data|
+          next unless data
+
+          to_json_proc.call(data)
+        end
+      end
+
+      def from_json()
+        proc do |data|
+          next unless data
+          from_json_proc.call(data) if data
+
+          if data.is_a? Array
+            data.collect { |elem| from_json_proc.call(elem) }
+          else
+            from_json_proc.call(data)
+          end
+        end
       end
     end
 

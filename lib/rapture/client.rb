@@ -6,8 +6,16 @@ module Rapture
   class Client
     include REST
 
-    def initialize(token)
+    # @param token [String] token used for authorization, must be prefixed with token type, e.g.
+    #   `Bot`, `Bearer`
+    # @param shard_key [{Integer, Integer}] the shard key for this connection. See [Sharding](https://discordapp.com/developers/docs/resources/guild#guild-object-premium-tier)
+    #   for more information.
+    # @param large_threshold [Integer] limit for when the gateway will no longer send offline member data.
+    #   Must be between 50 and 250
+    def initialize(token, shard_key: [0, 1], large_threshold: 150)
       @type, @token = token.split(" ")
+      @shard_key = shard_key
+      @large_threshold = large_threshold
       @heartbeat_interval = 1
       @send_heartbeats = false
       @event_handlers = Hash.new { |hash, key| hash[key] = Array.new }
@@ -136,13 +144,11 @@ module Rapture
     }.freeze
 
     private def identify
-      # TODO: set shard key
-      # TODO: set large_threshold
       payload = Gateway::Identify.new(
         @token,
         IDENTIFY_PROPERTIES,
-        150,
-        [0, 1]
+        @large_threshold,
+        @shard_key
       )
       @websocket.send({op: 2, d: payload}.to_json)
     end

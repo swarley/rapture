@@ -14,18 +14,23 @@ module Rapture
       alias_method :opcode, :op
 
       # @!attribute [r] s
+      # @return [Integer, 0] sequence number used for resuming and heartbeats.
+      # Only in dispatch packets
       getter :s
       alias_method :sequence, :s
 
       # @!attribute [r] d
+      # @return [Hash] event data
       getter :d
       alias_method :data, :d
 
       # @!attribute [r] t
+      # @return [String, nil] event name for this payload. Only in dispatch packets
       getter :t
       alias_method :type, :t
 
       # @!attribute [r] code
+      # @return [Integer]
       getter :code
 
       def inspect
