@@ -248,7 +248,7 @@ module Rapture
       getter :icon_url
 
       # @!attribute [r] proxy_icon_url
-      # @return a proxied url of author icon
+      # @return [String, nil] a proxied url of author icon
       getter :proxy_icon_url
     end
 
