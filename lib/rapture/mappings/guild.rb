@@ -173,7 +173,7 @@ module Rapture
 
     # @!attribute [r] widget_channel_id
     # @return [Integer, nil]
-    getter :widget_channel_id, converter: Converters.Snowflake
+    getter :widget_channel_id, converter: Converters.Snowflake?
 
     # @!attribute [r] system_channel_id
     # @return [Integer, nil]
@@ -181,7 +181,7 @@ module Rapture
 
     # @!attribute [r] joined_at
     # @return [Time, nil]
-    getter :joined_at, converter: Converters.Timestamp
+    getter :joined_at, converter: Converters.Timestamp?
 
     # @!attribute [r] large
     # @return [true, false]

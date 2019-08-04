@@ -7,7 +7,7 @@ module Rapture
     include Mapping
     # @!attribute [r] id
     # @return [Integer] ID
-    getter :id, to_json: :to_s, converter: Converters.Snowflake
+    getter :id, converter: Converters.Snowflake
 
     # @!attribute [r] channel_id
     # @return [Integer]
@@ -15,7 +15,7 @@ module Rapture
 
     # @!attribute [r] guild_id
     # @return [Integer, nil]
-    getter :guild_id, converter: Converters.Snowflake
+    getter :guild_id, converter: Converters.Snowflake?
 
     # @!attribute [r] author
     # @return [User]
@@ -50,8 +50,12 @@ module Rapture
     getter :mentions, from_json: User
 
     # @!attribute [r] mentions_roles
-    # @return [Array<Role>]
-    getter :mention_roles, converter: Converters.Snowflake
+    # @return [Array<Integer>]
+    getter :mention_roles,
+      from_json: proc { |data|
+        Oj.load(data).map { |id| Converters.Snowflake.from_json.call(id) }
+      },
+      to_json: proc { |ids| ids.collect(&:to_s).to_json }
 
     # @!attribute [r] attachments
     # @return [Array<Attachment>]
@@ -75,7 +79,7 @@ module Rapture
 
     # @!attribute [r] webhook_id
     # @return [Integer, nil]
-    getter :webhook_id, converter: Converters.Snowflake
+    getter :webhook_id, converter: Converters.Snowflake?
 
     # @!attribute [r] type
     # @return [Integer]

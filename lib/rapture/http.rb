@@ -1,42 +1,9 @@
 # frozen_string_literal: true
 
+require "faraday_middleware"
+
 # Module containing Faraday and HTTP "wetworks"
 module Rapture::HTTP
-  class JSONError
-    include Rapture::Mapping
-
-    # @!attribute [r] code
-    # @return [Integer] JSON Error code
-    # @see https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes
-    getter :code
-
-    # @!attribute [r] message
-    # @return [String]
-    getter :message
-  end
-
-  class HTTPException < Exception
-    include Rapture::Mapping
-
-    # @!attribute [r] code
-    # @return [Integer] The JSON error code associated with this exception.
-    getter :code
-
-    # @!attribute [r] errors
-    # @return [Array<JSONError>]
-    getter :errors, from_json: proc { |data|
-               data[:content][:_errors].collect { |err| JSONError.from_h(err) }
-             }
-
-    # @!attribute [r] message
-    # @return [String]
-    getter :message
-
-    def inspect
-      "#<Rapture::HTTP::HTTPException @code=#{@code} @message=#{message.inspect}>"
-    end
-  end
-
   # Base URL to Discord's API for all requests
   BASE_URL = "https://discordapp.com/api/v7"
 
@@ -61,6 +28,9 @@ module Rapture::HTTP
       # end
 
       faraday.use RateLimiter
+
+      faraday.request :multipart
+      faraday.request :json
 
       faraday.headers["User-Agent"] = user_agent
 
@@ -195,18 +165,13 @@ module Rapture::HTTP
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
   def request(method, endpoint, body = nil, headers = {})
-    case method
-    when :post, :put, :patch
-      headers["Content-type"] = "application/json"
-      body = encode_json(body) if body
-    end
     resp = faraday.run_request(method, endpoint, body, headers)
 
     case resp.status
-    when 200, 201
+    when 200, 201, 204
       resp
     when 400..502
-      raise HTTPException.from_json(resp.body)
+      raise Rapture::HTTPException.from_json(resp.body)
     else
       # @todo unknown response code
     end

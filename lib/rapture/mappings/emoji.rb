@@ -4,6 +4,10 @@ module Rapture
   class Emoji
     include Mapping
 
+    # @!attribute [r] available
+    # @return [true, false]
+    getter :available
+
     # @!attribute [r] id
     # @return [Integer, nil] emoji id
     getter :id, converter: Converters.Snowflake?

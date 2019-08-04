@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 module Rapture
   # A User account on Discord
   class User
@@ -62,5 +61,27 @@ module Rapture
     def distinct
       "#{username}##{discriminator}"
     end
+
+    # class Connection
+    #   include Mapping
+
+    #   getter :id
+
+    #   getter :name
+
+    #   getter :type
+
+    #   getter :revoked
+
+    #   getter :integrations, from_json: Rapture::Guild::Integration
+
+    #   getter :verified
+
+    #   getter :friend_sync
+
+    #   getter :show_activity
+
+    #   getter :visibility
+    # end
   end
 end

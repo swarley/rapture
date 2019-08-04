@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'faraday', '~> 0.13'
+  spec.add_dependency 'faraday_middleware', '~> 0.13'
   spec.add_dependency 'oj', '~> 3.3'
   spec.add_dependency 'faye-websocket'
 
