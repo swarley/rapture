@@ -3,7 +3,7 @@
 require "rapture/mappings/member"
 
 module Rapture
-  module  Voice
+  module Voice
     class State
       include Mapping
 

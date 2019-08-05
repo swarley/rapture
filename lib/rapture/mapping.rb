@@ -109,7 +109,7 @@ module Rapture::Mapping
       array = Oj.load(data, symbol_keys: true)
       array.collect { |hash| from_h(hash, :from_json) }
     end
-    
+
     # Creates a new instance of this object from a hash
     # @param hash [Hash] hash to convert into a new object
     # @param converter [Symbol] converter to use on the hash values, i.e. :from_json

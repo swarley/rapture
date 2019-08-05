@@ -9,7 +9,7 @@ module Rapture::REST
     response = request(
       :post,
       "channels/#{channel_id}/webhooks",
-      name: name, avatar: avatar
+      name: name, avatar: avatar,
     )
 
     Webhook.from_json(response.body)
@@ -47,7 +47,7 @@ module Rapture::REST
     response = request(
       :patch,
       "webhooks/#{webhook_id}",
-      name: name, avatar: avatar, channel_id: channel_id
+      name: name, avatar: avatar, channel_id: channel_id,
     )
     Webhook.from_json(response.body)
   end
@@ -58,7 +58,7 @@ module Rapture::REST
     response = request(
       :patch,
       "webhooks/#{webhook_id}/#{webhook_token}",
-      name: name, avatar: avatar, channel_id: channel_id
+      name: name, avatar: avatar, channel_id: channel_id,
     )
     Webhook.from_json(response.body)
   end
@@ -92,7 +92,7 @@ module Rapture::REST
       file = params.delete(:file)
       payload = {
         file: file,
-        payload_json: params.to_json
+        payload_json: params.to_json,
       }
     else
       payload = params

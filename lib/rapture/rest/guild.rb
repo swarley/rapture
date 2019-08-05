@@ -2,5 +2,4 @@
 
 module Rapture::REST
   include Rapture::HTTP
-
 end

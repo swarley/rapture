@@ -1,7 +1,7 @@
 
 module Rapture::REST
   include Rapture::HTTP
-  
+
   # Returns a {User} object for a given user ID.
   # https://discordapp.com/developers/docs/resources/user#get-user
   # @return [User]

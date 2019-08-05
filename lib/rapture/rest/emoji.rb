@@ -25,7 +25,7 @@ module Rapture::REST
     response = request(
       :post,
       "guilds/#{guild_id}/emojis",
-      name: name, image: image, roles: roles
+      name: name, image: image, roles: roles,
     )
     Emoji.from_json(response.body)
   end
@@ -36,7 +36,7 @@ module Rapture::REST
     response = request(
       :patch,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
-      { name: name, roles: roles }.compact
+      {name: name, roles: roles}.compact
     )
     Emoji.from_json(response.body)
   end
