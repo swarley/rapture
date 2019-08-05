@@ -23,7 +23,7 @@ module Rapture
     # @!attribute [r] errors
     # @return [Array<JSONError>]
     getter :errors, from_json: proc { |data|
-               data[:content][:_errors].collect { |err| JSONError.from_h(err) }
+               data[:content][:_errors].collect { |err| JSONError.from_h(err) } if data
              }
 
     # @!attribute [r] message

@@ -197,8 +197,8 @@ module Rapture
     getter :member_count
 
     # @!attribute [r] voice_states
-    # @return [Array<VoiceState>]
-    getter :voice_states, from_json: VoiceState
+    # @return [Array<Voice::State>]
+    getter :voice_states, from_json: Voice::State
 
     # @!attribute [r] members
     # @return [Array<Member>, nil]
