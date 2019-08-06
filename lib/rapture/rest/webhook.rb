@@ -5,6 +5,10 @@ module Rapture::REST
 
   # Create a new webhook
   # https://discordapp.com/developers/docs/resources/webhook#create-webhook
+  # @param channel_id [String, Integer]
+  # @param name [String]
+  # @param avatar [String] data URI String
+  # @return [Webhook]
   def create_webhook(channel_id, name:, avatar: nil)
     response = request(
       :post,
@@ -17,6 +21,8 @@ module Rapture::REST
 
   # Return a list of webhooks for a channel
   # https://discordapp.com/developers/docs/resources/webhook#get-channel-webhooks
+  # @param channel_id [String, Integer]
+  # @return [Array<Webhook>]
   def get_channel_webhooks(channel_id)
     response = request(:get, "channels/#{channel_id}/webhooks")
     Webhook.from_json_array(response.body)
@@ -24,6 +30,8 @@ module Rapture::REST
 
   # Return a list of webhooks for a guild
   # https://discordapp.com/developers/docs/resources/webhook#get-guild-webhooks
+  # @param guild_id [String, Integer]
+  # @return [Array<Webhook>]
   def get_guild_webhooks(guild_id)
     response = request(:get, "guilds/#{guild_id}/webhooks")
     Webhook.from_json_array(response.body)
@@ -31,46 +39,65 @@ module Rapture::REST
 
   # Return a webhook for the given ID
   # https://discordapp.com/developers/docs/resources/webhook#get-webhook
+  # @param webhook_id [String, Integer]
+  # @return [Webhook]
   def get_webhook(webhook_id)
     Webhook.from_json request(:get, "webhooks/#{webhook_id}").body
   end
 
   # Get a webhook but does not require authentication and returns
   # no {User} in the {Webhook} object
+  # @param webhook_id [String, Integer]
+  # @param webhook_token [String]
+  # @return [Webhook]
   def get_webhook_with_token(webhook_id, webhook_token)
     Webhook.from_json request(:get, "webhooks/#{webhook_id}/#{webhook_token}").body
   end
 
   # Modify a webhook
   # https://discordapp.com/developers/docs/resources/webhook#modify-webhook
-  def modify_webhook(webhook_id, name: nil, avatar: nil, channel_id: nil)
+  # @param webhook_id [String, Integer]
+  # @option params [String] :name
+  # @option params [String] :avatar
+  # @option channel_id [String, Integer] channel_id
+  # @return [Webhook]
+  def modify_webhook(webhook_id, **params)
     response = request(
       :patch,
       "webhooks/#{webhook_id}",
-      name: name, avatar: avatar, channel_id: channel_id,
+      params
     )
     Webhook.from_json(response.body)
   end
 
   # Modify a webhook using a token
   # https://discordapp.com/developers/docs/resources/webhook#modify-webhook-with-token
-  def modify_webhook_with_token(webhook_id, webhook_token, name: nil, avatar: nil, channel_id: nil)
+  # @param webhook_id [String, Integer]
+  # @param webhook_token [String]
+  # @option params [String] :name
+  # @option params [String] :avatar
+  # @option channel_id [String, Integer] channel_id
+  # @return [Webhook]
+  def modify_webhook_with_token(webhook_id, webhook_token, **params)
     response = request(
       :patch,
       "webhooks/#{webhook_id}/#{webhook_token}",
-      name: name, avatar: avatar, channel_id: channel_id,
+      params
     )
     Webhook.from_json(response.body)
   end
 
   # Delete a webhook
   # https://discordapp.com/developers/docs/resources/webhook#delete-webhook
+  # @param webhook_id [String, Integer]
   def delete_webhook(webhook_id)
     request(:delete, "webhooks/#{webhook_id}")
   end
 
   # Delete a webhook with a token
   # https://discordapp.com/developers/docs/resources/webhook#delete-webhook-with-token
+  # @param webhook_id [String, Integer]
+  # @param webhook_token [String]
   def delete_webhook_with_token(webhook_id, webhook_token)
     request(:delete, "webhook/#{webhook_id}/#{webhook_token}")
   end

@@ -23,9 +23,9 @@ Or install it yourself as:
 ```ruby
 require 'rapture'
 
-bot = Rapture::Client.new("Bot Y0UR.T0KEN.HERE")
+client = Rapture::Client.new("Bot Y0UR.T0KEN.HERE")
 
-bot.on_message_create do |message|
+client.on_message_create do |message|
   if message.content.start_with? '!ping'
     bot.create_message(message.channel_id, content: 'Pong!')
   end

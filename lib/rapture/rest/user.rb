@@ -4,6 +4,7 @@ module Rapture::REST
 
   # Returns a {User} object for a given user ID.
   # https://discordapp.com/developers/docs/resources/user#get-user
+  # @param id [String, Integer]
   # @return [User]
   def get_user(id)
     response = request(:get, "users/#{id}")
@@ -27,6 +28,7 @@ module Rapture::REST
 
   # Leave a guild
   # https://discordapp.com/developers/docs/resources/user#leave-guild
+  # @param guild_id [String, Integer]
   # @return [true, false] whether this action was successful
   def leave_guild(guild_id)
     request(:delete, "users/@me/guilds/#{guild_id}").status == 204
@@ -42,6 +44,7 @@ module Rapture::REST
 
   # Create a new DM channel. Returns a {Channel} object
   # https://discordapp.com/developers/docs/resources/user#create-dm
+  # @param recipient_id [String, Integer]
   # @return [Channel]
   def create_dm(recipient_id)
     response = request(:post, "users/@me/channels", recipient_id: recipient_id)

@@ -4,6 +4,7 @@ require "rapture/mappings/channel"
 require "rapture/mappings/emoji"
 require "rapture/mappings/voice"
 require "rapture/mappings/member"
+require "rapture/mappings/user"
 require "rapture/mappings/gateway"
 
 module Rapture
@@ -81,6 +82,17 @@ module Rapture
 
   class Guild
     include Mapping
+
+    class Embed
+      include Mapping
+
+      # @!attribute [r] enabled
+      # @return [true, false]
+      getter :enabled
+
+      # @!attribute [r] channel_id
+      # @return [Integer, nil]
+      getter :channel_id, converter: Converters.Snowflake?
 
     # @!attribute [r] id
     # @return [Integer]

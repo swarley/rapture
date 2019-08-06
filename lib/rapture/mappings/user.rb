@@ -62,26 +62,20 @@ module Rapture
       "#{username}##{discriminator}"
     end
 
-    # class Connection
-    #   include Mapping
+    class Connection
+      include Mapping
 
-    #   getter :id
+      getter :id
+      getter :name
+      getter :type
+      getter :revoked
 
-    #   getter :name
-
-    #   getter :type
-
-    #   getter :revoked
-
-    #   getter :integrations, from_json: Rapture::Guild::Integration
-
-    #   getter :verified
-
-    #   getter :friend_sync
-
-    #   getter :show_activity
-
-    #   getter :visibility
-    # end
+      # @todo avoid this from being a thing
+      getter :integrations, from_json: proc { |data| Rapture::Guild::Integration.from_json(data) }
+      getter :verified
+      getter :friend_sync
+      getter :show_activity
+      getter :visibility
+    end
   end
 end
