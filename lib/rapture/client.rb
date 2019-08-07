@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rapture/mappings/gateway_events"
+
 module Rapture
   # The `Client` abstracts away the token from making REST API requests
   # and provides a means to connect to Discord's gateway.
@@ -308,7 +310,7 @@ module Rapture
     __event(:voice_server_update, Gateway::VoiceServerUpdate)
 
     # @!macro gateway_event
-    __Event(:webhooks_update, Gateway::WebhooksUpdate)
+    __event(:webhooks_update, Gateway::WebhooksUpdate)
 
     # @endgroup
 

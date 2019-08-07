@@ -1,11 +1,11 @@
 
+require "rapture/mappings/gateway"
 require "rapture/mappings/permissions"
 require "rapture/mappings/channel"
 require "rapture/mappings/emoji"
 require "rapture/mappings/voice"
 require "rapture/mappings/member"
 require "rapture/mappings/user"
-require "rapture/mappings/gateway"
 
 module Rapture
   class Integration
