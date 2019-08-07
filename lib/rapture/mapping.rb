@@ -153,7 +153,7 @@ module Rapture::Mapping
                   raise ArgumentError, "Action must be a symbol or respond to :call"
                 end
       end
-      
+
       value
     rescue Exception => ex
       puts "EXCEPTION ON PROP"

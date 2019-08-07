@@ -197,9 +197,9 @@ module Rapture
     end
 
     ChannelCreate = Channel.dup
-    
+
     ChannelUpdate = Channel.dup
-    
+
     ChannelDelete = Channel.dup
 
     class ChannelPinsUpdate
@@ -396,14 +396,14 @@ module Rapture
       # @!attribute [r] message_id
       # @return [Integer]
       getter :message_id, converter: Converters.Snowflake
-      
+
       # @!attribute [r] guild_id
       # @return [Integer, nil]
       getter :guild_id, converter: Converters.Snowflake?
 
       # @!attribute [r] emoji
       # @return [Reaction]
-      getter :emoji, from_json: Reaction 
+      getter :emoji, from_json: Reaction
     end
 
     class MessageReactionRemove
@@ -491,9 +491,9 @@ module Rapture
 
       # @!attribute [r] timestamp
       # @return [Time]
-      getter :timestamp, 
-        to_json: proc {|time| time.to_i },
-        from_json: proc {|u_time| Time.at(u_time) }
+      getter :timestamp,
+        to_json: proc { |time| time.to_i },
+        from_json: proc { |u_time| Time.at(u_time) }
     end
 
     UserUpdate = User.dup
