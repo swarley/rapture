@@ -73,7 +73,7 @@ module Rapture
         handle_dispatch(packet.type, packet.data)
         @session.sequence = packet.sequence
       when OP_INVALID_SESSION
-        handle_invalidate_session(packet.data)
+        handle_invalidate_session
       else
         # puts "Unknown opcode: #{packet.inspect}"
       end
@@ -118,85 +118,20 @@ module Rapture
     #   to at least cut down on the from_h calls in the case statement
     # Handle an OPCODE_DISPATCH (0) packet.
     def handle_dispatch(event_type, data)
-      payload = case event_type
-                when "READY"
-                  ready_event = Gateway::Ready.from_h(data, :from_json)
-                  @session = Session.new(0, false, false, true, ready_event.session_id)
-                  ready_event
-                when "MESSAGE_CREATE"
-                  Message.from_h(data, :from_json)
-                when "CHANNEL_CREATE"
-                  Gateway::ChannelCreate.from_h(data, :from_json)
-                when "CHANNEL_UPDATE"
-                  Gateway::ChannelUpdate.from_h(data, :from_json)
-                when "CHANNEL_DELETE"
-                  Gateway::ChannelDelete.from_h(data, :from_json)
-                when "CHANNEL_PINS_UPDATE"
-                  Gateway::ChannelPinsUpdate.from_h(data, :from_json)
-                when "GUILD_CREATE"
-                  Gateway::GuildCreate.from_h(data, :from_json)
-                when "GUILD_UPDATE"
-                  Gateway::GuildUpdate.from_h(data, :from_json)
-                when "GUILD_DELETE"
-                  Gateway::GuildDelete.from_h(data, :from_json)
-                when "GUILD_BAN_ADD"
-                  Gateway::GuildBanAdd.from_h(data, :from_json)
-                when "GUILD_BAN_REMOVE"
-                  Gateway::GuildBanRemove.from_h(data, :from_json)
-                when "GUILD_EMOJIS_UPDATE"
-                  Gateway::GuildEmojiUpdate.from_h(data, :from_json)
-                when "GUILD_INTEGRATIONS_UPDATE"
-                  Gateway::GuildIntegrationsUpdate.from_h(data, :from_json)
-                when "GUILD_MEMBER_ADD"
-                  Gateway::GuildMemberAdd.from_h(data, :from_json)
-                when "GUILD_MEMBER_REMOVE"
-                  Gateway::GuildMemberRemove.from_h(data, :from_json)
-                when "GUILD_MEMBER_UPDATE"
-                  Gateway::GuildMemberUpdate.from_h(data, :from_json)
-                when "GUILD_MEMBERS_CHUNK"
-                  Gateway::GuildMembersChunk.from_h(data, :from_json)
-                when "GUILD_ROLE_CREATE"
-                  Gateway::GuildRoleCreate.from_h(data, :from_json)
-                when "GUILD_ROLE_UPDATE"
-                  Gateway::GuildRoleUpdate.from_h(data, :from_json)
-                when "GUILD_ROLE_DELETE"
-                  Gateway::GuildRoleDelete.from_h(data, :from_json)
-                when "MESSAGE_CREATE"
-                  Gateway::MessageCreate.from_h(data, :from_json)
-                when "MESSAGE_UPDATE"
-                  Gateway::MessageUpdate.from_h(data, :from_json)
-                when "MESSAGE_DELETE"
-                  Gateway::MessageDelete.from_h(data, :from_json)
-                when "MESSAGE_DELETE_BULK"
-                  Gateway::MessageDeleteBulk.from_h(data, :from_json)
-                when "MESSAGE_REACTION_ADD"
-                  Gateway::MessageReactionAdd.from_h(data, :from_json)
-                when "MESSAGE_REACTION_REMOVE"
-                  Gateway::MessageReactionRemove.from_h(data, :from_json)
-                when "MESSAGE_REACTION_REMOVE_ALL"
-                  Gateway::MessageReactionRemoveAll.from_h(data, :from_json)
-                when "PRESENCE_UPDATE"
-                  Gateway::PresenceUpdate.from_h(data, :from_json)
-                when "TYPING_START"
-                  Gateway::TypingStart.from_h(data, :from_json)
-                when "USER_UPDATE"
-                  Gateway::UserUpdate.from_h(data, :from_json)
-                when "VOICE_STATE_UPDATE"
-                  Gateway::VoiceStateUpdate.from_h(data, :from_json)
-                when "VOICE_SERVER_UPDATE"
-                  Gateway::VoiceServerUpdate.from_h(data, :from_json)
-                when "WEBHOOKS_UPDATE"
-                  Gateway::WebhooksUpdate.from_h(data, :from_json)
-                end
-      Thread.new { call_handlers(payload) }
-      payload
+      event_type = event_type.to_sym
+
+      if event_type == :READY
+        @session = Session.new(0, false, false, true, data[:session_id])
+      end
+
+      Thread.new { call_handlers(event_type, data) }
     end
 
     # @!visibility private
     # Dispatch an event to handlers relevant to the payload.
     # `payload` may be any gateway event payload
-    def call_handlers(payload)
-      @event_handlers[payload.class].dup.each do |handler|
+    def call_handlers(event_type, payload)
+      @event_handlers[event_type].dup.each do |handler|
         handler.call(payload)
       end
     end
@@ -205,9 +140,9 @@ module Rapture
     def self.__event(name, klass)
       define_method(:"on_#{name}") do |&block|
         handler = -> (payload) do
-          block.call(payload)
+          block.call(klass.from_h(payload, :from_json))
         end
-        @event_handlers[klass].push(handler)
+        @event_handlers[name.upcase].push(handler)
       end
     end
 

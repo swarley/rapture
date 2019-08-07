@@ -9,11 +9,11 @@ module Rapture
 
       # @!attribute [r] guild_id
       # @return [Integer, nil]
-      getter :guild_id, converter: Converters.Timestamp
+      getter :guild_id, converter: Converters.Snowflake
 
       # @!attribute [r] channel_id
       # @return [Integer, nil]
-      getter :channel_id, converter: Converters.Timestamp?
+      getter :channel_id, converter: Converters.Snowflake?
 
       # @!attribute [r] user_id
       # @return [Integer]

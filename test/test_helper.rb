@@ -8,7 +8,7 @@ require "minitest/spec"
 
 def json_data(name)
   path = File.join(File.expand_path("data", __dir__), "#{name}.json")
-  data = File.read(path)
+  File.read(path)
 end
 
 def parsed_json_data(name)
