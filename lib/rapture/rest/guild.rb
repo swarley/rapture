@@ -18,7 +18,7 @@ module Rapture::REST
     response = request(
       :post,
       "guilds",
-      name: name, **params
+      name: name, **params,
     )
 
     Rapture::Guild.from_json(response.body)
@@ -84,14 +84,14 @@ module Rapture::REST
   # @option params [Integer] :user_limit
   # @option params [Integer] :rate_limit_per_user
   # @option params [Integer] :position
-  # @option params [Array<Overwrite>] :permission_overwrites
+  # @option params [Array<Guild::Overwrite>] :permission_overwrites
   # @option params [String, Integer] :parent_id
   # @option params [true, false] :nsfw
   def create_guild_channel(guild_id, name:, **params)
     response = request(
       :post,
       "guilds/#{guild_id}/channels",
-      name: name, **params
+      name: name, **params,
     )
     Rapture::Channel.from_json(response.body)
   end
@@ -140,7 +140,7 @@ module Rapture::REST
     response = request(
       :put,
       "guilds/#{guild_id}/members/#{user_id}",
-      access_token: access_token, **params
+      access_token: access_token, **params,
     )
 
     return nil if response.status == 204
@@ -173,7 +173,7 @@ module Rapture::REST
     response = request(
       :patch,
       "guilds/#{guild_id}/members/@me/nick",
-      nick: nick
+      nick: nick,
     )
     response.body
   end
@@ -313,7 +313,7 @@ module Rapture::REST
   # @return [Integer]
   def get_guild_prune_count(guild_id)
     response = request(:get, "guilds/#{guild_id}/prune")
-    Oj.load(response.body)['pruned']
+    Oj.load(response.body)["pruned"]
   end
 
   # Begin a prune operation
@@ -325,7 +325,7 @@ module Rapture::REST
   def begin_guild_prune(guild_id, days: nil, compute_prune_count: nil)
     query = URI.encode_www_form(days: days, compute_prune_count: compute_prune_count)
     response = request(:post, "guilds/#{guild_id}/prune" + query)
-    Oj.load(response.body)['pruned']
+    Oj.load(response.body)["pruned"]
   end
 
   # A list of {Voice::Region} objects for a guild.
@@ -355,7 +355,7 @@ module Rapture::REST
     request(
       :post,
       "guilds/#{guild_id}/integrations",
-      type: type, id: id
+      type: type, id: id,
     )
   end
 
@@ -371,7 +371,7 @@ module Rapture::REST
     request(
       :patch,
       "guilds/#{guild_id}/integrations/#{integration_id}",
-      { expire_behavior: expire_behavior, expire_grace_period: expire_grace_period, enable_emoticons: enable_emoticons }
+      {expire_behavior: expire_behavior, expire_grace_period: expire_grace_period, enable_emoticons: enable_emoticons}
     )
   end
 
@@ -422,15 +422,14 @@ module Rapture::REST
   # @return [String, nil]
   def get_guild_vanity_url(guild_id)
     response = request(:get, "guilds/#{guild_id}/vanity-url")
-    Oj.load(response.body)['code']
+    Oj.load(response.body)["code"]
   end
 
   # Returns a PNG image widget for the guild
   # https://discordapp.com/developers/docs/resources/guild#get-guild-widget-image
   # @param guild_id [String, Integer]
-  # @todo 
+  # @todo
   def get_guild_widget_image(guild_id, style: nil)
     request(:get, "guilds/#{guild_id}/widget.png?" + style)
   end
-
 end

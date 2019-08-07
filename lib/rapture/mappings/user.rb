@@ -4,6 +4,22 @@ module Rapture
   class User
     include Mapping
 
+    class Connection
+      include Mapping
+
+      getter :id
+      getter :name
+      getter :type
+      getter :revoked
+
+      # @todo avoid this from being a thing
+      getter :integrations, from_json: proc { |data| Rapture::Guild::Integration.from_json(data) }
+      getter :verified
+      getter :friend_sync
+      getter :show_activity
+      getter :visibility
+    end
+
     # @!attribute [r] id
     # @return [Integer] ID
     getter :id, converter: Converters.Snowflake
@@ -60,22 +76,6 @@ module Rapture
     # @return [String]
     def distinct
       "#{username}##{discriminator}"
-    end
-
-    class Connection
-      include Mapping
-
-      getter :id
-      getter :name
-      getter :type
-      getter :revoked
-
-      # @todo avoid this from being a thing
-      getter :integrations, from_json: proc { |data| Rapture::Guild::Integration.from_json(data) }
-      getter :verified
-      getter :friend_sync
-      getter :show_activity
-      getter :visibility
     end
   end
 end

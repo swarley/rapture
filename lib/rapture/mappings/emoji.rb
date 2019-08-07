@@ -36,4 +36,17 @@ module Rapture
     # @return [true, false] whether this emoji is animated
     getter :animated
   end
+
+  # Represents an emoji partial for reactions
+  class Reaction
+    include Mapping
+
+    # @!attribute [r] id
+    # @return [Integer, nil]
+    getter :id, converter: Converters.Snowflake?
+
+    # @!attribute [r] name
+    # @return [String]
+    getter :name
+  end
 end

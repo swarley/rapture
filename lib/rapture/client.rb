@@ -94,35 +94,112 @@ module Rapture
       end
     end
 
+    # @!visibility private
+    # Handle an OP_INVALID_SESSION (9) packet
     private def handle_invalidate_session
       if @session
         @session.invalid = true
       else
+        # Log (received op 9 before @session)
         # TODO: panic?
       end
 
       identify
     end
 
+    # @!visibility private
+    # @todo This could be done many different ways.
+    #   I don't super like it as is. Maybe convert the name
+    #   into the class name since we map 1:1 in the Gateway
+    #   namespace.
+    #   Or, pass the class and call from_h in the dispatch
+    #   to at least cut down on the from_h calls in the case statement
+    # Handle an OPCODE_DISPATCH (0) packet.
     def handle_dispatch(event_type, data)
-      payload = nil
-      case event_type
+      payload = case event_type
       when "READY"
-        payload = Gateway::Ready.from_h(data, :from_json)
-        @session = Session.new(0, false, false, true, payload.session_id)
+        ready_event = Gateway::Ready.from_h(data, :from_json)
+        @session = Session.new(0, false, false, true, ready_event.session_id)
+        ready_event
       when "MESSAGE_CREATE"
-        payload = Message.from_h(data, :from_json)
+        Message.from_h(data, :from_json)
+      when "CHANNEL_CREATE"
+        Gateway::ChannelCreate.from_h(data, :from_json)
+      when "CHANNEL_UPDATE"
+        Gateway::ChannelUpdate.from_h(data, :from_json)
+      when "CHANNEL_DELETE"
+        Gateway::ChannelDelete.from_h(data, :from_json)
+      when "CHANNEL_PINS_UPDATE"
+        Gateway::ChannelPinsUpdate.from_h(data, :from_json)
+      when "GUILD_CREATE"
+        Gateway::GuildCreate.from_h(data, :from_json)
+      when "GUILD_UPDATE"
+        Gateway::GuildUpdate.from_h(data, :from_json)
+      when "GUILD_DELETE"
+        Gateway::GuildDelete.from_h(data, :from_json)
+      when "GUILD_BAN_ADD"
+        Gateway::GuildBanAdd.from_h(data, :from_json)
+      when "GUILD_BAN_REMOVE"
+        Gateway::GuildBanRemove.from_h(data, :from_json)
+      when "GUILD_EMOJIS_UPDATE"
+        Gateway::GuildEmojiUpdate.from_h(data, :from_json)
+      when "GUILD_INTEGRATIONS_UPDATE"
+        Gateway::GuildIntegrationsUpdate.from_h(data, :from_json)
+      when "GUILD_MEMBER_ADD"
+        Gateway::GuildMemberAdd.from_h(data, :from_json)
+      when "GUILD_MEMBER_REMOVE"
+        Gateway::GuildMemberRemove.from_h(data, :from_json)
+      when "GUILD_MEMBER_UPDATE"
+        Gateway::GuildMemberUpdate.from_h(data, :from_json)
+      when "GUILD_MEMBERS_CHUNK"
+        Gateway::GuildMembersChunk.from_h(data, :from_json)
+      when "GUILD_ROLE_CREATE"
+        Gateway::GuildRoleCreate.from_h(data, :from_json)
+      when "GUILD_ROLE_UPDATE"
+        Gateway::GuildRoleUpdate.from_h(data, :from_json)
+      when "GUILD_ROLE_DELETE"
+        Gateway::GuildRoleDelete.from_h(data, :from_json)
+      when "MESSAGE_CREATE"
+        Gateway::MessageCreate.from_h(data, :from_json)
+      when "MESSAGE_UPDATE"
+        Gateway::MessageUpdate.from_h(data, :from_json)
+      when "MESSAGE_DELETE"
+        Gateway::MessageDelete.from_h(data, :from_json)
+      when "MESSAGE_DELETE_BULK"
+        Gateway::MessageDeleteBulk.from_h(data, :from_json)
+      when "MESSAGE_REACTION_ADD"
+        Gateway::MessageReactionAdd.from_h(data, :from_json)
+      when "MESSAGE_REACTION_REMOVE"
+        Gateway::MessageReactionRemove.from_h(data, :from_json)
+      when "MESSAGE_REACTION_REMOVE_ALL"
+        Gateway::MessageReactionRemoveAll.from_h(data, :from_json)
+      when "PRESENCE_UPDATE"
+        Gateway::PresenceUpdate.from_h(data, :from_json)
+      when "TYPING_START"
+        Gateway::TypingStart.from_h(data, :from_json)
+      when "USER_UPDATE"
+        Gateway::UserUpdate.from_h(data, :from_json)
+      when "VOICE_STATE_UPDATE"
+        Gateway::VoiceStateUpdate.from_h(data, :from_json)
+      when "VOICE_SERVER_UPDATE"
+        Gateway::VoiceServerUpdate.from_h(data, :from_json)
+      when "WEBHOOKS_UPDATE"
+        Gateway::WebhooksUpdate.from_h(data, :from_json)
       end
       Thread.new { call_handlers(payload) }
       payload
     end
 
+    # @!visibility private
+    # Dispatch an event to handlers relevant to the payload.
+    # `payload` may be any gateway event payload
     def call_handlers(payload)
       @event_handlers[payload.class].dup.each do |handler|
         handler.call(payload)
       end
     end
 
+    # @!visibility private
     def self.__event(name, klass)
       define_method(:"on_#{name}") do |&block|
         handler = -> (payload) do
@@ -132,9 +209,113 @@ module Rapture
       end
     end
 
-    __event(:ready, Gateway::Ready)
-    __event(:message_create, Message)
+    # @!group Handler registers
 
+    # @!macro [new] gateway_event
+    #   @!method on_$1(&block)
+    #     Register a handler to be called when a `$1` event is recieved
+    #     @yieldparam [$2] data
+    __event(:ready, Gateway::Ready)
+
+    # @!macro gateway_event
+    __event(:message_create, Gateway::MessageCreate)
+
+    # @!macro gateway_event
+    __event(:channel_create, Gateway::ChannelCreate)
+
+    # @!macro gateway_event
+    __event(:channel_update, Gateway::ChannelUpdate)
+
+    # @!macro gateway_event
+    __event(:channel_delete, Gateway::ChannelDelete)
+
+    # @!macro gateway_event
+    __event(:channel_pins_update, Gateway::ChannelPinsUpdate)
+
+    # @!macro gateway_event
+    __event(:guild_create, Gateway::GuildCreate)
+
+    # @!macro gateway_event
+    __event(:guild_update, Gateway::GuildUpdate)
+
+    # @!macro gateway_event
+    __event(:guild_delete, Gateway::GuildDelete)
+
+    # @!macro gateway_event
+    __event(:guild_ban_add, Gateway::GuildBanAdd)
+
+    # @!macro gateway_event
+    __event(:guild_ban_remove, Gateway::GuildBanRemove)
+
+    # @!macro gateway_event
+    __event(:guild_emojis_update, Gateway::GuildEmojisUpdate)
+
+    # @!macro gateway_event
+    __event(:guild_integrations_update, Gateway::GuildIntegrationsUpdate)
+
+    # @!macro gateway_event
+    __event(:guild_member_add, Gateway::GuildMemberAdd)
+
+    # @!macro gateway_event
+    __event(:guild_member_remove, Gateway::GuildMemberRemove)
+
+    # @!macro gateway_event
+    __event(:guild_member_update, Gateway::GuildMemberUpdate)
+
+    # @!macro gateway_event
+    __event(:guild_members_chunk, Gateway::GuildMembersChunk)
+
+    # @!macro gateway_event
+    __event(:guild_role_create, Gateway::GuildRoleCreate)
+
+    # @!macro gateway_event
+    __event(:guild_role_update, Gateway::GuildRoleUpdate)
+
+    # @!macro gateway_event
+    __event(:guild_role_delete, Gateway::GuildRoleDelete)
+
+    # @!macro gateway_event
+    __event(:message_create, Gateway::MessageCreate)
+
+    # @!macro gateway_event
+    __event(:message_update, Gateway::MessageUpdate)
+
+    # @!macro gateway_event
+    __event(:message_delete, Gateway::MessageDelete)
+
+    # @!macro gateway_event
+    __event(:message_delete_bulk, Gateway::MessageDeleteBulk)
+
+    # @!macro gateway_event
+    __event(:message_reaction_add, Gateway::MessageReactionAdd)
+
+    # @!macro gateway_event
+    __event(:message_reaction_remove, Gateway::MessageReactionRemove)
+
+    # @!macro gateway_event
+    __event(:message_reaction_remove_all, Gateway::MessageReactionRemoveAll)
+
+    # @!macro gateway_event
+    __event(:presence_update, Gateway::PresenceUpdate)
+
+    # @!macro gateway_event
+    __event(:typing_start, Gateway::TypingStart)
+
+    # @!macro gateway_event
+    __event(:user_update, Gateway::UserUpdate)
+
+    # @!macro gateway_event
+    __event(:voice_state_update, Gateway::VoiceStateUpdate)
+
+    # @!macro gateway_event
+    __event(:voice_server_update, Gateway::VoiceServerUpdate)
+
+    # @!macro gateway_event
+    __Event(:webhooks_update, Gateway::WebhooksUpdate)
+
+    # @endgroup
+
+    # The properties for the identify payload that is sent via the gateway
     IDENTIFY_PROPERTIES = {
       os: "Ruby",
       browser: "rapture",
@@ -143,6 +324,8 @@ module Rapture
       referring_domain: "",
     }.freeze
 
+    # @!visibility private
+    # Send an `IDENTIFY` packet through the gateway
     private def identify
       payload = Gateway::Identify.new(
         @token,
@@ -153,6 +336,8 @@ module Rapture
       @websocket.send({op: 2, d: payload}.to_json)
     end
 
+    # @!visibility private
+    # Attempt to resume a gateway connection
     private def resume
       payload = Gateway::Resume.new(
         @token,
@@ -161,6 +346,8 @@ module Rapture
       @websocket.send({op: 6, d: payload}.to_json)
     end
 
+    # @!visibility private
+    # Begin a loop that sends a heartbeat on a fixed interval
     private def setup_heartbeats
       Thread.new do
         loop do

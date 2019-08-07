@@ -5,9 +5,10 @@ module Rapture::REST
 
   # Returns a {Channel} object for a given channel ID
   # https://discordapp.com/developers/docs/resources/channel#get-channel
+  # @param channel_id [String, Integer]
   # @return [Channel]
-  def get_channel(id)
-    response = request(:get, "channels/#{id}")
+  def get_channel(channel_id)
+    response = request(:get, "channels/#{channel_id}")
     Rapture::Channel.from_json(response.body)
   end
 
@@ -22,7 +23,7 @@ module Rapture::REST
   # @option params [Integer] :rate_limit_per_user
   # @option params [Integer] :bitrate
   # @option params [Integer] :user_limit
-  # @option params [Array<Overwrite>] :permission_overwrites
+  # @option params [Array<Guild::Overwrite>] :permission_overwrites
   # @option params [Integer, String] :parent_id
   # @return [Channel] updated channel object
   def modify_channel(channel_id, **params)
@@ -39,9 +40,10 @@ module Rapture::REST
   # deleted, but a DM may be reopened.
   # https://discordapp.com/developers/docs/resources/channel#deleteclose-channel
   # @param channel_id [String, Integer]
+  # @return [Channel] the deleted channel object
   def delete_channel(channel_id)
     response = request(:delete, "channels/#{channel_id}")
-    Channel.from_json(response.body)
+    Rapture::Channel.from_json(response.body)
   end
 
   # Return messages for a channel. This endpoint requires `VIEW_CHANNEL`
@@ -65,9 +67,15 @@ module Rapture::REST
 
   # Creates a message in a channel.
   # https://discordapp.com/developers/docs/resources/channel#create-message
+  # @note One of `file`, `content`, or `embed` must be passed.
+  # @param channel_id [String, Integer]
+  # @option params [String] :content
+  # @option params [Embed] :embed
+  # @option params [true, false] :tts
+  # @option params [Faraday::UploadIO] :file
   # @return [Message] the created message
-  def create_message(channel_id, content: nil, embed: nil, tts: false, file: nil)
-    payload = {content: content, embed: embed, tts: tts}
+  def create_message(channel_id, **params)
+    payload = params
 
     if file
       file = Faraday::UploadIO.new(file, MIME::Types.type_for(file).first)
@@ -88,18 +96,24 @@ module Rapture::REST
 
   # Edits a message in a channel.
   # https://discordapp.com/developers/docs/resources/channel#edit-message
+  # @param channel_id [String, Integer]
+  # @param message_id [String, Integer]
+  # @option params [String, nil] :content
+  # @option params [Embed, nil] :embed
   # @return [Message] the edited message
-  def edit_message(channel_id, message_id, content: nil, embed: nil)
+  def edit_message(channel_id, message_id, **params)
     response = request(
       :patch,
       "channels/#{channel_id}/messages/#{message_id}",
-      content: content, embed: embed,
+      params
     )
     Rapture::Message.from_json(response.body)
   end
 
   # Deletes a message in a channel.
   # https://discordapp.com/developers/docs/resources/channel#delete-message
+  # @param channel_id [String, Integer]
+  # @param message_id [String, Integer]
   def delete_message(channel_id, message_id)
     request(:delete, "channels/#{channel_id}/messages/#{message_id}")
   end
@@ -180,11 +194,11 @@ module Rapture::REST
   # Create a new invite for a channel
   # https://discordapp.com/developers/docs/resources/channel#create-channel-invite
   # @param channel_id [String, Integer]
-  # @param max_age [Integer]
-  # @param max_uses [Integer]
-  # @param temporary [true, false]
-  # @param unique [true, false]
-  def create_channel_invite(channel_id, max_age: nil, max_uses: nil, temporary: nil, unique: nil)
+  # @option params [Integer] :max_age
+  # @option params [Integer] :max_uses
+  # @option params [true, false] :temporary
+  # @option params [true, false] :unique
+  def create_channel_invite(channel_id, **params)
     response = request(
       :post,
       "channels/#{channel_id}/invites",
@@ -237,10 +251,10 @@ module Rapture::REST
   # Adds a recipient to a group DM using their access token
   # https://discordapp.com/developers/docs/resources/channel#group-dm-add-recipient
   # @param channel_id [String, Integer]
-  # @param message_id [String, Integer]
+  # @param user_id [String, Integer]
   # @param access_token [String]
   # @param nick [String]
-  def add_group_dm_recipient(channel_id, user_ud, access_token:, nick:)
+  def add_group_dm_recipient(channel_id, user_id, access_token:, nick: nil)
     request(
       :put,
       "channels/#{channel_id}/recipients/#{user_id}",
@@ -250,6 +264,8 @@ module Rapture::REST
 
   # Remove a recipient from a group DM
   # https://discordapp.com/developers/docs/resources/channel#group-dm-remove-recipient
+  # @param channel_id [String, Integer]
+  # @param user_id [String, Integer]
   def delete_group_dm_recipient(channel_id, user_id)
     request(:delete, "channels/#{channel_id}/recipients/#{user_id}")
   end

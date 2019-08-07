@@ -93,6 +93,7 @@ module Rapture
       # @!attribute [r] channel_id
       # @return [Integer, nil]
       getter :channel_id, converter: Converters.Snowflake?
+    end
 
     # @!attribute [r] id
     # @return [Integer]

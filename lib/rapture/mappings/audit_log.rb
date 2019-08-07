@@ -1,39 +1,21 @@
 
+require "rapture/mappings/webhook"
+
 module Rapture
   class AuditLog
     include Mapping
 
-    class Entry
-      include Maping
-
-      # @!attribute [r] target_id
-      # @return [String, nil] the type name of the affected object
-      getter :target_id
-
-      # @!attribute [r] changes
-      # @return [Array<Change>, nil]
-      getter :changes, from_json: Change
-
-      # @!attribute [r] user_id
-      # @return [Integer]
-      getter :user_id, converter: Converters.Snowflake
+    # @todo Separate into GuildChange, ChannelChange, RoleChange, InviteChange,
+    class Change
+      include Mapping
 
       # @!attribute [r] id
-      # @return [Integer]
-      getter :id, converter: Converters.Snowflake
+      # @return [Integer, nil]
+      getter :id, converter: Converters.Snowflake?
 
-      # @!attribute [r] action_type
-      # @return [Integer]
-      # @see https://discordapp.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
-      getter :action_type
-
-      # @!attribute [r] options
-      # @return [Info, nil] additional info for certain action types
-      getter :options, from_json: Info
-
-      # @!attribute [r] reason
-      # @return [String, nil]
-      getter :reason
+      # @!attribute [r] type
+      # @return [Integer, String] Integer if refering to a channel type
+      getter :type
     end
 
     class Info
@@ -78,22 +60,42 @@ module Rapture
       getter :role_name
     end
 
-    # @todo Separate into GuildChange, ChannelChange, RoleChange, InviteChange,
-    class Change
+    class Entry
       include Mapping
 
-      # @!attribute [r] id
-      # @return [Integer, nil]
-      getter :id, converter: Converters.Snowflake?
+      # @!attribute [r] target_id
+      # @return [String, nil] the type name of the affected object
+      getter :target_id
 
-      # @!attribute [r] type
-      # @return [Integer, String] Integer if refering to a channel type
-      getter :type
+      # @!attribute [r] changes
+      # @return [Array<Change>, nil]
+      getter :changes, from_json: Change
+
+      # @!attribute [r] user_id
+      # @return [Integer]
+      getter :user_id, converter: Converters.Snowflake
+
+      # @!attribute [r] id
+      # @return [Integer]
+      getter :id, converter: Converters.Snowflake
+
+      # @!attribute [r] action_type
+      # @return [Integer]
+      # @see https://discordapp.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
+      getter :action_type
+
+      # @!attribute [r] options
+      # @return [Info, nil] additional info for certain action types
+      getter :options, from_json: Info
+
+      # @!attribute [r] reason
+      # @return [String, nil]
+      getter :reason
     end
 
     # @!attribute [r] webhooks
     # @return [Array<Webhook>]
-    getter :webhooks, from_json: Webhook
+    getter :webhooks, from_json: Rapture::Webhook
 
     # @!attribute [r] users
     # @return [Array<User>]

@@ -18,5 +18,6 @@ require "rapture/rest"
 require "rapture/websocket"
 require "rapture/client"
 
+# Main module containing Rapture data types and methods
 module Rapture
 end

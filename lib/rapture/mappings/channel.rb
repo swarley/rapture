@@ -4,30 +4,30 @@ require "rapture/mappings/user"
 require "rapture/mappings/emoji"
 
 module Rapture
-  class Overwrite
-    include Mapping
-
-    # @!attribute [r] id
-    # @return [Integer] role or user ID
-    getter :id, converters: Converters.Snowflake
-
-    # @!attribute [r] type
-    # @return [String] either "role" or "member"
-    getter :type
-
-    # @!attribute [r] allow
-    # @todo permissions
-    # @return [Integer] permission bit set
-    getter :allow
-
-    # @!attribute [r] deny
-    # @todo permissions
-    # @return [Integer] premission bit set
-    getter :deny
-  end
-
   class Channel
     include Mapping
+
+    class Overwrite
+      include Mapping
+
+      # @!attribute [r] id
+      # @return [Integer] role or user ID
+      getter :id, converters: Converters.Snowflake
+
+      # @!attribute [r] type
+      # @return [String] either "role" or "member"
+      getter :type
+
+      # @!attribute [r] allow
+      # @todo permissions
+      # @return [Integer] permission bit set
+      getter :allow
+
+      # @!attribute [r] deny
+      # @todo permissions
+      # @return [Integer] premission bit set
+      getter :deny
+    end
 
     # @!attribute [r] id
     # @return [Integer] ID

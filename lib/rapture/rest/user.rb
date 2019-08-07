@@ -69,11 +69,11 @@ module Rapture::REST
     Rapture::Channel.from_json(response.body)
   end
 
-  # Returns an {Array<User::Connection>}. Requires `connections` scope.
+  # Returns a list of user connections. Requires `connections` scope.
   # https://discordapp.com/developers/docs/resources/user#get-user-connections
-  # @return [Array<User::Connection>]
+  # @return [Array<Rapture::User::Connection>]
   def get_user_connections
     response = request(:get, "users/@me/connections")
-    User::Connection.from_json_array(response.body)
+    Rapture::User::Connection.from_json_array(response.body)
   end
 end

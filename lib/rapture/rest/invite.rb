@@ -7,7 +7,7 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/invite#get-invite
   # @param invite_code [String]
   # @return [Invite]
-  def get_invite(invite_code,  with_counts: nil)
+  def get_invite(invite_code, with_counts: nil)
     query = URI.encode_www_form(with_counts: with_counts)
     response = request(:get, "invites/#{invite_code}" + query)
     Invite.from_json(response.body)

@@ -14,6 +14,9 @@ module Rapture::REST
 
   # Get an emoji from a guild by its ID
   # https://discordapp.com/developers/docs/resources/emoji#get-guild-emoji
+  # @param guild_id [String, Integer]
+  # @param emoji_id [String, Integer]
+  # @return [Emoji]
   def get_guild_emoji(guild_id, emoji_id)
     response = request(:get, "guilds/#{guild_id}/emojis/#{emoji_id}")
     Emoji.from_json(response.body)
@@ -21,6 +24,11 @@ module Rapture::REST
 
   # Create a new emoji for a guild
   # https://discordapp.com/developers/docs/resources/emoji#create-guild-emoji
+  # @param guild_id [String, Integer]
+  # @param name [String]
+  # @param image [Faraday::UploadIO]
+  # @param roles [Array<String, Integer>] array of role IDs that can use this emoji
+  # @return [Emoji]
   def create_guild_emoji(guild_id, name:, image:, roles: [])
     response = request(
       :post,
@@ -32,7 +40,12 @@ module Rapture::REST
 
   # Modify a given emoji
   # https://discordapp.com/developers/docs/resources/emoji#modify-guild-emoji
-  def modify_guild_emoji(guild_id, emoji_id, name: nil, roles: nil)
+  # @param guild_id [String, Integer]
+  # @param emoji_id [String, Integer]
+  # @option params [String] :name
+  # @option params [Array<String, Integer>] :roles array of role IDs that can use this emoji
+  # @return [Emoji]
+  def modify_guild_emoji(guild_id, emoji_id, **params)
     response = request(
       :patch,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
@@ -43,6 +56,8 @@ module Rapture::REST
 
   # Delete a given emoji
   # https://discordapp.com/developers/docs/resources/emoji#delete-guild-emoji
+  # @param guild_id [String, Integer]
+  # @param emoji_id [String, Integer]
   def delete_guild_emoji(guild_id, emoji_id)
     request(:delete, "guilds/#{guild_id}/emojis/#{emoji_id}")
   end

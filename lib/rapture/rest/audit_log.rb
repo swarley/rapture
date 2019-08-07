@@ -5,16 +5,17 @@ module Rapture::REST
 
   # Fetch a guild's audit log
   # @param guild_id [String, Integer]
-  # @param user_id [String, Integer]
-  # @param action_type [Integer]
-  # @param before [String, Integer]
-  # @param limit [Integer]
-  def get_guild_audit_log(guild_id, user_id: nil, action_type: nil, before: nil, limit: nil)
-    query = {user_id: user_id, action_type: action_type, before: before, limit: limit}.compact
+  # @option params [String, Integer] :user_id
+  # @option params [Integer] :action_type
+  # @option params [String, Integer] :before
+  # @option params [Integer] :limit
+  # @return [AuditLog]
+  def get_guild_audit_log(guild_id, **params)
+    query = URI.encode_www_form(params)
     response = request(
       :get,
-      "guilds/#{guild_id}/audit-logs?" + URI.encode_www_form(query)
+      "guilds/#{guild_id}/audit-logs?" + query
     )
-    AuditLog.from_json(response)
+    Rapture::AuditLog.from_json(response.body)
   end
 end
