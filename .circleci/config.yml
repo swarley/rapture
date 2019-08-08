@@ -58,9 +58,9 @@ jobs:
           at: .
       - run:
           name: Install dependencies
-          command: npm install -g gh-pages@2.0.1
+          command: sudo npm install -g gh-pages@2.0.1
       - run:
-          name: Configure git
+          name: Configure Dependencies
           command: |
             git config user.email "ci-build@swarley.xyz"
             git config user.name "ci-build"
