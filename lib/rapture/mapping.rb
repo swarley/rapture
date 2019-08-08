@@ -136,31 +136,29 @@ module Rapture::Mapping
 
     # @!visibility private
     def convert(value, prop, option_method)
-      if (action = @properties.dig(prop, option_method))
-        value = if action.is_a?(Symbol)
-                  value.send(action)
-                elsif action.is_a?(Class)
-                  if value.is_a?(Hash)
-                    action.from_h(value, option_method)
-                  elsif value.is_a?(Array)
-                    value.map do |element|
-                      if element.is_a?(action)
-                        element.to_h(option_method)
-                      else
-                        action.from_h(element, option_method)
-                      end
-                    end
-                  elsif value.is_a?(action)
-                    value.to_h(option_method)
-                  end
-                elsif action.respond_to?(:call)
-                  action.call(value)
-                else
-                  raise ArgumentError, "Action must be a symbol or respond to :call"
-                end
-      end
+      return value unless action = @properties.dig(prop, option_method)
 
-      value
+      if action.is_a?(Symbol)
+        value.send(action)
+      elsif action.is_a?(Class)
+        if value.is_a?(Hash)
+          action.from_h(value, option_method)
+        elsif value.is_a?(Array)
+          value.map do |element|
+            if element.is_a?(action)
+              element.to_h(option_method)
+            else
+              action.from_h(element, option_method)
+            end
+          end
+        elsif value.is_a?(action)
+          value.to_h(option_method)
+        end
+      elsif action.respond_to?(:call)
+        action.call(value)
+      else
+        raise ArgumentError, "Action must be a symbol or respond to :call"
+      end
     rescue Exception => _
       raise Rapture::SerdeError, "Failed to convert property: `#{prop}'"
     end
