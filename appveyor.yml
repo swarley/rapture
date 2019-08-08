@@ -7,4 +7,4 @@ install:
 build: off
 
 test_script:
-  - bundle exec rake test
+  - rake test
