@@ -135,19 +135,7 @@ module Rapture::Mapping
       if action.is_a?(Symbol)
         value.send(action)
       elsif action.is_a?(Class)
-        if value.is_a?(Hash)
-          action.from_h(value, option_method)
-        elsif value.is_a?(Array)
-          value.map do |element|
-            if element.is_a?(action)
-              element.to_h(option_method)
-            else
-              action.from_h(element, option_method)
-            end
-          end
-        elsif value.is_a?(action)
-          value.to_h(option_method)
-        end
+        convert_class(value, action, option_method)
       elsif action.respond_to?(:call)
         action.call(value)
       else
@@ -155,6 +143,29 @@ module Rapture::Mapping
       end
     rescue Exception => _
       raise Rapture::SerdeError, "Failed to convert property: `#{prop}'"
+    end
+
+    # @!visibility private
+    def convert_class(value, action, option_method)
+      case value
+      when Hash
+        action.from_h(value, option_method)
+      when Array
+        convert_array(value, action, option_method)
+      when action
+        value.to_h(option_method)
+      end
+    end
+
+    # @!visibility private
+    def convert_array(value, action, option_method)
+      value.map do |element|
+        if element.is_a? action
+          element.to_h(option_method)
+        else
+          action.from_h(element, option_method)
+        end
+      end
     end
   end
 
