@@ -1,11 +1,15 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/maintainability)](https://codeclimate.com/github/swarley/rapture/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/test_coverage)](https://codeclimate.com/github/swarley/rapture/test_coverage) [![CircleCI](https://img.shields.io/circleci/build/github/swarley/rapture/master)](https://circleci.com/gh/swarley/rapture)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/maintainability)](https://codeclimate.com/github/swarley/rapture/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/test_coverage)](https://codeclimate.com/github/swarley/rapture/test_coverage) [![CircleCI](https://img.shields.io/circleci/build/github/swarley/rapture/master)](https://circleci.com/gh/swarley/rapture) [![Windows build status](https://ci.appveyor.com/api/projects/status/6dcu4eajebmv7fny/branch/master?svg=true)](https://ci.appveyor.com/project/swarley/rapture/branch/master)
+
 
 # Rapture
 
 A Ruby library for [Discord](https://discord.com).
 
+----------------------------------------------------
+
 ## Installation
 
+#### Linux/MacOS
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -19,6 +23,10 @@ And then execute:
 Or install it yourself as:
 
     $ gem install discord-rapture
+
+#### Windows
+You can install in the same method as Linux, however you must remove `eventmachine` and install it with `--platform=ruby`, this is due to an incompatibility with EventMachine and Ruby versions >2.3 on Windows. 
+
 
 ## Usage
 
@@ -44,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/z64/rapture.
+Bug reports and pull requests are welcome on GitHub at https://github.com/swarley/rapture.
 
 ## License
 
