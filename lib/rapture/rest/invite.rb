@@ -24,7 +24,7 @@ module Rapture::REST
       :delete,
       "invites/#{invite_code}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
     Invite.from_json(response.body)
   end

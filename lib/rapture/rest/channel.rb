@@ -33,7 +33,7 @@ module Rapture::REST
       :patch,
       "channels/#{channel_id}",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
 
     Rapture::Channel.from_json(response.body)
@@ -50,7 +50,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
 
     Rapture::Channel.from_json(response.body)
@@ -128,7 +128,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}/messages/#{message_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -141,7 +141,7 @@ module Rapture::REST
       :post,
       "channels/#{channel_id}/messages/bulk-delete",
       {messages: messages},
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -180,7 +180,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/#{user_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -204,7 +204,7 @@ module Rapture::REST
       :put,
       "channel/#{channel_id}/permissions/#{overwrite_id}",
       {allow: allow, deny: deny, type: type},
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -230,7 +230,7 @@ module Rapture::REST
       :post,
       "channels/#{channel_id}/invites",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
 
     Rapture::Invite.from_json(response.body)
@@ -245,7 +245,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}/permissions/#{overwrite_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 

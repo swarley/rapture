@@ -55,7 +55,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
     Rapture::Guild.from_json(response.body)
   end
@@ -97,7 +97,7 @@ module Rapture::REST
       :post,
       "guilds/#{guild_id}/channels",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
     Rapture::Channel.from_json(response.body)
   end
@@ -111,7 +111,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/channels",
       positions,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -176,7 +176,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/members/#{user_id}",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -205,7 +205,7 @@ module Rapture::REST
       :put,
       "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -220,7 +220,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -234,7 +234,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/members/#{user_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -269,7 +269,7 @@ module Rapture::REST
       :put,
       "guilds/#{guild_id}/bans/#{user_id}?" + query,
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -283,7 +283,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/bans/#{user_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -311,7 +311,7 @@ module Rapture::REST
       :post,
       "guilds/#{guild_id}/roles",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
     Rapture::Role.from_json(response.body)
   end
@@ -327,7 +327,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/roles",
       positions,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
 
     Role.from_json_array(response.body)
@@ -349,7 +349,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/roles/#{role_id}",
       params,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
 
     Rapture::Role.from_json(response.body)
@@ -365,7 +365,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/roles/#{role_id}",
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
   end
 
@@ -391,7 +391,7 @@ module Rapture::REST
       :post,
       "guilds/#{guild_id}/prune" + query,
       nil,
-      'X-Audit-Log-Reason': reason
+      'X-Audit-Log-Reason': reason,
     )
     Oj.load(response.body)["pruned"]
   end
