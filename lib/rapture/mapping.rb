@@ -130,14 +130,15 @@ module Rapture::Mapping
 
     # @!visibility private
     def convert(value, prop, option_method)
-      return value unless action = @properties.dig(prop, option_method)
-
-      if action.is_a?(Symbol)
+      case action = @properties.dig(prop, option_method)
+      when Symbol
         value.send(action)
-      elsif action.is_a?(Class)
+      when Class
         convert_class(value, action, option_method)
-      elsif action.respond_to?(:call)
+      when Proc
         action.call(value)
+      when nil
+        value
       else
         raise ArgumentError, "Action must be a symbol or respond to :call"
       end
