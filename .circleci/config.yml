@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ruby:2.4-alpine
+      - image: circleci/ruby:2.4
         environment:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -12,19 +12,9 @@ jobs:
           name: Installer Bundler
           command: gem install bundler -v 2.0.2
       
-      - restore_cache:
-          keys:
-            - rapture-bundle-{{ checksum "Gemfile.lock" }}
-            - rapture-bundle-
-      
       - run:
           name: Install Dependencies
           command: bundle check --path vendor/bundle || bundle install
-      
-      - save_cache:
-          key: rapture-bundle-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
       
       - run:
           name: Run Tests
