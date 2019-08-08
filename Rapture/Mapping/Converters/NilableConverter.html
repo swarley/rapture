@@ -371,33 +371,25 @@
       <pre class="lines">
 
 
+32
+33
 34
 35
 36
 37
 38
 39
-40
-41
-42
-43
-44
-45
-46</pre>
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_json'>from_json</span>
   <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
-    <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_data'>data</span>
-
-    <span class='id identifier rubyid_from_json_proc'>from_json_proc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span>
-
     <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Array</span>
       <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_elem'>elem</span><span class='op'>|</span> <span class='id identifier rubyid_from_json_proc'>from_json_proc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_elem'>elem</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_from_json_proc'>from_json_proc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_from_json_proc'>from_json_proc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -425,18 +417,14 @@
 27
 28
 29
-30
-31
-32</pre>
+30</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_json'>to_json</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid__args'>_args</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
-    <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_data'>data</span>
-
-    <span class='id identifier rubyid_to_json_proc'>to_json_proc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_to_json_proc'>to_json_proc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -449,7 +437,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  8 22:30:22 2019 by
+  Generated on Thu Aug  8 22:34:58 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
