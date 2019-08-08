@@ -25,22 +25,16 @@ module Rapture::Mapping
     NilableConverter = Struct.new(:to_json_proc, :from_json_proc) do
       def to_json(*_args)
         proc do |data|
-          next unless data
-
-          to_json_proc.call(data)
+          to_json_proc.call(data) if data
         end
       end
 
       def from_json
         proc do |data|
-          next unless data
-
-          from_json_proc.call(data) if data
-
           if data.is_a? Array
             data.collect { |elem| from_json_proc.call(elem) }
           else
-            from_json_proc.call(data)
+            from_json_proc.call(data) if data
           end
         end
       end
