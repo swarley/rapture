@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ruby/2.4-alpine
+      - image: ruby:2.4-alpine
         environment:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
