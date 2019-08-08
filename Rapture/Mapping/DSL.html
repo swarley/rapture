@@ -208,7 +208,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Create an Array of this object type from a json array.</p>
+</div></span>
   
 </li>
 
@@ -290,12 +292,12 @@
       <pre class="lines">
 
 
-87
-88
-89</pre>
+98
+99
+100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_properties'>properties</span>
   <span class='ivar'>@properties</span>
@@ -376,34 +378,26 @@
       <pre class="lines">
 
 
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
 126
 127
 128
-129</pre>
+129
+130
+131
+132
+133
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_h'>from_h</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='id identifier rubyid_converter'>converter</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_instance'>instance</span> <span class='op'>=</span> <span class='id identifier rubyid_new'>new</span>
 
   <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span>
     <span class='id identifier rubyid_v'>v</span> <span class='op'>=</span> <span class='id identifier rubyid_convert'>convert</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='comma'>,</span> <span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_converter'>converter</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_converter'>converter</span>
-    <span class='kw'>begin</span>
-      <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:&quot;@</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>
-    <span class='kw'>rescue</span> <span class='const'>NoMethodError</span>
-      <span class='comment'># puts &quot;WARN: #{self} missing property: #{k} (raw value: #{v.inspect})&quot;
-</span>    <span class='kw'>end</span>
+    <span class='id identifier rubyid_instance'>instance</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:&quot;@</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_k'>k</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 
   <span class='id identifier rubyid_instance'>instance</span>
@@ -459,13 +453,13 @@
       <pre class="lines">
 
 
-103
-104
-105
-106</pre>
+112
+113
+114
+115</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='const'>Oj</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>symbol_keys:</span> <span class='kw'>true</span><span class='rparen'>)</span>
@@ -485,19 +479,30 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an Array of this object type from a json array</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-108
-109
-110
-111</pre>
+118
+119
+120
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_array'>array</span> <span class='op'>=</span> <span class='const'>Oj</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>symbol_keys:</span> <span class='kw'>true</span><span class='rparen'>)</span>
@@ -534,27 +539,23 @@
       <pre class="lines">
 
 
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99</pre>
+101
+102
+103
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_getter'>getter</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_attr_reader'>attr_reader</span> <span class='id identifier rubyid_name'>name</span>
 
   <span class='comment'># @todo Fix this to actually be included in options
-</span>  <span class='kw'>if</span> <span class='id identifier rubyid_converter'>converter</span>
-    <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>from_json:</span> <span class='id identifier rubyid_converter'>converter</span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='comma'>,</span> <span class='label'>to_json:</span> <span class='id identifier rubyid_converter'>converter</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+</span>  <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>from_json:</span> <span class='id identifier rubyid_converter'>converter</span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='comma'>,</span> <span class='label'>to_json:</span> <span class='id identifier rubyid_converter'>converter</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_converter'>converter</span>
 
   <span class='lparen'>(</span><span class='ivar'>@properties</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span>
 <span class='kw'>end</span></pre>
@@ -568,7 +569,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  8 13:24:44 2019 by
+  Generated on Thu Aug  8 16:12:40 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

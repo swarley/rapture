@@ -69,12 +69,12 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">Exception</span>
+      <span class="inheritName">RuntimeError</span>
       
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Exception</li>
+            <li class="next">RuntimeError</li>
           
             <li class="next">Rapture::HTTPException</li>
           
@@ -106,7 +106,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Exception for handline errors when accessing the REST API.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -192,6 +203,35 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#response-instance_method" title="#response (instance method)">#<strong>response</strong>  &#x21d2; Faraday::Response </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The response from the request that resulted in this exception.</p>
+</div></span>
   
 </li>
 
@@ -318,10 +358,10 @@
       <pre class="lines">
 
 
-20</pre>
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 28</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:code</span></pre>
     </td>
@@ -376,12 +416,12 @@
       <pre class="lines">
 
 
-25
-26
-27</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 33</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:errors</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='id identifier rubyid_proc'>proc</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
   <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='symbol'>:content</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:_errors</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_err'>err</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="JSONError.html" title="Rapture::JSONError (class)">JSONError</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_h'>from_h</span><span class='lparen'>(</span><span class='id identifier rubyid_err'>err</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span>
@@ -430,12 +470,73 @@
       <pre class="lines">
 
 
-31</pre>
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 39</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:message</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="response-instance_method">
+  
+    #<strong>response</strong>  &#x21d2; <tt>Faraday::Response</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The response from the request that resulted in this exception</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Faraday::Response</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The response from the request that resulted in this exception</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_response'>response</span>
+  <span class='ivar'>@response</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -463,12 +564,12 @@
       <pre class="lines">
 
 
-40
-41
-42</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;Rapture::HTTP::HTTPException @code=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@code</span><span class='embexpr_end'>}</span><span class='tstring_content'> @message=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
@@ -493,20 +594,20 @@
       <pre class="lines">
 
 
-33
-34
-35
-36
-37
-38</pre>
+41
+42
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/errors.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='heredoc_beg'>&lt;&lt;~ERROR</span>
 <span class='tstring_content'>    ERROR [</span><span class='embexpr_beg'>#{</span><span class='ivar'>@code</span><span class='embexpr_end'>}</span><span class='tstring_content'>]: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@message</span><span class='embexpr_end'>}</span><span class='tstring_content'>
-</span><span class='tstring_content'>    </span><span class='embexpr_beg'>#{</span><span class='ivar'>@errors</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_err'>err</span><span class='op'>|</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='embexpr_end'>}</span><span class='tstring_content'>   
+</span><span class='tstring_content'>    </span><span class='embexpr_beg'>#{</span><span class='ivar'>@errors</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_err'>err</span><span class='op'>|</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_err'>err</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='embexpr_end'>}</span><span class='tstring_content'>
 </span><span class='heredoc_end'>  ERROR
 </span><span class='kw'>end</span></pre>
     </td>
@@ -519,7 +620,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  8 13:24:45 2019 by
+  Generated on Thu Aug  8 16:12:41 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

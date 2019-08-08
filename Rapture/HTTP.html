@@ -178,31 +178,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#request-instance_method" title="#request (instance method)">#<strong>request</strong>(method, endpoint, body = nil, headers = {})  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Makes a request to the API, applying handling for preemptive rate limits
-and additional exception handling.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#user_agent-instance_method" title="#user_agent (instance method)">#<strong>user_agent</strong>  &#x21d2; Object </a>
     
 
@@ -276,66 +251,6 @@ location.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="request-instance_method">
-  
-    #<strong>request</strong>(method, endpoint, body = nil, headers = {})  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Makes a request to the API, applying handling for preemptive rate limits
-and additional exception handling</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/http.rb', line 167</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_headers'>headers</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_resp'>resp</span> <span class='op'>=</span> <span class='id identifier rubyid_faraday'>faraday</span><span class='period'>.</span><span class='id identifier rubyid_run_request'>run_request</span><span class='lparen'>(</span><span class='id identifier rubyid_method'>method</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='comma'>,</span> <span class='id identifier rubyid_headers'>headers</span><span class='rparen'>)</span>
-
-  <span class='kw'>case</span> <span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span>
-  <span class='kw'>when</span> <span class='int'>200</span><span class='comma'>,</span> <span class='int'>201</span><span class='comma'>,</span> <span class='int'>204</span>
-    <span class='id identifier rubyid_resp'>resp</span>
-  <span class='kw'>when</span> <span class='int'>400</span><span class='op'>..</span><span class='int'>502</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="HTTPException.html" title="Rapture::HTTPException (class)">HTTPException</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-  <span class='kw'>else</span>
-    <span class='comment'># @todo unknown response code
-</span>  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="user_agent-instance_method">
   
     #<strong>user_agent</strong>  &#x21d2; <tt>Object</tt> 
@@ -381,7 +296,7 @@ and additional exception handling</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  8 13:24:43 2019 by
+  Generated on Thu Aug  8 16:12:38 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
