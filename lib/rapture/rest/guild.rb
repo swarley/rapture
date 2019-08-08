@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module that holds methods for interacting with the REST portion of the API
 module Rapture::REST
   include Rapture::HTTP
 
@@ -47,12 +48,14 @@ module Rapture::REST
   # @option params [String, Integer] :owner_id
   # @option params [String] :splash
   # @option params [String, Integer] :system_channel_id
+  # @param reason [String]
   # @return [Guild] updated {Guild} object
-  def modify_guild(guild_id, **params)
+  def modify_guild(guild_id, reason: nil, **params)
     response = request(
       :patch,
       "guilds/#{guild_id}",
-      params
+      params,
+      'X-Audit-Log-Reason': reason
     )
     Rapture::Guild.from_json(response.body)
   end
@@ -87,11 +90,14 @@ module Rapture::REST
   # @option params [Array<Guild::Overwrite>] :permission_overwrites
   # @option params [String, Integer] :parent_id
   # @option params [true, false] :nsfw
-  def create_guild_channel(guild_id, name:, **params)
+  # @param reason [String]
+  def create_guild_channel(guild_id, name:, reason: nil, **params)
+    params[:name] = name
     response = request(
       :post,
       "guilds/#{guild_id}/channels",
-      name: name, **params,
+      params,
+      'X-Audit-Log-Reason': reason
     )
     Rapture::Channel.from_json(response.body)
   end
@@ -100,8 +106,13 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#modify-guild-channel-positions
   # @param guild_id [String, Integer]
   # @param positions [Array<(String, Integer), (Integer, Integer)>]
-  def modify_guild_channel_positions(guild_id, positions)
-    request(:patch, "guilds/#{guild_id}/channels", positions)
+  def modify_guild_channel_positions(guild_id, positions, reason: nil)
+    request(
+      :patch,
+      "guilds/#{guild_id}/channels",
+      positions,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Get a {Member} object for a user.
@@ -137,13 +148,16 @@ module Rapture::REST
   # @option params [true, false] :deaf
   # @return [Member, nil] `nil` if the user is already a member of the guild
   def add_guild_member(guild_id, user_id, access_token:, **params)
+    params[:access_token] = access_token
+
     response = request(
       :put,
       "guilds/#{guild_id}/members/#{user_id}",
-      access_token: access_token, **params,
+      params,
     )
 
     return nil if response.status == 204
+
     Rapture::Member.from_json(response.body)
   end
 
@@ -156,11 +170,13 @@ module Rapture::REST
   # @option params [true, false] :mute
   # @option params [true, false] :deaf
   # @option params [String, Integer, nil] :channel_id
-  def modify_guild_member(guild_id, user_id, **params)
+  # @param reason [String]
+  def modify_guild_member(guild_id, user_id, reason: nil, **params)
     request(
       :patch,
       "guilds/#{guild_id}/members/#{user_id}",
-      params
+      params,
+      'X-Audit-Log-Reason': reason
     )
   end
 
@@ -183,8 +199,14 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @param user_id [String, Integer]
   # @param role_id [String, Integer]
-  def add_guild_member_role(guild_id, user_id, role_id)
-    request(:put, "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}")
+  # @param reason [String]
+  def add_guild_member_role(guild_id, user_id, role_id, reason: nil)
+    request(
+      :put,
+      "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Remove a role from a guild member
@@ -192,16 +214,28 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @param user_id [String, Integer]
   # @param role_id [String, Integer]
-  def remove_guild_member_role(guild_id, user_id, role_id)
-    request(:delete, "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}")
+  # @param reason [String]
+  def remove_guild_member_role(guild_id, user_id, role_id, reason: nil)
+    request(
+      :delete,
+      "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
-  # Remove a member from a guild
+  # Remove/Kick a member from a guild
   # https://discordapp.com/developers/docs/resources/guild#remove-guild-member
   # @param guild_id [String, Integer]
   # @param user_id [String, Integer]
-  def remove_guild_member(guild_id, user_id)
-    request(:delete, "guilds/#{guild_id}/members/#{user_id}")
+  # @param reason [String]
+  def remove_guild_member(guild_id, user_id, reason: nil)
+    request(
+      :delete,
+      "guilds/#{guild_id}/members/#{user_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # List of bans in a guild
@@ -233,7 +267,9 @@ module Rapture::REST
     query = URI.encode_www_form('delete-message-days': delete_message_days, reason: reason)
     request(
       :put,
-      "guilds/#{guild_id}/bans/#{user_id}?" + query
+      "guilds/#{guild_id}/bans/#{user_id}?" + query,
+      nil,
+      'X-Audit-Log-Reason': reason
     )
   end
 
@@ -241,8 +277,14 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#remove-guild-ban
   # @param guild_id [String, Integer]
   # @param user_id [String, Integer]
-  def remove_guild_ban(guild_id, user_id)
-    request(:delete, "guilds/#{guild_id}/bans/#{user_id}")
+  # @param reason [String]
+  def remove_guild_ban(guild_id, user_id, reason: nil)
+    request(
+      :delete,
+      "guilds/#{guild_id}/bans/#{user_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Get a list of roles for a guild
@@ -262,9 +304,15 @@ module Rapture::REST
   # @option params [Integer] :color
   # @option params [true, false] :hoist
   # @option params [true, false] :mentionable
+  # @param reason [String]
   # @return [Role]
-  def create_guild_role(guild_id, **params)
-    response = request(:post, "guilds/#{guild_id}/roles", params)
+  def create_guild_role(guild_id, reason: nil, **params)
+    response = request(
+      :post,
+      "guilds/#{guild_id}/roles",
+      params,
+      'X-Audit-Log-Reason': reason
+    )
     Rapture::Role.from_json(response.body)
   end
 
@@ -272,9 +320,16 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#modify-guild-role-positions
   # @param guild_id [String, Integer]
   # @param positions [Array<(String, Integer), (Integer, Integer)>]
+  # @param reason [String]
   # @return [Array<Role>]
-  def modify_guild_role_positions(guild_id, positions)
-    response = request(:patch, "guilds/#{guild_id}/roles", positions)
+  def modify_guild_role_positions(guild_id, positions, reason: nil)
+    response = request(
+      :patch,
+      "guilds/#{guild_id}/roles",
+      positions,
+      'X-Audit-Log-Reason': reason
+    )
+
     Role.from_json_array(response.body)
   end
 
@@ -287,12 +342,14 @@ module Rapture::REST
   # @option params [Integer] :color
   # @option params [true, false] :hoist
   # @option params [true, false] :mentionable
+  # @param reason [String]
   # @return [Role]
   def modify_guild_role(guild_id, role_id, **params)
     response = request(
       :patch,
       "guilds/#{guild_id}/roles/#{role_id}",
-      params
+      params,
+      'X-Audit-Log-Reason': reason
     )
 
     Rapture::Role.from_json(response.body)
@@ -302,8 +359,14 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#delete-guild-role
   # @param guild_id [String, Integer]
   # @param role_id [String, Integer]
+  # @param reason [String]
   def delete_guild_role(guild_id, role_id)
-    request(:delete, "guilds/#{guild_id}/roles/#{role_id}")
+    request(
+      :delete,
+      "guilds/#{guild_id}/roles/#{role_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Get a number indicating the number of members that would
@@ -324,7 +387,12 @@ module Rapture::REST
   # @return [Integer, nil]
   def begin_guild_prune(guild_id, days: nil, compute_prune_count: nil)
     query = URI.encode_www_form(days: days, compute_prune_count: compute_prune_count)
-    response = request(:post, "guilds/#{guild_id}/prune" + query)
+    response = request(
+      :post,
+      "guilds/#{guild_id}/prune" + query,
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
     Oj.load(response.body)["pruned"]
   end
 
@@ -371,7 +439,7 @@ module Rapture::REST
     request(
       :patch,
       "guilds/#{guild_id}/integrations/#{integration_id}",
-      {expire_behavior: expire_behavior, expire_grace_period: expire_grace_period, enable_emoticons: enable_emoticons}
+      expire_behavior: expire_behavior, expire_grace_period: expire_grace_period, enable_emoticons: enable_emoticons,
     )
   end
 

@@ -1,7 +1,6 @@
-
 # frozen_string_literal: true
 
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rapture/version'
 
@@ -36,14 +35,13 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faye-websocket'
   spec.add_dependency 'mime-types', '~> 3.2'
   spec.add_dependency 'oj', '~> 3.3'
-  
 
   spec.add_development_dependency 'bundler', '~> 2.0.2'
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'minitest-ci', '~> 3.4'
   spec.add_development_dependency 'pry', '~> 0.10'
   spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency "rufo", "~> 0.4.0"
   spec.add_development_dependency 'simplecov', '~> 0.17'
   spec.add_development_dependency 'yard', '~> 0.9'
-  spec.add_development_dependency "rufo", "~> 0.4.0"
 end

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Rapture
+  # Mapping for errors returned by the v7 API
   class JSONError
     include Rapture::Mapping
 
@@ -12,8 +15,13 @@ module Rapture
     getter :message
   end
 
-  class HTTPException < Exception
+  # Exception for handline errors when accessing the REST API.
+  class HTTPException < RuntimeError
     include Rapture::Mapping
+
+    # @!attribute [r] response
+    # @return [Faraday::Response] The response from the request that resulted in this exception
+    attr_reader :response
 
     # @!attribute [r] code
     # @return [Integer] The JSON error code associated with this exception.
@@ -33,7 +41,7 @@ module Rapture
     def to_s
       <<~ERROR
         ERROR [#{@code}]: #{@message}
-        #{@errors.collect { |err| "> #{err.code}: #{err.message}" }.join "\n"}   
+        #{@errors.collect { |err| "> #{err.code}: #{err.message}" }.join "\n"}
       ERROR
     end
 

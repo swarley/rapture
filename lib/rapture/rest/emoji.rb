@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module that holds methods for interacting with the REST portion of the API
 module Rapture::REST
   include Rapture::HTTP
 
@@ -28,12 +29,14 @@ module Rapture::REST
   # @param name [String]
   # @param image [Faraday::UploadIO]
   # @param roles [Array<String, Integer>] array of role IDs that can use this emoji
+  # @param reason [String] for audit log entry
   # @return [Emoji]
-  def create_guild_emoji(guild_id, name:, image:, roles: [])
+  def create_guild_emoji(guild_id, name:, image:, roles: [], reason: nil)
     response = request(
       :post,
       "guilds/#{guild_id}/emojis",
-      name: name, image: image, roles: roles,
+      {name: name, image: image, roles: roles},
+      'X-Audit-Log-Reason': reason
     )
     Emoji.from_json(response.body)
   end
@@ -44,12 +47,14 @@ module Rapture::REST
   # @param emoji_id [String, Integer]
   # @option params [String] :name
   # @option params [Array<String, Integer>] :roles array of role IDs that can use this emoji
+  # @param reason [String]
   # @return [Emoji]
-  def modify_guild_emoji(guild_id, emoji_id, **params)
+  def modify_guild_emoji(guild_id, emoji_id, reason: nil, **params)
     response = request(
       :patch,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
-      {name: name, roles: roles}.compact
+      params,
+      'X-Audit-Log-Reason': reason
     )
     Emoji.from_json(response.body)
   end
@@ -58,7 +63,13 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/emoji#delete-guild-emoji
   # @param guild_id [String, Integer]
   # @param emoji_id [String, Integer]
-  def delete_guild_emoji(guild_id, emoji_id)
-    request(:delete, "guilds/#{guild_id}/emojis/#{emoji_id}")
+  # @param reason [String]
+  def delete_guild_emoji(guild_id, emoji_id, reason: nil)
+    request(
+      :delete,
+      "guilds/#{guild_id}/emojis/#{emoji_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 end

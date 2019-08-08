@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module that holds methods for interacting with the REST portion of the API
 module Rapture::REST
   include Rapture::HTTP
 
@@ -8,12 +9,14 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @param name [String]
   # @param avatar [String] data URI String
+  # @param reason [String]
   # @return [Webhook]
-  def create_webhook(channel_id, name:, avatar: nil)
+  def create_webhook(channel_id, name:, avatar: nil, reason: nil)
     response = request(
       :post,
       "channels/#{channel_id}/webhooks",
-      name: name, avatar: avatar,
+      {name: name, avatar: avatar},
+      'X-Audit-Log-Reason': reason
     )
 
     Webhook.from_json(response.body)
@@ -60,12 +63,14 @@ module Rapture::REST
   # @option params [String] :name
   # @option params [String] :avatar
   # @option channel_id [String, Integer] channel_id
+  # @param reason [String]
   # @return [Webhook]
-  def modify_webhook(webhook_id, **params)
+  def modify_webhook(webhook_id, reason: nil, **params)
     response = request(
       :patch,
       "webhooks/#{webhook_id}",
-      params
+      params,
+      'X-Audit-Log-Reason': reason
     )
     Webhook.from_json(response.body)
   end
@@ -77,12 +82,14 @@ module Rapture::REST
   # @option params [String] :name
   # @option params [String] :avatar
   # @option channel_id [String, Integer] channel_id
+  # @param reason [String]
   # @return [Webhook]
-  def modify_webhook_with_token(webhook_id, webhook_token, **params)
+  def modify_webhook_with_token(webhook_id, webhook_token, reason: nil, **params)
     response = request(
       :patch,
       "webhooks/#{webhook_id}/#{webhook_token}",
-      params
+      params,
+      'X-Audit-Log-Reason': reason
     )
     Webhook.from_json(response.body)
   end
@@ -90,16 +97,28 @@ module Rapture::REST
   # Delete a webhook
   # https://discordapp.com/developers/docs/resources/webhook#delete-webhook
   # @param webhook_id [String, Integer]
-  def delete_webhook(webhook_id)
-    request(:delete, "webhooks/#{webhook_id}")
+  # @param reason [String]
+  def delete_webhook(webhook_id, reason: nil)
+    request(
+      :delete,
+      "webhooks/#{webhook_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Delete a webhook with a token
   # https://discordapp.com/developers/docs/resources/webhook#delete-webhook-with-token
   # @param webhook_id [String, Integer]
   # @param webhook_token [String]
-  def delete_webhook_with_token(webhook_id, webhook_token)
-    request(:delete, "webhook/#{webhook_id}/#{webhook_token}")
+  # @param reason [String]
+  def delete_webhook_with_token(webhook_id, webhook_token, reason: nil)
+    request(
+      :delete,
+      "webhook/#{webhook_id}/#{webhook_token}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # @todo wait documentation and response support

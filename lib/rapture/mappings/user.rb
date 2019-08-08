@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Rapture
   # A User account on Discord
   class User

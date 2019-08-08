@@ -18,8 +18,10 @@ module Rapture::HTTP
     "DiscordBot (https://github.com/z64/rapture, #{Rapture::VERSION})"
   end
 
+  private
+
   # Faraday client to issue all requests.
-  private def faraday
+  def faraday
     @faraday ||= Faraday.new(url: base_url) do |faraday|
       faraday.authorization(@type, @token)
 
@@ -58,16 +60,11 @@ module Rapture::HTTP
       @reset = Time.at(reset_time) if reset_time
     end
 
-    # Checks that we have enough data cached to perform
-    # preemptive ratelimit checks
-    private def headers?
-      @remaining && @now && @reset
-    end
-
     # @return [true, false] if the next request would be rate limited
     def will_be_rate_limited?
       return false unless headers?
       return false if Time.now > @reset
+
       @remaining.zero?
     end
 
@@ -80,6 +77,14 @@ module Rapture::HTTP
     # @param time [Integer] amount of time to sleep during synchronization
     def sleep_for(time)
       @mutex.synchronize { sleep time }
+    end
+
+    private
+
+    # Checks that we have enough data cached to perform
+    # preemptive ratelimit checks
+    def headers?
+      @remaining && @now && @reset
     end
   end
 
@@ -112,17 +117,6 @@ module Rapture::HTTP
       (@ratelimits ||= {})[key] ||= RateLimit.new
     end
 
-    # Parses a URI path into the relevant component for rate limiting
-    # @return [Symbol]
-    private def parse_path(path)
-      parts = path.split("/")
-      if MAJOR_PARAMETERS.include? parts[4]
-        parts.take(5)
-      else
-        parts.take(4)
-      end.join("_").to_sym
-    end
-
     # Handle requests
     def call(env)
       # Preserve a copy of the original env
@@ -149,17 +143,19 @@ module Rapture::HTTP
         response
       end
     end
-  end
 
-  # Helper method for optional JSON body params. `nil` valued keys are
-  # removed, and `:null` value keys serialize to JSON `null`.
-  # @!visibility private
-  def encode_json(object = {})
-    object.delete_if { |_, v| v.nil? }
-    object.each do |k, v|
-      object[k] = nil if v == :null
+    private
+
+    # Parses a URI path into the relevant component for rate limiting
+    # @return [Symbol]
+    def parse_path(path)
+      parts = path.split("/")
+      if MAJOR_PARAMETERS.include? parts[4]
+        parts.take(5)
+      else
+        parts.take(4)
+      end.join("_").to_sym
     end
-    Oj.dump(object)
   end
 
   # Makes a request to the API, applying handling for preemptive rate limits
@@ -171,9 +167,11 @@ module Rapture::HTTP
     when 200, 201, 204
       resp
     when 400..502
-      raise Rapture::HTTPException.from_json(resp.body)
+      ex = Rapture::HTTPException.from_json(resp.body)
+      ex.response = resp
+      raise ex
     else
-      # @todo unknown response code
+      puts "Received an unknown response code: #{resp.status}"
     end
   end
 end

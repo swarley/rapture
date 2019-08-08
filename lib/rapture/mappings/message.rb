@@ -52,10 +52,10 @@ module Rapture
     # @!attribute [r] mentions_roles
     # @return [Array<Integer>]
     getter :mention_roles,
-      from_json: proc { |data|
-        Oj.load(data).map { |id| Converters.Snowflake.from_json.call(id) }
-      },
-      to_json: proc { |ids| ids.collect(&:to_s).to_json }
+           from_json: proc { |data|
+             Oj.load(data).map { |id| Converters.Snowflake.from_json.call(id) }
+           },
+           to_json: proc { |ids| ids.collect(&:to_s).to_json }
 
     # @!attribute [r] attachments
     # @return [Array<Attachment>]

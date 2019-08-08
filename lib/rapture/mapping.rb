@@ -4,13 +4,14 @@ Oj.mimic_JSON
 
 # DSL module for mapping objects to JSON
 module Rapture::Mapping
+  # Create converters that handle special serde operations
   module Converters
     Converter = Struct.new(:to_json_proc, :from_json_proc) do
-      def to_json()
+      def to_json(*_args)
         to_json_proc
       end
 
-      def from_json()
+      def from_json
         proc do |data|
           if data.is_a? Array
             data.collect { |elem| from_json_proc.call(elem) }
@@ -22,7 +23,7 @@ module Rapture::Mapping
     end
 
     NilableConverter = Struct.new(:to_json_proc, :from_json_proc) do
-      def to_json()
+      def to_json(*_args)
         proc do |data|
           next unless data
 
@@ -30,9 +31,10 @@ module Rapture::Mapping
         end
       end
 
-      def from_json()
+      def from_json
         proc do |data|
           next unless data
+
           from_json_proc.call(data) if data
 
           if data.is_a? Array
@@ -44,6 +46,7 @@ module Rapture::Mapping
       end
     end
 
+    # Create a special method that returns a struct containing procs for serde
     def self.converter(name, nilable: false, to_json: nil, from_json: nil)
       conv = Converter.new(to_json, from_json)
 
@@ -58,6 +61,10 @@ module Rapture::Mapping
     # @!group Converters
 
     # Snowflake serde
+    # @!method Snowflake
+    #   @return Converter
+    # @!method Snowflake?
+    #   @return NilableConverter
     converter(
       :Snowflake,
       nilable: true,
@@ -66,6 +73,10 @@ module Rapture::Mapping
     )
 
     # Timestamp serde
+    # @!method Timestamp
+    #   @return Converter
+    # @!method Timestamp?
+    #   @return NilableConverter
     converter(
       :Timestamp,
       nilable: true,
@@ -91,9 +102,7 @@ module Rapture::Mapping
       attr_reader name
 
       # @todo Fix this to actually be included in options
-      if converter
-        options = {from_json: converter.from_json, to_json: converter.to_json}.merge(options)
-      end
+      options = {from_json: converter.from_json, to_json: converter.to_json}.merge(options) if converter
 
       (@properties ||= {})[name] = options
     end
@@ -105,6 +114,7 @@ module Rapture::Mapping
       from_h(hash, :from_json)
     end
 
+    # Create an Array of this object type from a json array
     def from_json_array(data)
       array = Oj.load(data, symbol_keys: true)
       array.collect { |hash| from_h(hash, :from_json) }
@@ -118,11 +128,7 @@ module Rapture::Mapping
 
       hash.each do |k, v|
         v = convert(v, k, converter) if converter
-        begin
-          instance.instance_variable_set(:"@#{k}", v)
-        rescue NoMethodError
-          # puts "WARN: #{self} missing property: #{k} (raw value: #{v.inspect})"
-        end
+        instance.instance_variable_set(:"@#{k}", v)
       end
 
       instance
@@ -155,11 +161,11 @@ module Rapture::Mapping
       end
 
       value
-    rescue Exception => ex
+    rescue Exception => e
       puts "EXCEPTION ON PROP"
       puts prop
       p @properties
-      raise ex
+      raise e
     end
   end
 

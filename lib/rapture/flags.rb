@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rapture
   module PermissionFlags
     # Allows creation of instant invites
@@ -33,7 +35,7 @@ module Rapture
     # Allows for sending of /tts messages
     SEND_TTS_MESSAGES = 0x00001000
 
-    # Allows for deletion of other users messages	T
+    # Allows for deletion of other users messages  T
     MANAGE_MESSAGES = 0x00002000
 
     # Links sent by users with this permission will be auto-embedded

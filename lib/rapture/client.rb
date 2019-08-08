@@ -20,16 +20,20 @@ module Rapture
       @large_threshold = large_threshold
       @heartbeat_interval = 1
       @send_heartbeats = false
-      @event_handlers = Hash.new { |hash, key| hash[key] = Array.new }
+      @event_handlers = Hash.new { |hash, key| hash[key] = [] }
       setup_heartbeats
     end
 
+    # Initiate a connection to the gateway
     def run
       websocket.run
     end
 
+    # @attribute [r] websocket
+    # @return [WebSocket]
     def websocket
       return @websocket if @websocket
+
       @websocket = WebSocket.new(get_gateway.url)
 
       @websocket.on_open do |event|
@@ -47,7 +51,7 @@ module Rapture
       @websocket
     end
 
-    private def on_open(event); end
+    # @!group Opcodes
 
     OP_DISPATCH = 0
     OP_HEARTBEAT = 1
@@ -62,70 +66,9 @@ module Rapture
     OP_HELLO = 10
     OP_HEARTBEAT_ACK = 11
 
+    # @!endgroup
+
     Session = Struct.new(:sequence, :suspend, :invalid, :resume, :id)
-
-    private def on_message(packet)
-      case packet.opcode
-      when OP_HELLO
-        interval = packet.data[:heartbeat_interval] / 1000.0
-        handle_hello(interval)
-      when OP_DISPATCH
-        handle_dispatch(packet.type, packet.data)
-        @session.sequence = packet.sequence
-      when OP_INVALID_SESSION
-        handle_invalidate_session
-      else
-        # puts "Unknown opcode: #{packet.inspect}"
-      end
-    end
-
-    private def on_close(event)
-      @send_heartbeats = false
-    end
-
-    private def handle_hello(interval)
-      @heartbeat_interval = interval
-      @send_heartbeats = true
-      # TODO: Heartbeat ack checking
-
-      # TODO: resume
-      if @session.nil? || @session.invalid
-        identify
-      else
-        resume
-      end
-    end
-
-    # @!visibility private
-    # Handle an OP_INVALID_SESSION (9) packet
-    private def handle_invalidate_session
-      if @session
-        @session.invalid = true
-      else
-        # Log (received op 9 before @session)
-        # TODO: panic?
-      end
-
-      identify
-    end
-
-    # @!visibility private
-    # @todo This could be done many different ways.
-    #   I don't super like it as is. Maybe convert the name
-    #   into the class name since we map 1:1 in the Gateway
-    #   namespace.
-    #   Or, pass the class and call from_h in the dispatch
-    #   to at least cut down on the from_h calls in the case statement
-    # Handle an OPCODE_DISPATCH (0) packet.
-    def handle_dispatch(event_type, data)
-      event_type = event_type.to_sym
-
-      if event_type == :READY
-        @session = Session.new(0, false, false, true, data[:session_id])
-      end
-
-      Thread.new { call_handlers(event_type, data) }
-    end
 
     # @!visibility private
     # Dispatch an event to handlers relevant to the payload.
@@ -139,7 +82,7 @@ module Rapture
     # @!visibility private
     def self.__event(name, klass)
       define_method(:"on_#{name}") do |&block|
-        handler = -> (payload) do
+        handler = lambda do |payload|
           block.call(klass.from_h(payload, :from_json))
         end
         @event_handlers[name.upcase].push(handler)
@@ -258,9 +201,11 @@ module Rapture
       referring_domain: "",
     }.freeze
 
+    private
+
     # @!visibility private
     # Send an `IDENTIFY` packet through the gateway
-    private def identify
+    def identify
       payload = Gateway::Identify.new(
         @token,
         IDENTIFY_PROPERTIES,
@@ -272,7 +217,7 @@ module Rapture
 
     # @!visibility private
     # Attempt to resume a gateway connection
-    private def resume
+    def resume
       payload = Gateway::Resume.new(
         @token,
         @session
@@ -282,7 +227,7 @@ module Rapture
 
     # @!visibility private
     # Begin a loop that sends a heartbeat on a fixed interval
-    private def setup_heartbeats
+    def setup_heartbeats
       Thread.new do
         loop do
           if @send_heartbeats
@@ -294,6 +239,57 @@ module Rapture
           sleep @heartbeat_interval
         end
       end
+    end
+
+    def on_open(event); end
+
+    def on_message(packet)
+      case packet.opcode
+      when OP_HELLO
+        interval = packet.data[:heartbeat_interval] / 1000.0
+        handle_hello(interval)
+      when OP_DISPATCH
+        handle_dispatch(packet.type, packet.data)
+        @session.sequence = packet.sequence
+      when OP_INVALID_SESSION
+        handle_invalidate_session
+      else
+        puts "Unknown opcode: #{packet.inspect}"
+      end
+    end
+
+    def on_close(_event)
+      @send_heartbeats = false
+    end
+
+    def handle_hello(interval)
+      @heartbeat_interval = interval
+      @send_heartbeats = true
+      # TODO: Heartbeat ack checking
+
+      if @session.nil? || @session.invalid
+        identify
+      else
+        resume
+      end
+    end
+
+    # @!visibility private
+    # Handle an OP_INVALID_SESSION (9) packet
+    def handle_invalidate_session
+      @session.invalid = true if @session
+
+      identify
+    end
+
+    # @!visibility private
+    # Handle an OPCODE_DISPATCH (0) packet.
+    def handle_dispatch(event_type, data)
+      event_type = event_type.to_sym
+
+      @session = Session.new(0, false, false, true, data[:session_id]) if event_type == :READY
+
+      Thread.new { call_handlers(event_type, data) }
     end
   end
 end

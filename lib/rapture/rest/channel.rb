@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module that holds methods for interacting with the REST portion of the API
 module Rapture::REST
   include Rapture::HTTP
 
@@ -25,12 +26,14 @@ module Rapture::REST
   # @option params [Integer] :user_limit
   # @option params [Array<Guild::Overwrite>] :permission_overwrites
   # @option params [Integer, String] :parent_id
+  # @param reason [String]
   # @return [Channel] updated channel object
-  def modify_channel(channel_id, **params)
+  def modify_channel(channel_id, reason: nil, **params)
     response = request(
       :patch,
       "channels/#{channel_id}",
-      **params,
+      params,
+      'X-Audit-Log-Reason': reason
     )
 
     Rapture::Channel.from_json(response.body)
@@ -40,9 +43,16 @@ module Rapture::REST
   # deleted, but a DM may be reopened.
   # https://discordapp.com/developers/docs/resources/channel#deleteclose-channel
   # @param channel_id [String, Integer]
+  # @param reason [String]
   # @return [Channel] the deleted channel object
-  def delete_channel(channel_id)
-    response = request(:delete, "channels/#{channel_id}")
+  def delete_channel(channel_id, reason: nil)
+    response = request(
+      :delete,
+      "channels/#{channel_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
+
     Rapture::Channel.from_json(response.body)
   end
 
@@ -50,13 +60,12 @@ module Rapture::REST
   # permission. This endpoint will return no messages unless the user has `READ_MESSAGE_HISTORY`
   # permission.
   # @param channel_id [String, Integer]
-  # @param around [String, Integer]
-  # @param before [String, Integer]
-  # @param after [String, Integer]
-  # @param limit [Integer]
+  # @option params [String, Integer] :around
+  # @option params [String, Integer] :before
+  # @option params [String, Integer] :after
+  # @option params [Integer] :limit
   # @return [Array<Message>]
-  def get_channel_messages(channel_id, around: nil, before: nil, after: nil, limit: nil)
-    params = {around: around, before: before, after: after, limit: limit}.compact
+  def get_channel_messages(channel_id, **params)
     response = request(
       :get,
       "channels/#{channel_id}/messages?#{URI.encode_www_form(params)}",
@@ -114,16 +123,26 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/channel#delete-message
   # @param channel_id [String, Integer]
   # @param message_id [String, Integer]
-  def delete_message(channel_id, message_id)
-    request(:delete, "channels/#{channel_id}/messages/#{message_id}")
+  def delete_message(channel_id, message_id, reason: nil)
+    request(
+      :delete,
+      "channels/#{channel_id}/messages/#{message_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Delete multiple messages in a single request. Only for guild channels.
   # https://discordapp.com/developers/docs/resources/channel#bulk-delete-messages
   # @param channel_id [String, Integer]
   # @param messages [Array<Integer, String>] message IDs to be deleted.
-  def bulk_delete_messages(channel_id, messages)
-    request(:post, "channels/#{channel_id}/messages/bulk-delete", messages: messages)
+  def bulk_delete_messages(channel_id, messages, reason: nil)
+    request(
+      :post,
+      "channels/#{channel_id}/messages/bulk-delete",
+      {messages: messages},
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Create a reaction on a message.
@@ -153,10 +172,16 @@ module Rapture::REST
   # @param message_id [String, Integer]
   # @param emoji [String] `name:id` for custom emoji, or a unicode representation.
   # @param user_id [String, Integer]
-  def delete_user_reaction(channel_id, message_id, emoji, user_id)
+  # @param reason [String]
+  def delete_user_reaction(channel_id, message_id, emoji, user_id, reason: nil)
     emoji = URI.encode_www_form_component(emoji) unless emoji.ascii_only?
 
-    request(:delete, "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/#{user_id}")
+    request(
+      :delete,
+      "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/#{user_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Delete all reactions on a message.
@@ -174,11 +199,12 @@ module Rapture::REST
   # @param allow [Integer] bitwise value of all allowed permissions
   # @param deny [Integer] bitwise value of all denied permissions
   # @param type [String] `"member"` or `"role"`
-  def edit_channel_permissions(channel_id, overwrite_id, allow:, deny:, type:)
+  def edit_channel_permissions(channel_id, overwrite_id, allow:, deny:, type:, reason: nil)
     request(
       :put,
       "channel/#{channel_id}/permissions/#{overwrite_id}",
-      allow: allow, deny: deny, type: type,
+      {allow: allow, deny: deny, type: type},
+      'X-Audit-Log-Reason': reason
     )
   end
 
@@ -188,7 +214,7 @@ module Rapture::REST
   # @return [Array<Invite>]
   def get_channel_invites(channel_id)
     response = request(:get, "channels/#{channel_id}/invites")
-    Invite.from_json_array(response.body)
+    Rapture::Invite.from_json_array(response.body)
   end
 
   # Create a new invite for a channel
@@ -198,22 +224,29 @@ module Rapture::REST
   # @option params [Integer] :max_uses
   # @option params [true, false] :temporary
   # @option params [true, false] :unique
-  def create_channel_invite(channel_id, **params)
+  # @param reason [String]
+  def create_channel_invite(channel_id, reason: nil, **params)
     response = request(
       :post,
       "channels/#{channel_id}/invites",
-      max_age: max_age, max_uses: max_uses, temporary: temporary, unique: unique,
+      params,
+      'X-Audit-Log-Reason': reason
     )
 
-    Invite.from_json(response.body)
+    Rapture::Invite.from_json(response.body)
   end
 
   # Delete a channel permission overwrite
   # https://discordapp.com/developers/docs/resources/channel#delete-channel-permission
   # @param channel_id [String, Integer]
   # @param overwrite_id [String, Integer]
-  def delete_channel_permission(channel_id, overwrite_id)
-    request(:delete, "channels/#{channel_id}/permissions/#{overwrite_id}")
+  def delete_channel_permission(channel_id, overwrite_id, reason: nil)
+    request(
+      :delete,
+      "channels/#{channel_id}/permissions/#{overwrite_id}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
   end
 
   # Trigger a typing indicator for a channel
@@ -229,7 +262,7 @@ module Rapture::REST
   # @return [Array<Message>]
   def get_pinned_messages(channel_id)
     response = request(:get, "channels/#{channel_id}/pins")
-    Message.from_json_array(response.body)
+    Rapture::Message.from_json_array(response.body)
   end
 
   # Pin a message in a channel

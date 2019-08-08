@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module that holds methods for interacting with the REST portion of the API
 module Rapture::REST
   include Rapture::HTTP
 
@@ -16,9 +17,15 @@ module Rapture::REST
   # Delete an invite
   # https://discordapp.com/developers/docs/resources/invite#delete-invite
   # @param invite_code [String]
+  # @param reason [String]
   # @return [Invite]
-  def delete_invite(invite_code)
-    response = request(:delete, "invites/#{invite_code}")
+  def delete_invite(invite_code, reason: nil)
+    response = request(
+      :delete,
+      "invites/#{invite_code}",
+      nil,
+      'X-Audit-Log-Reason': reason
+    )
     Invite.from_json(response.body)
   end
 end

@@ -12,7 +12,7 @@ end
 task default: :test
 
 desc "Format ruby code"
-task :format do |_task, rake_args|
+task :format do |_task, _rake_args|
   require "rufo"
   Rufo::Command.run(%w[lib test])
 end

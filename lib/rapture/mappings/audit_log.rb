@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require "rapture/mappings/webhook"
 
@@ -18,6 +19,7 @@ module Rapture
       getter :type
     end
 
+    # Information about an audit log entry
     class Info
       include Mapping
 

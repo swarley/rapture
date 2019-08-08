@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "rapture/mappings/user"
 require "rapture/mappings/member"
 require "rapture/mappings/permissions"

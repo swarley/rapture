@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rapture/mappings/user"
 require "rapture/mappings/member"
 
@@ -41,7 +43,7 @@ module Rapture::Gateway
   end
 
   # Payload that is sent to indicate a status update
-  #https://discordapp.com/developers/docs/topics/gateway#update-status
+  # https://discordapp.com/developers/docs/topics/gateway#update-status
   class StatusUpdate
     include Rapture::Mapping
 
@@ -433,8 +435,8 @@ module Rapture::Gateway
     # @!attribute [r] timestamp
     # @return [Time]
     getter :timestamp,
-      to_json: proc { |time| time.to_i },
-      from_json: proc { |u_time| Time.at(u_time) }
+           to_json: proc { |time| time.to_i },
+           from_json: proc { |u_time| Time.at(u_time) }
   end
 
   UserUpdate = Rapture::User.dup
