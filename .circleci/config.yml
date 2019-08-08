@@ -45,7 +45,8 @@ jobs:
           name: Build docs
           command: bundle exec yard
       - persist_to_workspace:
-          root: doc/
+          root: .
+          path: doc/
   
   docs-deploy:
     docker:
