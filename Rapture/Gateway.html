@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Rapture::Gateway
+  
+    &mdash; Documentation by YARD 0.9.20
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Rapture::Gateway";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span>
+     &raquo; 
+    <span class="title">Gateway</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Rapture::Gateway
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/rapture/mappings/gateway.rb<span class="defines">,<br />
+  lib/rapture/mappings/gateway_events.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Gateway/ChannelPinsUpdate.html" title="Rapture::Gateway::ChannelPinsUpdate (class)">ChannelPinsUpdate</a></span>, <span class='object_link'><a href="Gateway/ClientStatus.html" title="Rapture::Gateway::ClientStatus (class)">ClientStatus</a></span>, <span class='object_link'><a href="Gateway/GuildBanAdd.html" title="Rapture::Gateway::GuildBanAdd (class)">GuildBanAdd</a></span>, <span class='object_link'><a href="Gateway/GuildEmojisUpdate.html" title="Rapture::Gateway::GuildEmojisUpdate (class)">GuildEmojisUpdate</a></span>, <span class='object_link'><a href="Gateway/GuildIntegrationsUpdate.html" title="Rapture::Gateway::GuildIntegrationsUpdate (class)">GuildIntegrationsUpdate</a></span>, <span class='object_link'><a href="Gateway/GuildMemberAdd.html" title="Rapture::Gateway::GuildMemberAdd (class)">GuildMemberAdd</a></span>, <span class='object_link'><a href="Gateway/GuildMemberRemove.html" title="Rapture::Gateway::GuildMemberRemove (class)">GuildMemberRemove</a></span>, <span class='object_link'><a href="Gateway/GuildMemberUpdate.html" title="Rapture::Gateway::GuildMemberUpdate (class)">GuildMemberUpdate</a></span>, <span class='object_link'><a href="Gateway/GuildMembersChunk.html" title="Rapture::Gateway::GuildMembersChunk (class)">GuildMembersChunk</a></span>, <span class='object_link'><a href="Gateway/GuildRoleCreate.html" title="Rapture::Gateway::GuildRoleCreate (class)">GuildRoleCreate</a></span>, <span class='object_link'><a href="Gateway/GuildRoleDelete.html" title="Rapture::Gateway::GuildRoleDelete (class)">GuildRoleDelete</a></span>, <span class='object_link'><a href="Gateway/GuildRoleUpdate.html" title="Rapture::Gateway::GuildRoleUpdate (class)">GuildRoleUpdate</a></span>, <span class='object_link'><a href="Gateway/Heartbeat.html" title="Rapture::Gateway::Heartbeat (class)">Heartbeat</a></span>, <span class='object_link'><a href="Gateway/Hello.html" title="Rapture::Gateway::Hello (class)">Hello</a></span>, <span class='object_link'><a href="Gateway/Identify.html" title="Rapture::Gateway::Identify (class)">Identify</a></span>, <span class='object_link'><a href="Gateway/InvalidSession.html" title="Rapture::Gateway::InvalidSession (class)">InvalidSession</a></span>, <span class='object_link'><a href="Gateway/MessageDelete.html" title="Rapture::Gateway::MessageDelete (class)">MessageDelete</a></span>, <span class='object_link'><a href="Gateway/MessageDeleteBulk.html" title="Rapture::Gateway::MessageDeleteBulk (class)">MessageDeleteBulk</a></span>, <span class='object_link'><a href="Gateway/MessageReactionAdd.html" title="Rapture::Gateway::MessageReactionAdd (class)">MessageReactionAdd</a></span>, <span class='object_link'><a href="Gateway/MessageReactionRemove.html" title="Rapture::Gateway::MessageReactionRemove (class)">MessageReactionRemove</a></span>, <span class='object_link'><a href="Gateway/MessageReactionRemoveAll.html" title="Rapture::Gateway::MessageReactionRemoveAll (class)">MessageReactionRemoveAll</a></span>, <span class='object_link'><a href="Gateway/PresenceUpdate.html" title="Rapture::Gateway::PresenceUpdate (class)">PresenceUpdate</a></span>, <span class='object_link'><a href="Gateway/Ready.html" title="Rapture::Gateway::Ready (class)">Ready</a></span>, <span class='object_link'><a href="Gateway/Reconnect.html" title="Rapture::Gateway::Reconnect (class)">Reconnect</a></span>, <span class='object_link'><a href="Gateway/RequestGuildMembers.html" title="Rapture::Gateway::RequestGuildMembers (class)">RequestGuildMembers</a></span>, <span class='object_link'><a href="Gateway/Resume.html" title="Rapture::Gateway::Resume (class)">Resume</a></span>, <span class='object_link'><a href="Gateway/Resumed.html" title="Rapture::Gateway::Resumed (class)">Resumed</a></span>, <span class='object_link'><a href="Gateway/StatusUpdate.html" title="Rapture::Gateway::StatusUpdate (class)">StatusUpdate</a></span>, <span class='object_link'><a href="Gateway/TypingStart.html" title="Rapture::Gateway::TypingStart (class)">TypingStart</a></span>, <span class='object_link'><a href="Gateway/VoiceServerUpdate.html" title="Rapture::Gateway::VoiceServerUpdate (class)">VoiceServerUpdate</a></span>, <span class='object_link'><a href="Gateway/VoiceStateUpdatePayload.html" title="Rapture::Gateway::VoiceStateUpdatePayload (class)">VoiceStateUpdatePayload</a></span>, <span class='object_link'><a href="Gateway/WebhooksUpdate.html" title="Rapture::Gateway::WebhooksUpdate (class)">WebhooksUpdate</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ChannelCreate-constant" class="">ChannelCreate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="ChannelUpdate-constant" class="">ChannelUpdate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="ChannelDelete-constant" class="">ChannelDelete =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="GuildCreate-constant" class="">GuildCreate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="GuildUpdate-constant" class="">GuildUpdate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="GuildDelete-constant" class="">GuildDelete =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="GuildBanRemove-constant" class="">GuildBanRemove =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="Gateway/GuildBanAdd.html" title="Rapture::Gateway::GuildBanAdd (class)">GuildBanAdd</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="MessageCreate-constant" class="">MessageCreate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="MessageUpdate-constant" class="">MessageUpdate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="UserUpdate-constant" class="">UserUpdate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="User.html" title="Rapture::User (class)">User</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+        <dt id="VoiceStateUpdate-constant" class="">VoiceStateUpdate =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Voice.html" title="Rapture::Voice (module)">Voice</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Voice/State.html" title="Rapture::Voice::State (class)">State</a></span></span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Aug  8 06:29:19 2019 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.20 (ruby-2.4.6).
+</div>
+
+    </div>
+  </body>
+</html>

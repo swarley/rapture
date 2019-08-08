@@ -1,0 +1,3063 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Rapture::Client
+  
+    &mdash; Documentation by YARD 0.9.20
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "Rapture::Client";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span>
+     &raquo; 
+    <span class="title">Client</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Rapture::Client
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Rapture::Client</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="REST.html" title="Rapture::REST (module)">REST</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/rapture/client.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The <code>Client</code> abstracts away the token from making REST API
+requests and provides a means to connect to Discord&#39;s gateway.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Client/Session.html" title="Rapture::Client::Session (class)">Session</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="OP_DISPATCH-constant" class="">OP_DISPATCH =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>0</span></pre></dd>
+      
+        <dt id="OP_HEARTBEAT-constant" class="">OP_HEARTBEAT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>1</span></pre></dd>
+      
+        <dt id="OP_IDENTIFY-constant" class="">OP_IDENTIFY =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>2</span></pre></dd>
+      
+        <dt id="OP_STATUS_UPDATE-constant" class="">OP_STATUS_UPDATE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span></pre></dd>
+      
+        <dt id="OP_VOICE_STATE_UPDATE-constant" class="">OP_VOICE_STATE_UPDATE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span></pre></dd>
+      
+        <dt id="OP_VOICE_SERVER_PING-constant" class="">OP_VOICE_SERVER_PING =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
+      
+        <dt id="OP_RESUME-constant" class="">OP_RESUME =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>6</span></pre></dd>
+      
+        <dt id="OP_RECONNECT-constant" class="">OP_RECONNECT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>7</span></pre></dd>
+      
+        <dt id="OP_REQUEST_GUILD_MEMBERS-constant" class="">OP_REQUEST_GUILD_MEMBERS =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span></pre></dd>
+      
+        <dt id="OP_INVALID_SESSION-constant" class="">OP_INVALID_SESSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>9</span></pre></dd>
+      
+        <dt id="OP_HELLO-constant" class="">OP_HELLO =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+        <dt id="OP_HEARTBEAT_ACK-constant" class="">OP_HEARTBEAT_ACK =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>11</span></pre></dd>
+      
+        <dt id="IDENTIFY_PROPERTIES-constant" class="">IDENTIFY_PROPERTIES =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The properties for the identify payload that is sent via the gateway</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>os:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Ruby</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>browser:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rapture</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>device:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rapture</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>referrer:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='label'>referring_domain:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+  
+  
+  <h3 class="inherited">Constants included
+     from <span class='object_link'><a href="HTTP.html" title="Rapture::HTTP (module)">HTTP</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="HTTP.html#BASE_URL-constant" title="Rapture::HTTP::BASE_URL (constant)">HTTP::BASE_URL</a></span></p>
+
+
+
+
+
+  
+    <h2>
+      Handler registers
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_channel_create-instance_method" title="#on_channel_create (instance method)">#<strong>on_channel_create</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>channel_create</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_channel_delete-instance_method" title="#on_channel_delete (instance method)">#<strong>on_channel_delete</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>channel_delete</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_channel_pins_update-instance_method" title="#on_channel_pins_update (instance method)">#<strong>on_channel_pins_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>channel_pins_update</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_channel_update-instance_method" title="#on_channel_update (instance method)">#<strong>on_channel_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>channel_update</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_ban_add-instance_method" title="#on_guild_ban_add (instance method)">#<strong>on_guild_ban_add</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_ban_add</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_ban_remove-instance_method" title="#on_guild_ban_remove (instance method)">#<strong>on_guild_ban_remove</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_ban_remove</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_create-instance_method" title="#on_guild_create (instance method)">#<strong>on_guild_create</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_create</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_delete-instance_method" title="#on_guild_delete (instance method)">#<strong>on_guild_delete</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_delete</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_emojis_update-instance_method" title="#on_guild_emojis_update (instance method)">#<strong>on_guild_emojis_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_emojis_update</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_integrations_update-instance_method" title="#on_guild_integrations_update (instance method)">#<strong>on_guild_integrations_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a
+<code>guild_integrations_update</code> event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_member_add-instance_method" title="#on_guild_member_add (instance method)">#<strong>on_guild_member_add</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_member_add</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_member_remove-instance_method" title="#on_guild_member_remove (instance method)">#<strong>on_guild_member_remove</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_member_remove</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_member_update-instance_method" title="#on_guild_member_update (instance method)">#<strong>on_guild_member_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_member_update</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_members_chunk-instance_method" title="#on_guild_members_chunk (instance method)">#<strong>on_guild_members_chunk</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_members_chunk</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_role_create-instance_method" title="#on_guild_role_create (instance method)">#<strong>on_guild_role_create</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_role_create</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_role_delete-instance_method" title="#on_guild_role_delete (instance method)">#<strong>on_guild_role_delete</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_role_delete</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_role_update-instance_method" title="#on_guild_role_update (instance method)">#<strong>on_guild_role_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_role_update</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_guild_update-instance_method" title="#on_guild_update (instance method)">#<strong>on_guild_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>guild_update</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_create-instance_method" title="#on_message_create (instance method)">#<strong>on_message_create</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>message_create</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_delete-instance_method" title="#on_message_delete (instance method)">#<strong>on_message_delete</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>message_delete</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_delete_bulk-instance_method" title="#on_message_delete_bulk (instance method)">#<strong>on_message_delete_bulk</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>message_delete_bulk</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_reaction_add-instance_method" title="#on_message_reaction_add (instance method)">#<strong>on_message_reaction_add</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>message_reaction_add</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_reaction_remove-instance_method" title="#on_message_reaction_remove (instance method)">#<strong>on_message_reaction_remove</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>message_reaction_remove</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_reaction_remove_all-instance_method" title="#on_message_reaction_remove_all (instance method)">#<strong>on_message_reaction_remove_all</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a
+<code>message_reaction_remove_all</code> event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_message_update-instance_method" title="#on_message_update (instance method)">#<strong>on_message_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>message_update</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_presence_update-instance_method" title="#on_presence_update (instance method)">#<strong>on_presence_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>presence_update</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_ready-instance_method" title="#on_ready (instance method)">#<strong>on_ready</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>ready</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_typing_start-instance_method" title="#on_typing_start (instance method)">#<strong>on_typing_start</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>typing_start</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_user_update-instance_method" title="#on_user_update (instance method)">#<strong>on_user_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>user_update</code> event is
+recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_voice_server_update-instance_method" title="#on_voice_server_update (instance method)">#<strong>on_voice_server_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>voice_server_update</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_voice_state_update-instance_method" title="#on_voice_state_update (instance method)">#<strong>on_voice_state_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>voice_state_update</code>
+event is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#on_webhooks_update-instance_method" title="#on_webhooks_update (instance method)">#<strong>on_webhooks_update</strong> {|data| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler to be called when a <code>webhooks_update</code> event
+is recieved.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(token, shard_key: [0, 1], large_threshold: 150)  &#x21d2; Client </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Client.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run-instance_method" title="#run (instance method)">#<strong>run</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#websocket-instance_method" title="#websocket (instance method)">#<strong>websocket</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="REST.html" title="Rapture::REST (module)">REST</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="REST.html#add_group_dm_recipient-instance_method" title="Rapture::REST#add_group_dm_recipient (method)">#add_group_dm_recipient</a></span>, <span class='object_link'><a href="REST.html#add_guild_member-instance_method" title="Rapture::REST#add_guild_member (method)">#add_guild_member</a></span>, <span class='object_link'><a href="REST.html#add_guild_member_role-instance_method" title="Rapture::REST#add_guild_member_role (method)">#add_guild_member_role</a></span>, <span class='object_link'><a href="REST.html#add_pinned_message-instance_method" title="Rapture::REST#add_pinned_message (method)">#add_pinned_message</a></span>, <span class='object_link'><a href="REST.html#begin_guild_prune-instance_method" title="Rapture::REST#begin_guild_prune (method)">#begin_guild_prune</a></span>, <span class='object_link'><a href="REST.html#bulk_delete_messages-instance_method" title="Rapture::REST#bulk_delete_messages (method)">#bulk_delete_messages</a></span>, <span class='object_link'><a href="REST.html#create_channel_invite-instance_method" title="Rapture::REST#create_channel_invite (method)">#create_channel_invite</a></span>, <span class='object_link'><a href="REST.html#create_dm-instance_method" title="Rapture::REST#create_dm (method)">#create_dm</a></span>, <span class='object_link'><a href="REST.html#create_group_dm-instance_method" title="Rapture::REST#create_group_dm (method)">#create_group_dm</a></span>, <span class='object_link'><a href="REST.html#create_guild-instance_method" title="Rapture::REST#create_guild (method)">#create_guild</a></span>, <span class='object_link'><a href="REST.html#create_guild_ban-instance_method" title="Rapture::REST#create_guild_ban (method)">#create_guild_ban</a></span>, <span class='object_link'><a href="REST.html#create_guild_channel-instance_method" title="Rapture::REST#create_guild_channel (method)">#create_guild_channel</a></span>, <span class='object_link'><a href="REST.html#create_guild_emoji-instance_method" title="Rapture::REST#create_guild_emoji (method)">#create_guild_emoji</a></span>, <span class='object_link'><a href="REST.html#create_guild_integration-instance_method" title="Rapture::REST#create_guild_integration (method)">#create_guild_integration</a></span>, <span class='object_link'><a href="REST.html#create_guild_role-instance_method" title="Rapture::REST#create_guild_role (method)">#create_guild_role</a></span>, <span class='object_link'><a href="REST.html#create_message-instance_method" title="Rapture::REST#create_message (method)">#create_message</a></span>, <span class='object_link'><a href="REST.html#create_reaction-instance_method" title="Rapture::REST#create_reaction (method)">#create_reaction</a></span>, <span class='object_link'><a href="REST.html#create_webhook-instance_method" title="Rapture::REST#create_webhook (method)">#create_webhook</a></span>, <span class='object_link'><a href="REST.html#delete_all_reactions-instance_method" title="Rapture::REST#delete_all_reactions (method)">#delete_all_reactions</a></span>, <span class='object_link'><a href="REST.html#delete_channel-instance_method" title="Rapture::REST#delete_channel (method)">#delete_channel</a></span>, <span class='object_link'><a href="REST.html#delete_channel_permission-instance_method" title="Rapture::REST#delete_channel_permission (method)">#delete_channel_permission</a></span>, <span class='object_link'><a href="REST.html#delete_group_dm_recipient-instance_method" title="Rapture::REST#delete_group_dm_recipient (method)">#delete_group_dm_recipient</a></span>, <span class='object_link'><a href="REST.html#delete_guild-instance_method" title="Rapture::REST#delete_guild (method)">#delete_guild</a></span>, <span class='object_link'><a href="REST.html#delete_guild_emoji-instance_method" title="Rapture::REST#delete_guild_emoji (method)">#delete_guild_emoji</a></span>, <span class='object_link'><a href="REST.html#delete_guild_integration-instance_method" title="Rapture::REST#delete_guild_integration (method)">#delete_guild_integration</a></span>, <span class='object_link'><a href="REST.html#delete_guild_role-instance_method" title="Rapture::REST#delete_guild_role (method)">#delete_guild_role</a></span>, <span class='object_link'><a href="REST.html#delete_invite-instance_method" title="Rapture::REST#delete_invite (method)">#delete_invite</a></span>, <span class='object_link'><a href="REST.html#delete_message-instance_method" title="Rapture::REST#delete_message (method)">#delete_message</a></span>, <span class='object_link'><a href="REST.html#delete_own_reaction-instance_method" title="Rapture::REST#delete_own_reaction (method)">#delete_own_reaction</a></span>, <span class='object_link'><a href="REST.html#delete_pinned_message-instance_method" title="Rapture::REST#delete_pinned_message (method)">#delete_pinned_message</a></span>, <span class='object_link'><a href="REST.html#delete_user_reaction-instance_method" title="Rapture::REST#delete_user_reaction (method)">#delete_user_reaction</a></span>, <span class='object_link'><a href="REST.html#delete_webhook-instance_method" title="Rapture::REST#delete_webhook (method)">#delete_webhook</a></span>, <span class='object_link'><a href="REST.html#delete_webhook_with_token-instance_method" title="Rapture::REST#delete_webhook_with_token (method)">#delete_webhook_with_token</a></span>, <span class='object_link'><a href="REST.html#edit_channel_permissions-instance_method" title="Rapture::REST#edit_channel_permissions (method)">#edit_channel_permissions</a></span>, <span class='object_link'><a href="REST.html#edit_message-instance_method" title="Rapture::REST#edit_message (method)">#edit_message</a></span>, <span class='object_link'><a href="REST.html#execute_webhook-instance_method" title="Rapture::REST#execute_webhook (method)">#execute_webhook</a></span>, <span class='object_link'><a href="REST.html#get_channel-instance_method" title="Rapture::REST#get_channel (method)">#get_channel</a></span>, <span class='object_link'><a href="REST.html#get_channel_invites-instance_method" title="Rapture::REST#get_channel_invites (method)">#get_channel_invites</a></span>, <span class='object_link'><a href="REST.html#get_channel_messages-instance_method" title="Rapture::REST#get_channel_messages (method)">#get_channel_messages</a></span>, <span class='object_link'><a href="REST.html#get_channel_webhooks-instance_method" title="Rapture::REST#get_channel_webhooks (method)">#get_channel_webhooks</a></span>, <span class='object_link'><a href="REST.html#get_current_application_information-instance_method" title="Rapture::REST#get_current_application_information (method)">#get_current_application_information</a></span>, <span class='object_link'><a href="REST.html#get_current_user-instance_method" title="Rapture::REST#get_current_user (method)">#get_current_user</a></span>, <span class='object_link'><a href="REST.html#get_current_user_guilds-instance_method" title="Rapture::REST#get_current_user_guilds (method)">#get_current_user_guilds</a></span>, <span class='object_link'><a href="REST.html#get_gateway-instance_method" title="Rapture::REST#get_gateway (method)">#get_gateway</a></span>, <span class='object_link'><a href="REST.html#get_gateway_bot-instance_method" title="Rapture::REST#get_gateway_bot (method)">#get_gateway_bot</a></span>, <span class='object_link'><a href="REST.html#get_guild-instance_method" title="Rapture::REST#get_guild (method)">#get_guild</a></span>, <span class='object_link'><a href="REST.html#get_guild_audit_log-instance_method" title="Rapture::REST#get_guild_audit_log (method)">#get_guild_audit_log</a></span>, <span class='object_link'><a href="REST.html#get_guild_ban-instance_method" title="Rapture::REST#get_guild_ban (method)">#get_guild_ban</a></span>, <span class='object_link'><a href="REST.html#get_guild_bans-instance_method" title="Rapture::REST#get_guild_bans (method)">#get_guild_bans</a></span>, <span class='object_link'><a href="REST.html#get_guild_channel-instance_method" title="Rapture::REST#get_guild_channel (method)">#get_guild_channel</a></span>, <span class='object_link'><a href="REST.html#get_guild_embed-instance_method" title="Rapture::REST#get_guild_embed (method)">#get_guild_embed</a></span>, <span class='object_link'><a href="REST.html#get_guild_emoji-instance_method" title="Rapture::REST#get_guild_emoji (method)">#get_guild_emoji</a></span>, <span class='object_link'><a href="REST.html#get_guild_integrations-instance_method" title="Rapture::REST#get_guild_integrations (method)">#get_guild_integrations</a></span>, <span class='object_link'><a href="REST.html#get_guild_member-instance_method" title="Rapture::REST#get_guild_member (method)">#get_guild_member</a></span>, <span class='object_link'><a href="REST.html#get_guild_prune_count-instance_method" title="Rapture::REST#get_guild_prune_count (method)">#get_guild_prune_count</a></span>, <span class='object_link'><a href="REST.html#get_guild_roles-instance_method" title="Rapture::REST#get_guild_roles (method)">#get_guild_roles</a></span>, <span class='object_link'><a href="REST.html#get_guild_vanity_url-instance_method" title="Rapture::REST#get_guild_vanity_url (method)">#get_guild_vanity_url</a></span>, <span class='object_link'><a href="REST.html#get_guild_voice_regions-instance_method" title="Rapture::REST#get_guild_voice_regions (method)">#get_guild_voice_regions</a></span>, <span class='object_link'><a href="REST.html#get_guild_webhooks-instance_method" title="Rapture::REST#get_guild_webhooks (method)">#get_guild_webhooks</a></span>, <span class='object_link'><a href="REST.html#get_guild_widget_image-instance_method" title="Rapture::REST#get_guild_widget_image (method)">#get_guild_widget_image</a></span>, <span class='object_link'><a href="REST.html#get_invite-instance_method" title="Rapture::REST#get_invite (method)">#get_invite</a></span>, <span class='object_link'><a href="REST.html#get_pinned_messages-instance_method" title="Rapture::REST#get_pinned_messages (method)">#get_pinned_messages</a></span>, <span class='object_link'><a href="REST.html#get_user-instance_method" title="Rapture::REST#get_user (method)">#get_user</a></span>, <span class='object_link'><a href="REST.html#get_user_connections-instance_method" title="Rapture::REST#get_user_connections (method)">#get_user_connections</a></span>, <span class='object_link'><a href="REST.html#get_user_dms-instance_method" title="Rapture::REST#get_user_dms (method)">#get_user_dms</a></span>, <span class='object_link'><a href="REST.html#get_webhook-instance_method" title="Rapture::REST#get_webhook (method)">#get_webhook</a></span>, <span class='object_link'><a href="REST.html#get_webhook_with_token-instance_method" title="Rapture::REST#get_webhook_with_token (method)">#get_webhook_with_token</a></span>, <span class='object_link'><a href="REST.html#leave_guild-instance_method" title="Rapture::REST#leave_guild (method)">#leave_guild</a></span>, <span class='object_link'><a href="REST.html#list_guild_emojis-instance_method" title="Rapture::REST#list_guild_emojis (method)">#list_guild_emojis</a></span>, <span class='object_link'><a href="REST.html#list_guild_members-instance_method" title="Rapture::REST#list_guild_members (method)">#list_guild_members</a></span>, <span class='object_link'><a href="REST.html#list_voice_regions-instance_method" title="Rapture::REST#list_voice_regions (method)">#list_voice_regions</a></span>, <span class='object_link'><a href="REST.html#modify_channel-instance_method" title="Rapture::REST#modify_channel (method)">#modify_channel</a></span>, <span class='object_link'><a href="REST.html#modify_current_user_nick-instance_method" title="Rapture::REST#modify_current_user_nick (method)">#modify_current_user_nick</a></span>, <span class='object_link'><a href="REST.html#modify_guild-instance_method" title="Rapture::REST#modify_guild (method)">#modify_guild</a></span>, <span class='object_link'><a href="REST.html#modify_guild_channel_positions-instance_method" title="Rapture::REST#modify_guild_channel_positions (method)">#modify_guild_channel_positions</a></span>, <span class='object_link'><a href="REST.html#modify_guild_embed-instance_method" title="Rapture::REST#modify_guild_embed (method)">#modify_guild_embed</a></span>, <span class='object_link'><a href="REST.html#modify_guild_emoji-instance_method" title="Rapture::REST#modify_guild_emoji (method)">#modify_guild_emoji</a></span>, <span class='object_link'><a href="REST.html#modify_guild_integration-instance_method" title="Rapture::REST#modify_guild_integration (method)">#modify_guild_integration</a></span>, <span class='object_link'><a href="REST.html#modify_guild_member-instance_method" title="Rapture::REST#modify_guild_member (method)">#modify_guild_member</a></span>, <span class='object_link'><a href="REST.html#modify_guild_role-instance_method" title="Rapture::REST#modify_guild_role (method)">#modify_guild_role</a></span>, <span class='object_link'><a href="REST.html#modify_guild_role_positions-instance_method" title="Rapture::REST#modify_guild_role_positions (method)">#modify_guild_role_positions</a></span>, <span class='object_link'><a href="REST.html#modify_webhook-instance_method" title="Rapture::REST#modify_webhook (method)">#modify_webhook</a></span>, <span class='object_link'><a href="REST.html#modify_webhook_with_token-instance_method" title="Rapture::REST#modify_webhook_with_token (method)">#modify_webhook_with_token</a></span>, <span class='object_link'><a href="REST.html#remove_guild_ban-instance_method" title="Rapture::REST#remove_guild_ban (method)">#remove_guild_ban</a></span>, <span class='object_link'><a href="REST.html#remove_guild_member-instance_method" title="Rapture::REST#remove_guild_member (method)">#remove_guild_member</a></span>, <span class='object_link'><a href="REST.html#remove_guild_member_role-instance_method" title="Rapture::REST#remove_guild_member_role (method)">#remove_guild_member_role</a></span>, <span class='object_link'><a href="REST.html#sync_guild_integration-instance_method" title="Rapture::REST#sync_guild_integration (method)">#sync_guild_integration</a></span>, <span class='object_link'><a href="REST.html#trigger_typing_indicator-instance_method" title="Rapture::REST#trigger_typing_indicator (method)">#trigger_typing_indicator</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="HTTP.html" title="Rapture::HTTP (module)">HTTP</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="HTTP.html#base_url-instance_method" title="Rapture::HTTP#base_url (method)">#base_url</a></span>, <span class='object_link'><a href="HTTP.html#request-instance_method" title="Rapture::HTTP#request (method)">#request</a></span>, <span class='object_link'><a href="HTTP.html#user_agent-instance_method" title="Rapture::HTTP#user_agent (method)">#user_agent</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(token, shard_key: [0, 1], large_threshold: 150)  &#x21d2; <tt><span class='object_link'><a href="" title="Rapture::Client (class)">Client</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of Client</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>token used for authorization, must be prefixed with token type, e.g.
+<code>Bot</code>, <code>Bearer</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>shard_key</span>
+      
+      
+        <span class='type'>(<tt>{Integer, Integer}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the shard key for this connection. See <a
+href="https://discordapp.com/developers/docs/resources/guild#guild-object-premium-tier">Sharding</a>
+for more information.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>large_threshold</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>limit for when the gateway will no longer send offline member data. Must be
+between 50 and 250</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>shard_key:</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>large_threshold:</span> <span class='int'>150</span><span class='rparen'>)</span>
+  <span class='ivar'>@type</span><span class='comma'>,</span> <span class='ivar'>@token</span> <span class='op'>=</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='ivar'>@shard_key</span> <span class='op'>=</span> <span class='id identifier rubyid_shard_key'>shard_key</span>
+  <span class='ivar'>@large_threshold</span> <span class='op'>=</span> <span class='id identifier rubyid_large_threshold'>large_threshold</span>
+  <span class='ivar'>@heartbeat_interval</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='ivar'>@send_heartbeats</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='ivar'>@event_handlers</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_setup_heartbeats'>setup_heartbeats</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="on_channel_create-instance_method">
+  
+    #<strong>on_channel_create</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>channel_create</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#ChannelCreate-constant" title="Rapture::Gateway::ChannelCreate (constant)">Gateway::ChannelCreate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+158</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 158</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#ChannelCreate-constant" title="Rapture::Gateway::ChannelCreate (constant)">ChannelCreate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_channel_delete-instance_method">
+  
+    #<strong>on_channel_delete</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>channel_delete</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#ChannelDelete-constant" title="Rapture::Gateway::ChannelDelete (constant)">Gateway::ChannelDelete</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+164</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 164</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#ChannelDelete-constant" title="Rapture::Gateway::ChannelDelete (constant)">ChannelDelete</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_channel_pins_update-instance_method">
+  
+    #<strong>on_channel_pins_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>channel_pins_update</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/ChannelPinsUpdate.html" title="Rapture::Gateway::ChannelPinsUpdate (class)">Gateway::ChannelPinsUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+167</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 167</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_pins_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/ChannelPinsUpdate.html" title="Rapture::Gateway::ChannelPinsUpdate (class)">ChannelPinsUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_channel_update-instance_method">
+  
+    #<strong>on_channel_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>channel_update</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#ChannelUpdate-constant" title="Rapture::Gateway::ChannelUpdate (constant)">Gateway::ChannelUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 161</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#ChannelUpdate-constant" title="Rapture::Gateway::ChannelUpdate (constant)">ChannelUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_ban_add-instance_method">
+  
+    #<strong>on_guild_ban_add</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_ban_add</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildBanAdd.html" title="Rapture::Gateway::GuildBanAdd (class)">Gateway::GuildBanAdd</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+179</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 179</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_ban_add</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildBanAdd.html" title="Rapture::Gateway::GuildBanAdd (class)">GuildBanAdd</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_ban_remove-instance_method">
+  
+    #<strong>on_guild_ban_remove</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_ban_remove</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#GuildBanRemove-constant" title="Rapture::Gateway::GuildBanRemove (constant)">Gateway::GuildBanRemove</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+182</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 182</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_ban_remove</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildBanRemove-constant" title="Rapture::Gateway::GuildBanRemove (constant)">GuildBanRemove</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_create-instance_method">
+  
+    #<strong>on_guild_create</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_create</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#GuildCreate-constant" title="Rapture::Gateway::GuildCreate (constant)">Gateway::GuildCreate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 170</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildCreate-constant" title="Rapture::Gateway::GuildCreate (constant)">GuildCreate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_delete-instance_method">
+  
+    #<strong>on_guild_delete</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_delete</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#GuildDelete-constant" title="Rapture::Gateway::GuildDelete (constant)">Gateway::GuildDelete</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 176</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildDelete-constant" title="Rapture::Gateway::GuildDelete (constant)">GuildDelete</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_emojis_update-instance_method">
+  
+    #<strong>on_guild_emojis_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_emojis_update</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildEmojisUpdate.html" title="Rapture::Gateway::GuildEmojisUpdate (class)">Gateway::GuildEmojisUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 185</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_emojis_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildEmojisUpdate.html" title="Rapture::Gateway::GuildEmojisUpdate (class)">GuildEmojisUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_integrations_update-instance_method">
+  
+    #<strong>on_guild_integrations_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a
+<code>guild_integrations_update</code> event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildIntegrationsUpdate.html" title="Rapture::Gateway::GuildIntegrationsUpdate (class)">Gateway::GuildIntegrationsUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+188</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 188</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_integrations_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildIntegrationsUpdate.html" title="Rapture::Gateway::GuildIntegrationsUpdate (class)">GuildIntegrationsUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_member_add-instance_method">
+  
+    #<strong>on_guild_member_add</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_member_add</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildMemberAdd.html" title="Rapture::Gateway::GuildMemberAdd (class)">Gateway::GuildMemberAdd</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 191</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_member_add</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMemberAdd.html" title="Rapture::Gateway::GuildMemberAdd (class)">GuildMemberAdd</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_member_remove-instance_method">
+  
+    #<strong>on_guild_member_remove</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_member_remove</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildMemberRemove.html" title="Rapture::Gateway::GuildMemberRemove (class)">Gateway::GuildMemberRemove</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 194</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_member_remove</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMemberRemove.html" title="Rapture::Gateway::GuildMemberRemove (class)">GuildMemberRemove</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_member_update-instance_method">
+  
+    #<strong>on_guild_member_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_member_update</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildMemberUpdate.html" title="Rapture::Gateway::GuildMemberUpdate (class)">Gateway::GuildMemberUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 197</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_member_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMemberUpdate.html" title="Rapture::Gateway::GuildMemberUpdate (class)">GuildMemberUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_members_chunk-instance_method">
+  
+    #<strong>on_guild_members_chunk</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_members_chunk</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildMembersChunk.html" title="Rapture::Gateway::GuildMembersChunk (class)">Gateway::GuildMembersChunk</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 200</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_members_chunk</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMembersChunk.html" title="Rapture::Gateway::GuildMembersChunk (class)">GuildMembersChunk</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_role_create-instance_method">
+  
+    #<strong>on_guild_role_create</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_role_create</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildRoleCreate.html" title="Rapture::Gateway::GuildRoleCreate (class)">Gateway::GuildRoleCreate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+203</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 203</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_role_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildRoleCreate.html" title="Rapture::Gateway::GuildRoleCreate (class)">GuildRoleCreate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_role_delete-instance_method">
+  
+    #<strong>on_guild_role_delete</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_role_delete</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildRoleDelete.html" title="Rapture::Gateway::GuildRoleDelete (class)">Gateway::GuildRoleDelete</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+209</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 209</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_role_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildRoleDelete.html" title="Rapture::Gateway::GuildRoleDelete (class)">GuildRoleDelete</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_role_update-instance_method">
+  
+    #<strong>on_guild_role_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_role_update</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/GuildRoleUpdate.html" title="Rapture::Gateway::GuildRoleUpdate (class)">Gateway::GuildRoleUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+206</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 206</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_role_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildRoleUpdate.html" title="Rapture::Gateway::GuildRoleUpdate (class)">GuildRoleUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_guild_update-instance_method">
+  
+    #<strong>on_guild_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>guild_update</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#GuildUpdate-constant" title="Rapture::Gateway::GuildUpdate (constant)">Gateway::GuildUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+173</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 173</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildUpdate-constant" title="Rapture::Gateway::GuildUpdate (constant)">GuildUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_create-instance_method">
+  
+    #<strong>on_message_create</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>message_create</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#MessageCreate-constant" title="Rapture::Gateway::MessageCreate (constant)">Gateway::MessageCreate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+212</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 212</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#MessageCreate-constant" title="Rapture::Gateway::MessageCreate (constant)">MessageCreate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_delete-instance_method">
+  
+    #<strong>on_message_delete</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>message_delete</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/MessageDelete.html" title="Rapture::Gateway::MessageDelete (class)">Gateway::MessageDelete</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+218</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 218</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageDelete.html" title="Rapture::Gateway::MessageDelete (class)">MessageDelete</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_delete_bulk-instance_method">
+  
+    #<strong>on_message_delete_bulk</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>message_delete_bulk</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/MessageDeleteBulk.html" title="Rapture::Gateway::MessageDeleteBulk (class)">Gateway::MessageDeleteBulk</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+221</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 221</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_delete_bulk</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageDeleteBulk.html" title="Rapture::Gateway::MessageDeleteBulk (class)">MessageDeleteBulk</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_reaction_add-instance_method">
+  
+    #<strong>on_message_reaction_add</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>message_reaction_add</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/MessageReactionAdd.html" title="Rapture::Gateway::MessageReactionAdd (class)">Gateway::MessageReactionAdd</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+224</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 224</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_reaction_add</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageReactionAdd.html" title="Rapture::Gateway::MessageReactionAdd (class)">MessageReactionAdd</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_reaction_remove-instance_method">
+  
+    #<strong>on_message_reaction_remove</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>message_reaction_remove</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/MessageReactionRemove.html" title="Rapture::Gateway::MessageReactionRemove (class)">Gateway::MessageReactionRemove</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+227</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 227</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_reaction_remove</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageReactionRemove.html" title="Rapture::Gateway::MessageReactionRemove (class)">MessageReactionRemove</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_reaction_remove_all-instance_method">
+  
+    #<strong>on_message_reaction_remove_all</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a
+<code>message_reaction_remove_all</code> event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/MessageReactionRemoveAll.html" title="Rapture::Gateway::MessageReactionRemoveAll (class)">Gateway::MessageReactionRemoveAll</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+230</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 230</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_reaction_remove_all</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageReactionRemoveAll.html" title="Rapture::Gateway::MessageReactionRemoveAll (class)">MessageReactionRemoveAll</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_message_update-instance_method">
+  
+    #<strong>on_message_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>message_update</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#MessageUpdate-constant" title="Rapture::Gateway::MessageUpdate (constant)">Gateway::MessageUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+215</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 215</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#MessageUpdate-constant" title="Rapture::Gateway::MessageUpdate (constant)">MessageUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_presence_update-instance_method">
+  
+    #<strong>on_presence_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>presence_update</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/PresenceUpdate.html" title="Rapture::Gateway::PresenceUpdate (class)">Gateway::PresenceUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+233</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 233</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:presence_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/PresenceUpdate.html" title="Rapture::Gateway::PresenceUpdate (class)">PresenceUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_ready-instance_method">
+  
+    #<strong>on_ready</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>ready</code> event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/Ready.html" title="Rapture::Gateway::Ready (class)">Gateway::Ready</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+155</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 155</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:ready</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/Ready.html" title="Rapture::Gateway::Ready (class)">Ready</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_typing_start-instance_method">
+  
+    #<strong>on_typing_start</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>typing_start</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/TypingStart.html" title="Rapture::Gateway::TypingStart (class)">Gateway::TypingStart</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+236</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 236</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:typing_start</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/TypingStart.html" title="Rapture::Gateway::TypingStart (class)">TypingStart</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_user_update-instance_method">
+  
+    #<strong>on_user_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>user_update</code> event is
+recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#UserUpdate-constant" title="Rapture::Gateway::UserUpdate (constant)">Gateway::UserUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 239</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:user_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#UserUpdate-constant" title="Rapture::Gateway::UserUpdate (constant)">UserUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_voice_server_update-instance_method">
+  
+    #<strong>on_voice_server_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>voice_server_update</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/VoiceServerUpdate.html" title="Rapture::Gateway::VoiceServerUpdate (class)">Gateway::VoiceServerUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+245</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 245</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:voice_server_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/VoiceServerUpdate.html" title="Rapture::Gateway::VoiceServerUpdate (class)">VoiceServerUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_voice_state_update-instance_method">
+  
+    #<strong>on_voice_state_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>voice_state_update</code>
+event is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway.html#VoiceStateUpdate-constant" title="Rapture::Gateway::VoiceStateUpdate (constant)">Gateway::VoiceStateUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+242</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 242</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:voice_state_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#VoiceStateUpdate-constant" title="Rapture::Gateway::VoiceStateUpdate (constant)">VoiceStateUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="on_webhooks_update-instance_method">
+  
+    #<strong>on_webhooks_update</strong> {|data| ... } &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler to be called when a <code>webhooks_update</code> event
+is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gateway/WebhooksUpdate.html" title="Rapture::Gateway::WebhooksUpdate (class)">Gateway::WebhooksUpdate</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+248</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 248</span>
+
+<span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:webhooks_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/WebhooksUpdate.html" title="Rapture::Gateway::WebhooksUpdate (class)">WebhooksUpdate</a></span></span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="run-instance_method">
+  
+    #<strong>run</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span>
+  <span class='id identifier rubyid_websocket'>websocket</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="websocket-instance_method">
+  
+    #<strong>websocket</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_websocket'>websocket</span>
+  <span class='kw'>return</span> <span class='ivar'>@websocket</span> <span class='kw'>if</span> <span class='ivar'>@websocket</span>
+  <span class='ivar'>@websocket</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="WebSocket.html" title="Rapture::WebSocket (class)">WebSocket</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WebSocket.html#initialize-instance_method" title="Rapture::WebSocket#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_get_gateway'>get_gateway</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@websocket</span><span class='period'>.</span><span class='id identifier rubyid_on_open'>on_open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_event'>event</span><span class='op'>|</span>
+    <span class='id identifier rubyid_on_open'>on_open</span><span class='lparen'>(</span><span class='id identifier rubyid_event'>event</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@websocket</span><span class='period'>.</span><span class='id identifier rubyid_on_message'>on_message</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_packet'>packet</span><span class='op'>|</span>
+    <span class='id identifier rubyid_on_message'>on_message</span><span class='lparen'>(</span><span class='id identifier rubyid_packet'>packet</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@websocket</span><span class='period'>.</span><span class='id identifier rubyid_on_close'>on_close</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_event'>event</span><span class='op'>|</span>
+    <span class='id identifier rubyid_on_close'>on_close</span><span class='lparen'>(</span><span class='id identifier rubyid_event'>event</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@websocket</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Aug  8 06:29:19 2019 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.20 (ruby-2.4.6).
+</div>
+
+    </div>
+  </body>
+</html>
