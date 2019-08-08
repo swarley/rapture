@@ -12,7 +12,7 @@ module Rapture
 
       # @!attribute [r] id
       # @return [Integer] role or user ID
-      getter :id, converters: Converters.Snowflake
+      getter :id, converter: Converters.Snowflake
 
       # @!attribute [r] type
       # @return [String] either "role" or "member"

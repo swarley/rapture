@@ -1,6 +1,24 @@
 # frozen_string_literal: true
 
 module Rapture
+  class Team
+    include Mapping
+
+    class Member
+      include Mapping
+
+      getter :membership_state
+      getter :permissions
+      getter :team_id, converter: Converters.Snowflake
+      getter :user, from_json: User
+    end
+
+    getter :icon
+    getter :id, converter: Converters.Snowflake
+    getter :members, from_json: Team::Member
+    getter :owner_user_id, converter: Converters.Snowflake
+  end
+
   class OauthApplication
     include Mapping
 
@@ -19,23 +37,5 @@ module Rapture
     getter :primary_sku_id, converter: Converters.Snowflake?
     getter :slug
     getter :cover_image
-  end
-
-  class Team
-    include Mapping
-
-    class Member
-      include Mapping
-
-      getter :membership_state
-      getter :permissions
-      getter :team_id, converter: Converters.Snowflake
-      getter :user, from_json: User
-    end
-
-    getter :icon
-    getter :id, converter: Converters.Snowflake
-    getter :members, from_json: Team::Member
-    getter :owner_user_id, converter: Converters.Snowflake
   end
 end

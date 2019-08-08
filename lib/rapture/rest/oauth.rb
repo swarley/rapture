@@ -9,6 +9,6 @@ module Rapture::REST
   # @return [OauthApplication]
   def get_current_application_information
     response = request(:get, "oauth2/applications/@me")
-    OauthApplication.from_json(response.body)
+    Rapture::OauthApplication.from_json(response.body)
   end
 end

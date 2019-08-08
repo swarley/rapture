@@ -19,7 +19,7 @@ module Rapture::REST
       'X-Audit-Log-Reason': reason,
     )
 
-    Webhook.from_json(response.body)
+    Rapture::Webhook.from_json(response.body)
   end
 
   # Return a list of webhooks for a channel
@@ -28,7 +28,7 @@ module Rapture::REST
   # @return [Array<Webhook>]
   def get_channel_webhooks(channel_id)
     response = request(:get, "channels/#{channel_id}/webhooks")
-    Webhook.from_json_array(response.body)
+    Rapture::Webhook.from_json_array(response.body)
   end
 
   # Return a list of webhooks for a guild
@@ -37,7 +37,7 @@ module Rapture::REST
   # @return [Array<Webhook>]
   def get_guild_webhooks(guild_id)
     response = request(:get, "guilds/#{guild_id}/webhooks")
-    Webhook.from_json_array(response.body)
+    Rapture::Webhook.from_json_array(response.body)
   end
 
   # Return a webhook for the given ID
@@ -45,7 +45,7 @@ module Rapture::REST
   # @param webhook_id [String, Integer]
   # @return [Webhook]
   def get_webhook(webhook_id)
-    Webhook.from_json request(:get, "webhooks/#{webhook_id}").body
+    Rapture::Webhook.from_json request(:get, "webhooks/#{webhook_id}").body
   end
 
   # Get a webhook but does not require authentication and returns
@@ -54,7 +54,7 @@ module Rapture::REST
   # @param webhook_token [String]
   # @return [Webhook]
   def get_webhook_with_token(webhook_id, webhook_token)
-    Webhook.from_json request(:get, "webhooks/#{webhook_id}/#{webhook_token}").body
+    Rapture::Webhook.from_json request(:get, "webhooks/#{webhook_id}/#{webhook_token}").body
   end
 
   # Modify a webhook
@@ -72,7 +72,7 @@ module Rapture::REST
       params,
       'X-Audit-Log-Reason': reason,
     )
-    Webhook.from_json(response.body)
+    Rapture::Webhook.from_json(response.body)
   end
 
   # Modify a webhook using a token
@@ -91,7 +91,7 @@ module Rapture::REST
       params,
       'X-Audit-Log-Reason': reason,
     )
-    Webhook.from_json(response.body)
+    Rapture::Webhook.from_json(response.body)
   end
 
   # Delete a webhook

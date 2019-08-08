@@ -10,7 +10,7 @@ module Rapture::REST
   # @return [Array<Emoji>]
   def list_guild_emojis(guild_id)
     response = request(:get, "guilds/#{guild_id}/emojis")
-    Emoji.from_json_array(response.data)
+    Rapture::Emoji.from_json_array(response.body)
   end
 
   # Get an emoji from a guild by its ID
@@ -20,7 +20,7 @@ module Rapture::REST
   # @return [Emoji]
   def get_guild_emoji(guild_id, emoji_id)
     response = request(:get, "guilds/#{guild_id}/emojis/#{emoji_id}")
-    Emoji.from_json(response.body)
+    Rapture::Emoji.from_json(response.body)
   end
 
   # Create a new emoji for a guild
@@ -38,7 +38,7 @@ module Rapture::REST
       {name: name, image: image, roles: roles},
       'X-Audit-Log-Reason': reason,
     )
-    Emoji.from_json(response.body)
+    Rapture::Emoji.from_json(response.body)
   end
 
   # Modify a given emoji
@@ -56,7 +56,7 @@ module Rapture::REST
       params,
       'X-Audit-Log-Reason': reason,
     )
-    Emoji.from_json(response.body)
+    Rapture::Emoji.from_json(response.body)
   end
 
   # Delete a given emoji

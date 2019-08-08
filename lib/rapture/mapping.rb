@@ -81,7 +81,7 @@ module Rapture::Mapping
       :Timestamp,
       nilable: true,
       from_json: proc { |data| Time.parse(data) },
-      to_json: proc { |time| time.iso8601(3) },
+      to_json: proc { |time| time.iso8601(6) },
     )
 
     # @!endgroup
@@ -161,11 +161,8 @@ module Rapture::Mapping
       end
 
       value
-    rescue Exception => e
-      puts "EXCEPTION ON PROP"
-      puts prop
-      p @properties
-      raise e
+    rescue Exception => _
+      raise Rapture::SerdeError, "Failed to convert property: `#{prop}'"
     end
   end
 

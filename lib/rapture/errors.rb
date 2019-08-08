@@ -49,4 +49,7 @@ module Rapture
       "#<Rapture::HTTP::HTTPException @code=#{@code} @message=#{message.inspect}>"
     end
   end
+
+  class SerdeError < RuntimeError
+  end
 end

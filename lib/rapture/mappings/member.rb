@@ -24,7 +24,7 @@ module Rapture
 
     # @!attribute [r] premium_since
     # @return [Time, nil]
-    getter :premium_since, converter: Converters.Timestamp
+    getter :premium_since, converter: Converters.Timestamp?
 
     # @!attribute [r] deaf
     # @return [true, false]

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rapture"
+
 describe Rapture::Mapping do
   class Example
     include Rapture::Mapping
@@ -18,6 +20,22 @@ describe Rapture::Mapping do
   class ArrayExample
     include Rapture::Mapping
     getter :values, from_json: Example
+  end
+
+  class AbstractObject
+    def to_h(_)
+      {foo: :bar}
+    end
+  end
+
+  class AbstractObjectExample
+    include Rapture::Mapping
+    getter :values, to_json: AbstractObject
+  end
+
+  class ErrorExample
+    include Rapture::Mapping
+    getter :foo, from_json: "Not valid"
   end
 
   before do
@@ -53,6 +71,27 @@ describe Rapture::Mapping do
       json = %({"values":[#{@raw_json}]})
       ArrayExample.from_json(json)
     end
+
+    it "converts an array of abstract objects" do
+      abstract = AbstractObjectExample.from_h(values: [AbstractObject.new])
+      assert_equal(
+        abstract.to_json,
+        %({"values":[{"foo":"bar"}]})
+      )
+    end
+  end
+
+  describe ".from_json_array" do
+    it "creates an array of objects from a json array" do
+      object = Example.from_json(@raw_json).to_h
+
+      json = %([#{@raw_json}])
+      array = Example.from_json_array(json).collect(&:to_h)
+      assert_equal(
+        array,
+        [object]
+      )
+    end
   end
 
   describe "#to_h" do
@@ -79,6 +118,14 @@ describe Rapture::Mapping do
       json = %({"values":[#{@raw_json}]})
       object = ArrayExample.from_json(json)
       assert_equal(object.to_json, json)
+    end
+  end
+
+  describe "#convert" do
+    it "raises an error if a converter has a mismatched type" do
+      assert_raises(Rapture::SerdeError) do
+        ErrorExample.from_json(@raw_json)
+      end
     end
   end
 end

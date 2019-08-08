@@ -15,7 +15,7 @@ module Rapture::HTTP
 
   # Returns the required User-Agent string
   def user_agent
-    "DiscordBot (https://github.com/z64/rapture, #{Rapture::VERSION})"
+    "DiscordBot (https://github.com/swarley/rapture, #{Rapture::VERSION})"
   end
 
   private

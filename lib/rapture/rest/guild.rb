@@ -71,9 +71,9 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#get-guild-channels
   # @param guild_id [String, Integer]
   # @return [Guild]
-  def get_guild_channel(guild_id)
+  def get_guild_channels(guild_id)
     response = request(:get, "guilds/#{guild_id}/channels")
-    Rapture::Guild.from_json(response.body)
+    Rapture::Channel.from_json_array(response.body)
   end
 
   # Create a new channel for a guild.
