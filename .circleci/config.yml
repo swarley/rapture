@@ -11,9 +11,16 @@ jobs:
       - run:
           name: Installer Bundler
           command: gem install bundler -v 2.0.2
+      - restore_cache:
+          keys:
+            - rapture-cache-
       - run:
           name: Install Dependencies
           command: bundle check --path vendor/bundle || bundle install
+      - save_cache:
+          key: rapture-cache-
+          paths:
+            - vendor/bundle      
       - run:
           name: Setup Code Climate test-reporter
           command: |
@@ -38,9 +45,16 @@ jobs:
       - run:
           name: Install bundler
           command: gem install bundler -v 2.0.2
+      - restore_cache:
+          keys:
+            - rapture-cache-
       - run:
           name: Install dependencies
-          command: bundle install
+          command: bundle check --path vendor/bundle || bundle install 
+      - save_cache:
+          key: rapture-cache-
+          paths:
+            - vendor/bundle
       - run:
           name: Build docs
           command: bundle exec yard
@@ -56,9 +70,18 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      - restore_cache:
+          keys:
+            - rapture-docs-deploy-cache-
       - run:
           name: Install dependencies
-          command: sudo npm install -g gh-pages@2.0.1
+          command: |
+            npm config set prefix .node
+            npm install -g gh-pages@2.0.1
+      - save_cache:
+          key: rapture-docs-deploy-cache-
+          paths:
+            - .node
       - run:
           name: Configure Dependencies
           command: |
@@ -69,7 +92,7 @@ jobs:
             - "7e:f7:e3:9c:be:14:cc:cb:e1:83:bd:72:a1:b0:c5:de"
       - run:
           name: Deploy to gh-pages
-          command: gh-pages --message "[skip ci] Updates" --dist doc
+          command: .node/bin/gh-pages --message "[skip ci] Updates" --dist doc
 
 workflows:
   version: 2
