@@ -36,6 +36,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install bundler
+          command: gem install bundler -v 2.0.2
+      - run:
           name: Install dependencies
           command: bundle install
       - run:
