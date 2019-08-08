@@ -1336,7 +1336,7 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-bans">dis
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_guild_channel-instance_method" title="#get_guild_channel (instance method)">#<strong>get_guild_channel</strong>(guild_id)  &#x21d2; Guild </a>
+      <a href="#get_guild_channels-instance_method" title="#get_guild_channels (instance method)">#<strong>get_guild_channels</strong>(guild_id)  &#x21d2; Guild </a>
     
 
     
@@ -3905,7 +3905,7 @@ href="https://discordapp.com/developers/docs/resources/emoji#create-guild-emoji"
     <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>image:</span> <span class='id identifier rubyid_image'>image</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='id identifier rubyid_roles'>roles</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -4547,7 +4547,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#create-webhook">d
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -6618,7 +6618,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#get-channel-webho
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_channel_webhooks'>get_channel_webhooks</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channels/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/webhooks</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -6675,7 +6675,7 @@ href="https://discordapp.com/developers/docs/topics/oauth2#get-current-applicati
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_current_application_information'>get_current_application_information</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>oauth2/applications/@me</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="OauthApplication.html" title="Rapture::OauthApplication (class)">OauthApplication</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="OauthApplication.html" title="Rapture::OauthApplication (class)">OauthApplication</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -7280,9 +7280,9 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-bans">dis
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="get_guild_channel-instance_method">
+  <h3 class="signature " id="get_guild_channels-instance_method">
   
-    #<strong>get_guild_channel</strong>(guild_id)  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt> 
+    #<strong>get_guild_channels</strong>(guild_id)  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt> 
   
 
   
@@ -7342,9 +7342,9 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-channels"
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 74</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_guild_channel'>get_guild_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_guild_channels'>get_guild_channels</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/channels</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -7499,7 +7499,7 @@ href="https://discordapp.com/developers/docs/resources/emoji#get-guild-emoji">di
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_emoji'>get_guild_emoji</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_emoji_id'>emoji_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/emojis/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_emoji_id'>emoji_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -8015,7 +8015,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#get-guild-webhook
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_webhooks'>get_guild_webhooks</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/webhooks</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -8469,7 +8469,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#get-webhook">disc
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/webhook.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_webhook'>get_webhook</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>webhooks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>webhooks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -8550,7 +8550,7 @@ the <span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (cl
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/webhook.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_webhook_with_token'>get_webhook_with_token</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>webhooks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>webhooks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -8697,7 +8697,7 @@ href="https://discordapp.com/developers/docs/resources/emoji#list-guild-emojis">
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_guild_emojis'>list_guild_emojis</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/emojis</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -8835,7 +8835,7 @@ href="https://discordapp.com/developers/docs/resources/voice#list-voice-regions"
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/voice.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_voice_regions'>list_voice_regions</span>
-  <span class='const'><span class='object_link'><a href="Voice.html" title="Rapture::Voice (module)">Voice</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Voice/Region.html" title="Rapture::Voice::Region (class)">Region</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>voice/regions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Voice.html" title="Rapture::Voice (module)">Voice</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Voice/Region.html" title="Rapture::Voice::Region (class)">Region</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>voice/regions</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -9709,7 +9709,7 @@ href="https://discordapp.com/developers/docs/resources/emoji#modify-guild-emoji"
     <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -10425,7 +10425,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
     <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -10594,7 +10594,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook-wi
     <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -10977,7 +10977,7 @@ href="https://discordapp.com/developers/docs/resources/channel#trigger-typing-in
 </div>
 
       <div id="footer">
-  Generated on Thu Aug  8 16:12:39 2019 by
+  Generated on Thu Aug  8 21:58:00 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
