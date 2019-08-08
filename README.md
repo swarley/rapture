@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/maintainability)](https://codeclimate.com/github/swarley/rapture/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/test_coverage)](https://codeclimate.com/github/swarley/rapture/test_coverage) [![CircleCI](https://img.shields.io/circleci/build/github/swarley/rapture)](https://circleci.com/gh/swarley/rapture)
+
 # Rapture
 
 A Ruby library for [Discord](https://discord.com).
