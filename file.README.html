@@ -64,13 +64,19 @@ src="https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/maintainability"
 <a href="https://codeclimate.com/github/swarley/rapture/test_coverage"><img
 src="https://api.codeclimate.com/v1/badges/d517c936c813b67c21f2/test_coverage"></a>
 <a href="https://circleci.com/gh/swarley/rapture"><img
-src="https://img.shields.io/circleci/build/github/swarley/rapture/master"></a></p>
+src="https://img.shields.io/circleci/build/github/swarley/rapture/master"></a>
+<a
+href="https://ci.appveyor.com/project/swarley/rapture/branch/master"><img
+src="https://ci.appveyor.com/api/projects/status/6dcu4eajebmv7fny/branch/master?svg=true"></a></p>
 
 <h1 id="label-Rapture">Rapture</h1>
 
 <p>A Ruby library for <a href="https://discord.com">Discord</a>.</p>
+<hr>
 
 <h2 id="label-Installation">Installation</h2>
+
+<h4 id="label-Linux-2FMacOS">Linux/MacOS</h4>
 
 <p>Add this line to your application&#39;s Gemfile:</p>
 
@@ -84,6 +90,13 @@ src="https://img.shields.io/circleci/build/github/swarley/rapture/master"></a></
 <p>Or install it yourself as:</p>
 
 <pre class="code ruby"><code class="ruby">$ gem install discord-rapture</code></pre>
+
+<h4 id="label-Windows">Windows</h4>
+
+<p>You can install in the same method as Linux, however you must remove
+<code>eventmachine</code> and install it with <code>--platform=ruby</code>,
+this is due to an incompatibility with EventMachine and Ruby versions
+&gt;2.3 on Windows.</p>
 
 <h2 id="label-Usage">Usage</h2>
 
@@ -117,7 +130,7 @@ href="https://rubygems.org">rubygems.org</a>.</p>
 <h2 id="label-Contributing">Contributing</h2>
 
 <p>Bug reports and pull requests are welcome on GitHub at <a
-href="https://github.com/z64/rapture">github.com/z64/rapture</a>.</p>
+href="https://github.com/swarley/rapture">github.com/swarley/rapture</a>.</p>
 
 <h2 id="label-License">License</h2>
 
@@ -126,7 +139,7 @@ href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Thu Aug  8 06:29:17 2019 by
+  Generated on Thu Aug  8 06:38:53 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
