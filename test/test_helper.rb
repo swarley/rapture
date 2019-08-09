@@ -11,8 +11,12 @@ require "minitest/ci"
 require "minitest/spec"
 
 def json_data(name)
+  @json_data_cache ||= {}
+
+  return @json_data_cache[name] if @json_data_cache[name]
+
   path = File.join(File.expand_path("data", __dir__), "#{name}.json")
-  File.read(path)
+  @json_data_cache[name] = File.read(path)
 end
 
 def parsed_json_data(name)

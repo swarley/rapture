@@ -11,7 +11,7 @@ module Rapture::REST
   def get_invite(invite_code, with_counts: nil)
     query = URI.encode_www_form(with_counts: with_counts)
     response = request(:get, "invites/#{invite_code}" + query)
-    Invite.from_json(response.body)
+    Rapture::Invite.from_json(response.body)
   end
 
   # Delete an invite
@@ -26,6 +26,6 @@ module Rapture::REST
       nil,
       'X-Audit-Log-Reason': reason,
     )
-    Invite.from_json(response.body)
+    Rapture::Invite.from_json(response.body)
   end
 end

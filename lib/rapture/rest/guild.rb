@@ -244,7 +244,7 @@ module Rapture::REST
   # @return [Array<Ban>]
   def get_guild_bans(guild_id)
     response = request(:get, "guilds/#{guild_id}/bans")
-    Ban.from_json_array(response.body)
+    Rapture::Ban.from_json_array(response.body)
   end
 
   # Get the {Ban} object for a given user
@@ -254,7 +254,7 @@ module Rapture::REST
   # @return [Ban]
   def get_guild_ban(guild_id, user_id)
     response = request(:get, "guilds/#{guild_id}/bans/#{user_id}")
-    Ban.from_json(response.body)
+    Rapture::Ban.from_json(response.body)
   end
 
   # Create a guild ban and optionally delete messages sent by the user
@@ -330,7 +330,7 @@ module Rapture::REST
       'X-Audit-Log-Reason': reason,
     )
 
-    Role.from_json_array(response.body)
+    Rapture::Role.from_json_array(response.body)
   end
 
   # Modify a guild role
@@ -344,7 +344,7 @@ module Rapture::REST
   # @option params [true, false] :mentionable
   # @param reason [String]
   # @return [Role]
-  def modify_guild_role(guild_id, role_id, **params)
+  def modify_guild_role(guild_id, role_id, reason: nil, **params)
     response = request(
       :patch,
       "guilds/#{guild_id}/roles/#{role_id}",
@@ -402,7 +402,7 @@ module Rapture::REST
   # @return [Array<Voice::Region>]
   def get_guild_voice_regions(guild_id)
     response = request(:get, "guilds/#{guild_id}/regions")
-    Voice::Region.from_json_array(response.body)
+    Rapture::Voice::Region.from_json_array(response.body)
   end
 
   # A list of {Integration} objects for a guild
