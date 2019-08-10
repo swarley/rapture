@@ -155,7 +155,7 @@ module Rapture::HTTP
       if MAJOR_PARAMETERS.include? route[0]
         [method] + route.take(3)
       else
-        [method] + route.take(1)
+        [method] + route.take(2)
       end.join("_").to_sym
     end
   end
