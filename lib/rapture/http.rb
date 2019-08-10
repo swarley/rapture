@@ -108,7 +108,7 @@ module Rapture::HTTP
     end
 
     # Major parameters to consider
-    MAJOR_PARAMETERS = %w[guild_id channel_id webhook_id].freeze
+    MAJOR_PARAMETERS = %w[guilds channels webhooks].freeze
 
     # Returns the {RateLimit} for the givin `path`
     # @return [RateLimit]
@@ -150,13 +150,12 @@ module Rapture::HTTP
     # Parses a URI path into the relevant component for rate limiting
     # @return [Symbol]
     def parse_path(method, path)
-      *_, major, route = path.split("/", 5)
+      route = path.split("/")[3..-1]
 
-      if MAJOR_PARAMETERS.include? major
-        id, route = route.split("/", 2)
-        [method, major, major_id, route.gsub(/\d+/, "")]
+      if MAJOR_PARAMETERS.include? route[0]
+        [method] + route.take(3)
       else
-        [method, route.gsub(/\d+/, "")]
+        [method] + route.take(1)
       end.join("_").to_sym
     end
   end
