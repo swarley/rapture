@@ -24,4 +24,6 @@ require "rapture/client"
 
 # Main module containing Rapture data types and methods
 module Rapture
+  LOGGER = Logger.new(STDOUT)
+  LOGGER.level = Logger::INFO
 end

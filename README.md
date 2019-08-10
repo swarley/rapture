@@ -25,7 +25,7 @@ Or install it yourself as:
     $ gem install discord-rapture
 
 #### Windows
-You can install in the same method as Linux, however you must remove `eventmachine` and install it with `--platform=ruby`, this is due to an incompatibility with EventMachine and Ruby versions >2.3 on Windows. 
+You can install in the same method as Linux, however you must remove `eventmachine` and install it with `--platform=ruby`. This is due to an incompatibility with EventMachine and Ruby versions >2.3 on Windows. 
 
 
 ## Usage

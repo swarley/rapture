@@ -161,11 +161,11 @@ module Rapture
 
     # @!attribute [r] roles
     # @return [Array<Role>]
-    getter :roles, from_json: Role
+    getter :roles, from_json: Rapture::Role
 
     # @!attribute [r] emojis
     # @return [Array<Emoji>]
-    getter :emojis, from_json: Emoji
+    getter :emojis, from_json: Rapture::Emoji
 
     # @!attribute [r] features
     # @return [Array<String>]

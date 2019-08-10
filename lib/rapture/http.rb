@@ -108,12 +108,12 @@ module Rapture::HTTP
     end
 
     # Major parameters to consider
-    MAJOR_PARAMETERS = %w[guild_id channel_id webhook_id].freeze
+    MAJOR_PARAMETERS = %w[guilds channels webhooks].freeze
 
     # Returns the {RateLimit} for the givin `path`
     # @return [RateLimit]
-    def ratelimit(path)
-      key = parse_path(path)
+    def ratelimit(method, path)
+      key = parse_path(method, path)
       (@ratelimits ||= {})[key] ||= RateLimit.new
     end
 
@@ -122,25 +122,26 @@ module Rapture::HTTP
       # Preserve a copy of the original env
       original_env = env.dup
 
-      rl = ratelimit(env.url.path)
+      rl = ratelimit(env.method, env.url.path)
 
       # Handle preemptive rate limiting
       rl.sleep_until_reset if rl.will_be_rate_limited?
 
       # Make the request, and update our cached rate limit headers
       # If we get a 429, sleep it off and retry
-      response = @app.call(env)
+      @app.call(env).on_complete do |response|
 
-      # Update our cached headers
-      rl.headers = response.headers
+        # Update our cached headers
+        rl.headers = response[:response_headers]
 
-      # Handle rate limiting
-      if response.status == 429
-        tmq = TooManyRequests.from_json(response.body)
-        rl.sleep_for tmq.retry_after
-        @app.call(original_env)
-      else
-        response
+        # Handle rate limiting
+        if response[:status] == 429
+          tmq = TooManyRequests.from_json(response[:body])
+          rl.sleep_for tmq.retry_after
+          @app.call(original_env)
+        else
+          response
+        end
       end
     end
 
@@ -148,12 +149,13 @@ module Rapture::HTTP
 
     # Parses a URI path into the relevant component for rate limiting
     # @return [Symbol]
-    def parse_path(path)
-      parts = path.split("/")
-      if MAJOR_PARAMETERS.include? parts[4]
-        parts.take(5)
+    def parse_path(method, path)
+      route = path.split("/")[3..-1]
+
+      if MAJOR_PARAMETERS.include? route[0]
+        [method] + route.take(3)
       else
-        parts.take(4)
+        [method] + route.take(2)
       end.join("_").to_sym
     end
   end
@@ -161,17 +163,34 @@ module Rapture::HTTP
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
   def request(method, endpoint, body = nil, headers = {})
+    log_request(method, endpoint, body, headers)
     resp = faraday.run_request(method, endpoint, body, headers)
+    log_response(endpoint, resp)
 
     case resp.status
     when 200, 201, 204
       resp
     when 400..502
       ex = Rapture::HTTPException.from_json(resp.body)
-      ex.response = resp
       raise ex
     else
-      puts "Received an unknown response code: #{resp.status}"
+      LOGGER.warn("HTTP") { "Received an unknown response code: #{resp.status}" }
     end
+  end
+
+  # @!visibilty private
+  def log_request(method, endpoint, body, headers)
+    Rapture::LOGGER.info("HTTP") { "-> #{method.upcase} /#{endpoint}" }
+    Rapture::LOGGER.debug("HTTP") do
+      str = "-> #{method.upcase} /#{endpoint}"
+      str += " body: #{Oj.generate(body)}"
+      str += " headers: #{Oj.generate(headers)}"
+      str
+    end
+  end
+
+  # @!visibility private
+  def log_response(endpoint, resp)
+    Rapture::LOGGER.info("HTTP") { "<- /#{endpoint} (#{resp.status})" }
   end
 end

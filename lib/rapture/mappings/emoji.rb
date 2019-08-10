@@ -17,8 +17,8 @@ module Rapture
     getter :name
 
     # @!attribute [r] roles
-    # @return [Array<Role>, nil] roles this emoji is whitelisted to
-    getter :roles, from_json: Role
+    # @return [Array<Integer>, nil] roles this emoji is whitelisted to
+    getter :roles, converter: Converters.Snowflake?
 
     # @!attribute [r] user
     # @return [User, nil] the user that created this emoji
