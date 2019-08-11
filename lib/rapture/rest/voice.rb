@@ -9,9 +9,9 @@ module Rapture::REST
   def list_voice_regions
     response = request(
       :voice_regions, nil,
-      :get, 
+      :get,
       "voice/regions"
     )
-    Rapture::Voice::Region.from_json_array(response.body) 
+    Rapture::Voice::Region.from_json_array(response.body)
   end
 end

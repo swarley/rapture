@@ -12,7 +12,7 @@ module Rapture::REST
     query = URI.encode_www_form(with_counts: with_counts)
     response = request(
       :invites_code, nil,
-      :get, 
+      :get,
       "invites/#{invite_code}" + query
     )
     Rapture::Invite.from_json(response.body)

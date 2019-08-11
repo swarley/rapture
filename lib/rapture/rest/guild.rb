@@ -424,8 +424,8 @@ module Rapture::REST
   # @return [Integer]
   def get_guild_prune_count(guild_id)
     response = request(
-      :guilds_gid_prune, guild_id, 
-      :get, 
+      :guilds_gid_prune, guild_id,
+      :get,
       "guilds/#{guild_id}/prune"
     )
     Oj.load(response.body)["pruned"]
@@ -456,7 +456,7 @@ module Rapture::REST
   def get_guild_voice_regions(guild_id)
     response = request(
       :guilds_gid_regions, guild_id,
-      :get, 
+      :get,
       "guilds/#{guild_id}/regions"
     )
     Rapture::Voice::Region.from_json_array(response.body)
@@ -533,7 +533,7 @@ module Rapture::REST
   def get_guild_embed(guild_id)
     response = request(
       :guilds_gid_embed, guild_id,
-      :get, 
+      :get,
       "guilds/#{guild_id}/embed"
     )
     Guild::Embed.from_json(response.body)

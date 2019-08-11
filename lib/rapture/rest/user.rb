@@ -36,7 +36,7 @@ module Rapture::REST
   def get_current_user_guilds
     response = request(
       :users_me_guilds, nil,
-      :get, 
+      :get,
       "users/@me/guilds"
     )
     Rapture::Guild.from_json_array(response.body)
@@ -49,7 +49,7 @@ module Rapture::REST
   def leave_guild(guild_id)
     request(
       :users_me_guilds_gid, nil,
-      :delete, 
+      :delete,
       "users/@me/guilds/#{guild_id}"
     ).status == 204
   end
@@ -60,7 +60,7 @@ module Rapture::REST
   def get_user_dms
     response = request(
       :users_me_channels, nil,
-      :get, 
+      :get,
       "users/@me/channels"
     )
     Rapture::Channel.from_json_array(response.body)
@@ -73,9 +73,9 @@ module Rapture::REST
   def create_dm(recipient_id)
     response = request(
       :users_me_channels, nil,
-      :post, 
-      "users/@me/channels", 
-      recipient_id: recipient_id
+      :post,
+      "users/@me/channels",
+      recipient_id: recipient_id,
     )
     Rapture::Channel.from_json(response.body)
   end
@@ -105,7 +105,7 @@ module Rapture::REST
   def get_user_connections
     response = request(
       :users_me_connections, nil,
-      :get, 
+      :get,
       "users/@me/connections"
     )
     Rapture::User::Connection.from_json_array(response.body)

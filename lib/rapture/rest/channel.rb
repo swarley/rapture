@@ -12,7 +12,8 @@ module Rapture::REST
     response = request(
       :channels_cid, channel_id,
       :get,
-      "channels/#{channel_id}")
+      "channels/#{channel_id}"
+    )
     Rapture::Channel.from_json(response.body)
   end
 
@@ -210,7 +211,7 @@ module Rapture::REST
   def delete_all_reactions(channel_id, message_id)
     request(
       :channels_cid_messages_mid_reactions, channel_id,
-      :delete, 
+      :delete,
       "channels/#{channel_id}/messages/#{message_id}/reactions"
     )
   end
@@ -239,7 +240,8 @@ module Rapture::REST
   def get_channel_invites(channel_id)
     response = request(
       :channels_cid_invites, channel_id,
-      :get, "channels/#{channel_id}/invites")
+      :get, "channels/#{channel_id}/invites"
+    )
     Rapture::Invite.from_json_array(response.body)
   end
 
@@ -347,6 +349,7 @@ module Rapture::REST
   def delete_group_dm_recipient(channel_id, user_id)
     request(
       :channels_cid_recipients_uid, channel_id,
-      :delete, "channels/#{channel_id}/recipients/#{user_id}")
+      :delete, "channels/#{channel_id}/recipients/#{user_id}"
+    )
   end
 end

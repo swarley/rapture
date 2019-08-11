@@ -88,10 +88,10 @@ module Rapture::HTTP
 
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
-  def request(key, major_param, method, endpoint, body = nil, headers = {})    
+  def request(key, major_param, method, endpoint, body = nil, headers = {})
     @rate_limits ||= {}
     key = [key, major_param].freeze
-    
+
     begin
       rl = (@rate_limits[key] ||= RateLimit.new)
       global_rl = (@rate_limits[:global] ||= RateLimit.new)
@@ -108,13 +108,12 @@ module Rapture::HTTP
         global_rl.sleep_until_reset
       end
 
-
       log_request(method, endpoint, body, headers)
       resp = faraday.run_request(method, endpoint, body, headers)
       log_response(endpoint, resp)
 
       rl.headers = resp.headers
-      global_rl.headers = resp.headers if resp.headers['x-ratelimit-global']
+      global_rl.headers = resp.headers if resp.headers["x-ratelimit-global"]
       case resp.status
       when 200, 201, 204
         resp
@@ -126,8 +125,8 @@ module Rapture::HTTP
         LOGGER.warn("HTTP") { "Received an unknown response code: #{resp.status}" }
       end
     rescue Rapture::TooManyRequests => ex
-      rl = global_rl if resp.headers['x-ratelimit-global']
-      
+      rl = global_rl if resp.headers["x-ratelimit-global"]
+
       Rapture::LOGGER.info("HTTP") do
         if rl == global_rl
           "You are being ratelimited. Locking global mutex."

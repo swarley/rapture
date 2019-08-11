@@ -30,7 +30,7 @@ module Rapture::REST
   def get_channel_webhooks(channel_id)
     response = request(
       :channels_cid_webhooks, channel_id,
-      :get, 
+      :get,
       "channels/#{channel_id}/webhooks"
     )
     Rapture::Webhook.from_json_array(response.body)
@@ -43,7 +43,7 @@ module Rapture::REST
   def get_guild_webhooks(guild_id)
     response = request(
       :guilds_gid_webhooks, guild_id,
-      :get, 
+      :get,
       "guilds/#{guild_id}/webhooks"
     )
     Rapture::Webhook.from_json_array(response.body)
@@ -56,7 +56,7 @@ module Rapture::REST
   def get_webhook(webhook_id)
     response = request(
       :webhooks_wid, webhook_id,
-      :get, 
+      :get,
       "webhooks/#{webhook_id}"
     )
     Rapture::Webhook.from_json(response.body)
@@ -70,7 +70,7 @@ module Rapture::REST
   def get_webhook_with_token(webhook_id, webhook_token)
     response = request(
       :webhooks_wid_wt, webhook_id,
-      :get, 
+      :get,
       "webhooks/#{webhook_id}/#{webhook_token}"
     )
     Rapture::Webhook.from_json(response.body)
