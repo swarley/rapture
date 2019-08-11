@@ -8,7 +8,11 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/topics/oauth2#get-current-application-information
   # @return [OauthApplication]
   def get_current_application_information
-    response = request(:get, "oauth2/applications/@me")
+    response = request(
+      :oauth2_applications_me, nil,
+      :get,
+      "oauth2/applications/@me"
+    )
     Rapture::OauthApplication.from_json(response.body)
   end
 end

@@ -52,4 +52,20 @@ module Rapture
 
   class SerdeError < RuntimeError
   end
+
+  class TooManyRequests < RuntimeError
+    include Rapture::Mapping
+
+    # @!attribute [r] message
+    # @return [String] Rate limit message
+    getter :message
+
+    # @!attribute [r] retry_after
+    # @return [Integer] seconds until a retry can be performed
+    getter :retry_after, from_json: proc { |v| v / 1000.0 }
+
+    # @!attribute [r] global
+    # @return [true, false] if this request exceeded the global rate limit
+    getter :global
+  end
 end

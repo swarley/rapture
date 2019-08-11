@@ -9,7 +9,10 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @return [Channel]
   def get_channel(channel_id)
-    response = request(:get, "channels/#{channel_id}")
+    response = request(
+      :channels_cid, channel_id,
+      :get,
+      "channels/#{channel_id}")
     Rapture::Channel.from_json(response.body)
   end
 
@@ -30,6 +33,7 @@ module Rapture::REST
   # @return [Channel] updated channel object
   def modify_channel(channel_id, reason: nil, **params)
     response = request(
+      :channels_cid, channel_id,
       :patch,
       "channels/#{channel_id}",
       params,
@@ -47,6 +51,7 @@ module Rapture::REST
   # @return [Channel] the deleted channel object
   def delete_channel(channel_id, reason: nil)
     response = request(
+      :channels_cid, channel_id,
       :delete,
       "channels/#{channel_id}",
       nil,
@@ -67,6 +72,7 @@ module Rapture::REST
   # @return [Array<Message>]
   def get_channel_messages(channel_id, **params)
     response = request(
+      :channels_cid_messages, channel_id,
       :get,
       "channels/#{channel_id}/messages?#{URI.encode_www_form(params)}",
     )
@@ -95,6 +101,7 @@ module Rapture::REST
     end
 
     response = request(
+      :channels_cid_messages, channel_id,
       :post,
       "channels/#{channel_id}/messages",
       payload
@@ -112,6 +119,7 @@ module Rapture::REST
   # @return [Message] the edited message
   def edit_message(channel_id, message_id, **params)
     response = request(
+      :channels_cid_messages_mid, channel_id,
       :patch,
       "channels/#{channel_id}/messages/#{message_id}",
       params
@@ -125,6 +133,7 @@ module Rapture::REST
   # @param message_id [String, Integer]
   def delete_message(channel_id, message_id, reason: nil)
     request(
+      :channels_cid_messages_mid, channel_id,
       :delete,
       "channels/#{channel_id}/messages/#{message_id}",
       nil,
@@ -138,6 +147,7 @@ module Rapture::REST
   # @param messages [Array<Integer, String>] message IDs to be deleted.
   def bulk_delete_messages(channel_id, messages, reason: nil)
     request(
+      :channels_cid_messages_bulk_delete, channel_id,
       :post,
       "channels/#{channel_id}/messages/bulk-delete",
       {messages: messages},
@@ -152,7 +162,11 @@ module Rapture::REST
   def create_reaction(channel_id, message_id, emoji)
     emoji = URI.encode_www_form_component(emoji) unless emoji.ascii_only?
 
-    request(:put, "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/@me")
+    request(
+      :channels_cid_messages_mid_reactions_emoji_me, channel_id,
+      :put,
+      "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/@me"
+    )
   end
 
   # Delete a reaction from the current user.
@@ -163,7 +177,11 @@ module Rapture::REST
   def delete_own_reaction(channel_id, message_id, emoji)
     emoji = URI.encode_www_form_component(emoji) unless emoji.ascii_only?
 
-    request(:delete, "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/@me")
+    request(
+      :channels_cid_messages_mid_reactions_emoji_me, channel_id,
+      :delete,
+      "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/@me"
+    )
   end
 
   # Delete a user's reaction.
@@ -177,6 +195,7 @@ module Rapture::REST
     emoji = URI.encode_www_form_component(emoji) unless emoji.ascii_only?
 
     request(
+      :channels_cid_messages_mid_reactions_emoji_uid, channel_id,
       :delete,
       "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/#{user_id}",
       nil,
@@ -189,7 +208,11 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @param message_id [String, Integer]
   def delete_all_reactions(channel_id, message_id)
-    request(:delete, "channels/#{channel_id}/messages/#{message_id}")
+    request(
+      :channels_cid_messages_mid_reactions, channel_id,
+      :delete, 
+      "channels/#{channel_id}/messages/#{message_id}/reactions"
+    )
   end
 
   # Edit permission overwrites for a user or role in a channel.
@@ -201,6 +224,7 @@ module Rapture::REST
   # @param type [String] `"member"` or `"role"`
   def edit_channel_permissions(channel_id, overwrite_id, allow:, deny:, type:, reason: nil)
     request(
+      :channels_cid_permissions_oid, channel_id,
       :put,
       "channel/#{channel_id}/permissions/#{overwrite_id}",
       {allow: allow, deny: deny, type: type},
@@ -213,7 +237,9 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @return [Array<Invite>]
   def get_channel_invites(channel_id)
-    response = request(:get, "channels/#{channel_id}/invites")
+    response = request(
+      :channels_cid_invites, channel_id,
+      :get, "channels/#{channel_id}/invites")
     Rapture::Invite.from_json_array(response.body)
   end
 
@@ -227,6 +253,7 @@ module Rapture::REST
   # @param reason [String]
   def create_channel_invite(channel_id, reason: nil, **params)
     response = request(
+      :channels_cid_invites, channel_id,
       :post,
       "channels/#{channel_id}/invites",
       params,
@@ -242,6 +269,7 @@ module Rapture::REST
   # @param overwrite_id [String, Integer]
   def delete_channel_permission(channel_id, overwrite_id, reason: nil)
     request(
+      :channels_cid_permissions_oid, channel_id,
       :delete,
       "channels/#{channel_id}/permissions/#{overwrite_id}",
       nil,
@@ -253,7 +281,11 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/channel#trigger-typing-indicator
   # @param channel_id [String, Integer]
   def trigger_typing_indicator(channel_id)
-    request(:post, "channels/#{channel_id}/typing")
+    request(
+      :channels_cid_typing, channel_id,
+      :post,
+      "channels/#{channel_id}/typing"
+    )
   end
 
   # Returns all pinned messages in the channel
@@ -261,7 +293,11 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @return [Array<Message>]
   def get_pinned_messages(channel_id)
-    response = request(:get, "channels/#{channel_id}/pins")
+    response = request(
+      :channels_cid_pins, channel_id,
+      :get,
+      "channels/#{channel_id}/pins"
+    )
     Rapture::Message.from_json_array(response.body)
   end
 
@@ -270,7 +306,11 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @param message_id [String, Integer]
   def add_pinned_message(channel_id, message_id)
-    request(:put, "channels/#{channel_id}/pins/#{message_id}")
+    request(
+      :channels_cid_pins_mid, channel_id,
+      :put,
+      "channels/#{channel_id}/pins/#{message_id}"
+    )
   end
 
   # Delete a pinned message in a channel
@@ -278,7 +318,11 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @param message_id [String, Integer]
   def delete_pinned_message(channel_id, message_id)
-    request(:delete, "channels/#{channel_id}/pins/#{message_id}")
+    request(
+      :channels_cid_pins_mid, channel_id,
+      :delete,
+      "channels/#{channel_id}/pins/#{message_id}"
+    )
   end
 
   # Adds a recipient to a group DM using their access token
@@ -289,6 +333,7 @@ module Rapture::REST
   # @param nick [String]
   def add_group_dm_recipient(channel_id, user_id, access_token:, nick: nil)
     request(
+      :channels_cid_recipients_uid, channel_id,
       :put,
       "channels/#{channel_id}/recipients/#{user_id}",
       access_token: access_token, nick: nick,
@@ -300,6 +345,8 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @param user_id [String, Integer]
   def delete_group_dm_recipient(channel_id, user_id)
-    request(:delete, "channels/#{channel_id}/recipients/#{user_id}")
+    request(
+      :channels_cid_recipients_uid, channel_id,
+      :delete, "channels/#{channel_id}/recipients/#{user_id}")
   end
 end

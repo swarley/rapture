@@ -10,7 +10,11 @@ module Rapture::REST
   # @param id [String, Integer]
   # @return [User]
   def get_user(id)
-    response = request(:get, "users/#{id}")
+    response = request(
+      :users_id, id,
+      :get,
+      "users/#{id}"
+    )
     Rapture::User.from_json(response.body)
   end
 
@@ -18,14 +22,23 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/user#get-current-user
   # @return [User]
   def get_current_user
-    get_user("@me")
+    response = request(
+      :users_me, nil,
+      :get,
+      "users/@me"
+    )
+    Rapture::User.from_json(response.body)
   end
 
   # Returns an {Array<Guild>} of guilds the current user is a member of.
   # https://discordapp.com/developers/docs/resources/user#get-current-user-guilds
   # @return [Array<Guild>]
   def get_current_user_guilds
-    response = request(:get, "users/@me/guilds")
+    response = request(
+      :users_me_guilds, nil,
+      :get, 
+      "users/@me/guilds"
+    )
     Rapture::Guild.from_json_array(response.body)
   end
 
@@ -34,14 +47,22 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [true, false] whether this action was successful
   def leave_guild(guild_id)
-    request(:delete, "users/@me/guilds/#{guild_id}").status == 204
+    request(
+      :users_me_guilds_gid, nil,
+      :delete, 
+      "users/@me/guilds/#{guild_id}"
+    ).status == 204
   end
 
   # Returns an {Array<Channel>} of DM channels. For bots this will return
   # an empty array.
   # https://discordapp.com/developers/docs/resources/user#get-user-dms
   def get_user_dms
-    response = request(:get, "users/@me/channels")
+    response = request(
+      :users_me_channels, nil,
+      :get, 
+      "users/@me/channels"
+    )
     Rapture::Channel.from_json_array(response.body)
   end
 
@@ -50,7 +71,12 @@ module Rapture::REST
   # @param recipient_id [String, Integer]
   # @return [Channel]
   def create_dm(recipient_id)
-    response = request(:post, "users/@me/channels", recipient_id: recipient_id)
+    response = request(
+      :users_me_channels, nil,
+      :post, 
+      "users/@me/channels", 
+      recipient_id: recipient_id
+    )
     Rapture::Channel.from_json(response.body)
   end
 
@@ -64,6 +90,7 @@ module Rapture::REST
   # @return [Channel]
   def create_group_dm(access_tokens, nicks)
     response = request(
+      :users_me_channels, nil,
       :post,
       "users/@me/channels",
       access_tokens: access_tokens, nicks: nicks,
@@ -76,7 +103,11 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/user#get-user-connections
   # @return [Array<Rapture::User::Connection>]
   def get_user_connections
-    response = request(:get, "users/@me/connections")
+    response = request(
+      :users_me_connections, nil,
+      :get, 
+      "users/@me/connections"
+    )
     Rapture::User::Connection.from_json_array(response.body)
   end
 end

@@ -14,6 +14,7 @@ module Rapture::REST
   def get_guild_audit_log(guild_id, **params)
     query = URI.encode_www_form(params)
     response = request(
+      :guilds_gid_audit_logs, guild_id,
       :get,
       "guilds/#{guild_id}/audit-logs?" + query
     )

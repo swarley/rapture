@@ -9,7 +9,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Array<Emoji>]
   def list_guild_emojis(guild_id)
-    response = request(:get, "guilds/#{guild_id}/emojis")
+    response = request(
+      :guilds_gid_emojis, guild_id,
+      :get,
+      "guilds/#{guild_id}/emojis"
+    )
     Rapture::Emoji.from_json_array(response.body)
   end
 
@@ -19,7 +23,11 @@ module Rapture::REST
   # @param emoji_id [String, Integer]
   # @return [Emoji]
   def get_guild_emoji(guild_id, emoji_id)
-    response = request(:get, "guilds/#{guild_id}/emojis/#{emoji_id}")
+    response = request(
+      :guilds_gid_emojis_eid, guild_id,
+      :get,
+      "guilds/#{guild_id}/emojis/#{emoji_id}"
+    )
     Rapture::Emoji.from_json(response.body)
   end
 
@@ -33,6 +41,7 @@ module Rapture::REST
   # @return [Emoji]
   def create_guild_emoji(guild_id, name:, image:, roles: [], reason: nil)
     response = request(
+      :guilds_sid_emojis, guild_id,
       :post,
       "guilds/#{guild_id}/emojis",
       {name: name, image: image, roles: roles},
@@ -51,6 +60,7 @@ module Rapture::REST
   # @return [Emoji]
   def modify_guild_emoji(guild_id, emoji_id, reason: nil, **params)
     response = request(
+      :guild_gid_emojis_eid, guild_id,
       :patch,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
       params,
@@ -66,6 +76,7 @@ module Rapture::REST
   # @param reason [String]
   def delete_guild_emoji(guild_id, emoji_id, reason: nil)
     request(
+      :guilds_gid_emojis_eid, guild_id,
       :delete,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
       nil,

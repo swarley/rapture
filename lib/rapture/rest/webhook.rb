@@ -13,6 +13,7 @@ module Rapture::REST
   # @return [Webhook]
   def create_webhook(channel_id, name:, avatar: nil, reason: nil)
     response = request(
+      :channels_cid_webhooks, channel_id,
       :post,
       "channels/#{channel_id}/webhooks",
       {name: name, avatar: avatar},
@@ -27,7 +28,11 @@ module Rapture::REST
   # @param channel_id [String, Integer]
   # @return [Array<Webhook>]
   def get_channel_webhooks(channel_id)
-    response = request(:get, "channels/#{channel_id}/webhooks")
+    response = request(
+      :channels_cid_webhooks, channel_id,
+      :get, 
+      "channels/#{channel_id}/webhooks"
+    )
     Rapture::Webhook.from_json_array(response.body)
   end
 
@@ -36,7 +41,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Array<Webhook>]
   def get_guild_webhooks(guild_id)
-    response = request(:get, "guilds/#{guild_id}/webhooks")
+    response = request(
+      :guilds_gid_webhooks, guild_id,
+      :get, 
+      "guilds/#{guild_id}/webhooks"
+    )
     Rapture::Webhook.from_json_array(response.body)
   end
 
@@ -45,7 +54,12 @@ module Rapture::REST
   # @param webhook_id [String, Integer]
   # @return [Webhook]
   def get_webhook(webhook_id)
-    Rapture::Webhook.from_json request(:get, "webhooks/#{webhook_id}").body
+    response = request(
+      :webhooks_wid, webhook_id,
+      :get, 
+      "webhooks/#{webhook_id}"
+    )
+    Rapture::Webhook.from_json(response.body)
   end
 
   # Get a webhook but does not require authentication and returns
@@ -54,7 +68,12 @@ module Rapture::REST
   # @param webhook_token [String]
   # @return [Webhook]
   def get_webhook_with_token(webhook_id, webhook_token)
-    Rapture::Webhook.from_json request(:get, "webhooks/#{webhook_id}/#{webhook_token}").body
+    response = request(
+      :webhooks_wid_wt, webhook_id,
+      :get, 
+      "webhooks/#{webhook_id}/#{webhook_token}"
+    )
+    Rapture::Webhook.from_json(response.body)
   end
 
   # Modify a webhook
@@ -67,6 +86,7 @@ module Rapture::REST
   # @return [Webhook]
   def modify_webhook(webhook_id, reason: nil, **params)
     response = request(
+      :webhooks_wid, webhook_id,
       :patch,
       "webhooks/#{webhook_id}",
       params,
@@ -86,6 +106,7 @@ module Rapture::REST
   # @return [Webhook]
   def modify_webhook_with_token(webhook_id, webhook_token, reason: nil, **params)
     response = request(
+      :webhooks_wid_wt, webhook_id,
       :patch,
       "webhooks/#{webhook_id}/#{webhook_token}",
       params,
@@ -100,6 +121,7 @@ module Rapture::REST
   # @param reason [String]
   def delete_webhook(webhook_id, reason: nil)
     request(
+      :webhooks_wid, webhook_id,
       :delete,
       "webhooks/#{webhook_id}",
       nil,
@@ -114,6 +136,7 @@ module Rapture::REST
   # @param reason [String]
   def delete_webhook_with_token(webhook_id, webhook_token, reason: nil)
     request(
+      :webhooks_wid_wt, webhook_id,
       :delete,
       "webhook/#{webhook_id}/#{webhook_token}",
       nil,
@@ -145,6 +168,7 @@ module Rapture::REST
     end
 
     request(
+      :webhooks_wid_wt, webhook_id,
       :post,
       "webhooks/#{webhook_id}/#{webhook_token}?wait=#{wait}",
       payload

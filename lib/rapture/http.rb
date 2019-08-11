@@ -29,8 +29,6 @@ module Rapture::HTTP
       #   logger.filter(/Authorization: .*/, "Authorization: #{@type} REDACTED")
       # end
 
-      faraday.use RateLimiter
-
       faraday.request :multipart
       faraday.request :json
 
@@ -88,93 +86,59 @@ module Rapture::HTTP
     end
   end
 
-  # Middleware for processing rate limiting across all requests.
-  class RateLimiter < Faraday::Middleware
-    # Exception to raise on a 429
-    class TooManyRequests < RuntimeError
-      include Rapture::Mapping
-
-      # @!attribute [r] message
-      # @return [String] Rate limit message
-      getter :message
-
-      # @!attribute [r] retry_after
-      # @return [Integer] seconds until a retry can be performed
-      getter :retry_after, from_json: proc { |v| v / 1000.0 }
-
-      # @!attribute [r] global
-      # @return [true, false] if this request exceeded the global rate limit
-      getter :global
-    end
-
-    # Major parameters to consider
-    MAJOR_PARAMETERS = %w[guilds channels webhooks].freeze
-
-    # Returns the {RateLimit} for the givin `path`
-    # @return [RateLimit]
-    def ratelimit(method, path)
-      key = parse_path(method, path)
-      (@ratelimits ||= {})[key] ||= RateLimit.new
-    end
-
-    # Handle requests
-    def call(env)
-      # Preserve a copy of the original env
-      original_env = env.dup
-
-      rl = ratelimit(env.method, env.url.path)
-
-      # Handle preemptive rate limiting
-      rl.sleep_until_reset if rl.will_be_rate_limited?
-
-      # Make the request, and update our cached rate limit headers
-      # If we get a 429, sleep it off and retry
-      @app.call(env).on_complete do |response|
-
-        # Update our cached headers
-        rl.headers = response[:response_headers]
-
-        # Handle rate limiting
-        if response[:status] == 429
-          tmq = TooManyRequests.from_json(response[:body])
-          rl.sleep_for tmq.retry_after
-          @app.call(original_env)
-        else
-          response
-        end
-      end
-    end
-
-    private
-
-    # Parses a URI path into the relevant component for rate limiting
-    # @return [Symbol]
-    def parse_path(method, path)
-      route = path.split("/")[3..-1]
-
-      if MAJOR_PARAMETERS.include? route[0]
-        [method] + route.take(3)
-      else
-        [method] + route.take(2)
-      end.join("_").to_sym
-    end
-  end
-
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
-  def request(method, endpoint, body = nil, headers = {})
-    log_request(method, endpoint, body, headers)
-    resp = faraday.run_request(method, endpoint, body, headers)
-    log_response(endpoint, resp)
+  def request(key, major_param, method, endpoint, body = nil, headers = {})    
+    @rate_limits ||= {}
+    key = [key, major_param].freeze
+    
+    begin
+      rl = (@rate_limits[key] ||= RateLimit.new)
+      global_rl = (@rate_limits[:global] ||= RateLimit.new)
 
-    case resp.status
-    when 200, 201, 204
-      resp
-    when 400..502
-      ex = Rapture::HTTPException.from_json(resp.body)
-      raise ex
-    else
-      LOGGER.warn("HTTP") { "Received an unknown response code: #{resp.status}" }
+      if rl.will_be_rate_limited?
+        Rapture::LOGGER.info("HTTP") do
+          "[RATELIMIT] Preemtively locking mutex for #{key}"
+        end
+        rl.sleep_until_reset
+      elsif global_rl.will_be_rate_limited?
+        Rapture::LOGGER.info("HTTP") do
+          "[RATELIMIT] Preemptively locking global mutex"
+        end
+        global_rl.sleep_until_reset
+      end
+
+
+      log_request(method, endpoint, body, headers)
+      resp = faraday.run_request(method, endpoint, body, headers)
+      log_response(endpoint, resp)
+
+      rl.headers = resp.headers
+      global_rl.headers = resp.headers if resp.headers['x-ratelimit-global']
+      case resp.status
+      when 200, 201, 204
+        resp
+      when 429
+        raise Rapture::TooManyRequests.from_json(resp.body)
+      when 400..502
+        raise Rapture::HTTPException.from_json(resp.body)
+      else
+        LOGGER.warn("HTTP") { "Received an unknown response code: #{resp.status}" }
+      end
+    rescue Rapture::TooManyRequests => ex
+      rl = global_rl if resp.headers['x-ratelimit-global']
+      
+      Rapture::LOGGER.info("HTTP") do
+        if rl == global_rl
+          "You are being ratelimited. Locking global mutex."
+        else
+          "You are being ratelimited. Locking #{key} mutex."
+        end
+      end
+
+      rl.sleep_for ex.retry_after
+
+      retry
     end
   end
 

@@ -17,6 +17,7 @@ module Rapture::REST
   # @return [Guild]
   def create_guild(name:, **params)
     response = request(
+      :guilds, nil,
       :post,
       "guilds",
       name: name, **params,
@@ -30,7 +31,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Guild]
   def get_guild(guild_id)
-    response = request(:get, "guilds/#{guild_id}")
+    response = request(
+      :guilds_gid, guild_id,
+      :get,
+      "guilds/#{guild_id}"
+    )
     Rapture::Guild.from_json(response.body)
   end
 
@@ -52,6 +57,7 @@ module Rapture::REST
   # @return [Guild] updated {Guild} object
   def modify_guild(guild_id, reason: nil, **params)
     response = request(
+      :guilds_gid, guild_id,
       :patch,
       "guilds/#{guild_id}",
       params,
@@ -64,7 +70,11 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#delete-guild
   # @param guild_id [String, Integer]
   def delete_guild(guild_id)
-    request(:delete, "guilds/#{guild_id}")
+    request(
+      :guilds_gid, guild_id,
+      :delete,
+      "guilds/#{guild_id}"
+    )
   end
 
   # Returns a list of {Array<Channel>} for a given guild.
@@ -72,7 +82,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Guild]
   def get_guild_channels(guild_id)
-    response = request(:get, "guilds/#{guild_id}/channels")
+    response = request(
+      :guilds_gid_channels, guild_id,
+      :get,
+      "guilds/#{guild_id}/channels"
+    )
     Rapture::Channel.from_json_array(response.body)
   end
 
@@ -94,6 +108,7 @@ module Rapture::REST
   def create_guild_channel(guild_id, name:, reason: nil, **params)
     params[:name] = name
     response = request(
+      :guilds_gid_channels, guild_id,
       :post,
       "guilds/#{guild_id}/channels",
       params,
@@ -108,6 +123,7 @@ module Rapture::REST
   # @param positions [Array<(String, Integer), (Integer, Integer)>]
   def modify_guild_channel_positions(guild_id, positions, reason: nil)
     request(
+      :guilds_gid_channels, guild_id,
       :patch,
       "guilds/#{guild_id}/channels",
       positions,
@@ -121,7 +137,11 @@ module Rapture::REST
   # @param user_id [String, Integer]
   # @return [Member]
   def get_guild_member(guild_id, user_id)
-    response = request(:get, "guilds/#{guild_id}/members/#{user_id}")
+    response = request(
+      :guilds_gid_members_uid, guild_id,
+      :get,
+      "guilds/#{guild_id}/members/#{user_id}"
+    )
     Rapture::Member.from_json(response.body)
   end
 
@@ -133,7 +153,11 @@ module Rapture::REST
   # @return [Array<Member>]
   def list_guild_members(guild_id, limit: 1, after: 0)
     query = URI.encode_www_form(limit: limit, after: after)
-    response = request(:get, "guilds/#{guild_id}/members?" + query)
+    response = request(
+      :guilds_gid_members, guild_id,
+      :get,
+      "guilds/#{guild_id}/members?" + query
+    )
     Rapture::Member.from_json_array(response.body)
   end
 
@@ -151,6 +175,7 @@ module Rapture::REST
     params[:access_token] = access_token
 
     response = request(
+      :guilds_gid_members_uid, guild_id,
       :put,
       "guilds/#{guild_id}/members/#{user_id}",
       params,
@@ -173,6 +198,7 @@ module Rapture::REST
   # @param reason [String]
   def modify_guild_member(guild_id, user_id, reason: nil, **params)
     request(
+      :guilds_gid_members_uid, guild_id,
       :patch,
       "guilds/#{guild_id}/members/#{user_id}",
       params,
@@ -187,6 +213,7 @@ module Rapture::REST
   # @return [String] the nickname that was set
   def modify_current_user_nick(guild_id, nick:)
     response = request(
+      :guilds_gid_members_me_nick, guild_id,
       :patch,
       "guilds/#{guild_id}/members/@me/nick",
       nick: nick,
@@ -202,6 +229,7 @@ module Rapture::REST
   # @param reason [String]
   def add_guild_member_role(guild_id, user_id, role_id, reason: nil)
     request(
+      :guilds_gid_members_uid_roles_rid, guild_id,
       :put,
       "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
       nil,
@@ -217,6 +245,7 @@ module Rapture::REST
   # @param reason [String]
   def remove_guild_member_role(guild_id, user_id, role_id, reason: nil)
     request(
+      :guilds_gid_members_uid_roles_rid, guild_id,
       :delete,
       "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
       nil,
@@ -231,6 +260,7 @@ module Rapture::REST
   # @param reason [String]
   def remove_guild_member(guild_id, user_id, reason: nil)
     request(
+      :guilds_gid_members_uid, guild_id,
       :delete,
       "guilds/#{guild_id}/members/#{user_id}",
       nil,
@@ -243,7 +273,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Array<Ban>]
   def get_guild_bans(guild_id)
-    response = request(:get, "guilds/#{guild_id}/bans")
+    response = request(
+      :guilds_gid_bans, guild_id,
+      :get,
+      "guilds/#{guild_id}/bans"
+    )
     Rapture::Ban.from_json_array(response.body)
   end
 
@@ -253,7 +287,11 @@ module Rapture::REST
   # @param user_id [String, Integer]
   # @return [Ban]
   def get_guild_ban(guild_id, user_id)
-    response = request(:get, "guilds/#{guild_id}/bans/#{user_id}")
+    response = request(
+      :guilds_gid_bans_uid, guild_id,
+      :get,
+      "guilds/#{guild_id}/bans/#{user_id}"
+    )
     Rapture::Ban.from_json(response.body)
   end
 
@@ -266,6 +304,7 @@ module Rapture::REST
   def create_guild_ban(guild_id, user_id, delete_message_days: nil, reason: nil)
     query = URI.encode_www_form('delete-message-days': delete_message_days, reason: reason)
     request(
+      :guilds_gid_bans_uid, guild_id,
       :put,
       "guilds/#{guild_id}/bans/#{user_id}?" + query,
       nil,
@@ -280,6 +319,7 @@ module Rapture::REST
   # @param reason [String]
   def remove_guild_ban(guild_id, user_id, reason: nil)
     request(
+      :guilds_gid_bans_uid, guild_id,
       :delete,
       "guilds/#{guild_id}/bans/#{user_id}",
       nil,
@@ -292,7 +332,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Array<Role>]
   def get_guild_roles(guild_id)
-    response = request(:get, "guilds/#{guild_id}/roles")
+    response = request(
+      :guilds_gid_roles, guild_id,
+      :get,
+      "guilds/#{guild_id}/roles"
+    )
     Rapture::Role.from_json_array(response.body)
   end
 
@@ -308,6 +352,7 @@ module Rapture::REST
   # @return [Role]
   def create_guild_role(guild_id, reason: nil, **params)
     response = request(
+      :guilds_gid_roles, guild_id,
       :post,
       "guilds/#{guild_id}/roles",
       params,
@@ -324,6 +369,7 @@ module Rapture::REST
   # @return [Array<Role>]
   def modify_guild_role_positions(guild_id, positions, reason: nil)
     response = request(
+      :guilds_gid_roles, guild_id,
       :patch,
       "guilds/#{guild_id}/roles",
       positions,
@@ -346,6 +392,7 @@ module Rapture::REST
   # @return [Role]
   def modify_guild_role(guild_id, role_id, reason: nil, **params)
     response = request(
+      :guild_gid_roles_rid, guild_id,
       :patch,
       "guilds/#{guild_id}/roles/#{role_id}",
       params,
@@ -362,6 +409,7 @@ module Rapture::REST
   # @param reason [String]
   def delete_guild_role(guild_id, role_id)
     request(
+      :guilds_gid_roles_rid, guild_id,
       :delete,
       "guilds/#{guild_id}/roles/#{role_id}",
       nil,
@@ -375,7 +423,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Integer]
   def get_guild_prune_count(guild_id)
-    response = request(:get, "guilds/#{guild_id}/prune")
+    response = request(
+      :guilds_gid_prune, guild_id, 
+      :get, 
+      "guilds/#{guild_id}/prune"
+    )
     Oj.load(response.body)["pruned"]
   end
 
@@ -388,6 +440,7 @@ module Rapture::REST
   def begin_guild_prune(guild_id, days: nil, compute_prune_count: nil)
     query = URI.encode_www_form(days: days, compute_prune_count: compute_prune_count)
     response = request(
+      :guilds_gid_prune, guild_id,
       :post,
       "guilds/#{guild_id}/prune" + query,
       nil,
@@ -401,7 +454,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Array<Voice::Region>]
   def get_guild_voice_regions(guild_id)
-    response = request(:get, "guilds/#{guild_id}/regions")
+    response = request(
+      :guilds_gid_regions, guild_id,
+      :get, 
+      "guilds/#{guild_id}/regions"
+    )
     Rapture::Voice::Region.from_json_array(response.body)
   end
 
@@ -410,7 +467,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Array<Integration>]
   def get_guild_integrations(guild_id)
-    response = request(:get, "guilds/#{guild_id}/integrations")
+    response = request(
+      :guilds_gid_integrations, guild_id,
+      :get,
+      "guilds/#{guild_id}/integrations"
+    )
     Integration.from_json_array(response.body)
   end
 
@@ -421,6 +482,7 @@ module Rapture::REST
   # @param id [String, Integer]
   def create_guild_integration(guild_id, type:, id:)
     request(
+      :guilds_gid_integrations, guild_id,
       :post,
       "guilds/#{guild_id}/integrations",
       type: type, id: id,
@@ -437,6 +499,7 @@ module Rapture::REST
   # @param enable_emoticons [true, false]
   def modify_guild_integration(guild_id, integration_id, expire_behavior:, expire_grace_period:, enable_emoticons:)
     request(
+      :guilds_gid_integrations_iid, guild_id,
       :patch,
       "guilds/#{guild_id}/integrations/#{integration_id}",
       expire_behavior: expire_behavior, expire_grace_period: expire_grace_period, enable_emoticons: enable_emoticons,
@@ -449,6 +512,7 @@ module Rapture::REST
   # @param integration_id [String, Integer]
   def delete_guild_integration(guild_id, integration_id)
     request(
+      :guilds_gid_integrations_iid, guild_id,
       :delete,
       "guilds/#{guild_id}/integrations/#{integration_id}"
     )
@@ -456,6 +520,7 @@ module Rapture::REST
 
   def sync_guild_integration(guild_id, integration_id)
     request(
+      :guilds_gid_integrations_iid_sync, guild_id,
       :post,
       "guilds/#{guild_id}/integrations/#{integration_id}/sync"
     )
@@ -466,7 +531,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [Guild::Embed]
   def get_guild_embed(guild_id)
-    response = request(:get, "guilds/#{guild_id}/embed")
+    response = request(
+      :guilds_gid_embed, guild_id,
+      :get, 
+      "guilds/#{guild_id}/embed"
+    )
     Guild::Embed.from_json(response.body)
   end
 
@@ -477,6 +546,7 @@ module Rapture::REST
   # @option params [String, Integer] :channel_id
   def modify_guild_embed(guild_id, **params)
     response = request(
+      :guilds_gid_embed, guild_id,
       :patch,
       "guilds/#{guild_id}/embed",
       params
@@ -489,7 +559,11 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @return [String, nil]
   def get_guild_vanity_url(guild_id)
-    response = request(:get, "guilds/#{guild_id}/vanity-url")
+    response = request(
+      :guilds_gid_vanity_url, guild_id,
+      :get,
+      "guilds/#{guild_id}/vanity-url"
+    )
     Oj.load(response.body)["code"]
   end
 
@@ -498,6 +572,10 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @todo
   def get_guild_widget_image(guild_id, style: nil)
-    request(:get, "guilds/#{guild_id}/widget.png?" + style)
+    request(
+      :guilds_gid_widget, guild_id,
+      :get,
+      "guilds/#{guild_id}/widget.png?" + style
+    )
   end
 end
