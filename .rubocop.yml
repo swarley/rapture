@@ -15,6 +15,9 @@ Style/ClassAndModuleChildren:
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 

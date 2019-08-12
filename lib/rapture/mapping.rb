@@ -33,8 +33,8 @@ module Rapture::Mapping
         proc do |data|
           if data.is_a? Array
             data.collect { |elem| from_json_proc.call(elem) }
-          else
-            from_json_proc.call(data) if data
+          elsif data
+            from_json_proc.call(data)
           end
         end
       end
@@ -142,7 +142,7 @@ module Rapture::Mapping
       else
         raise ArgumentError, "Action must be a symbol or respond to :call"
       end
-    rescue Exception => _
+    rescue Exception => _e
       raise Rapture::SerdeError, "Failed to convert property: `#{prop}'"
     end
 

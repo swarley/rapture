@@ -93,8 +93,7 @@ module Rapture::REST
   def create_message(channel_id, **params)
     payload = params
 
-    if file = payload.delete(:file)
-      file = Faraday::UploadIO.new(file, MIME::Types.type_for(file).first)
+    if (file = payload.delete(:file))
       payload = {
         file: file,
         payload_json: Oj.dump(payload),
