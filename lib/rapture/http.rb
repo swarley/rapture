@@ -20,14 +20,38 @@ module Rapture::HTTP
 
   private
 
+  class LoggerMiddleware < Faraday::Middleware
+    # @!visibility private
+    def log_request(env)
+      Rapture::LOGGER.info("HTTP") { "-> #{env[:method].upcase} /#{env[:url]}" }
+      Rapture::LOGGER.debug("HTTP") do
+        str = "-> #{env[:method].upcase} #{env[:url]}"
+        str += " body: #{Oj.generate(env[:body])}"
+        str += " headers: #{Oj.generate(env[:request_headers])}"
+        str
+      end
+    end
+
+    # @!visibility private
+    def log_response(url, env)
+      Rapture::LOGGER.info("HTTP") { "<- #{url} (#{env[:status]})" }
+    end
+
+    def call(req_env)
+      log_request(req_env)
+
+      @app.call(req_env).on_complete do |resp_env|
+        log_response(req_env[:url], resp_env)
+      end
+    end
+  end
+
   # Faraday client to issue all requests.
   def faraday
     @faraday ||= Faraday.new(url: base_url) do |faraday|
       faraday.authorization(@type, @token)
 
-      # faraday.response :logger do |logger|
-      #   logger.filter(/Authorization: .*/, "Authorization: #{@type} REDACTED")
-      # end
+      faraday.use LoggerMiddleware
 
       faraday.request :multipart
       faraday.request :json
@@ -86,74 +110,68 @@ module Rapture::HTTP
     end
   end
 
-  # Makes a request to the API, applying handling for preemptive rate limits
-  # and additional exception handling
-  def request(key, major_param, method, endpoint, body = nil, headers = {})
-    @rate_limits ||= {}
-    key = [key, major_param].freeze
-
-    begin
-      rl = (@rate_limits[key] ||= RateLimit.new)
-      global_rl = (@rate_limits[:global] ||= RateLimit.new)
-
-      if rl.will_be_rate_limited?
-        Rapture::LOGGER.info("HTTP") do
-          "[RATELIMIT] Preemtively locking mutex for #{key}"
-        end
-        rl.sleep_until_reset
-      elsif global_rl.will_be_rate_limited?
-        Rapture::LOGGER.info("HTTP") do
-          "[RATELIMIT] Preemptively locking global mutex"
-        end
-        global_rl.sleep_until_reset
-      end
-
-      log_request(method, endpoint, body, headers)
-      resp = faraday.run_request(method, endpoint, body, headers)
-      log_response(endpoint, resp)
-
-      rl.headers = resp.headers
-      global_rl.headers = resp.headers if resp.headers["x-ratelimit-global"]
-      case resp.status
-      when 200, 201, 204
-        resp
-      when 429
-        raise Rapture::TooManyRequests.from_json(resp.body)
-      when 400..502
-        raise Rapture::HTTPException.from_json(resp.body)
-      else
-        LOGGER.warn("HTTP") { "Received an unknown response code: #{resp.status}" }
-      end
-    rescue Rapture::TooManyRequests => ex
-      rl = global_rl if resp.headers["x-ratelimit-global"]
-
-      Rapture::LOGGER.info("HTTP") do
-        if rl == global_rl
-          "You are being ratelimited. Locking global mutex."
-        else
-          "You are being ratelimited. Locking #{key} mutex."
-        end
-      end
-
-      rl.sleep_for ex.retry_after
-
-      retry
-    end
-  end
-
-  # @!visibilty private
-  def log_request(method, endpoint, body, headers)
-    Rapture::LOGGER.info("HTTP") { "-> #{method.upcase} /#{endpoint}" }
-    Rapture::LOGGER.debug("HTTP") do
-      str = "-> #{method.upcase} /#{endpoint}"
-      str += " body: #{Oj.generate(body)}"
-      str += " headers: #{Oj.generate(headers)}"
-      str
+  # @!visibility private
+  # Lock a rate limit mutex preemptively if the next request would deplete the bucket.
+  def preemptive_rl_wait(key, rl)
+    if rl.will_be_rate_limited?
+      log_ratelimit_lock(key, rl)
+      rl.sleep_until_reset
     end
   end
 
   # @!visibility private
-  def log_response(endpoint, resp)
-    Rapture::LOGGER.info("HTTP") { "<- /#{endpoint} (#{resp.status})" }
+  # Handle a HTTP response based on the status code
+  def handle_http_response(rl, response)
+    rl.headers = response.headers
+    @rate_limits[:global].headers = response.headers if response.headers["x-ratelimit-global"]
+
+    case response.status
+    when 200, 201, 204
+      response
+    when 429
+      raise Rapture::TooManyRequests.from_json(response.body)
+    when 400..502
+      raise Rapture::HTTPException.from_json(response.body)
+    else
+      Rapture::LOGGER.warn("HTTP") { "Received an unknown response code: #{response.status}" }
+    end
+  end
+
+  # Makes a request to the API, applying handling for preemptive rate limits
+  # and additional exception handling
+  def request(key, major_param, method, endpoint, body = nil, headers = {})
+    @rate_limits ||= Hash.new { |hash, key| hash[key] = RateLimit.new }
+    key = [key, major_param].freeze
+
+    begin
+      rl = @rate_limits[key]
+      preemptive_rl_wait(key, rl)
+      preemptive_rl_wait(:global, @rate_limits[:global])
+
+      resp = faraday.run_request(method, endpoint, body, headers)
+      handle_http_response(rl, resp)
+    rescue Rapture::TooManyRequests => ex
+      rl = @rate_limits[:global] if resp.headers["x-ratelimit-global"]
+      log_too_many_requests(rl == global_rl ? :global : key, ex.retry_after)
+      rl.sleep_for ex.retry_after
+      retry
+    end
+  end
+
+  # @!visibility private
+  def log_ratelimit_lock(key, rl)
+    time = Time.at(rl.reset_time) - Time.now
+    key_name = (key == :global) ? "global" : key.join("_")
+    Rapture::LOGGER.info("HTTP") do
+      "[RATELIMIT] Preemptively locking %s mutex for %.2f seconds." % [key_name, time]
+    end
+  end
+
+  # @!visibility private
+  def log_too_many_requests(key, retry_after)
+    key_name = (key == :global) ? "global" : key.join("_")
+    Rapture::LOGGER.info("HTTP") do
+      "[RATELIMIT] You are being ratelimited. Locking %s mutex for %.2f seconds" % [key_name, retry_after]
+    end
   end
 end
