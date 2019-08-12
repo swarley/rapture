@@ -137,6 +137,17 @@ module Rapture::HTTP
     end
   end
 
+  # @!visibility private
+  # Handle preemtive rate limiting, running the request, and logging the response
+  def run_request(key, *args)
+    rl = @rate_limits[key]
+    preemptive_rl_wait(key, rl)
+    preemptive_rl_wait(:global, @rate_limits[:global])
+
+    resp = faraday.run_request(method, endpoint, body, headers)
+    handle_http_response(rl, resp)
+  end
+
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
   def request(key, major_param, method, endpoint, body = nil, headers = {})
@@ -144,12 +155,7 @@ module Rapture::HTTP
     key = [key, major_param].freeze
 
     begin
-      rl = @rate_limits[key]
-      preemptive_rl_wait(key, rl)
-      preemptive_rl_wait(:global, @rate_limits[:global])
-
-      resp = faraday.run_request(method, endpoint, body, headers)
-      handle_http_response(rl, resp)
+      run_request(key, method, endpoint, body, headers)
     rescue Rapture::TooManyRequests => ex
       rl = @rate_limits[:global] if resp.headers["x-ratelimit-global"]
       log_too_many_requests(rl == global_rl ? :global : key, ex.retry_after)
