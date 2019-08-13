@@ -54,16 +54,16 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/emoji#modify-guild-emoji
   # @param guild_id [String, Integer]
   # @param emoji_id [String, Integer]
-  # @option params [String] :name
-  # @option params [Array<String, Integer>] :roles array of role IDs that can use this emoji
+  # @param name [String]
+  # @param roles [Array<String, Integer>] array of role IDs that can use this emoji
   # @param reason [String]
   # @return [Emoji]
-  def modify_guild_emoji(guild_id, emoji_id, reason: nil, **params)
+  def modify_guild_emoji(guild_id, emoji_id, reason: nil, name: nil, roles: nil)
     response = request(
       :guild_gid_emojis_eid, guild_id,
       :patch,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
-      params,
+      {name: name, roles: roles},
       'X-Audit-Log-Reason': reason,
     )
     Rapture::Emoji.from_json(response.body)

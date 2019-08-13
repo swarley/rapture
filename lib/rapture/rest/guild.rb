@@ -7,20 +7,23 @@ module Rapture::REST
   # Create a guild. This can only be used by bots in less than 10 guilds.
   # https://discordapp.com/developers/docs/resources/guild#create-guild
   # @param name [String]
-  # @option params [String] :region
-  # @option params [String] :icon
-  # @option params [Integer] :verification_level
-  # @option params [Integer] :default_message_notifications
-  # @option params [Integer] :explicit_content_filter
-  # @option params [Array<Role>] :roles
-  # @option params [Array<Channel>] :channels
+  # @param region [String]
+  # @param icon [String]
+  # @param verification_level [Integer]
+  # @param default_message_notifications [Integer]
+  # @param explicit_content_filter [Integer]
+  # @param roles [Array<Role>]
+  # @param channels [Array<Channel>]
   # @return [Guild]
-  def create_guild(name:, **params)
+  def create_guild(name:, region: nil, icon: nil, verification_level: nil, default_message_notifications: nil,
+                   explicit_content_filter: nil, roles: nil, channels: nil)
     response = request(
       :guilds, nil,
       :post,
       "guilds",
-      name: name, **params,
+      name: name, region: region, icon: icon, verification_level: verification_level,
+      default_message_notifications: default_message_notifications, explicit_content_filter: explicit_content_filter,
+      roles: roles, channels: channels,
     )
 
     Rapture::Guild.from_json(response.body)
@@ -42,25 +45,30 @@ module Rapture::REST
   # Modify a guild's settings
   # https://discordapp.com/developers/docs/resources/guild#modify-guild
   # @param guild_id [String, Integer]
-  # @option params [String] :name
-  # @option params [String] :region
-  # @option params [Integer] :verification_level
-  # @option params [Integer] :default_message_notification
-  # @option params [Integer] :explicit_content_filter
-  # @option params [String, Integer] :afk_channel_id
-  # @option params [Integer] :afk_timeout
-  # @option params [String] :icon
-  # @option params [String, Integer] :owner_id
-  # @option params [String] :splash
-  # @option params [String, Integer] :system_channel_id
+  # @param name [String]
+  # @param region [String]
+  # @param verification_level [Integer]
+  # @param default_message_notification [Integer]
+  # @param explicit_content_filter [Integer]
+  # @param afk_channel_id [String, Integer]
+  # @param afk_timeout [Integer]
+  # @param icon [String]
+  # @param owner_id [String, Integer]
+  # @param splash [String]
+  # @param system_channel_id [String, Integer]
   # @param reason [String]
   # @return [Guild] updated {Guild} object
-  def modify_guild(guild_id, reason: nil, **params)
+  def modify_guild(guild_id, reason: nil, name: nil, region: nil, verification_level: nil,
+                             default_message_notifications: nil, explicit_content_filter: nil,
+                             afk_channel_id: nil, afk_timeout: nil, icon: nil, owner_id: nil, splash: nil,
+                             system_channel_id: nil)
     response = request(
       :guilds_gid, guild_id,
       :patch,
       "guilds/#{guild_id}",
-      params,
+      {name: name, region: region, verification_level: verification_level, default_message_notifications: default_message_notifications,
+       explicit_content_filter: explicit_content_filter, afk_channel_id: afk_channel_id, afk_timeout: afk_timeout,
+       icon: icon, owner_id: owner_id, splash: splash, system_channel_id: system_channel_id},
       'X-Audit-Log-Reason': reason,
     )
     Rapture::Guild.from_json(response.body)
@@ -94,24 +102,26 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#create-guild-channel
   # @param guild_id [String, Integer]
   # @param name [String]
-  # @option params [String] :name
-  # @option params [Integer] :type
-  # @option params [String] :topic
-  # @option params [Integer] :bitrate
-  # @option params [Integer] :user_limit
-  # @option params [Integer] :rate_limit_per_user
-  # @option params [Integer] :position
-  # @option params [Array<Guild::Overwrite>] :permission_overwrites
-  # @option params [String, Integer] :parent_id
-  # @option params [true, false] :nsfw
+  # @param type [Integer]
+  # @param topic [String]
+  # @param bitrate [Integer]
+  # @param user_limit [Integer]
+  # @param rate_limit_per_user [Integer]
+  # @param position [Integer]
+  # @param permission_overwrites [Array<Guild::Overwrite>]
+  # @param parent_id [String, Integer]
+  # @param nsfw [true, false]
   # @param reason [String]
-  def create_guild_channel(guild_id, name:, reason: nil, **params)
-    params[:name] = name
+  def create_guild_channel(guild_id, name:, reason: nil, type: nil, topic: nil, bitrate: nil, user_limit: nil,
+                                     rate_limit_per_user: nil, position: nil, permission_overwrites: nil, parent_id: nil,
+                                     nsfw: nil)
     response = request(
       :guilds_gid_channels, guild_id,
       :post,
       "guilds/#{guild_id}/channels",
-      params,
+      {name: name, type: type, topic: topic, bitrate: bitrate, user_limit: user_limit,
+       rate_limit_per_user: rate_limit_per_user, position: position,
+       permission_overwrites: permission_overwrites, parent_id: parent_id, nsfw: nsfw},
       'X-Audit-Log-Reason': reason,
     )
     Rapture::Channel.from_json(response.body)
@@ -151,8 +161,8 @@ module Rapture::REST
   # @param limit [Integer]
   # @param after [String, Integer]
   # @return [Array<Member>]
-  def list_guild_members(guild_id, limit: 1, after: 0)
-    query = URI.encode_www_form(limit: limit, after: after)
+  def list_guild_members(guild_id, limit: nil, after: nil)
+    query = URI.encode_www_form({limit: limit, after: after}.compact)
     response = request(
       :guilds_gid_members, guild_id,
       :get,
@@ -166,19 +176,17 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @param user_id [String, Integer]
   # @param access_token [String]
-  # @option params [String] :nick
-  # @option params [Array<String, Integer>] :roles
-  # @option params [true, false] :mute
-  # @option params [true, false] :deaf
+  # @param nick [String]
+  # @param roles [Array<String, Integer>]
+  # @param mute [true, false]
+  # @param deaf [true, false]
   # @return [Member, nil] `nil` if the user is already a member of the guild
-  def add_guild_member(guild_id, user_id, access_token:, **params)
-    params[:access_token] = access_token
-
+  def add_guild_member(guild_id, user_id, access_token:, nick: nil, roles: nil, mute: nil, deaf: nil)
     response = request(
       :guilds_gid_members_uid, guild_id,
       :put,
       "guilds/#{guild_id}/members/#{user_id}",
-      params,
+      nick: nick, roles: roles, mute: mute, deaf: deaf,
     )
 
     return nil if response.status == 204
@@ -190,18 +198,18 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#modify-guild-member
   # @param guild_id [String, Integer]
   # @param user_id [String, Integer]
-  # @option params [String] :nick
-  # @option params [Array<String, Integer>] :roles
-  # @option params [true, false] :mute
-  # @option params [true, false] :deaf
-  # @option params [String, Integer, nil] :channel_id
+  # @param nick [String]
+  # @param roles [Array<String, Integer>]
+  # @param mute [true, false]
+  # @param deaf [true, false]
+  # @param channel_id [String, Integer, nil]
   # @param reason [String]
-  def modify_guild_member(guild_id, user_id, reason: nil, **params)
+  def modify_guild_member(guild_id, user_id, reason: nil, nick: nil, roles: nil, mute: nil, deaf: nil, channel_id: nil)
     request(
       :guilds_gid_members_uid, guild_id,
       :patch,
       "guilds/#{guild_id}/members/#{user_id}",
-      params,
+      {nick: nick, roles: roles, mute: mute, deaf: deaf, channel_id: channel_id},
       'X-Audit-Log-Reason': reason,
     )
   end
@@ -343,19 +351,19 @@ module Rapture::REST
   # Create a new role for the guild
   # https://discordapp.com/developers/docs/resources/guild#create-guild-role
   # @param guild_id [String, Integer]
-  # @option params [String] :name
-  # @option params [Integer] :permissions
-  # @option params [Integer] :color
-  # @option params [true, false] :hoist
-  # @option params [true, false] :mentionable
+  # @param name [String]
+  # @param permissions [Integer]
+  # @param color [Integer]
+  # @param hoist [true, false]
+  # @param mentionable [true, false]
   # @param reason [String]
   # @return [Role]
-  def create_guild_role(guild_id, reason: nil, **params)
+  def create_guild_role(guild_id, reason: nil, name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil)
     response = request(
       :guilds_gid_roles, guild_id,
       :post,
       "guilds/#{guild_id}/roles",
-      params,
+      {name: name, permissions: permissions, color: color, hoist: hoist, mentionable: mentionable},
       'X-Audit-Log-Reason': reason,
     )
     Rapture::Role.from_json(response.body)
@@ -383,19 +391,19 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/guild#modify-guild-role
   # @param guild_id [String, Integer]
   # @param role_id [String, Integer]
-  # @option params [String] :name
-  # @option params [Integer] :permissions
-  # @option params [Integer] :color
-  # @option params [true, false] :hoist
-  # @option params [true, false] :mentionable
+  # @param name [String]
+  # @param permissions [Integer]
+  # @param color [Integer]
+  # @param hoist [true, false]
+  # @param mentionable [true, false]
   # @param reason [String]
   # @return [Role]
-  def modify_guild_role(guild_id, role_id, reason: nil, **params)
+  def modify_guild_role(guild_id, role_id, reason: nil, name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil)
     response = request(
       :guild_gid_roles_rid, guild_id,
       :patch,
       "guilds/#{guild_id}/roles/#{role_id}",
-      params,
+      {name: name, permissions: permissions, color: color, hoist: hoist, mentionable: mentionable},
       'X-Audit-Log-Reason': reason,
     )
 
@@ -438,7 +446,7 @@ module Rapture::REST
   # @param compute_prune_count [true, false]
   # @return [Integer, nil]
   def begin_guild_prune(guild_id, days: nil, compute_prune_count: nil)
-    query = URI.encode_www_form(days: days, compute_prune_count: compute_prune_count)
+    query = URI.encode_www_form({days: days, compute_prune_count: compute_prune_count}.compact)
     response = request(
       :guilds_gid_prune, guild_id,
       :post,
@@ -542,14 +550,14 @@ module Rapture::REST
   # Modify a guild embed
   # https://discordapp.com/developers/docs/resources/guild#modify-guild-embed
   # @param guild_id [String, Integer]
-  # @option params [true, false] :enabled
-  # @option params [String, Integer] :channel_id
-  def modify_guild_embed(guild_id, **params)
+  # @param enabled [true, false]
+  # @param channel_id [String, Integer]
+  def modify_guild_embed(guild_id, enabled: nil, channel_id: nil)
     response = request(
       :guilds_gid_embed, guild_id,
       :patch,
       "guilds/#{guild_id}/embed",
-      params
+      enabled: enabled, channel_id: channel_id,
     )
     Guild::Embed.from_json(response.body)
   end

@@ -132,6 +132,7 @@ module Rapture::HTTP
   def request(key, major_param, method, endpoint, body = nil, headers = {})
     @rate_limits ||= Hash.new { |hash, rl_key| hash[rl_key] = RateLimit.new }
     rl_key = [key, major_param].freeze
+    body = Rapture.encode_json(body) if body
 
     begin
       run_request(rl_key, method, endpoint, body, headers)

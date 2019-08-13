@@ -20,24 +20,26 @@ module Rapture::REST
   # Update a channel's settings
   # https://discordapp.com/developers/docs/resources/channel#modify-channel
   # @param channel_id [String, Integer]
-  # @param params [Hash]
-  # @option params [String] :name
-  # @option params [Integer] :position
-  # @option params [String] :topic
-  # @option params [true, false] :nsfw
-  # @option params [Integer] :rate_limit_per_user
-  # @option params [Integer] :bitrate
-  # @option params [Integer] :user_limit
-  # @option params [Array<Guild::Overwrite>] :permission_overwrites
-  # @option params [Integer, String] :parent_id
+  # @param name [String]
+  # @param position [Integer]
+  # @param topic [String]
+  # @param nsfw [true, false]
+  # @param rate_limit_per_user [Integer] :rate_limit_per_user
+  # @param bitrate [Integer]
+  # @param user_limit [Integer]
+  # @param permission_overwrites [Array<Guild::Overwrite>]
+  # @param parent_id [Integer, String]
   # @param reason [String]
   # @return [Channel] updated channel object
-  def modify_channel(channel_id, reason: nil, **params)
+  def modify_channel(channel_id,
+                     reason: nil, name: nil, position: nil, topic: nil, nsfw: nil, rate_limit_per_user: nil,
+                     bitrate: nil, user_limit: nil, permission_overwrites: nil, parent_id: nil)
     response = request(
       :channels_cid, channel_id,
       :patch,
       "channels/#{channel_id}",
-      params,
+      {name: name, position: position, topic: topic, nsfw: nsfw, rate_limit_per_user: rate_limit_per_user,
+       bitrate: bitrate, user_limit: user_limit, permission_overwrites: permission_overwrites, parent_id: parent_id},
       'X-Audit-Log-Reason': reason,
     )
 
@@ -66,16 +68,17 @@ module Rapture::REST
   # permission. This endpoint will return no messages unless the user has `READ_MESSAGE_HISTORY`
   # permission.
   # @param channel_id [String, Integer]
-  # @option params [String, Integer] :around
-  # @option params [String, Integer] :before
-  # @option params [String, Integer] :after
-  # @option params [Integer] :limit
+  # @param around [String, Integer]
+  # @param before [String, Integer]
+  # @param after [String, Integer]
+  # @param limit [Integer] The maximum amount of messages to retrieve.
   # @return [Array<Message>]
-  def get_channel_messages(channel_id, **params)
+  def get_channel_messages(channel_id, limit: nil, around: nil, before: nil, after: nil)
+    query = URI.encode_www_form({limit: limit, around: around, before: before, after: after}.compact)
     response = request(
       :channels_cid_messages, channel_id,
       :get,
-      "channels/#{channel_id}/messages?#{URI.encode_www_form(params)}",
+      "channels/#{channel_id}/messages?#{query}",
     )
 
     Rapture::Message.from_json_array(response.body)
@@ -85,18 +88,18 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/channel#create-message
   # @note One of `file`, `content`, or `embed` must be passed.
   # @param channel_id [String, Integer]
-  # @option params [String] :content
-  # @option params [Embed] :embed
-  # @option params [true, false] :tts
-  # @option params [Faraday::UploadIO] :file
+  # @param content [String]
+  # @param embed [Embed]
+  # @param tts [true, false]
+  # @param file [Faraday::UploadIO]
   # @return [Message] the created message
-  def create_message(channel_id, **params)
-    payload = params
+  def create_message(channel_id, content: nil, embed: nil, tts: nil, file: nil)
+    payload = {content: content, embed: embed, tts: tts}
 
-    if (file = payload.delete(:file))
+    if file
       payload = {
         file: file,
-        payload_json: Oj.dump(payload),
+        payload_json: Rapture.encode_json(payload),
       }
     end
 
@@ -114,15 +117,15 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/channel#edit-message
   # @param channel_id [String, Integer]
   # @param message_id [String, Integer]
-  # @option params [String, nil] :content
-  # @option params [Embed, nil] :embed
+  # @param content [String, nil]
+  # @param embed [Embed, nil]
   # @return [Message] the edited message
-  def edit_message(channel_id, message_id, **params)
+  def edit_message(channel_id, message_id, content: nil, embed: nil)
     response = request(
       :channels_cid_messages_mid, channel_id,
       :patch,
       "channels/#{channel_id}/messages/#{message_id}",
-      params
+      content: content, embed: embed,
     )
     Rapture::Message.from_json(response.body)
   end
@@ -247,17 +250,17 @@ module Rapture::REST
   # Create a new invite for a channel
   # https://discordapp.com/developers/docs/resources/channel#create-channel-invite
   # @param channel_id [String, Integer]
-  # @option params [Integer] :max_age
-  # @option params [Integer] :max_uses
-  # @option params [true, false] :temporary
-  # @option params [true, false] :unique
+  # @param max_age [Integer]
+  # @param max_uses [Integer]
+  # @param temporary [true, false]
+  # @param unique [true, false]
   # @param reason [String]
-  def create_channel_invite(channel_id, reason: nil, **params)
+  def create_channel_invite(channel_id, reason: nil, max_age: nil, max_uses: nil, temporary: nil, unique: nil)
     response = request(
       :channels_cid_invites, channel_id,
       :post,
       "channels/#{channel_id}/invites",
-      params,
+      {max_age: max_age, max_uses: max_uses, temporary: temporary, unique: unique},
       'X-Audit-Log-Reason': reason,
     )
 

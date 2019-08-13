@@ -79,17 +79,17 @@ module Rapture::REST
   # Modify a webhook
   # https://discordapp.com/developers/docs/resources/webhook#modify-webhook
   # @param webhook_id [String, Integer]
-  # @option params [String] :name
-  # @option params [String] :avatar
+  # @param name [String]
+  # @param avatar [String]
   # @option channel_id [String, Integer] channel_id
   # @param reason [String]
   # @return [Webhook]
-  def modify_webhook(webhook_id, reason: nil, **params)
+  def modify_webhook(webhook_id, reason: nil, name: nil, avatar: nil)
     response = request(
       :webhooks_wid, webhook_id,
       :patch,
       "webhooks/#{webhook_id}",
-      params,
+      {name: name, avatar: avatar},
       'X-Audit-Log-Reason': reason,
     )
     Rapture::Webhook.from_json(response.body)
@@ -99,17 +99,17 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/resources/webhook#modify-webhook-with-token
   # @param webhook_id [String, Integer]
   # @param webhook_token [String]
-  # @option params [String] :name
-  # @option params [String] :avatar
-  # @option channel_id [String, Integer] channel_id
+  # @param name [String]
+  # @param avatar [String]
+  # @param channel_id [String, Integer]
   # @param reason [String]
   # @return [Webhook]
-  def modify_webhook_with_token(webhook_id, webhook_token, reason: nil, **params)
+  def modify_webhook_with_token(webhook_id, webhook_token, reason: nil, name: nil, avatar: nil, channel_id: nil)
     response = request(
       :webhooks_wid_wt, webhook_id,
       :patch,
       "webhooks/#{webhook_id}/#{webhook_token}",
-      params,
+      {name: name, avatar: avatar, channel_id: channel_id},
       'X-Audit-Log-Reason': reason,
     )
     Rapture::Webhook.from_json(response.body)
@@ -150,22 +150,16 @@ module Rapture::REST
   # @param webhook_id [String, Integer]
   # @param webhook_token [String]
   # @param wait [true, false]
-  # @option params [String] :content
-  # @option params [String] :username
-  # @option params [String] :avatar_url
-  # @option params [true, false] :tts
-  # @option params [String, IO] :file path to a file or IO
-  # @option params [Array<Embed, Hash>] :embeds
-  def execute_webhook(webhook_id, webhook_token, wait: false, **params)
-    if params[:file]
-      file = params.delete(:file)
-      payload = {
-        file: file,
-        payload_json: params.to_json,
-      }
-    else
-      payload = params
-    end
+  # @param content [String]
+  # @param username [String]
+  # @param avatar_url [String]
+  # @param tts [true, false]
+  # @param file [Faraday::UploadIO]
+  # @param embeds [Array<Embed, Hash>]
+  def execute_webhook(webhook_id, webhook_token, wait: false, content: nil, username: nil, avatar_url: nil, tts: nil, file: nil)
+    payload = {content: content, username: username, avatar_url: avatar_url, tts: tts}
+
+    payload = {file: file, payload_json: Oj.dump(payload)} if file
 
     request(
       :webhooks_wid_wt, webhook_id,

@@ -27,4 +27,12 @@ require "rapture/client"
 module Rapture
   LOGGER = Logger.new(STDOUT)
   LOGGER.level = Logger::INFO
+
+  def self.encode_json(hash)
+    hash = hash.compact
+    hash.each do |key, value|
+      hash[key] = nil if value == :null
+    end
+    Oj.dump(hash)
+  end
 end
