@@ -23,11 +23,11 @@ module Rapture::HTTP
   class LoggerMiddleware < Faraday::Middleware
     # @!visibility private
     def log_request(env)
-      Rapture::LOGGER.info("HTTP") { "-> #{env[:method].upcase} /#{env[:url]}" }
+      Rapture::LOGGER.info("HTTP") { "-> #{env[:method].upcase} #{env[:url]}" }
       Rapture::LOGGER.debug("HTTP") do
         str = "-> #{env[:method].upcase} #{env[:url]}"
-        str += " body: #{Oj.generate(env[:body])}"
-        str += " headers: #{Oj.generate(env[:request_headers])}"
+        str += "   body: #{Oj.generate(env[:body])}"
+        str += "   headers: #{Oj.generate(env[:request_headers])}"
         str
       end
     end
@@ -35,6 +35,7 @@ module Rapture::HTTP
     # @!visibility private
     def log_response(url, env)
       Rapture::LOGGER.info("HTTP") { "<- #{url} (#{env[:status]})" }
+      # Debug log raw response?
     end
 
     def call(req_env)
@@ -57,6 +58,7 @@ module Rapture::HTTP
       faraday.request :json
 
       faraday.headers["User-Agent"] = user_agent
+      faraday.headers["X-RateLimit-Precision"] = "millisecond"
 
       faraday.adapter Faraday.default_adapter
     end
@@ -64,6 +66,10 @@ module Rapture::HTTP
 
   # Class for tracking requests and their rate limits
   class RateLimit
+    attr_reader :reset
+    attr_reader :remaining
+    attr_reader :limit
+
     def initialize
       @mutex = Mutex.new
     end
@@ -78,7 +84,7 @@ module Rapture::HTTP
 
       @now = Time.rfc2822(headers["date"])
 
-      reset_time = headers["x-ratelimit-reset"]&.to_i
+      reset_time = headers["x-ratelimit-reset"]&.to_f
       @reset = Time.at(reset_time) if reset_time
     end
 
@@ -101,6 +107,17 @@ module Rapture::HTTP
       @mutex.synchronize { sleep time }
     end
 
+    # Check to see if this limiter is currently being locked.
+    def locked?
+      @mutex.locked?
+    end
+
+    # Wait for this to limiter to become available again.
+    def wait_for_unlock
+      @mutex.lock
+      @mutex.unlock
+    end
+
     private
 
     # Checks that we have enough data cached to perform
@@ -110,9 +127,45 @@ module Rapture::HTTP
     end
   end
 
+  # Makes a request to the API, applying handling for preemptive rate limits
+  # and additional exception handling
+  def request(key, major_param, method, endpoint, body = nil, headers = {})
+    @rate_limits ||= Hash.new { |hash, rl_key| hash[rl_key] = RateLimit.new }
+    rl_key = [key, major_param].freeze
+
+    begin
+      run_request(rl_key, method, endpoint, body, headers)
+    rescue Rapture::TooManyRequests => e
+      limited_key = e.global ? :global : rl_key
+      rl = @rate_limits[limited_key]
+
+      log_too_many_requests(limited_key, e.retry_after)
+
+      if rl.locked?
+        rl.wait_for_unlock
+      else
+        @rate_limits[limited_key].sleep_for e.retry_after
+      end
+
+      retry
+    end
+  end
+
+  # @!visibility private
+  # Handle preemtive rate limiting, running the request, and logging the response
+  def run_request(key, *args)
+    rl = @rate_limits[key]
+    preemptive_rl_wait(key)
+    preemptive_rl_wait(:global)
+
+    resp = faraday.run_request(*args)
+    handle_http_response(rl, resp)
+  end
+
   # @!visibility private
   # Lock a rate limit mutex preemptively if the next request would deplete the bucket.
-  def preemptive_rl_wait(key, rate_limit)
+  def preemptive_rl_wait(key)
+    rate_limit = @rate_limits[key]
     return unless rate_limit.will_be_rate_limited?
 
     log_ratelimit_lock(key, rate_limit)
@@ -138,35 +191,8 @@ module Rapture::HTTP
   end
 
   # @!visibility private
-  # Handle preemtive rate limiting, running the request, and logging the response
-  def run_request(key, *args)
-    rl = @rate_limits[key]
-    preemptive_rl_wait(key, rl)
-    preemptive_rl_wait(:global, @rate_limits[:global])
-
-    resp = faraday.run_request(*args)
-    handle_http_response(rl, resp)
-  end
-
-  # Makes a request to the API, applying handling for preemptive rate limits
-  # and additional exception handling
-  def request(key, major_param, method, endpoint, body = nil, headers = {})
-    @rate_limits ||= Hash.new { |hash, rl_key| hash[rl_key] = RateLimit.new }
-    key = [key, major_param].freeze
-
-    begin
-      run_request(key, method, endpoint, body, headers)
-    rescue Rapture::TooManyRequests => e
-      rl = @rate_limits[:global] if resp.headers["x-ratelimit-global"]
-      log_too_many_requests(rl == global_rl ? :global : key, e.retry_after)
-      rl.sleep_for e.retry_after
-      retry
-    end
-  end
-
-  # @!visibility private
   def log_ratelimit_lock(key, rate_limit)
-    time = Time.at(rate_limit.reset_time) - Time.now
+    time = rate_limit.reset - Time.now
     key_name = key == :global ? "global" : key.join("_")
     Rapture::LOGGER.info("HTTP") do
       "[RATELIMIT] Preemptively locking #{key_name} mutex for #{time.truncate(2)} seconds."
