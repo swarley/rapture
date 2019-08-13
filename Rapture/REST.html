@@ -155,7 +155,7 @@ href="https://discordapp.com/developers/docs/resources/channel#group-dm-add-reci
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#add_guild_member-instance_method" title="#add_guild_member (instance method)">#<strong>add_guild_member</strong>(guild_id, user_id, access_token:, **params)  &#x21d2; Member<sup>?</sup> </a>
+      <a href="#add_guild_member-instance_method" title="#add_guild_member (instance method)">#<strong>add_guild_member</strong>(guild_id, user_id, access_token:, nick: nil, roles: nil, mute: nil, deaf: nil)  &#x21d2; Member<sup>?</sup> </a>
     
 
     
@@ -278,7 +278,7 @@ href="https://discordapp.com/developers/docs/resources/guild#begin-guild-prune">
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_channel_invite-instance_method" title="#create_channel_invite (instance method)">#<strong>create_channel_invite</strong>(channel_id, reason: nil, **params)  &#x21d2; Object </a>
+      <a href="#create_channel_invite-instance_method" title="#create_channel_invite (instance method)">#<strong>create_channel_invite</strong>(channel_id, reason: nil, max_age: nil, max_uses: nil, temporary: nil, unique: nil)  &#x21d2; Object </a>
     
 
     
@@ -351,7 +351,7 @@ href="https://discordapp.com/developers/docs/resources/channel#create-channel-in
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_guild-instance_method" title="#create_guild (instance method)">#<strong>create_guild</strong>(name:, **params)  &#x21d2; Guild </a>
+      <a href="#create_guild-instance_method" title="#create_guild (instance method)">#<strong>create_guild</strong>(name:, region: nil, icon: nil, verification_level: nil, default_message_notifications: nil, explicit_content_filter: nil, roles: nil, channels: nil)  &#x21d2; Guild </a>
     
 
     
@@ -400,7 +400,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-ban">d
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_guild_channel-instance_method" title="#create_guild_channel (instance method)">#<strong>create_guild_channel</strong>(guild_id, name:, reason: nil, **params)  &#x21d2; Object </a>
+      <a href="#create_guild_channel-instance_method" title="#create_guild_channel (instance method)">#<strong>create_guild_channel</strong>(guild_id, name:, reason: nil, type: nil, topic: nil, bitrate: nil, user_limit: nil, rate_limit_per_user: nil, position: nil, permission_overwrites: nil, parent_id: nil, nsfw: nil)  &#x21d2; Object </a>
     
 
     
@@ -474,7 +474,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-integr
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_guild_role-instance_method" title="#create_guild_role (instance method)">#<strong>create_guild_role</strong>(guild_id, reason: nil, **params)  &#x21d2; Role </a>
+      <a href="#create_guild_role-instance_method" title="#create_guild_role (instance method)">#<strong>create_guild_role</strong>(guild_id, reason: nil, name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil)  &#x21d2; Role </a>
     
 
     
@@ -499,7 +499,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-role">
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_message-instance_method" title="#create_message (instance method)">#<strong>create_message</strong>(channel_id, **params)  &#x21d2; Message </a>
+      <a href="#create_message-instance_method" title="#create_message (instance method)">#<strong>create_message</strong>(channel_id, content: nil, embed: nil, tts: nil, file: nil)  &#x21d2; Message </a>
     
 
     
@@ -965,7 +965,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#delete-webhook-wi
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#edit_message-instance_method" title="#edit_message (instance method)">#<strong>edit_message</strong>(channel_id, message_id, **params)  &#x21d2; Message </a>
+      <a href="#edit_message-instance_method" title="#edit_message (instance method)">#<strong>edit_message</strong>(channel_id, message_id, content: nil, embed: nil)  &#x21d2; Message </a>
     
 
     
@@ -989,7 +989,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#delete-webhook-wi
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute_webhook-instance_method" title="#execute_webhook (instance method)">#<strong>execute_webhook</strong>(webhook_id, webhook_token, wait: false, **params)  &#x21d2; Object </a>
+      <a href="#execute_webhook-instance_method" title="#execute_webhook (instance method)">#<strong>execute_webhook</strong>(webhook_id, webhook_token, wait: false, content: nil, username: nil, avatar_url: nil, tts: nil, file: nil)  &#x21d2; Object </a>
     
 
     
@@ -1064,7 +1064,7 @@ href="https://discordapp.com/developers/docs/resources/channel#get-channel-get_c
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_channel_messages-instance_method" title="#get_channel_messages (instance method)">#<strong>get_channel_messages</strong>(channel_id, **params)  &#x21d2; Array&lt;Message&gt; </a>
+      <a href="#get_channel_messages-instance_method" title="#get_channel_messages (instance method)">#<strong>get_channel_messages</strong>(channel_id, limit: nil, around: nil, before: nil, after: nil)  &#x21d2; Array&lt;Message&gt; </a>
     
 
     
@@ -1262,7 +1262,7 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild">discorda
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_guild_audit_log-instance_method" title="#get_guild_audit_log (instance method)">#<strong>get_guild_audit_log</strong>(guild_id, **params)  &#x21d2; AuditLog </a>
+      <a href="#get_guild_audit_log-instance_method" title="#get_guild_audit_log (instance method)">#<strong>get_guild_audit_log</strong>(guild_id, user_id: nil, action_type: nil, before: nil, limit: nil)  &#x21d2; AuditLog </a>
     
 
     
@@ -1830,7 +1830,7 @@ href="https://discordapp.com/developers/docs/resources/user#leave-guild">discord
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#list_guild_members-instance_method" title="#list_guild_members (instance method)">#<strong>list_guild_members</strong>(guild_id, limit: 1, after: 0)  &#x21d2; Array&lt;Member&gt; </a>
+      <a href="#list_guild_members-instance_method" title="#list_guild_members (instance method)">#<strong>list_guild_members</strong>(guild_id, limit: nil, after: nil)  &#x21d2; Array&lt;Member&gt; </a>
     
 
     
@@ -1880,7 +1880,7 @@ href="https://discordapp.com/developers/docs/resources/voice#list-voice-regions"
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_channel-instance_method" title="#modify_channel (instance method)">#<strong>modify_channel</strong>(channel_id, reason: nil, **params)  &#x21d2; Channel </a>
+      <a href="#modify_channel-instance_method" title="#modify_channel (instance method)">#<strong>modify_channel</strong>(channel_id, reason: nil, name: nil, position: nil, topic: nil, nsfw: nil, rate_limit_per_user: nil, bitrate: nil, user_limit: nil, permission_overwrites: nil, parent_id: nil)  &#x21d2; Channel </a>
     
 
     
@@ -1930,7 +1930,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-current-user
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_guild-instance_method" title="#modify_guild (instance method)">#<strong>modify_guild</strong>(guild_id, reason: nil, **params)  &#x21d2; Guild </a>
+      <a href="#modify_guild-instance_method" title="#modify_guild (instance method)">#<strong>modify_guild</strong>(guild_id, reason: nil, name: nil, region: nil, verification_level: nil, default_message_notifications: nil, explicit_content_filter: nil, afk_channel_id: nil, afk_timeout: nil, icon: nil, owner_id: nil, splash: nil, system_channel_id: nil)  &#x21d2; Guild </a>
     
 
     
@@ -1980,7 +1980,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-channe
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_guild_embed-instance_method" title="#modify_guild_embed (instance method)">#<strong>modify_guild_embed</strong>(guild_id, **params)  &#x21d2; Object </a>
+      <a href="#modify_guild_embed-instance_method" title="#modify_guild_embed (instance method)">#<strong>modify_guild_embed</strong>(guild_id, enabled: nil, channel_id: nil)  &#x21d2; Object </a>
     
 
     
@@ -2005,7 +2005,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-embed"
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_guild_emoji-instance_method" title="#modify_guild_emoji (instance method)">#<strong>modify_guild_emoji</strong>(guild_id, emoji_id, reason: nil, **params)  &#x21d2; Emoji </a>
+      <a href="#modify_guild_emoji-instance_method" title="#modify_guild_emoji (instance method)">#<strong>modify_guild_emoji</strong>(guild_id, emoji_id, reason: nil, name: nil, roles: nil)  &#x21d2; Emoji </a>
     
 
     
@@ -2055,7 +2055,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-integr
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_guild_member-instance_method" title="#modify_guild_member (instance method)">#<strong>modify_guild_member</strong>(guild_id, user_id, reason: nil, **params)  &#x21d2; Object </a>
+      <a href="#modify_guild_member-instance_method" title="#modify_guild_member (instance method)">#<strong>modify_guild_member</strong>(guild_id, user_id, reason: nil, nick: nil, roles: nil, mute: nil, deaf: nil, channel_id: nil)  &#x21d2; Object </a>
     
 
     
@@ -2080,7 +2080,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-member
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_guild_role-instance_method" title="#modify_guild_role (instance method)">#<strong>modify_guild_role</strong>(guild_id, role_id, reason: nil, **params)  &#x21d2; Role </a>
+      <a href="#modify_guild_role-instance_method" title="#modify_guild_role (instance method)">#<strong>modify_guild_role</strong>(guild_id, role_id, reason: nil, name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil)  &#x21d2; Role </a>
     
 
     
@@ -2130,7 +2130,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-role-p
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_webhook-instance_method" title="#modify_webhook (instance method)">#<strong>modify_webhook</strong>(webhook_id, reason: nil, **params)  &#x21d2; Webhook </a>
+      <a href="#modify_webhook-instance_method" title="#modify_webhook (instance method)">#<strong>modify_webhook</strong>(webhook_id, reason: nil, name: nil, avatar: nil)  &#x21d2; Webhook </a>
     
 
     
@@ -2155,7 +2155,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify_webhook_with_token-instance_method" title="#modify_webhook_with_token (instance method)">#<strong>modify_webhook_with_token</strong>(webhook_id, webhook_token, reason: nil, **params)  &#x21d2; Webhook </a>
+      <a href="#modify_webhook_with_token-instance_method" title="#modify_webhook_with_token (instance method)">#<strong>modify_webhook_with_token</strong>(webhook_id, webhook_token, reason: nil, name: nil, avatar: nil, channel_id: nil)  &#x21d2; Webhook </a>
     
 
     
@@ -2394,17 +2394,17 @@ href="https://discordapp.com/developers/docs/resources/channel#group-dm-add-reci
       <pre class="lines">
 
 
-335
-336
-337
 338
 339
 340
 341
-342</pre>
+342
+343
+344
+345</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 335</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 338</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_group_dm_recipient'>add_group_dm_recipient</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>access_token:</span><span class='comma'>,</span> <span class='label'>nick:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -2422,7 +2422,7 @@ href="https://discordapp.com/developers/docs/resources/channel#group-dm-add-reci
       <div class="method_details ">
   <h3 class="signature " id="add_guild_member-instance_method">
   
-    #<strong>add_guild_member</strong>(guild_id, user_id, access_token:, **params)  &#x21d2; <tt><span class='object_link'><a href="Member.html" title="Rapture::Member (class)">Member</a></span></tt><sup>?</sup> 
+    #<strong>add_guild_member</strong>(guild_id, user_id, access_token:, nick: nil, roles: nil, mute: nil, deaf: nil)  &#x21d2; <tt><span class='object_link'><a href="Member.html" title="Rapture::Member (class)">Member</a></span></tt><sup>?</sup> 
   
 
   
@@ -2476,72 +2476,49 @@ href="https://discordapp.com/developers/docs/resources/guild#add-guild-member">d
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>nick</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>roles</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String, Integer&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mute</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>deaf</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:nick</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:roles</span>
-          <span class="type">(<tt>Array&lt;String, Integer&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:mute</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:deaf</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -2568,32 +2545,28 @@ href="https://discordapp.com/developers/docs/resources/guild#add-guild-member">d
       <pre class="lines">
 
 
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
 184
 185
 186
-187</pre>
+187
+188
+189
+190
+191
+192
+193
+194
+195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 184</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_add_guild_member'>add_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>access_token:</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:access_token</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_access_token'>access_token</span>
-
+<span class='kw'>def</span> <span class='id identifier rubyid_add_guild_member'>add_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>access_token:</span><span class='comma'>,</span> <span class='label'>nick:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>mute:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>deaf:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_members_uid</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:put</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/members/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='label'>nick:</span> <span class='id identifier rubyid_nick'>nick</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='id identifier rubyid_roles'>roles</span><span class='comma'>,</span> <span class='label'>mute:</span> <span class='id identifier rubyid_mute'>mute</span><span class='comma'>,</span> <span class='label'>deaf:</span> <span class='id identifier rubyid_deaf'>deaf</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>==</span> <span class='int'>204</span>
@@ -2680,18 +2653,18 @@ href="https://discordapp.com/developers/docs/resources/guild#add-guild-member-ro
       <pre class="lines">
 
 
-230
-231
-232
-233
-234
-235
-236
-237
-238</pre>
+238
+239
+240
+241
+242
+243
+244
+245
+246</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 230</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 238</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_guild_member_role'>add_guild_member_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -2760,16 +2733,16 @@ href="https://discordapp.com/developers/docs/resources/channel#add-pinned-channe
       <pre class="lines">
 
 
-309
-310
-311
 312
 313
 314
-315</pre>
+315
+316
+317
+318</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 309</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_pinned_message'>add_pinned_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -2860,23 +2833,23 @@ href="https://discordapp.com/developers/docs/resources/guild#begin-guild-prune">
       <pre class="lines">
 
 
-440
-441
-442
-443
-444
-445
-446
-447
 448
 449
-450</pre>
+450
+451
+452
+453
+454
+455
+456
+457
+458</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 440</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 448</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_begin_guild_prune'>begin_guild_prune</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>days:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>compute_prune_count:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='label'>days:</span> <span class='id identifier rubyid_days'>days</span><span class='comma'>,</span> <span class='label'>compute_prune_count:</span> <span class='id identifier rubyid_compute_prune_count'>compute_prune_count</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>days:</span> <span class='id identifier rubyid_days'>days</span><span class='comma'>,</span> <span class='label'>compute_prune_count:</span> <span class='id identifier rubyid_compute_prune_count'>compute_prune_count</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_prune</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:post</span><span class='comma'>,</span>
@@ -2949,18 +2922,18 @@ href="https://discordapp.com/developers/docs/resources/channel#bulk-delete-messa
       <pre class="lines">
 
 
-148
-149
-150
 151
 152
 153
 154
 155
-156</pre>
+156
+157
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_bulk_delete_messages'>bulk_delete_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_messages'>messages</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -2979,7 +2952,7 @@ href="https://discordapp.com/developers/docs/resources/channel#bulk-delete-messa
       <div class="method_details ">
   <h3 class="signature " id="create_channel_invite-instance_method">
   
-    #<strong>create_channel_invite</strong>(channel_id, reason: nil, **params)  &#x21d2; <tt>Object</tt> 
+    #<strong>create_channel_invite</strong>(channel_id, reason: nil, max_age: nil, max_uses: nil, temporary: nil, unique: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -3011,6 +2984,50 @@ href="https://discordapp.com/developers/docs/resources/channel#create-channel-in
   
     <li>
       
+        <span class='name'>max_age</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_uses</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>temporary</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unique</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
         <span class='name'>reason</span>
       
       
@@ -3020,72 +3037,7 @@ href="https://discordapp.com/developers/docs/resources/channel#create-channel-in
       
     </li>
   
-    <li>
-      
-        <span class='name'>params</span>
-      
-      
-        <span class='type'>(<tt>Hash</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
-      
-    </li>
-  
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:max_age</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:max_uses</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:temporary</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:unique</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 
 </div><table class="source_code">
@@ -3094,9 +3046,6 @@ href="https://discordapp.com/developers/docs/resources/channel#create-channel-in
       <pre class="lines">
 
 
-255
-256
-257
 258
 259
 260
@@ -3104,17 +3053,20 @@ href="https://discordapp.com/developers/docs/resources/channel#create-channel-in
 262
 263
 264
-265</pre>
+265
+266
+267
+268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 255</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 258</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_channel_invite'>create_channel_invite</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_channel_invite'>create_channel_invite</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_age:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>max_uses:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>temporary:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>unique:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:channels_cid_invites</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span>
     <span class='symbol'>:post</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channels/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/invites</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>max_age:</span> <span class='id identifier rubyid_max_age'>max_age</span><span class='comma'>,</span> <span class='label'>max_uses:</span> <span class='id identifier rubyid_max_uses'>max_uses</span><span class='comma'>,</span> <span class='label'>temporary:</span> <span class='id identifier rubyid_temporary'>temporary</span><span class='comma'>,</span> <span class='label'>unique:</span> <span class='id identifier rubyid_unique'>unique</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
@@ -3323,7 +3275,7 @@ href="https://discordapp.com/developers/docs/resources/user#create-group-dm">dis
       <div class="method_details ">
   <h3 class="signature " id="create_guild-instance_method">
   
-    #<strong>create_guild</strong>(name:, **params)  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt> 
+    #<strong>create_guild</strong>(name:, region: nil, icon: nil, verification_level: nil, default_message_notifications: nil, explicit_content_filter: nil, roles: nil, channels: nil)  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt> 
   
 
   
@@ -3355,95 +3307,82 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild">disco
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>region</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>icon</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>verification_level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_message_notifications</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>explicit_content_filter</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>roles</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channels</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span>&gt;</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:region</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:icon</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:verification_level</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:default_message_notifications</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:explicit_content_filter</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:roles</span>
-          <span class="type">(<tt>Array&lt;<span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span>&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:channels</span>
-          <span class="type">(<tt>Array&lt;<span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span>&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -3474,17 +3413,23 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild">disco
 24
 25
 26
-27</pre>
+27
+28
+29
+30</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 18</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_guild'>create_guild</span><span class='lparen'>(</span><span class='label'>name:</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_guild'>create_guild</span><span class='lparen'>(</span><span class='label'>name:</span><span class='comma'>,</span> <span class='label'>region:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>icon:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>verification_level:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>default_message_notifications:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                 <span class='label'>explicit_content_filter:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>channels:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span>
     <span class='symbol'>:post</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>region:</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='label'>icon:</span> <span class='id identifier rubyid_icon'>icon</span><span class='comma'>,</span> <span class='label'>verification_level:</span> <span class='id identifier rubyid_verification_level'>verification_level</span><span class='comma'>,</span>
+    <span class='label'>default_message_notifications:</span> <span class='id identifier rubyid_default_message_notifications'>default_message_notifications</span><span class='comma'>,</span> <span class='label'>explicit_content_filter:</span> <span class='id identifier rubyid_explicit_content_filter'>explicit_content_filter</span><span class='comma'>,</span>
+    <span class='label'>roles:</span> <span class='id identifier rubyid_roles'>roles</span><span class='comma'>,</span> <span class='label'>channels:</span> <span class='id identifier rubyid_channels'>channels</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -3569,19 +3514,19 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-ban">d
       <pre class="lines">
 
 
-304
-305
-306
-307
-308
-309
-310
-311
 312
-313</pre>
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_guild_ban'>create_guild_ban</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>delete_message_days:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>delete-message-days</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_delete_message_days'>delete_message_days</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='id identifier rubyid_reason'>reason</span><span class='rparen'>)</span>
@@ -3601,7 +3546,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-ban">d
       <div class="method_details ">
   <h3 class="signature " id="create_guild_channel-instance_method">
   
-    #<strong>create_guild_channel</strong>(guild_id, name:, reason: nil, **params)  &#x21d2; <tt>Object</tt> 
+    #<strong>create_guild_channel</strong>(guild_id, name:, reason: nil, type: nil, topic: nil, bitrate: nil, user_limit: nil, rate_limit_per_user: nil, position: nil, permission_overwrites: nil, parent_id: nil, nsfw: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -3644,7 +3589,18 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-channe
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>topic</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -3655,126 +3611,93 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-channe
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>bitrate</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rate_limit_per_user</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>permission_overwrites</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Guild::Overwrite&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nsfw</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:type</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:topic</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:bitrate</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:user_limit</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:rate_limit_per_user</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:position</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:permission_overwrites</span>
-          <span class="type">(<tt>Array&lt;Guild::Overwrite&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:parent_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:nsfw</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 
 </div><table class="source_code">
@@ -3783,28 +3706,34 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-channe
       <pre class="lines">
 
 
-108
-109
-110
-111
-112
-113
-114
 115
 116
 117
-118</pre>
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 115</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_guild_channel'>create_guild_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>name:</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_guild_channel'>create_guild_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>name:</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>topic:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>bitrate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>user_limit:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                   <span class='label'>rate_limit_per_user:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>position:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>permission_overwrites:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>parent_id:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                                   <span class='label'>nsfw:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_channels</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:post</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/channels</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>type:</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='label'>topic:</span> <span class='id identifier rubyid_topic'>topic</span><span class='comma'>,</span> <span class='label'>bitrate:</span> <span class='id identifier rubyid_bitrate'>bitrate</span><span class='comma'>,</span> <span class='label'>user_limit:</span> <span class='id identifier rubyid_user_limit'>user_limit</span><span class='comma'>,</span>
+     <span class='label'>rate_limit_per_user:</span> <span class='id identifier rubyid_rate_limit_per_user'>rate_limit_per_user</span><span class='comma'>,</span> <span class='label'>position:</span> <span class='id identifier rubyid_position'>position</span><span class='comma'>,</span>
+     <span class='label'>permission_overwrites:</span> <span class='id identifier rubyid_permission_overwrites'>permission_overwrites</span><span class='comma'>,</span> <span class='label'>parent_id:</span> <span class='id identifier rubyid_parent_id'>parent_id</span><span class='comma'>,</span> <span class='label'>nsfw:</span> <span class='id identifier rubyid_nsfw'>nsfw</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -4016,17 +3945,17 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-integr
       <pre class="lines">
 
 
-483
-484
-485
-486
-487
-488
-489
-490</pre>
+491
+492
+493
+494
+495
+496
+497
+498</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 483</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 491</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_guild_integration'>create_guild_integration</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>type:</span><span class='comma'>,</span> <span class='label'>id:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -4044,7 +3973,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-integr
       <div class="method_details ">
   <h3 class="signature " id="create_guild_role-instance_method">
   
-    #<strong>create_guild_role</strong>(guild_id, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span></tt> 
+    #<strong>create_guild_role</strong>(guild_id, reason: nil, name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil)  &#x21d2; <tt><span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span></tt> 
   
 
   
@@ -4076,7 +4005,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-role">
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -4087,79 +4016,60 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-role">
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>permissions</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hoist</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mentionable</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:permissions</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:color</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:hoist</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:mentionable</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -4181,26 +4091,26 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-role">
       <pre class="lines">
 
 
-353
-354
-355
-356
-357
-358
-359
-360
 361
-362</pre>
+362
+363
+364
+365
+366
+367
+368
+369
+370</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 361</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_guild_role'>create_guild_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_guild_role'>create_guild_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>permissions:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>color:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>hoist:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>mentionable:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_roles</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:post</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/roles</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>permissions:</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='comma'>,</span> <span class='label'>color:</span> <span class='id identifier rubyid_color'>color</span><span class='comma'>,</span> <span class='label'>hoist:</span> <span class='id identifier rubyid_hoist'>hoist</span><span class='comma'>,</span> <span class='label'>mentionable:</span> <span class='id identifier rubyid_mentionable'>mentionable</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -4213,7 +4123,7 @@ href="https://discordapp.com/developers/docs/resources/guild#create-guild-role">
       <div class="method_details ">
   <h3 class="signature " id="create_message-instance_method">
   
-    #<strong>create_message</strong>(channel_id, **params)  &#x21d2; <tt><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></tt> 
+    #<strong>create_message</strong>(channel_id, content: nil, embed: nil, tts: nil, file: nil)  &#x21d2; <tt><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></tt> 
   
 
   
@@ -4254,68 +4164,49 @@ href="https://discordapp.com/developers/docs/resources/channel#create-message">d
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>content</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>embed</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Embed.html" title="Rapture::Embed (class)">Embed</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tts</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt>Faraday::UploadIO</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:content</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:embed</span>
-          <span class="type">(<tt><span class='object_link'><a href="Embed.html" title="Rapture::Embed (class)">Embed</a></span></tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:tts</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:file</span>
-          <span class="type">(<tt>Faraday::UploadIO</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -4342,9 +4233,6 @@ href="https://discordapp.com/developers/docs/resources/channel#create-message">d
       <pre class="lines">
 
 
-93
-94
-95
 96
 97
 98
@@ -4360,18 +4248,21 @@ href="https://discordapp.com/developers/docs/resources/channel#create-message">d
 108
 109
 110
-111</pre>
+111
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 96</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_message'>create_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_message'>create_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='label'>content:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>embed:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tts:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>file:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>content:</span> <span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='label'>embed:</span> <span class='id identifier rubyid_embed'>embed</span><span class='comma'>,</span> <span class='label'>tts:</span> <span class='id identifier rubyid_tts'>tts</span><span class='rbrace'>}</span>
 
-  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:file</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_file'>file</span>
     <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span>
       <span class='label'>file:</span> <span class='id identifier rubyid_file'>file</span><span class='comma'>,</span>
-      <span class='label'>payload_json:</span> <span class='const'>Oj</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='label'>payload_json:</span> <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='period'>.</span><span class='id identifier rubyid_encode_json'><span class='object_link'><a href="../Rapture.html#encode_json-class_method" title="Rapture.encode_json (method)">encode_json</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span><span class='comma'>,</span>
     <span class='rbrace'>}</span>
   <span class='kw'>end</span>
 
@@ -4457,18 +4348,18 @@ href="https://discordapp.com/developers/docs/resources/channel#create-message">d
       <pre class="lines">
 
 
-162
-163
-164
 165
 166
 167
 168
 169
-170</pre>
+170
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_reaction'>create_reaction</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='comma'>,</span> <span class='id identifier rubyid_emoji'>emoji</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_emoji'>emoji</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form_component'>encode_www_form_component</span><span class='lparen'>(</span><span class='id identifier rubyid_emoji'>emoji</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_emoji'>emoji</span><span class='period'>.</span><span class='id identifier rubyid_ascii_only?'>ascii_only?</span>
@@ -4661,16 +4552,16 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-all-reacti
       <pre class="lines">
 
 
-210
-211
-212
 213
 214
 215
-216</pre>
+216
+217
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 213</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_all_reactions'>delete_all_reactions</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -4756,8 +4647,6 @@ href="https://discordapp.com/developers/docs/resources/channel#deleteclose-chann
       <pre class="lines">
 
 
-53
-54
 55
 56
 57
@@ -4766,10 +4655,12 @@ href="https://discordapp.com/developers/docs/resources/channel#deleteclose-chann
 60
 61
 62
-63</pre>
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_channel'>delete_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -4840,18 +4731,18 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-channel-pe
       <pre class="lines">
 
 
-271
-272
-273
 274
 275
 276
 277
 278
-279</pre>
+279
+280
+281
+282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 274</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_channel_permission'>delete_channel_permission</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_overwrite_id'>overwrite_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -4920,15 +4811,15 @@ href="https://discordapp.com/developers/docs/resources/channel#group-dm-remove-r
       <pre class="lines">
 
 
-348
-349
-350
 351
 352
-353</pre>
+353
+354
+355
+356</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 348</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 351</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_group_dm_recipient'>delete_group_dm_recipient</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -4983,16 +4874,16 @@ href="https://discordapp.com/developers/docs/resources/guild#delete-guild">disco
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78</pre>
+80
+81
+82
+83
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_guild'>delete_guild</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -5150,16 +5041,16 @@ href="https://discordapp.com/developers/docs/resources/guild#delete-guild-integr
       <pre class="lines">
 
 
-513
-514
-515
-516
-517
-518
-519</pre>
+521
+522
+523
+524
+525
+526
+527</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 513</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 521</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_guild_integration'>delete_guild_integration</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_integration_id'>integration_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -5237,18 +5128,18 @@ href="https://discordapp.com/developers/docs/resources/guild#delete-guild-role">
       <pre class="lines">
 
 
-410
-411
-412
-413
-414
-415
-416
-417
-418</pre>
+418
+419
+420
+421
+422
+423
+424
+425
+426</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 410</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 418</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_guild_role'>delete_guild_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -5412,18 +5303,18 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-message">d
       <pre class="lines">
 
 
-134
-135
-136
 137
 138
 139
 140
 141
-142</pre>
+142
+143
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_message'>delete_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -5508,18 +5399,18 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-own-reacti
       <pre class="lines">
 
 
-177
-178
-179
 180
 181
 182
 183
 184
-185</pre>
+185
+186
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 180</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_own_reaction'>delete_own_reaction</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='comma'>,</span> <span class='id identifier rubyid_emoji'>emoji</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_emoji'>emoji</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form_component'>encode_www_form_component</span><span class='lparen'>(</span><span class='id identifier rubyid_emoji'>emoji</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_emoji'>emoji</span><span class='period'>.</span><span class='id identifier rubyid_ascii_only?'>ascii_only?</span>
@@ -5588,16 +5479,16 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-pinned-cha
       <pre class="lines">
 
 
-321
-322
-323
 324
 325
 326
-327</pre>
+327
+328
+329
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 321</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_pinned_message'>delete_pinned_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -5702,9 +5593,6 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-own-reacti
       <pre class="lines">
 
 
-194
-195
-196
 197
 198
 199
@@ -5712,10 +5600,13 @@ href="https://discordapp.com/developers/docs/resources/channel#delete-own-reacti
 201
 202
 203
-204</pre>
+204
+205
+206
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 194</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 197</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_user_reaction'>delete_user_reaction</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='comma'>,</span> <span class='id identifier rubyid_emoji'>emoji</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_emoji'>emoji</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form_component'>encode_www_form_component</span><span class='lparen'>(</span><span class='id identifier rubyid_emoji'>emoji</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_emoji'>emoji</span><span class='period'>.</span><span class='id identifier rubyid_ascii_only?'>ascii_only?</span>
@@ -6005,18 +5896,18 @@ href="https://discordapp.com/developers/docs/resources/channel#edit-channel-perm
       <pre class="lines">
 
 
-225
-226
-227
 228
 229
 230
 231
 232
-233</pre>
+233
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 228</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_edit_channel_permissions'>edit_channel_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_overwrite_id'>overwrite_id</span><span class='comma'>,</span> <span class='label'>allow:</span><span class='comma'>,</span> <span class='label'>deny:</span><span class='comma'>,</span> <span class='label'>type:</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -6035,7 +5926,7 @@ href="https://discordapp.com/developers/docs/resources/channel#edit-channel-perm
       <div class="method_details ">
   <h3 class="signature " id="edit_message-instance_method">
   
-    #<strong>edit_message</strong>(channel_id, message_id, **params)  &#x21d2; <tt><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></tt> 
+    #<strong>edit_message</strong>(channel_id, message_id, content: nil, embed: nil)  &#x21d2; <tt><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></tt> 
   
 
   
@@ -6078,52 +5969,27 @@ href="https://discordapp.com/developers/docs/resources/channel#edit-message">dis
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>content</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>embed</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Embed.html" title="Rapture::Embed (class)">Embed</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:content</span>
-          <span class="type">(<tt>String</tt>, <tt>nil</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:embed</span>
-          <span class="type">(<tt><span class='object_link'><a href="Embed.html" title="Rapture::Embed (class)">Embed</a></span></tt>, <tt>nil</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -6150,25 +6016,25 @@ href="https://discordapp.com/developers/docs/resources/channel#edit-message">dis
       <pre class="lines">
 
 
-120
-121
-122
 123
 124
 125
 126
 127
-128</pre>
+128
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 123</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_edit_message'>edit_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_edit_message'>edit_message</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='id identifier rubyid_message_id'>message_id</span><span class='comma'>,</span> <span class='label'>content:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>embed:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:channels_cid_messages_mid</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channels/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/messages/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_message_id'>message_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span>
+    <span class='label'>content:</span> <span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='label'>embed:</span> <span class='id identifier rubyid_embed'>embed</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -6180,7 +6046,7 @@ href="https://discordapp.com/developers/docs/resources/channel#edit-message">dis
       <div class="method_details ">
   <h3 class="signature " id="execute_webhook-instance_method">
   
-    #<strong>execute_webhook</strong>(webhook_id, webhook_token, wait: false, **params)  &#x21d2; <tt>Object</tt> 
+    #<strong>execute_webhook</strong>(webhook_id, webhook_token, wait: false, content: nil, username: nil, avatar_url: nil, tts: nil, file: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -6242,94 +6108,71 @@ href="https://discordapp.com/developers/docs/resources/webhook#execute-webhook">
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>content</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>username</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>avatar_url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tts</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt>Faraday::UploadIO</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>embeds</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="Embed.html" title="Rapture::Embed (class)">Embed</a></span>, Hash&gt;</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:content</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:username</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:avatar_url</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:tts</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:file</span>
-          <span class="type">(<tt>String</tt>, <tt>IO</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-            &mdash; <div class='inline'>
-<p>path to a file or IO</p>
-</div>
-          
-        </li>
-      
-        <li>
-          <span class="name">:embeds</span>
-          <span class="type">(<tt>Array&lt;<span class='object_link'><a href="Embed.html" title="Rapture::Embed (class)">Embed</a></span>, Hash&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 
 </div><table class="source_code">
@@ -6349,27 +6192,15 @@ href="https://discordapp.com/developers/docs/resources/webhook#execute-webhook">
 167
 168
 169
-170
-171
-172
-173
-174
-175
-176</pre>
+170</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/webhook.rb', line 159</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_execute_webhook'>execute_webhook</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='comma'>,</span> <span class='label'>wait:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:file</span><span class='rbracket'>]</span>
-    <span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:file</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-      <span class='label'>file:</span> <span class='id identifier rubyid_file'>file</span><span class='comma'>,</span>
-      <span class='label'>payload_json:</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='comma'>,</span>
-    <span class='rbrace'>}</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span>
-  <span class='kw'>end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_execute_webhook'>execute_webhook</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='comma'>,</span> <span class='label'>wait:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>content:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>username:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>avatar_url:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>tts:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>file:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>content:</span> <span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='label'>username:</span> <span class='id identifier rubyid_username'>username</span><span class='comma'>,</span> <span class='label'>avatar_url:</span> <span class='id identifier rubyid_avatar_url'>avatar_url</span><span class='comma'>,</span> <span class='label'>tts:</span> <span class='id identifier rubyid_tts'>tts</span><span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>file:</span> <span class='id identifier rubyid_file'>file</span><span class='comma'>,</span> <span class='label'>payload_json:</span> <span class='const'>Oj</span><span class='period'>.</span><span class='id identifier rubyid_dump'>dump</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_file'>file</span>
 
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:webhooks_wid_wt</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span>
@@ -6518,16 +6349,16 @@ href="https://discordapp.com/developers/docs/resources/channel#get-channel-get_c
       <pre class="lines">
 
 
-239
-240
-241
 242
 243
 244
-245</pre>
+245
+246
+247
+248</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 242</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_channel_invites'>get_channel_invites</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -6544,7 +6375,7 @@ href="https://discordapp.com/developers/docs/resources/channel#get-channel-get_c
       <div class="method_details ">
   <h3 class="signature " id="get_channel_messages-instance_method">
   
-    #<strong>get_channel_messages</strong>(channel_id, **params)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span>&gt;</tt> 
+    #<strong>get_channel_messages</strong>(channel_id, limit: nil, around: nil, before: nil, after: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span>&gt;</tt> 
   
 
   
@@ -6577,68 +6408,54 @@ unless the user has <code>READ_MESSAGE_HISTORY</code> permission.</p>
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>around</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>before</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>after</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>a customizable set of options</p>
+<p>The maximum amount of messages to retrieve.</p>
 </div>
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:around</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:before</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:after</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:limit</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -6660,24 +6477,26 @@ unless the user has <code>READ_MESSAGE_HISTORY</code> permission.</p>
       <pre class="lines">
 
 
-74
-75
 76
 77
 78
 79
 80
 81
-82</pre>
+82
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 76</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_channel_messages'>get_channel_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_channel_messages'>get_channel_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>around:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>before:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>after:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='comma'>,</span> <span class='label'>around:</span> <span class='id identifier rubyid_around'>around</span><span class='comma'>,</span> <span class='label'>before:</span> <span class='id identifier rubyid_before'>before</span><span class='comma'>,</span> <span class='label'>after:</span> <span class='id identifier rubyid_after'>after</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:channels_cid_messages</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span>
     <span class='symbol'>:get</span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channels/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/messages?</span><span class='embexpr_beg'>#{</span><span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channels/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/messages?</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_query'>query</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Message.html" title="Rapture::Message (class)">Message</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json_array'>from_json_array</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -7133,17 +6952,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild">discorda
       <pre class="lines">
 
 
-33
-34
-35
 36
 37
 38
 39
-40</pre>
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild'>get_guild</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7161,7 +6980,7 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild">discorda
       <div class="method_details ">
   <h3 class="signature " id="get_guild_audit_log-instance_method">
   
-    #<strong>get_guild_audit_log</strong>(guild_id, **params)  &#x21d2; <tt><span class='object_link'><a href="AuditLog.html" title="Rapture::AuditLog (class)">AuditLog</a></span></tt> 
+    #<strong>get_guild_audit_log</strong>(guild_id, user_id: nil, action_type: nil, before: nil, limit: nil)  &#x21d2; <tt><span class='object_link'><a href="AuditLog.html" title="Rapture::AuditLog (class)">AuditLog</a></span></tt> 
   
 
   
@@ -7192,68 +7011,49 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild">discorda
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>user_id</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>action_type</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>before</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:user_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:action_type</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:before</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:limit</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -7288,8 +7088,8 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild">discorda
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/audit_log.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_guild_audit_log'>get_guild_audit_log</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_guild_audit_log'>get_guild_audit_log</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>user_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>action_type:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>before:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>user_id:</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>action_type:</span> <span class='id identifier rubyid_action_type'>action_type</span><span class='comma'>,</span> <span class='label'>before:</span> <span class='id identifier rubyid_before'>before</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_audit_logs</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:get</span><span class='comma'>,</span>
@@ -7368,17 +7168,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-ban">disc
       <pre class="lines">
 
 
-289
-290
-291
-292
-293
-294
-295
-296</pre>
+297
+298
+299
+300
+301
+302
+303
+304</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 289</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 297</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_ban'>get_guild_ban</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7448,17 +7248,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-bans">dis
       <pre class="lines">
 
 
-275
-276
-277
-278
-279
-280
-281
-282</pre>
+283
+284
+285
+286
+287
+288
+289
+290</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 283</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_bans'>get_guild_bans</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7528,17 +7328,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-channels"
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91</pre>
+92
+93
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_channels'>get_guild_channels</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7608,17 +7408,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-embed">di
       <pre class="lines">
 
 
-533
-534
-535
-536
-537
-538
-539
-540</pre>
+541
+542
+543
+544
+545
+546
+547
+548</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 533</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 541</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_embed'>get_guild_embed</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7779,17 +7579,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-integrati
       <pre class="lines">
 
 
-469
-470
-471
-472
-473
-474
-475
-476</pre>
+477
+478
+479
+480
+481
+482
+483
+484</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 469</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 477</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_integrations'>get_guild_integrations</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7870,17 +7670,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-member">d
       <pre class="lines">
 
 
-139
-140
-141
-142
-143
-144
-145
-146</pre>
+149
+150
+151
+152
+153
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_member'>get_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -7951,17 +7751,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-prune-cou
       <pre class="lines">
 
 
-425
-426
-427
-428
-429
-430
-431
-432</pre>
+433
+434
+435
+436
+437
+438
+439
+440</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 425</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 433</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_prune_count'>get_guild_prune_count</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -8031,17 +7831,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-roles">di
       <pre class="lines">
 
 
-334
-335
-336
-337
-338
-339
-340
-341</pre>
+342
+343
+344
+345
+346
+347
+348
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 334</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 342</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_roles'>get_guild_roles</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -8111,17 +7911,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-vanity-ur
       <pre class="lines">
 
 
-561
-562
-563
-564
-565
-566
-567
-568</pre>
+569
+570
+571
+572
+573
+574
+575
+576</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 561</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 569</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_vanity_url'>get_guild_vanity_url</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -8191,17 +7991,17 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-voice-get
       <pre class="lines">
 
 
-456
-457
-458
-459
-460
-461
-462
-463</pre>
+464
+465
+466
+467
+468
+469
+470
+471</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 456</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 464</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_voice_regions'>get_guild_voice_regions</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -8344,16 +8144,16 @@ href="https://discordapp.com/developers/docs/resources/guild#get-guild-widget-im
       <pre class="lines">
 
 
-574
-575
-576
-577
-578
-579
-580</pre>
+582
+583
+584
+585
+586
+587
+588</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 574</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 582</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_widget_image'>get_guild_widget_image</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>style:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -8504,17 +8304,17 @@ href="https://discordapp.com/developers/docs/resources/channel#get-pinned-messag
       <pre class="lines">
 
 
-296
-297
-298
 299
 300
 301
 302
-303</pre>
+303
+304
+305
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 296</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 299</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_pinned_messages'>get_pinned_messages</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -9065,7 +8865,7 @@ href="https://discordapp.com/developers/docs/resources/emoji#list-guild-emojis">
       <div class="method_details ">
   <h3 class="signature " id="list_guild_members-instance_method">
   
-    #<strong>list_guild_members</strong>(guild_id, limit: 1, after: 0)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Member.html" title="Rapture::Member (class)">Member</a></span>&gt;</tt> 
+    #<strong>list_guild_members</strong>(guild_id, limit: nil, after: nil)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="Member.html" title="Rapture::Member (class)">Member</a></span>&gt;</tt> 
   
 
   
@@ -9139,21 +8939,21 @@ href="https://discordapp.com/developers/docs/resources/guild#list-guild-members"
       <pre class="lines">
 
 
-154
-155
-156
-157
-158
-159
-160
-161
-162</pre>
+164
+165
+166
+167
+168
+169
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 164</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_list_guild_members'>list_guild_members</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='int'>1</span><span class='comma'>,</span> <span class='label'>after:</span> <span class='int'>0</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='comma'>,</span> <span class='label'>after:</span> <span class='id identifier rubyid_after'>after</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_list_guild_members'>list_guild_members</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>after:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='comma'>,</span> <span class='label'>after:</span> <span class='id identifier rubyid_after'>after</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_members</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:get</span><span class='comma'>,</span>
@@ -9221,7 +9021,7 @@ href="https://discordapp.com/developers/docs/resources/voice#list-voice-regions"
       <div class="method_details ">
   <h3 class="signature " id="modify_channel-instance_method">
   
-    #<strong>modify_channel</strong>(channel_id, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></tt> 
+    #<strong>modify_channel</strong>(channel_id, reason: nil, name: nil, position: nil, topic: nil, nsfw: nil, rate_limit_per_user: nil, bitrate: nil, user_limit: nil, permission_overwrites: nil, parent_id: nil)  &#x21d2; <tt><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></tt> 
   
 
   
@@ -9253,10 +9053,103 @@ href="https://discordapp.com/developers/docs/resources/channel#modify-channel">d
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>name</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>position</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>topic</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nsfw</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rate_limit_per_user</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>:rate_limit_per_user</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bitrate</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>permission_overwrites</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Guild::Overwrite&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>parent_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>String</tt>)</span>
       
       
       
@@ -9274,100 +9167,6 @@ href="https://discordapp.com/developers/docs/resources/channel#modify-channel">d
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:position</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:topic</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:nsfw</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:rate_limit_per_user</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:bitrate</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:user_limit</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:permission_overwrites</span>
-          <span class="type">(<tt>Array&lt;Guild::Overwrite&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:parent_id</span>
-          <span class="type">(<tt>Integer</tt>, <tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -9394,6 +9193,7 @@ href="https://discordapp.com/developers/docs/resources/channel#modify-channel">d
       <pre class="lines">
 
 
+34
 35
 36
 37
@@ -9404,17 +9204,22 @@ href="https://discordapp.com/developers/docs/resources/channel#modify-channel">d
 42
 43
 44
-45</pre>
+45
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 34</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_channel'>modify_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_channel'>modify_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span>
+                   <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>position:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>topic:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>nsfw:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>rate_limit_per_user:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                   <span class='label'>bitrate:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>user_limit:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>permission_overwrites:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>parent_id:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:channels_cid</span><span class='comma'>,</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>channels/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>position:</span> <span class='id identifier rubyid_position'>position</span><span class='comma'>,</span> <span class='label'>topic:</span> <span class='id identifier rubyid_topic'>topic</span><span class='comma'>,</span> <span class='label'>nsfw:</span> <span class='id identifier rubyid_nsfw'>nsfw</span><span class='comma'>,</span> <span class='label'>rate_limit_per_user:</span> <span class='id identifier rubyid_rate_limit_per_user'>rate_limit_per_user</span><span class='comma'>,</span>
+     <span class='label'>bitrate:</span> <span class='id identifier rubyid_bitrate'>bitrate</span><span class='comma'>,</span> <span class='label'>user_limit:</span> <span class='id identifier rubyid_user_limit'>user_limit</span><span class='comma'>,</span> <span class='label'>permission_overwrites:</span> <span class='id identifier rubyid_permission_overwrites'>permission_overwrites</span><span class='comma'>,</span> <span class='label'>parent_id:</span> <span class='id identifier rubyid_parent_id'>parent_id</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
@@ -9496,18 +9301,18 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-current-user
       <pre class="lines">
 
 
-214
-215
-216
-217
-218
-219
-220
-221
-222</pre>
+222
+223
+224
+225
+226
+227
+228
+229
+230</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 222</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_current_user_nick'>modify_current_user_nick</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>nick:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -9526,7 +9331,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-current-user
       <div class="method_details ">
   <h3 class="signature " id="modify_guild-instance_method">
   
-    #<strong>modify_guild</strong>(guild_id, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt> 
+    #<strong>modify_guild</strong>(guild_id, reason: nil, name: nil, region: nil, verification_level: nil, default_message_notifications: nil, explicit_content_filter: nil, afk_channel_id: nil, afk_timeout: nil, icon: nil, owner_id: nil, splash: nil, system_channel_id: nil)  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt> 
   
 
   
@@ -9558,7 +9363,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild">disco
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -9569,133 +9374,126 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild">disco
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>region</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>verification_level</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default_message_notification</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>explicit_content_filter</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>afk_channel_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>afk_timeout</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>icon</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>owner_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>splash</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>system_channel_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:region</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:verification_level</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:default_message_notification</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:explicit_content_filter</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:afk_channel_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:afk_timeout</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:icon</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:owner_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:splash</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:system_channel_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -9722,26 +9520,36 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild">disco
       <pre class="lines">
 
 
-58
-59
-60
 61
 62
 63
 64
 65
 66
-67</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 61</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild'>modify_guild</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild'>modify_guild</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>region:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>verification_level:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                           <span class='label'>default_message_notifications:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>explicit_content_filter:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                           <span class='label'>afk_channel_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>afk_timeout:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>icon:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>owner_id:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>splash:</span> <span class='kw'>nil</span><span class='comma'>,</span>
+                           <span class='label'>system_channel_id:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>region:</span> <span class='id identifier rubyid_region'>region</span><span class='comma'>,</span> <span class='label'>verification_level:</span> <span class='id identifier rubyid_verification_level'>verification_level</span><span class='comma'>,</span> <span class='label'>default_message_notifications:</span> <span class='id identifier rubyid_default_message_notifications'>default_message_notifications</span><span class='comma'>,</span>
+     <span class='label'>explicit_content_filter:</span> <span class='id identifier rubyid_explicit_content_filter'>explicit_content_filter</span><span class='comma'>,</span> <span class='label'>afk_channel_id:</span> <span class='id identifier rubyid_afk_channel_id'>afk_channel_id</span><span class='comma'>,</span> <span class='label'>afk_timeout:</span> <span class='id identifier rubyid_afk_timeout'>afk_timeout</span><span class='comma'>,</span>
+     <span class='label'>icon:</span> <span class='id identifier rubyid_icon'>icon</span><span class='comma'>,</span> <span class='label'>owner_id:</span> <span class='id identifier rubyid_owner_id'>owner_id</span><span class='comma'>,</span> <span class='label'>splash:</span> <span class='id identifier rubyid_splash'>splash</span><span class='comma'>,</span> <span class='label'>system_channel_id:</span> <span class='id identifier rubyid_system_channel_id'>system_channel_id</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -9804,18 +9612,18 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-channe
       <pre class="lines">
 
 
-124
-125
-126
-127
-128
-129
-130
-131
-132</pre>
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_channel_positions'>modify_guild_channel_positions</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_positions'>positions</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -9834,7 +9642,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-channe
       <div class="method_details ">
   <h3 class="signature " id="modify_guild_embed-instance_method">
   
-    #<strong>modify_guild_embed</strong>(guild_id, **params)  &#x21d2; <tt>Object</tt> 
+    #<strong>modify_guild_embed</strong>(guild_id, enabled: nil, channel_id: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -9866,50 +9674,27 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-embed"
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>enabled</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:enabled</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:channel_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 
 </div><table class="source_code">
@@ -9918,25 +9703,25 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-embed"
       <pre class="lines">
 
 
-547
-548
-549
-550
-551
-552
-553
-554
-555</pre>
+555
+556
+557
+558
+559
+560
+561
+562
+563</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 547</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 555</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_embed'>modify_guild_embed</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_embed'>modify_guild_embed</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>enabled:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>channel_id:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_embed</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/embed</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span>
+    <span class='label'>enabled:</span> <span class='id identifier rubyid_enabled'>enabled</span><span class='comma'>,</span> <span class='label'>channel_id:</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Guild/Embed.html" title="Rapture::Guild::Embed (class)">Embed</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -9948,7 +9733,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-embed"
       <div class="method_details ">
   <h3 class="signature " id="modify_guild_emoji-instance_method">
   
-    #<strong>modify_guild_emoji</strong>(guild_id, emoji_id, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></tt> 
+    #<strong>modify_guild_emoji</strong>(guild_id, emoji_id, reason: nil, name: nil, roles: nil)  &#x21d2; <tt><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></tt> 
   
 
   
@@ -9991,7 +9776,7 @@ href="https://discordapp.com/developers/docs/resources/emoji#modify-guild-emoji"
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -10002,58 +9787,32 @@ href="https://discordapp.com/developers/docs/resources/emoji#modify-guild-emoji"
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>roles</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Array&lt;String, Integer&gt;</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>a customizable set of options</p>
+<p>array of role IDs that can use this emoji</p>
 </div>
       
     </li>
   
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:roles</span>
-          <span class="type">(<tt>Array&lt;String, Integer&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-            &mdash; <div class='inline'>
-<p>array of role IDs that can use this emoji</p>
-</div>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -10089,12 +9848,12 @@ href="https://discordapp.com/developers/docs/resources/emoji#modify-guild-emoji"
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/emoji.rb', line 61</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_emoji'>modify_guild_emoji</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_emoji_id'>emoji_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_emoji'>modify_guild_emoji</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_emoji_id'>emoji_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guild_gid_emojis_eid</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/emojis/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_emoji_id'>emoji_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='id identifier rubyid_roles'>roles</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -10190,17 +9949,17 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-integr
       <pre class="lines">
 
 
-500
-501
-502
-503
-504
-505
-506
-507</pre>
+508
+509
+510
+511
+512
+513
+514
+515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 500</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 508</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_integration'>modify_guild_integration</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_integration_id'>integration_id</span><span class='comma'>,</span> <span class='label'>expire_behavior:</span><span class='comma'>,</span> <span class='label'>expire_grace_period:</span><span class='comma'>,</span> <span class='label'>enable_emoticons:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -10218,7 +9977,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-integr
       <div class="method_details ">
   <h3 class="signature " id="modify_guild_member-instance_method">
   
-    #<strong>modify_guild_member</strong>(guild_id, user_id, reason: nil, **params)  &#x21d2; <tt>Object</tt> 
+    #<strong>modify_guild_member</strong>(guild_id, user_id, reason: nil, nick: nil, roles: nil, mute: nil, deaf: nil, channel_id: nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -10261,7 +10020,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-member
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>nick</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -10272,81 +10031,60 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-member
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>roles</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Array&lt;String, Integer&gt;</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>mute</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>deaf</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:nick</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:roles</span>
-          <span class="type">(<tt>Array&lt;String, Integer&gt;</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:mute</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:deaf</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:channel_id</span>
-          <span class="type">(<tt>String</tt>, <tt>Integer</tt>, <tt>nil</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 
 </div><table class="source_code">
@@ -10355,25 +10093,25 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-member
       <pre class="lines">
 
 
-199
-200
-201
-202
-203
-204
-205
-206
-207</pre>
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 207</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_member'>modify_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_member'>modify_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>nick:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>mute:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>deaf:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>channel_id:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guilds_gid_members_uid</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/members/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user_id'>user_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>nick:</span> <span class='id identifier rubyid_nick'>nick</span><span class='comma'>,</span> <span class='label'>roles:</span> <span class='id identifier rubyid_roles'>roles</span><span class='comma'>,</span> <span class='label'>mute:</span> <span class='id identifier rubyid_mute'>mute</span><span class='comma'>,</span> <span class='label'>deaf:</span> <span class='id identifier rubyid_deaf'>deaf</span><span class='comma'>,</span> <span class='label'>channel_id:</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -10385,7 +10123,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-member
       <div class="method_details ">
   <h3 class="signature " id="modify_guild_role-instance_method">
   
-    #<strong>modify_guild_role</strong>(guild_id, role_id, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span></tt> 
+    #<strong>modify_guild_role</strong>(guild_id, role_id, reason: nil, name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil)  &#x21d2; <tt><span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span></tt> 
   
 
   
@@ -10428,7 +10166,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-role">
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -10439,81 +10177,60 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-role">
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>permissions</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>color</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hoist</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mentionable</span>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:permissions</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:color</span>
-          <span class="type">(<tt>Integer</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:hoist</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:mentionable</span>
-          <span class="type">(<tt>true</tt>, <tt>false</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -10535,27 +10252,27 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-role">
       <pre class="lines">
 
 
-393
-394
-395
-396
-397
-398
-399
-400
 401
 402
-403</pre>
+403
+404
+405
+406
+407
+408
+409
+410
+411</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 393</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 401</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_role'>modify_guild_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_role'>modify_guild_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>permissions:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>color:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>hoist:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>mentionable:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:guild_gid_roles_rid</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>guilds/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/roles/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_role_id'>role_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>permissions:</span> <span class='id identifier rubyid_permissions'>permissions</span><span class='comma'>,</span> <span class='label'>color:</span> <span class='id identifier rubyid_color'>color</span><span class='comma'>,</span> <span class='label'>hoist:</span> <span class='id identifier rubyid_hoist'>hoist</span><span class='comma'>,</span> <span class='label'>mentionable:</span> <span class='id identifier rubyid_mentionable'>mentionable</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
 
@@ -10643,20 +10360,20 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-role-p
       <pre class="lines">
 
 
-370
-371
-372
-373
-374
-375
-376
-377
 378
 379
-380</pre>
+380
+381
+382
+383
+384
+385
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 370</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 378</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modify_guild_role_positions'>modify_guild_role_positions</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_positions'>positions</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -10677,7 +10394,7 @@ href="https://discordapp.com/developers/docs/resources/guild#modify-guild-role-p
       <div class="method_details ">
   <h3 class="signature " id="modify_webhook-instance_method">
   
-    #<strong>modify_webhook</strong>(webhook_id, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></tt> 
+    #<strong>modify_webhook</strong>(webhook_id, reason: nil, name: nil, avatar: nil)  &#x21d2; <tt><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></tt> 
   
 
   
@@ -10709,7 +10426,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -10720,17 +10437,23 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>avatar</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
@@ -10759,29 +10482,8 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
     
     
     
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:avatar</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
+    
+    
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -10817,12 +10519,12 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/webhook.rb', line 87</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_webhook'>modify_webhook</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_webhook'>modify_webhook</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>avatar:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:webhooks_wid</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>webhooks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>avatar:</span> <span class='id identifier rubyid_avatar'>avatar</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -10835,7 +10537,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook">d
       <div class="method_details ">
   <h3 class="signature " id="modify_webhook_with_token-instance_method">
   
-    #<strong>modify_webhook_with_token</strong>(webhook_id, webhook_token, reason: nil, **params)  &#x21d2; <tt><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></tt> 
+    #<strong>modify_webhook_with_token</strong>(webhook_id, webhook_token, reason: nil, name: nil, avatar: nil, channel_id: nil)  &#x21d2; <tt><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></tt> 
   
 
   
@@ -10878,7 +10580,7 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook-wi
   
     <li>
       
-        <span class='name'>reason</span>
+        <span class='name'>name</span>
       
       
         <span class='type'>(<tt>String</tt>)</span>
@@ -10889,17 +10591,12 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook-wi
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>avatar</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
-      
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
       
     </li>
   
@@ -10908,51 +10605,24 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook-wi
         <span class='name'>channel_id</span>
       
       
-        <span class='type'>(<tt>Hash</tt>)</span>
+        <span class='type'>(<tt>String</tt>, <tt>Integer</tt>)</span>
       
       
       
-        &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
-</div>
+    </li>
+  
+    <li>
+      
+        <span class='name'>reason</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
       
     </li>
   
 </ul>
-
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    <p class="tag_title">Options Hash (<tt>**params</tt>):</p>
-    <ul class="option">
-      
-        <li>
-          <span class="name">:name</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-        <li>
-          <span class="name">:avatar</span>
-          <span class="type">(<tt>String</tt>)</span>
-          <span class="default">
-            
-          </span>
-          
-        </li>
-      
-    </ul>
-  
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -10988,12 +10658,12 @@ href="https://discordapp.com/developers/docs/resources/webhook#modify-webhook-wi
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/rest/webhook.rb', line 107</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_modify_webhook_with_token'>modify_webhook_with_token</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_modify_webhook_with_token'>modify_webhook_with_token</span><span class='lparen'>(</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>avatar:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>channel_id:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
     <span class='symbol'>:webhooks_wid_wt</span><span class='comma'>,</span> <span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='comma'>,</span>
     <span class='symbol'>:patch</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>webhooks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_id'>webhook_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_webhook_token'>webhook_token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span>
+    <span class='lbrace'>{</span><span class='label'>name:</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>avatar:</span> <span class='id identifier rubyid_avatar'>avatar</span><span class='comma'>,</span> <span class='label'>channel_id:</span> <span class='id identifier rubyid_channel_id'>channel_id</span><span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>X-Audit-Log-Reason</span><span class='label_end'>&#39;:</span> <span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span>
   <span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -11067,18 +10737,18 @@ href="https://discordapp.com/developers/docs/resources/guild#remove-guild-ban">d
       <pre class="lines">
 
 
-320
-321
-322
-323
-324
-325
-326
-327
-328</pre>
+328
+329
+330
+331
+332
+333
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 320</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 328</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_guild_ban'>remove_guild_ban</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -11158,18 +10828,18 @@ href="https://discordapp.com/developers/docs/resources/guild#remove-guild-member
       <pre class="lines">
 
 
-261
-262
-263
-264
-265
-266
-267
-268
-269</pre>
+269
+270
+271
+272
+273
+274
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 261</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 269</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_guild_member'>remove_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -11260,18 +10930,18 @@ href="https://discordapp.com/developers/docs/resources/guild#remove-guild-member
       <pre class="lines">
 
 
-246
-247
-248
-249
-250
-251
-252
-253
-254</pre>
+254
+255
+256
+257
+258
+259
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 246</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_guild_member_role'>remove_guild_member_role</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='id identifier rubyid_role_id'>role_id</span><span class='comma'>,</span> <span class='label'>reason:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -11302,16 +10972,16 @@ href="https://discordapp.com/developers/docs/resources/guild#remove-guild-member
       <pre class="lines">
 
 
-521
-522
-523
-524
-525
-526
-527</pre>
+529
+530
+531
+532
+533
+534
+535</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 521</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/guild.rb', line 529</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sync_guild_integration'>sync_guild_integration</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_integration_id'>integration_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -11367,16 +11037,16 @@ href="https://discordapp.com/developers/docs/resources/channel#trigger-typing-in
       <pre class="lines">
 
 
-284
-285
-286
 287
 288
 289
-290</pre>
+290
+291
+292
+293</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/rest/channel.rb', line 287</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_trigger_typing_indicator'>trigger_typing_indicator</span><span class='lparen'>(</span><span class='id identifier rubyid_channel_id'>channel_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span>
@@ -11395,7 +11065,7 @@ href="https://discordapp.com/developers/docs/resources/channel#trigger-typing-in
 </div>
 
       <div id="footer">
-  Generated on Tue Aug 13 02:13:16 2019 by
+  Generated on Tue Aug 13 23:01:16 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
