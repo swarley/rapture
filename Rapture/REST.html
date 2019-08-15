@@ -6831,7 +6831,7 @@ href="https://discordapp.com/developers/docs/topics/gateway#get-gateway">discord
       <pre class="code"><span class="info file"># File 'lib/rapture/rest.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_gateway'>get_gateway</span>
-  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gateway</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:gateway</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gateway</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GatewayInfo.html" title="Rapture::GatewayInfo (class)">GatewayInfo</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -6889,7 +6889,7 @@ href="https://discordapp.com/developers/docs/topics/gateway#get-gateway-bot">dis
       <pre class="code"><span class="info file"># File 'lib/rapture/rest.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_gateway_bot'>get_gateway_bot</span>
-  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gateway/bot</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='symbol'>:gateway_bot</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='symbol'>:get</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>gateway/bot</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="GatewayInfo.html" title="Rapture::GatewayInfo (class)">GatewayInfo</a></span></span><span class='period'>.</span><span class='id identifier rubyid_from_json'>from_json</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -11065,7 +11065,7 @@ href="https://discordapp.com/developers/docs/resources/channel#trigger-typing-in
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 08:15:13 2019 by
+  Generated on Thu Aug 15 16:34:36 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
