@@ -64,73 +64,11 @@ module Rapture::HTTP
     end
   end
 
-  # Class for tracking requests and their rate limits
-  class RateLimit
-    attr_reader :reset
-    attr_reader :remaining
-    attr_reader :limit
-
-    def initialize
-      @mutex = Mutex.new
-    end
-
-    # Caches new headers
-    def headers=(headers)
-      @global = headers["x-ratelimit-global"]
-
-      @limit = headers["x-ratelimit-limit"]&.to_i
-
-      @remaining = headers["x-ratelimit-remaining"]&.to_i
-
-      @now = Time.rfc2822(headers["date"])
-
-      reset_time = headers["x-ratelimit-reset"]&.to_f
-      @reset = Time.at(reset_time) if reset_time
-    end
-
-    # @return [true, false] if the next request would be rate limited
-    def will_be_rate_limited?
-      return false unless headers?
-      return false if Time.now > @reset
-
-      @remaining.zero?
-    end
-
-    # Locks the mutex until the reset time has elapsed
-    def sleep_until_reset
-      sleep_for @reset - @now
-    end
-
-    # Locks the mutex for the specified amount of time
-    # @param time [Integer] amount of time to sleep during synchronization
-    def sleep_for(time)
-      @mutex.synchronize { sleep time }
-    end
-
-    # Check to see if this limiter is currently being locked.
-    def locked?
-      @mutex.locked?
-    end
-
-    # Wait for this to limiter to become available again.
-    def wait_for_unlock
-      @mutex.lock
-      @mutex.unlock
-    end
-
-    private
-
-    # Checks that we have enough data cached to perform
-    # preemptive ratelimit checks
-    def headers?
-      @remaining && @now && @reset
-    end
-  end
-
   # Makes a request to the API, applying handling for preemptive rate limits
   # and additional exception handling
   def request(key, major_param, method, endpoint, body = nil, headers = {})
-    @rate_limits ||= Hash.new { |hash, rl_key| hash[rl_key] = RateLimit.new }
+    @limiter ||= RateLimiter.new
+
     rl_key = [key, major_param].freeze
     body = Rapture.encode_json(body) if body
 
@@ -138,14 +76,14 @@ module Rapture::HTTP
       run_request(rl_key, method, endpoint, body, headers)
     rescue Rapture::TooManyRequests => e
       limited_key = e.global ? :global : rl_key
-      rl = @rate_limits[limited_key]
+      rl = @limiter.get_from_key(limited_key)
 
       log_too_many_requests(limited_key, e.retry_after)
 
       if rl.locked?
-        rl.wait_for_unlock
+        rl.wait_until_available
       else
-        @rate_limits[limited_key].sleep_for e.retry_after
+        rl.lock_for e.retry_after
       end
 
       retry
@@ -155,34 +93,35 @@ module Rapture::HTTP
   # @!visibility private
   # Handle preemtive rate limiting, running the request, and logging the response
   def run_request(key, *args)
-    rl = @rate_limits[key]
     preemptive_rl_wait(key)
     preemptive_rl_wait(:global)
 
     resp = faraday.run_request(*args)
-    handle_http_response(rl, resp)
+    handle_http_response(key, resp)
   end
 
   # @!visibility private
   # Lock a rate limit mutex preemptively if the next request would deplete the bucket.
   def preemptive_rl_wait(key)
-    rate_limit = @rate_limits[key]
-    return unless rate_limit.will_be_rate_limited?
+    return if (bucket = @limiter.get_from_key(key)).nil?
 
-    log_ratelimit_lock(key, rate_limit)
-    rate_limit.sleep_until_reset
+    bucket.wait_until_available
+    return unless bucket&.will_limit?
+
+    log_ratelimit_lock(key, bucket.reset_time - Time.now)
+    bucket.lock_until_reset
   end
 
   # @!visibility private
   # Handle a HTTP response based on the status code
-  def handle_http_response(rate_limit, response)
-    rate_limit.headers = response.headers
-    @rate_limits[:global].headers = response.headers if response.headers["x-ratelimit-global"]
+  def handle_http_response(key, response)
+    @limiter.update_from_headers(key, response.headers)
 
     case response.status
     when 200, 201, 204
       response
     when 429
+      @limiter.update_from_headers(:global, response.headers) if response.headers["x-ratelimit-global"]
       raise Rapture::TooManyRequests.from_json(response.body)
     when 400..502
       raise Rapture::HTTPException.from_json(response.body)
@@ -192,11 +131,11 @@ module Rapture::HTTP
   end
 
   # @!visibility private
-  def log_ratelimit_lock(key, rate_limit)
-    time = rate_limit.reset - Time.now
+  def log_ratelimit_lock(key, reset)
+    duration = reset.truncate(2)
     key_name = key == :global ? "global" : key.join("_")
     Rapture::LOGGER.info("HTTP") do
-      "[RATELIMIT] Preemptively locking #{key_name} mutex for #{time.truncate(2)} seconds."
+      "[RATELIMIT] Preemptively locking #{key_name} mutex for #{duration} seconds."
     end
   end
 
