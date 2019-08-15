@@ -37,6 +37,9 @@ jobs:
       - run:
           name: Formatting Check
           command: bundle exec rake format
+      - run:
+          name: Doc Test
+          command: bundle exec yard doc
   docs-build:
     docker:
       - image: circleci/ruby:2.4

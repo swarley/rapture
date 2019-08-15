@@ -106,7 +106,7 @@ module Rapture::HTTP
         reset = server_time + retry_after
         update(key, bucket_id, 0, 0, reset_time)
       else
-        raise "Bad headers when setting RL for #{key}"
+        Rapture::LOGGER.info("HTTP") { "Unable to set RL for #{key}" }
       end
     end
 

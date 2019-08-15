@@ -143,7 +143,7 @@ module Rapture::Mapping
         raise ArgumentError, "Action must be a symbol or respond to :call"
       end
     rescue Exception => _e
-      raise Rapture::SerdeError, "Failed to convert property: `#{prop}'"
+      raise Rapture::SerdeError, "Failed to convert property: `#{prop}' in #{self}"
     end
 
     # @!visibility private

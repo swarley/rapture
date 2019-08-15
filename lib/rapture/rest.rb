@@ -19,7 +19,7 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/topics/gateway#get-gateway
   # @return [GatewayInfo]
   def get_gateway
-    response = request(:get, "gateway")
+    response = request(:gateway, nil, :get, "gateway")
     Rapture::GatewayInfo.from_json(response.body)
   end
 
@@ -28,7 +28,7 @@ module Rapture::REST
   # https://discordapp.com/developers/docs/topics/gateway#get-gateway-bot
   # @return [GatewayInfo]
   def get_gateway_bot
-    response = request(:get, "gateway/bot")
+    response = request(:gateway_bot, nil, :get, "gateway/bot")
     Rapture::GatewayInfo.from_json(response.body)
   end
 end

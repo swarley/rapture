@@ -23,6 +23,7 @@ require "rapture/rest"
 require "rapture/websocket"
 require "rapture/cache"
 require "rapture/client"
+require "rapture/cached_client"
 
 # Main module containing Rapture data types and methods
 module Rapture

@@ -9,6 +9,11 @@ require "rapture"
 require "minitest/autorun"
 require "minitest/ci"
 require "minitest/spec"
+require "minitest/parallel"
+
+class Minitest::Test
+  parallelize_me!
+end
 
 def json_data(name)
   @json_data_cache ||= {}

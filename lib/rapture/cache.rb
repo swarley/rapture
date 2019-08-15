@@ -34,6 +34,12 @@ module Rapture
     end
   end
 
+  class NullCache < Cache
+    def cache(key, value)
+      value
+    end
+  end
+
   # This is the default cache that stores objects in memory
   class DefaultCache < Cache
     def initialize

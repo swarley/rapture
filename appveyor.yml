@@ -1,9 +1,0 @@
-install:
-  - set PATH=C:\Ruby24\bin;%PATH%
-  - rake build
-  - gem install pkg/* --development --platform=ruby
-
-build: off
-
-test_script:
-  - rake test

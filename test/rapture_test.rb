@@ -4,6 +4,8 @@ require "test_helper"
 require "rapture_test/mapping_test"
 require "rapture_test/converters_test"
 require "rapture_test/user_test"
+require "rapture_test/cache_test"
+require "rapture_test/rate_limiter_test"
 
 Rapture::LOGGER.level = :fatal
 
