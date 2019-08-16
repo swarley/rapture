@@ -22,38 +22,38 @@ describe Rapture::HTTP::RateLimiter do
     it "groups bucket access" do
       limiter = Rapture::HTTP::RateLimiter.new
 
-      key_a_1 = [:a, 1]
-      key_a_2 = [:a, 2]
-      key_b_3 = [:b, 3]
+      key_a1 = [:a, 1]
+      key_a2 = [:a, 2]
+      key_b3 = [:b, 3]
 
       reset_time = Time.now + 10
 
-      limiter.update(key_a_1, :bucket_a, 3, 3, reset_time)
-      limiter.update(key_a_2, :bucket_a, 3, 1, reset_time)
-      limiter.update(key_b_3, :bucket_b, 1, 1, reset_time)
+      limiter.update(key_a1, :bucket_a, 3, 3, reset_time)
+      limiter.update(key_a2, :bucket_a, 3, 1, reset_time)
+      limiter.update(key_b3, :bucket_b, 1, 1, reset_time)
 
       assert_equal(
-        limiter.get_from_key(key_a_1),
+        limiter.get_from_key(key_a1),
         limiter.get_from_id(:bucket_a)
       )
 
       assert_equal(
-        limiter.get_from_key(key_a_2),
+        limiter.get_from_key(key_a2),
         limiter.get_from_id(:bucket_a)
       )
 
       assert_equal(
-        limiter.get_from_key(key_b_3),
+        limiter.get_from_key(key_b3),
         limiter.get_from_id(:bucket_b)
       )
 
-      [limiter.get_from_key(key_a_1), limiter.get_from_key(key_a_2)].each do |bucket|
+      [limiter.get_from_key(key_a1), limiter.get_from_key(key_a2)].each do |bucket|
         assert_equal(bucket.limit, 3)
         assert_equal(bucket.remaining, 1)
         assert_equal(bucket.reset_time, reset_time)
       end
 
-      bucket = limiter.get_from_key(key_b_3)
+      bucket = limiter.get_from_key(key_b3)
       assert_equal(bucket.limit, 1)
       assert_equal(bucket.remaining, 1)
       assert_equal(bucket.reset_time, reset_time)

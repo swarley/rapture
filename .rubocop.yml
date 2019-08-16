@@ -26,6 +26,9 @@ Layout/BlockAlignment:
 
 Layout/IndentationWidth:
   Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
   
 Naming/AccessorMethodName:
   Exclude:

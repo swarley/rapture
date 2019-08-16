@@ -229,8 +229,8 @@ module Rapture
 
     # Request that a `GUILD_MEMBER_CHUNK` be sent
     def request_guild_members(guild_id, query: nil, limit: 0)
-      payload = {guild_id: guild_id, query: query, limit: limt}.compact
-      @websocket.send({op: OP_REQUEST_GUILD_MEMBERS, d: payload})
+      payload = {guild_id: guild_id, query: query, limit: limit}.compact
+      @websocket.send(op: OP_REQUEST_GUILD_MEMBERS, d: payload)
     end
 
     private
