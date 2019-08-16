@@ -20,6 +20,8 @@ module Rapture::HTTP
 
   private
 
+  # Middleware used to log incoming and outgoing HTTP
+  # requests
   class LoggerMiddleware < Faraday::Middleware
     # @!visibility private
     def log_request(env)
@@ -38,6 +40,8 @@ module Rapture::HTTP
       # Debug log raw response?
     end
 
+    # The method that is called on request
+    # Used to call our logging methods
     def call(req_env)
       log_request(req_env)
 

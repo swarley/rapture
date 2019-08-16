@@ -52,22 +52,48 @@ module Rapture
     end
 
     # @!group Opcodes
+    # https://discordapp.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes
 
+    # (Recieve) dispatches an event
     OP_DISPATCH = 0
+
+    # (Send/Recieve) used for ping checking
     OP_HEARTBEAT = 1
+
+    # (Send) used for client handshake
     OP_IDENTIFY = 2
+
+    # (Send) used to update the client status
     OP_STATUS_UPDATE = 3
+
+    # (Send) used to join/move/leave voice channels
     OP_VOICE_STATE_UPDATE = 4
+
+    # (Send)
     OP_VOICE_SERVER_PING = 5
+
+    # (Send) used to resume a closed connection
     OP_RESUME = 6
+
+    # (Recieve) used to tell clients to reconnect to the gateway
     OP_RECONNECT = 7
+
+    # (Send) used to request guild members
     OP_REQUEST_GUILD_MEMBERS = 8
+
+    # (Recieve) used to notify the client they have an invalid session ID
     OP_INVALID_SESSION = 9
+
+    # (Recieve) sent immediately after connecting, contains heartbeat and server debug info
     OP_HELLO = 10
+
+    # (Recieve) sned immediately following a client heartbeat
     OP_HEARTBEAT_ACK = 11
 
     # @!endgroup
 
+    # Struct used for keeping session data that allows us to `RESUME` on
+    # reconnect
     Session = Struct.new(:sequence, :suspend, :invalid, :resume, :id)
 
     # @!visibility private
@@ -201,6 +227,12 @@ module Rapture
       referring_domain: "",
     }.freeze
 
+    # Request that a `GUILD_MEMBER_CHUNK` be sent
+    def request_guild_members(guild_id, query: nil, limit: 0)
+      payload = {guild_id: guild_id, query: query, limit: limt}.compact
+      @websocket.send({op: OP_REQUEST_GUILD_MEMBERS, d: payload})
+    end
+
     private
 
     # @!visibility private
@@ -212,7 +244,7 @@ module Rapture
         @large_threshold,
         @shard_key
       )
-      @websocket.send({op: 2, d: payload}.to_json)
+      @websocket.send({op: OP_IDENTIFY, d: payload}.to_json)
     end
 
     # @!visibility private
@@ -222,7 +254,7 @@ module Rapture
         @token,
         @session
       )
-      @websocket.send({op: 6, d: payload}.to_json)
+      @websocket.send({op: OP_RESUME, d: payload}.to_json)
     end
 
     # @!visibility private
@@ -234,7 +266,7 @@ module Rapture
             # TODO: Heartbeat ack checking
             sequence = @session&.sequence
             # puts "Sending heartbeat (sequence: #{sequence}, interval: #{@heartbeat_interval})"
-            @websocket.send({op: 1, d: sequence}.to_json)
+            @websocket.send({op: OP_HEARTBEAT, d: sequence}.to_json)
           end
           sleep @heartbeat_interval
         end
@@ -253,6 +285,10 @@ module Rapture
         @session.sequence = packet.sequence
       when OP_INVALID_SESSION
         handle_invalidate_session
+      when OP_RECONNECT
+        @websocket.reconnect
+      when OP_HEARTBEAT_ACK
+        Rapture::LOGGER.info("Gateway") { "Recieved heartbeat ack: #{packet.d}" }
       else
         puts "Unknown opcode: #{packet.inspect}"
       end

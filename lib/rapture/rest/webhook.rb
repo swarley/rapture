@@ -156,8 +156,8 @@ module Rapture::REST
   # @param tts [true, false]
   # @param file [Faraday::UploadIO]
   # @param embeds [Array<Embed, Hash>]
-  def execute_webhook(webhook_id, webhook_token, wait: false, content: nil, username: nil, avatar_url: nil, tts: nil, file: nil)
-    payload = {content: content, username: username, avatar_url: avatar_url, tts: tts}
+  def execute_webhook(webhook_id, webhook_token, wait: false, content: nil, username: nil, avatar_url: nil, tts: nil, file: nil, embeds: nil)
+    payload = {content: content, username: username, avatar_url: avatar_url, tts: tts, embeds: embeds}
 
     payload = {file: file, payload_json: Oj.dump(payload)} if file
 

@@ -17,7 +17,10 @@ module Rapture
     getter :shards
   end
 
+  # Module containing gateway specific events and data structures
   module Gateway
+    # A user's status (online, idle, or dnd)
+    # https://discordapp.com/developers/docs/topics/gateway#client-status-object
     class ClientStatus
       include Mapping
 
@@ -34,6 +37,8 @@ module Rapture
       getter :web
     end
 
+    # Sent when a user's presence or info is updated
+    # https://discordapp.com/developers/docs/topics/gateway#presence-update-presence-update-event-fields
     class PresenceUpdate
       include Mapping
 

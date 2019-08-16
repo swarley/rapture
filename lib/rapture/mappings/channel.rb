@@ -4,9 +4,13 @@ require "rapture/mappings/user"
 require "rapture/mappings/emoji"
 
 module Rapture
+  # Represents a guild or DM channel
+  # https://discordapp.com/developers/docs/resources/channel#channel-object-channel-structure
   class Channel
     include Mapping
 
+    # A channel specific permission overwrite
+    # https://discordapp.com/developers/docs/resources/channel#overwrite-object-overwrite-structure
     class Overwrite
       include Mapping
 
@@ -94,6 +98,7 @@ module Rapture
     getter :last_pin_timestamp, converter: Converters.Timestamp
   end
 
+  # https://discordapp.com/developers/docs/resources/channel#message-object-message-activity-structure
   class Activity
     include Mapping
 
@@ -107,6 +112,7 @@ module Rapture
     getter :party_id
   end
 
+  # https://discordapp.com/developers/docs/resources/channel#message-object-message-application-structure
   class Application
     include Mapping
 
@@ -131,6 +137,8 @@ module Rapture
     getter :name
   end
 
+  # Represents an attachment associated with a message
+  # https://discordapp.com/developers/docs/resources/channel#attachment-object-attachment-structure
   class Attachment
     include Mapping
 
@@ -163,6 +171,8 @@ module Rapture
     getter :width
   end
 
+  # Class returned when getting a list of reactions on a message
+  # https://discordapp.com/developers/docs/resources/channel#reaction-object-reaction-structure
   class Reaction
     include Mapping
 
@@ -180,9 +190,11 @@ module Rapture
   end
 
   # @note The sum of all characters in an embed structure cannot exceed 6000 characters.
+  # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-structure
   class Embed
     include Mapping
 
+    # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-image-structure
     class Image
       include Mapping
 
@@ -203,6 +215,7 @@ module Rapture
       getter :width
     end
 
+    # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-video-structure
     class Video
       include Mapping
 
@@ -219,6 +232,7 @@ module Rapture
       getter :width
     end
 
+    # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-provider-structure
     class Provider
       include Mapping
 
@@ -231,6 +245,7 @@ module Rapture
       getter :url
     end
 
+    # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-author-structure
     class Author
       include Mapping
 
@@ -253,6 +268,7 @@ module Rapture
     end
 
     # Embed footer object
+    # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-footer-structure
     class Footer
       include Mapping
 
@@ -271,6 +287,7 @@ module Rapture
     end
 
     # Embed field object
+    # https://discordapp.com/developers/docs/resources/channel#embed-object-embed-field-structure
     class Field
       include Mapping
 

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Rapture
+  # Unicode or custom emoji objects that are used in messages
+  # or reactions.
+  # https://discordapp.com/developers/docs/resources/emoji#emoji-object-emoji-structure
   class Emoji
     include Mapping
 

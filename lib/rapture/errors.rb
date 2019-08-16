@@ -38,6 +38,7 @@ module Rapture
     # @return [String]
     getter :message
 
+    # Formatted error message for use with the logger and `puts`
     def to_s
       <<~ERROR
         ERROR [#{@code}]: #{@message}
@@ -45,14 +46,18 @@ module Rapture
       ERROR
     end
 
+    # Shorthand for an easy lookup of message and code on inspect. Also avoids including the response
     def inspect
       "#<Rapture::HTTP::HTTPException @code=#{@code} @message=#{message.inspect}>"
     end
   end
 
+  # An error that arises when there is an issue with the internal object
+  # serde
   class SerdeError < RuntimeError
   end
 
+  # An error that is raised when a 429 is encountered
   class TooManyRequests < RuntimeError
     include Rapture::Mapping
 

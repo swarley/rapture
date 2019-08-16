@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Rapture
+  # Represets a set of permissions attached to a group of users
+  # https://discordapp.com/developers/docs/topics/permissions#role-object
   class Role
     include Mapping
 
@@ -20,6 +22,8 @@ module Rapture
     # @return [true, false]
     getter :hoist
 
+    alias_method :hoist?, :hoist
+
     # @!attribute [r] position
     # @return [Integer]
     getter :position
@@ -32,8 +36,12 @@ module Rapture
     # @return [true, false]
     getter :managed
 
+    alias_method :managed?, :managed
+
     # @!attribute [r] mentionable
     # @return [true, false]
     getter :mentionable
+
+    alias_method :mentionable?, :mentionable
   end
 end

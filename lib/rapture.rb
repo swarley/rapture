@@ -27,9 +27,13 @@ require "rapture/cached_client"
 
 # Main module containing Rapture data types and methods
 module Rapture
+  # Library wide logging instance
   LOGGER = Logger.new(STDOUT)
   LOGGER.level = Logger::INFO
 
+  # Method for removing nil elements and then
+  # converting `:null` values to a `nil` value
+  # that persists through a json dump
   def self.encode_json(hash)
     hash = hash.compact
     hash.each do |key, value|

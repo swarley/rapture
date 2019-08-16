@@ -9,9 +9,11 @@ require "rapture/mappings/member"
 require "rapture/mappings/user"
 
 module Rapture
+  # https://discordapp.com/developers/docs/resources/guild#integration-object-integration-structure
   class Integration
     include Mapping
 
+    # https://discordapp.com/developers/docs/resources/guild#integration-account-object-integration-account-structure
     class Account
       include Mapping
 
@@ -69,6 +71,7 @@ module Rapture
     getter :synced_at, converter: Converters.Timestamp
   end
 
+  # https://discordapp.com/developers/docs/resources/guild#ban-object-ban-structure
   class Ban
     include Mapping
 
@@ -81,9 +84,12 @@ module Rapture
     getter :user, from_json: User
   end
 
+  # A guild represents a collection of users and channels, referred to as a server in the UI.
+  # https://discordapp.com/developers/docs/resources/guild#guild-object-guild-structure
   class Guild
     include Mapping
 
+    # https://discordapp.com/developers/docs/resources/guild#guild-embed-object-guild-embed-structure
     class Embed
       include Mapping
 

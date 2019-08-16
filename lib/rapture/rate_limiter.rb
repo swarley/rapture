@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "time"
 
 # Contains methods for handling HTTP requests
 module Rapture::HTTP
-
   # @!visibility private
   # A bucket used for HTTP rate limiting
   class Bucket
@@ -36,12 +37,13 @@ module Rapture::HTTP
 
     # @return [true, false]
     def will_limit?
-      @remaining - 1 < 0 && Time.now <= @reset_time
+      (@remaining - 1).negative? && Time.now <= @reset_time
     end
 
     # Lock and unlock this mutex (prevents access during reset)
     def wait_until_available
       return unless @locked
+
       @mutex.lock
       @mutex.unlock
     end
@@ -103,7 +105,7 @@ module Rapture::HTTP
                 end
         update(key, bucket_id, limit, remaining, reset)
       elsif retry_after
-        reset = server_time + retry_after
+        reset_time = server_time + retry_after
         update(key, bucket_id, 0, 0, reset_time)
       else
         Rapture::LOGGER.info("HTTP") { "Unable to set RL for #{key}" }

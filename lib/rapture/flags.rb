@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Rapture
+  # Collection of flags that represent permissions
+  # in a permission bitmask
   module PermissionFlags
     # Allows creation of instant invites
     CREATE_INSTANT_INVITE = 0x00000001
@@ -90,16 +92,37 @@ module Rapture
     MANAGE_EMOJIS = 0x40000000
   end
 
+  # Flags that can appear on a User object
+  # https://discordapp.com/developers/docs/resources/user#user-object-user-flags
   module UserFlags
+    # The user has no flags
     NONE = 0
+
+    # https://discordia.me/badges#discord-staff
     DISCORD_EMPLOYEE = 1 << 0
+
+    # https://discordia.me/badges#discord-partner
     DISCORD_PARTNER = 1 << 1
+
+    # https://discordia.me/badges#discord-hype-squad
     HYPESQUAD_EVENTS = 1 << 2
+
+    # https://discordia.me/badges#discord-bug-hunter
     BUG_HUNTER = 1 << 3
+
+    # https://discordia.me/badges#hype-squad-bravery
     HOUSE_BRAVERY = 1 << 6
+
+    # https://discordia.me/badges#hype-squad-brilliance
     HOUSE_BRILLIANCE = 1 << 7
+
+    # https://discordia.me/badges#hype-squad-balance
     HOUSE_BALANCE = 1 << 8
+
+    # https://discordia.me/badges#discord-nitro-early-supporter
     EARLY_SUPPORTER = 1 << 9
+
+    # This user is part of a {Team}
     TEAM_USER = 1 << 10
   end
 end

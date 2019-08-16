@@ -3,10 +3,13 @@
 require "rapture/mappings/webhook"
 
 module Rapture
+  # A log of administrative actions taken in a server
+  # https://discordapp.com/developers/docs/resources/audit-log#audit-log-object-audit-log-structure
   class AuditLog
     include Mapping
 
     # @todo Separate into GuildChange, ChannelChange, RoleChange, InviteChange,
+    # https://discordapp.com/developers/docs/resources/audit-log#audit-log-change-object-audit-log-change-structure
     class Change
       include Mapping
 
@@ -20,6 +23,7 @@ module Rapture
     end
 
     # Information about an audit log entry
+    # https://discordapp.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info
     class Info
       include Mapping
 
@@ -62,6 +66,7 @@ module Rapture
       getter :role_name
     end
 
+    # https://discordapp.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-entry-structure
     class Entry
       include Mapping
 

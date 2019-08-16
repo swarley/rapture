@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Rapture
+  # A webhook used for posting messages to a channel without authentication.
+  # https://discordapp.com/developers/docs/resources/webhook#webhook-object-webhook-structure
   class Webhook
     include Mapping
 

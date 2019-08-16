@@ -3,6 +3,8 @@
 require "rapture/mappings/user"
 
 module Rapture
+  # A user within the context of a given guild
+  # https://discordapp.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
   class Member
     include Mapping
 

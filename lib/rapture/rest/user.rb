@@ -2,6 +2,7 @@
 
 # Module that holds methods for interacting with the REST portion of the API
 
+# Module containing HTTP request methods
 module Rapture::REST
   include Rapture::HTTP
 

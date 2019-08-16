@@ -8,6 +8,7 @@ module Rapture::Gateway
   # A gateway heartbeat will have the sequence number as
   # it's payload.
   Heartbeat = Struct.new(:sequence) do
+    # Construct a Heartbeat from a payload hash
     def self.from_h(data, _)
       new(data)
     end
@@ -113,22 +114,6 @@ module Rapture::Gateway
   class Reconnect
   end
 
-  class RequestGuildMembers
-    include Rapture::Mapping
-
-    # @!attribute [r] guild_id
-    # @return [Integer]
-    getter :guild_id, converter: Converters.Snowflake
-
-    # @!attribute [r] query
-    # @return [String]
-    getter :query
-
-    # @!attribute [r] limit
-    # @return [Integer]
-    getter :limit
-  end
-
   # Invalid session stub for event dispatching
   InvalidSession = Struct.new(:resumable)
 
@@ -144,6 +129,7 @@ module Rapture::Gateway
     getter :_trace
   end
 
+  # An event that is fired when the gateway sends a `READY` packet
   class Ready
     include Rapture::Mapping
 
@@ -168,15 +154,20 @@ module Rapture::Gateway
     getter :session_id
   end
 
+  # An event stub for when a `RESUME` is preformed in the gateway
   class Resumed
   end
 
+  # An event that is fired when a new {Channel} is created.
   ChannelCreate = Rapture::Channel.dup
 
+  # An event that is fired when a {Channel} is updated
   ChannelUpdate = Rapture::Channel.dup
 
+  # An event that is fired when a {Channel} is deleted
   ChannelDelete = Rapture::Channel.dup
 
+  # An event that is fired when a channel's pins change
   class ChannelPinsUpdate
     include Rapture::Mapping
 
@@ -193,12 +184,16 @@ module Rapture::Gateway
     getter :last_pin_timestamp, converter: Converters.Timestamp?
   end
 
+  # An event that is fired when a new {Guild} is created.
   GuildCreate = Rapture::Guild.dup
 
+  # An event that is fired when a {Guild} is updated.
   GuildUpdate = Rapture::Guild.dup
 
+  # An event that is fired when a {Guild} is deleted.
   GuildDelete = Rapture::Guild.dup
 
+  # An event that is fired when a {Ban} is added.
   class GuildBanAdd
     include Rapture::Mapping
 
@@ -211,8 +206,10 @@ module Rapture::Gateway
     getter :user, from_json: Rapture::User
   end
 
+  # An event that is fired when a {Ban} is removed.
   GuildBanRemove = GuildBanAdd.dup
 
+  # An event that is fired when a guild's emojis are updated.
   class GuildEmojisUpdate
     include Rapture::Mapping
 
@@ -225,6 +222,7 @@ module Rapture::Gateway
     getter :emojis, from_json: Rapture::Emoji
   end
 
+  # An event that is fired when a guild's integrations are updated
   class GuildIntegrationsUpdate
     include Rapture::Mapping
 
@@ -233,6 +231,7 @@ module Rapture::Gateway
     getter :guild_id, converter: Converters.Snowflake
   end
 
+  # An event that is fired when a member is added to a guild.
   class GuildMemberAdd < Rapture::Member
     include Rapture::Mapping
 
@@ -241,6 +240,7 @@ module Rapture::Gateway
     getter :guild_id, converter: Converters.Snowflake
   end
 
+  # An event that is fired when a member is removed from a guild.
   class GuildMemberRemove
     include Rapture::Mapping
 
@@ -253,6 +253,7 @@ module Rapture::Gateway
     getter :user, from_json: Rapture::User
   end
 
+  # An event that is fired when a guild member is updated.
   class GuildMemberUpdate
     include Rapture::Mapping
 
@@ -273,6 +274,8 @@ module Rapture::Gateway
     getter :nick
   end
 
+  # An event that is fired when a guild member chunk is recieved
+  # in response to a guild member request packet.
   class GuildMembersChunk
     include Rapture::Mapping
 
@@ -285,6 +288,7 @@ module Rapture::Gateway
     getter :members, from_json: Rapture::Member
   end
 
+  # An event that is fired when a guild role is created.
   class GuildRoleCreate
     include Rapture::Mapping
 
@@ -297,6 +301,7 @@ module Rapture::Gateway
     getter :role, from_json: Rapture::Role
   end
 
+  # An event that is fired when a guild role is updated.
   class GuildRoleUpdate
     include Rapture::Mapping
 
@@ -309,6 +314,7 @@ module Rapture::Gateway
     getter :role, from_json: Rapture::Role
   end
 
+  # An event that is fired when a guild role is deleted.
   class GuildRoleDelete
     include Rapture::Mapping
 
@@ -321,10 +327,13 @@ module Rapture::Gateway
     getter :role_id, converter: Converters.Snowflake
   end
 
+  # An event that is fired when a message is created in a channel
   MessageCreate = Rapture::Message.dup
 
+  # An event that is fired when a message is updated
   MessageUpdate = Rapture::Message.dup
 
+  # An event that is fired when a message is deleted
   class MessageDelete
     include Rapture::Mapping
 
@@ -341,6 +350,7 @@ module Rapture::Gateway
     getter :guild_id, converter: Converters.Snowflake?
   end
 
+  # An event that is fired when a bulk message delete occurs
   class MessageDeleteBulk
     include Rapture::Mapping
 
@@ -357,6 +367,7 @@ module Rapture::Gateway
     getter :guild_id, converter: Converters.Snowflake?
   end
 
+  # An event that is fired when a reaction is added to a message
   class MessageReactionAdd
     include Rapture::Mapping
 
@@ -381,6 +392,7 @@ module Rapture::Gateway
     getter :emoji, from_json: Rapture::Reaction
   end
 
+  # An event that is fired when a reaction is removed from a message
   class MessageReactionRemove
     include Rapture::Mapping
 
@@ -401,6 +413,7 @@ module Rapture::Gateway
     getter :emoji, from_json: Rapture::Reaction
   end
 
+  # An event that is fired when all reactions are removed from a message
   class MessageReactionRemoveAll
     include Rapture::Mapping
 
@@ -417,6 +430,7 @@ module Rapture::Gateway
     getter :guild_id, converter: Converters.Snowflake?
   end
 
+  # An event that is fired when a typing start event is recieved
   class TypingStart
     include Rapture::Mapping
 
@@ -439,10 +453,13 @@ module Rapture::Gateway
            from_json: proc { |u_time| Time.at(u_time) }
   end
 
+  # An event that is fired when a user update's their information
   UserUpdate = Rapture::User.dup
 
+  # An event that is fired when a user's voice state is updated
   VoiceStateUpdate = Rapture::Voice::State.dup
 
+  # An event that is fired when a guild's voice server is updated
   class VoiceServerUpdate
     include Rapture::Mapping
 
@@ -459,6 +476,7 @@ module Rapture::Gateway
     getter :endpoint
   end
 
+  # An event that is fired when a channel webhook is created, updated, or deleted
   class WebhooksUpdate
     include Rapture::Mapping
 

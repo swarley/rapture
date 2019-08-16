@@ -12,12 +12,10 @@ module Rapture
     include Enumerable
 
     # Retrieve an object by its key
-    def resolve(key)
-    end
+    def resolve(key); end
 
     # Store an object in the cache, returning the stored value
-    def cache(key, value)
-    end
+    def cache(key, value); end
 
     # Retrieve an object from the cache, or store the result of
     # the yielded block
@@ -26,16 +24,16 @@ module Rapture
     end
 
     # Remove an object from the cache by its key
-    def remove(key)
-    end
+    def remove(key); end
 
     # Implement an each method to make use of Enumerable methods.
-    def each(&block)
-    end
+    def each(&block); end
   end
 
+  # A cache to be used when no caching is desired
   class NullCache < Cache
-    def cache(key, value)
+    # Return the value without storing it
+    def cache(_key, value)
       value
     end
   end

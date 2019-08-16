@@ -3,6 +3,8 @@
 require "rapture/mappings/guild"
 
 module Rapture
+  # The representation of a message that is sent to discord
+  # https://discordapp.com/developers/docs/resources/channel#message-object-message-structure
   class Message
     include Mapping
     # @!attribute [r] id

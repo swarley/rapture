@@ -3,7 +3,10 @@
 require "rapture/mappings/member"
 
 module Rapture
+  # Module containing classes and data structures pertaining to voice
   module Voice
+    # Represents a yser's voice connection state
+    # https://discordapp.com/developers/docs/resources/voice#voice-state-object-example-voice-state
     class State
       include Mapping
 
@@ -48,6 +51,8 @@ module Rapture
       getter :suppress
     end
 
+    # A voice server region that can be used when creating servers
+    # https://discordapp.com/developers/docs/resources/voice#voice-region-object
     class Region
       include Mapping
 

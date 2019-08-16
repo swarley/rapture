@@ -47,12 +47,12 @@ module Rapture
         guild.channels.each do |channel|
           channel.instance_variable_set(:@guild_id, guild.id)
           @channel_cache.cache(channel.id, channel)
-          @guild_channel_cache.fetch(guild.id) { Array.new } << channel.id
+          @guild_channel_cache.fetch(guild.id) { [] } << channel.id
         end
 
         guild.roles.each do |role|
           @role_cache.cache(role.id, role)
-          @guild_role_cache.fetch(guild.id) { Array.new } << role.id
+          @guild_role_cache.fetch(guild.id) { [] } << role.id
         end
 
         guild.members.each do |member|
@@ -63,8 +63,8 @@ module Rapture
 
       on_channel_create do |channel|
         @channel_cache.cache(channel.id, channel)
-        if guild_id = channel.guild_id
-          @guild_channel_cache.fetch(guild_id) { Array.new } << channel.id
+        if (guild_id = channel.guild_id)
+          @guild_channel_cache.fetch(guild_id) { [] } << channel.id
         end
       end
 
@@ -74,7 +74,7 @@ module Rapture
 
       on_channel_delete do |channel|
         channel_cache.remove(channel.id)
-        if guild_id = channel.guild_id
+        if (guild_id = channel.guild_id)
           @guild_channel_cache.resolve(guild_id).delete(channel.id)
         end
       end
@@ -94,7 +94,7 @@ module Rapture
 
       on_guild_member_update do |payload|
         @user_cache.cache(payload.user.id, payload.user)
-        if existing = @member_cache.resolve([payload.guild_id, payload.user.id])
+        if (existing = @member_cache.resolve([payload.guild_id, payload.user.id]))
           existing.roles = payload.roles
           existing.nick = payload.nick
           @member_cache.cache([member.guild_id, member.user.id], existing)
@@ -117,7 +117,7 @@ module Rapture
 
       on_guild_role_create do |payload|
         @role_cache.cache(payload.role.id, payload.role)
-        @guild_role_cache.fetch(payload.guild_id) { Array.new } << payload.role.id
+        @guild_role_cache.fetch(payload.guild_id) { [] } << payload.role.id
       end
 
       on_guild_role_update do |payload|
@@ -130,13 +130,9 @@ module Rapture
       end
 
       on_presence_update do |payload|
-        if payload.user
-          @user_cache.cache(payload.user.id, payload.user)
-        end
+        @user_cache.cache(payload.user.id, payload.user) if payload.user
 
-        if payload.roles && payload.user && payload.guild_id
-          @member_cache.cache([payload.guild_id, payload.user.id], payload)
-        end
+        @member_cache.cache([payload.guild_id, payload.user.id], payload) if payload.roles && payload.user && payload.guild_id
       end
     end
 
@@ -221,7 +217,7 @@ module Rapture
         end
       else
         guild_channels = super(guild_id)
-        @guild_channel_cache.cache(guild_id, guild_channels.collect { |channel| channel.id })
+        @guild_channel_cache.cache(guild_id, guild_channels.collect(&:id))
         guild_channels.each { |channel| @channel_cache.cache(channel.id, channel) }
       end
     end

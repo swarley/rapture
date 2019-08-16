@@ -6,11 +6,16 @@ Oj.mimic_JSON
 module Rapture::Mapping
   # Create converters that handle special serde operations
   module Converters
+    # Struct used for constructing a converter that passes procs for
+    # conversions
     Converter = Struct.new(:to_json_proc, :from_json_proc) do
+      # Pass the to_json proc
       def to_json(*_args)
         to_json_proc
       end
 
+      # Pass a from_json proc that creates an array of
+      # objects if neccesary
       def from_json
         proc do |data|
           if data.is_a? Array
@@ -22,13 +27,16 @@ module Rapture::Mapping
       end
     end
 
+    # A Converter struct that allows for nilable/optional values
     NilableConverter = Struct.new(:to_json_proc, :from_json_proc) do
+      # Pass a to_json proc that is called if the data is not nil
       def to_json(*_args)
         proc do |data|
           to_json_proc.call(data) if data
         end
       end
 
+      # Pass a from_json proc that allows for null values
       def from_json
         proc do |data|
           if data.is_a? Array

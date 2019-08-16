@@ -48,7 +48,7 @@ module Rapture::REST
   # @param name [String]
   # @param region [String]
   # @param verification_level [Integer]
-  # @param default_message_notification [Integer]
+  # @param default_message_notifications [Integer]
   # @param explicit_content_filter [Integer]
   # @param afk_channel_id [String, Integer]
   # @param afk_timeout [Integer]
@@ -58,10 +58,10 @@ module Rapture::REST
   # @param system_channel_id [String, Integer]
   # @param reason [String]
   # @return [Guild] updated {Guild} object
-  def modify_guild(guild_id, reason: nil, name: nil, region: nil, verification_level: nil,
+  def modify_guild(guild_id, name: nil, region: nil, verification_level: nil,
                              default_message_notifications: nil, explicit_content_filter: nil,
                              afk_channel_id: nil, afk_timeout: nil, icon: nil, owner_id: nil, splash: nil,
-                             system_channel_id: nil)
+                             system_channel_id: nil, reason: nil)
     response = request(
       :guilds_gid, guild_id,
       :patch,
@@ -186,7 +186,7 @@ module Rapture::REST
       :guilds_gid_members_uid, guild_id,
       :put,
       "guilds/#{guild_id}/members/#{user_id}",
-      nick: nick, roles: roles, mute: mute, deaf: deaf,
+      access_token: access_token, nick: nick, roles: roles, mute: mute, deaf: deaf,
     )
 
     return nil if response.status == 204
@@ -415,7 +415,7 @@ module Rapture::REST
   # @param guild_id [String, Integer]
   # @param role_id [String, Integer]
   # @param reason [String]
-  def delete_guild_role(guild_id, role_id)
+  def delete_guild_role(guild_id, role_id, reason: nil)
     request(
       :guilds_gid_roles_rid, guild_id,
       :delete,
@@ -526,12 +526,17 @@ module Rapture::REST
     )
   end
 
+  # Sync an integration.
+  # https://discordapp.com/developers/docs/resources/guild#sync-guild-integration
+  # @param guild_id [Integer]
+  # @param integration_id [Integer]
+  # @return [true, false] Returns true if the sync was successful
   def sync_guild_integration(guild_id, integration_id)
     request(
       :guilds_gid_integrations_iid_sync, guild_id,
       :post,
       "guilds/#{guild_id}/integrations/#{integration_id}/sync"
-    )
+    ).status == 204
   end
 
   # Get the guild embed object
