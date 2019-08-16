@@ -14,10 +14,11 @@ module Rapture
     #   for more information.
     # @param large_threshold [Integer] limit for when the gateway will no longer send offline member data.
     #   Must be between 50 and 250
-    def initialize(token, shard_key: [0, 1], large_threshold: 150)
+    def initialize(token, shard_key: [0, 1], large_threshold: 150, compress: :zlib_stream)
       @type, @token = token.split(" ")
       @shard_key = shard_key
       @large_threshold = large_threshold
+      @compress = compress
       @heartbeat_interval = 1
       @send_heartbeats = false
       @event_handlers = Hash.new { |hash, key| hash[key] = [] }
@@ -33,8 +34,11 @@ module Rapture
     # @return [WebSocket]
     def websocket
       return @websocket if @websocket
+      query_params = {v: 7, encoding: "json", compress: "zlib-stream"}
+      query_params.delete(:compress) unless @compress == :zlib_stream
 
-      @websocket = WebSocket.new(get_gateway.url)
+      query = URI.encode_www_form(query_params)
+      @websocket = WebSocket.new(get_gateway.url + "?#{query}", @compress)
 
       @websocket.on_open do |event|
         on_open(event)
@@ -242,7 +246,8 @@ module Rapture
         @token,
         IDENTIFY_PROPERTIES,
         @large_threshold,
-        @shard_key
+        @shard_key,
+        @compress
       )
       @websocket.send({op: OP_IDENTIFY, d: payload}.to_json)
     end

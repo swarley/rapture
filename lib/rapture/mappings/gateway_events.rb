@@ -35,11 +35,16 @@ module Rapture::Gateway
     # @return [(Integer, Integer)] Shard key
     getter :shard
 
-    def initialize(token, properties, large_threshold, shard)
+    # @!attribute [r] compress
+    # @return [true, false]
+    getter :compress
+
+    def initialize(token, properties, large_threshold, shard, compress)
       @token = token
       @properties = properties
       @large_threshold = large_threshold
       @shard = shard
+      @compress = compress
     end
   end
 
