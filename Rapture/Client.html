@@ -1230,7 +1230,7 @@ is recieved.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(token, shard_key: [0, 1], large_threshold: 150)  &#x21d2; Client </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(token, shard_key: [0, 1], large_threshold: 150, compress: :zlib_stream)  &#x21d2; Client </a>
     
 
     
@@ -1332,7 +1332,7 @@ is recieved.</p>
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(token, shard_key: [0, 1], large_threshold: 150)  &#x21d2; <tt><span class='object_link'><a href="" title="Rapture::Client (class)">Client</a></span></tt> 
+    #<strong>initialize</strong>(token, shard_key: [0, 1], large_threshold: 150, compress: :zlib_stream)  &#x21d2; <tt><span class='object_link'><a href="" title="Rapture::Client (class)">Client</a></span></tt> 
   
 
   
@@ -1419,15 +1419,17 @@ between 50 and 250</p>
 22
 23
 24
-25</pre>
+25
+26</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>shard_key:</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>large_threshold:</span> <span class='int'>150</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>shard_key:</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>large_threshold:</span> <span class='int'>150</span><span class='comma'>,</span> <span class='label'>compress:</span> <span class='symbol'>:zlib_stream</span><span class='rparen'>)</span>
   <span class='ivar'>@type</span><span class='comma'>,</span> <span class='ivar'>@token</span> <span class='op'>=</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@shard_key</span> <span class='op'>=</span> <span class='id identifier rubyid_shard_key'>shard_key</span>
   <span class='ivar'>@large_threshold</span> <span class='op'>=</span> <span class='id identifier rubyid_large_threshold'>large_threshold</span>
+  <span class='ivar'>@compress</span> <span class='op'>=</span> <span class='id identifier rubyid_compress'>compress</span>
   <span class='ivar'>@heartbeat_interval</span> <span class='op'>=</span> <span class='int'>1</span>
   <span class='ivar'>@send_heartbeats</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='ivar'>@event_handlers</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_hash'>hash</span><span class='comma'>,</span> <span class='id identifier rubyid_key'>key</span><span class='op'>|</span> <span class='id identifier rubyid_hash'>hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -1482,7 +1484,6 @@ between 50 and 250</p>
       <pre class="lines">
 
 
-34
 35
 36
 37
@@ -1500,15 +1501,22 @@ between 50 and 250</p>
 49
 50
 51
-52</pre>
+52
+53
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_websocket'>websocket</span>
   <span class='kw'>return</span> <span class='ivar'>@websocket</span> <span class='kw'>if</span> <span class='ivar'>@websocket</span>
+  <span class='id identifier rubyid_query_params'>query_params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>v:</span> <span class='int'>7</span><span class='comma'>,</span> <span class='label'>encoding:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>compress:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>zlib-stream</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_query_params'>query_params</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:compress</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@compress</span> <span class='op'>==</span> <span class='symbol'>:zlib_stream</span>
 
-  <span class='ivar'>@websocket</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="WebSocket.html" title="Rapture::WebSocket (class)">WebSocket</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WebSocket.html#initialize-instance_method" title="Rapture::WebSocket#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_get_gateway'>get_gateway</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_encode_www_form'>encode_www_form</span><span class='lparen'>(</span><span class='id identifier rubyid_query_params'>query_params</span><span class='rparen'>)</span>
+  <span class='ivar'>@websocket</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="WebSocket.html" title="Rapture::WebSocket (class)">WebSocket</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="WebSocket.html#initialize-instance_method" title="Rapture::WebSocket#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_get_gateway'>get_gateway</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>?</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_query'>query</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@compress</span><span class='rparen'>)</span>
 
   <span class='ivar'>@websocket</span><span class='period'>.</span><span class='id identifier rubyid_on_open'>on_open</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_event'>event</span><span class='op'>|</span>
     <span class='id identifier rubyid_on_open'>on_open</span><span class='lparen'>(</span><span class='id identifier rubyid_event'>event</span><span class='rparen'>)</span>
@@ -1578,10 +1586,10 @@ recieved</p>
       <pre class="lines">
 
 
-127</pre>
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 131</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#ChannelCreate-constant" title="Rapture::Gateway::ChannelCreate (constant)">ChannelCreate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1631,10 +1639,10 @@ recieved</p>
       <pre class="lines">
 
 
-133</pre>
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 137</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#ChannelDelete-constant" title="Rapture::Gateway::ChannelDelete (constant)">ChannelDelete</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1684,10 +1692,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-136</pre>
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 140</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_pins_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/ChannelPinsUpdate.html" title="Rapture::Gateway::ChannelPinsUpdate (class)">ChannelPinsUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1737,10 +1745,10 @@ recieved</p>
       <pre class="lines">
 
 
-130</pre>
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 130</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 134</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:channel_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#ChannelUpdate-constant" title="Rapture::Gateway::ChannelUpdate (constant)">ChannelUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1790,10 +1798,10 @@ recieved</p>
       <pre class="lines">
 
 
-148</pre>
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 152</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_ban_add</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildBanAdd.html" title="Rapture::Gateway::GuildBanAdd (class)">GuildBanAdd</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1843,10 +1851,10 @@ is recieved</p>
       <pre class="lines">
 
 
-151</pre>
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 155</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_ban_remove</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildBanRemove-constant" title="Rapture::Gateway::GuildBanRemove (constant)">GuildBanRemove</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1896,10 +1904,10 @@ recieved</p>
       <pre class="lines">
 
 
-139</pre>
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 143</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildCreate-constant" title="Rapture::Gateway::GuildCreate (constant)">GuildCreate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -1949,10 +1957,10 @@ recieved</p>
       <pre class="lines">
 
 
-145</pre>
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 149</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildDelete-constant" title="Rapture::Gateway::GuildDelete (constant)">GuildDelete</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2002,10 +2010,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-154</pre>
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 158</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_emojis_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildEmojisUpdate.html" title="Rapture::Gateway::GuildEmojisUpdate (class)">GuildEmojisUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2055,10 +2063,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-157</pre>
+161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 161</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_integrations_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildIntegrationsUpdate.html" title="Rapture::Gateway::GuildIntegrationsUpdate (class)">GuildIntegrationsUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2108,10 +2116,10 @@ is recieved</p>
       <pre class="lines">
 
 
-160</pre>
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 164</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_member_add</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMemberAdd.html" title="Rapture::Gateway::GuildMemberAdd (class)">GuildMemberAdd</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2161,10 +2169,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-163</pre>
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 167</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_member_remove</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMemberRemove.html" title="Rapture::Gateway::GuildMemberRemove (class)">GuildMemberRemove</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2214,10 +2222,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-166</pre>
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 166</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 170</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_member_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMemberUpdate.html" title="Rapture::Gateway::GuildMemberUpdate (class)">GuildMemberUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2267,10 +2275,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-169</pre>
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 169</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 173</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_members_chunk</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildMembersChunk.html" title="Rapture::Gateway::GuildMembersChunk (class)">GuildMembersChunk</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2320,10 +2328,10 @@ is recieved</p>
       <pre class="lines">
 
 
-172</pre>
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 172</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 176</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_role_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildRoleCreate.html" title="Rapture::Gateway::GuildRoleCreate (class)">GuildRoleCreate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2373,10 +2381,10 @@ is recieved</p>
       <pre class="lines">
 
 
-178</pre>
+182</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 182</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_role_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildRoleDelete.html" title="Rapture::Gateway::GuildRoleDelete (class)">GuildRoleDelete</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2426,10 +2434,10 @@ is recieved</p>
       <pre class="lines">
 
 
-175</pre>
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 179</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_role_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/GuildRoleUpdate.html" title="Rapture::Gateway::GuildRoleUpdate (class)">GuildRoleUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2479,10 +2487,10 @@ recieved</p>
       <pre class="lines">
 
 
-142</pre>
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 146</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:guild_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#GuildUpdate-constant" title="Rapture::Gateway::GuildUpdate (constant)">GuildUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2532,10 +2540,10 @@ recieved</p>
       <pre class="lines">
 
 
-181</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 181</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 185</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_create</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#MessageCreate-constant" title="Rapture::Gateway::MessageCreate (constant)">MessageCreate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2585,10 +2593,10 @@ recieved</p>
       <pre class="lines">
 
 
-187</pre>
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 191</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_delete</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageDelete.html" title="Rapture::Gateway::MessageDelete (class)">MessageDelete</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2638,10 +2646,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-190</pre>
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 194</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_delete_bulk</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageDeleteBulk.html" title="Rapture::Gateway::MessageDeleteBulk (class)">MessageDeleteBulk</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2691,10 +2699,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-193</pre>
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 197</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_reaction_add</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageReactionAdd.html" title="Rapture::Gateway::MessageReactionAdd (class)">MessageReactionAdd</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2744,10 +2752,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-196</pre>
+200</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 200</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_reaction_remove</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageReactionRemove.html" title="Rapture::Gateway::MessageReactionRemove (class)">MessageReactionRemove</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2797,10 +2805,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-199</pre>
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 203</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_reaction_remove_all</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/MessageReactionRemoveAll.html" title="Rapture::Gateway::MessageReactionRemoveAll (class)">MessageReactionRemoveAll</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2850,10 +2858,10 @@ recieved</p>
       <pre class="lines">
 
 
-184</pre>
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 184</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 188</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:message_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#MessageUpdate-constant" title="Rapture::Gateway::MessageUpdate (constant)">MessageUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2903,10 +2911,10 @@ is recieved</p>
       <pre class="lines">
 
 
-202</pre>
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 202</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 206</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:presence_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/PresenceUpdate.html" title="Rapture::Gateway::PresenceUpdate (class)">PresenceUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -2955,10 +2963,10 @@ is recieved</p>
       <pre class="lines">
 
 
-124</pre>
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 128</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:ready</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/Ready.html" title="Rapture::Gateway::Ready (class)">Ready</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -3008,10 +3016,10 @@ recieved</p>
       <pre class="lines">
 
 
-205</pre>
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 205</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 209</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:typing_start</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/TypingStart.html" title="Rapture::Gateway::TypingStart (class)">TypingStart</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -3061,10 +3069,10 @@ recieved</p>
       <pre class="lines">
 
 
-208</pre>
+212</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 212</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:user_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#UserUpdate-constant" title="Rapture::Gateway::UserUpdate (constant)">UserUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -3114,10 +3122,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-214</pre>
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 218</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:voice_server_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/VoiceServerUpdate.html" title="Rapture::Gateway::VoiceServerUpdate (class)">VoiceServerUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -3167,10 +3175,10 @@ event is recieved</p>
       <pre class="lines">
 
 
-211</pre>
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 211</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 215</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:voice_state_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway.html#VoiceStateUpdate-constant" title="Rapture::Gateway::VoiceStateUpdate (constant)">VoiceStateUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -3220,10 +3228,10 @@ is recieved</p>
       <pre class="lines">
 
 
-217</pre>
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 221</span>
 
 <span class='id identifier rubyid___event'>__event</span><span class='lparen'>(</span><span class='symbol'>:webhooks_update</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/WebhooksUpdate.html" title="Rapture::Gateway::WebhooksUpdate (class)">WebhooksUpdate</a></span></span><span class='rparen'>)</span></pre>
     </td>
@@ -3257,13 +3265,13 @@ is recieved</p>
       <pre class="lines">
 
 
-231
-232
-233
-234</pre>
+235
+236
+237
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 235</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_request_guild_members'>request_guild_members</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>query:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>guild_id:</span> <span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='id identifier rubyid_limit'>limit</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -3300,12 +3308,12 @@ is recieved</p>
       <pre class="lines">
 
 
-28
 29
-30</pre>
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/client.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span>
   <span class='id identifier rubyid_websocket'>websocket</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span>
@@ -3320,7 +3328,7 @@ is recieved</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Aug 16 01:06:08 2019 by
+  Generated on Fri Aug 16 02:58:17 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

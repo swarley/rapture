@@ -126,6 +126,33 @@ href="https://discordapp.com/developers/docs/topics/gateway#identify">discordapp
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#compress-instance_method" title="#compress (instance method)">#<strong>compress</strong>  &#x21d2; true, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#large_threshold-instance_method" title="#large_threshold (instance method)">#<strong>large_threshold</strong>  &#x21d2; Integer </a>
     
 
@@ -255,7 +282,7 @@ href="https://discordapp.com/developers/docs/topics/gateway#identify">discordapp
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(token, properties, large_threshold, shard)  &#x21d2; Identify </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(token, properties, large_threshold, shard, compress)  &#x21d2; Identify </a>
     
 
     
@@ -298,7 +325,7 @@ href="https://discordapp.com/developers/docs/topics/gateway#identify">discordapp
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    #<strong>initialize</strong>(token, properties, large_threshold, shard)  &#x21d2; <tt><span class='object_link'><a href="" title="Rapture::Gateway::Identify (class)">Identify</a></span></tt> 
+    #<strong>initialize</strong>(token, properties, large_threshold, shard, compress)  &#x21d2; <tt><span class='object_link'><a href="" title="Rapture::Gateway::Identify (class)">Identify</a></span></tt> 
   
 
   
@@ -321,21 +348,23 @@ href="https://discordapp.com/developers/docs/topics/gateway#identify">discordapp
       <pre class="lines">
 
 
-38
-39
-40
-41
 42
-43</pre>
+43
+44
+45
+46
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/gateway_events.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/gateway_events.rb', line 42</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='id identifier rubyid_properties'>properties</span><span class='comma'>,</span> <span class='id identifier rubyid_large_threshold'>large_threshold</span><span class='comma'>,</span> <span class='id identifier rubyid_shard'>shard</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='id identifier rubyid_properties'>properties</span><span class='comma'>,</span> <span class='id identifier rubyid_large_threshold'>large_threshold</span><span class='comma'>,</span> <span class='id identifier rubyid_shard'>shard</span><span class='comma'>,</span> <span class='id identifier rubyid_compress'>compress</span><span class='rparen'>)</span>
   <span class='ivar'>@token</span> <span class='op'>=</span> <span class='id identifier rubyid_token'>token</span>
   <span class='ivar'>@properties</span> <span class='op'>=</span> <span class='id identifier rubyid_properties'>properties</span>
   <span class='ivar'>@large_threshold</span> <span class='op'>=</span> <span class='id identifier rubyid_large_threshold'>large_threshold</span>
   <span class='ivar'>@shard</span> <span class='op'>=</span> <span class='id identifier rubyid_shard'>shard</span>
+  <span class='ivar'>@compress</span> <span class='op'>=</span> <span class='id identifier rubyid_compress'>compress</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -350,7 +379,57 @@ href="https://discordapp.com/developers/docs/topics/gateway#identify">discordapp
       
       <span id=""></span>
       <div class="method_details first">
-  <h3 class="signature first" id="large_threshold-instance_method">
+  <h3 class="signature first" id="compress-instance_method">
+  
+    #<strong>compress</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/gateway_events.rb', line 40</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:compress</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="large_threshold-instance_method">
   
     #<strong>large_threshold</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
   
@@ -581,7 +660,7 @@ href="https://discordapp.com/developers/docs/topics/gateway#identify">discordapp
 </div>
 
       <div id="footer">
-  Generated on Fri Aug 16 01:06:11 2019 by
+  Generated on Fri Aug 16 02:58:21 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
