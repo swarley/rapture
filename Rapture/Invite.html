@@ -104,7 +104,20 @@
   
 </div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Representation of a code that can be used to add a member to a guild or DM
+channel <a
+href="https://discordapp.com/developers/docs/resources/invite#invite-object-invite-structure">discordapp.com/developers/docs/resources/invite#invite-object-invite-structure</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -117,6 +130,200 @@
 
 
 
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#approximate_member_count-instance_method" title="#approximate_member_count (instance method)">#<strong>approximate_member_count</strong>  &#x21d2; Integer<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#approximate_presence_count-instance_method" title="#approximate_presence_count (instance method)">#<strong>approximate_presence_count</strong>  &#x21d2; Integer<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#channel-instance_method" title="#channel (instance method)">#<strong>channel</strong>  &#x21d2; Channel </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#code-instance_method" title="#code (instance method)">#<strong>code</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#guild-instance_method" title="#guild (instance method)">#<strong>guild</strong>  &#x21d2; Guild<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#target_user-instance_method" title="#target_user (instance method)">#<strong>target_user</strong>  &#x21d2; User </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#target_user_type-instance_method" title="#target_user_type (instance method)">#<strong>target_user_type</strong>  &#x21d2; Integer<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
 
 
 
@@ -133,11 +340,366 @@
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Mapping.html" title="Rapture::Mapping (module)">Mapping</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Mapping.html#to_h-instance_method" title="Rapture::Mapping#to_h (method)">#to_h</a></span>, <span class='object_link'><a href="Mapping.html#to_json-instance_method" title="Rapture::Mapping#to_json (method)">#to_json</a></span></p>
 
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="approximate_member_count-instance_method">
+  
+    #<strong>approximate_member_count</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 73</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:approximate_member_count</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="approximate_presence_count-instance_method">
+  
+    #<strong>approximate_presence_count</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 69</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:approximate_presence_count</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="channel-instance_method">
+  
+    #<strong>channel</strong>  &#x21d2; <tt><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 57</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:channel</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="code-instance_method">
+  
+    #<strong>code</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 49</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:code</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="guild-instance_method">
+  
+    #<strong>guild</strong>  &#x21d2; <tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt><sup>?</sup>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 53</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:guild</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="Guild.html" title="Rapture::Guild (class)">Guild</a></span></span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="target_user-instance_method">
+  
+    #<strong>target_user</strong>  &#x21d2; <tt><span class='object_link'><a href="User.html" title="Rapture::User (class)">User</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="User.html" title="Rapture::User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 61</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:target_user</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="User.html" title="Rapture::User (class)">User</a></span></span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="target_user_type-instance_method">
+  
+    #<strong>target_user_type</strong>  &#x21d2; <tt>Integer</tt><sup>?</sup>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/invite.rb', line 65</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:target_user_type</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:39 2019 by
+  Generated on Fri Aug 16 00:57:58 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

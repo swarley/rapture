@@ -155,7 +155,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of WebSocket.</p>
+<p>Create a websocket connecting to a given url.</p>
 </div></span>
   
 </li>
@@ -178,7 +178,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler that is executed when the websocket closes.</p>
+</div></span>
   
 </li>
 
@@ -200,7 +202,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler that is executed when a message is recieved.</p>
+</div></span>
   
 </li>
 
@@ -222,7 +226,33 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Register a handler that is executed when the websocket connects.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reconnect-instance_method" title="#reconnect (instance method)">#<strong>reconnect</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Close the websocket and reconnect.</p>
+</div></span>
   
 </li>
 
@@ -268,7 +298,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Transmit data over the socket.</p>
+</div></span>
   
 </li>
 
@@ -291,7 +323,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns a new instance of WebSocket</p>
+<p>Create a websocket connecting to a given url</p>
 
 
   </div>
@@ -305,12 +337,12 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span>
   <span class='ivar'>@url</span> <span class='op'>=</span> <span class='id identifier rubyid_url'>url</span>
@@ -336,18 +368,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler that is executed when the websocket closes</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-57
 58
-59</pre>
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 58</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_close'>on_close</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_handler'>handler</span><span class='rparen'>)</span>
   <span class='ivar'>@on_close_handler</span> <span class='op'>=</span> <span class='id identifier rubyid_handler'>handler</span>
@@ -366,7 +409,18 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler that is executed when a message is recieved</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -396,21 +450,75 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a handler that is executed when the websocket connects</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
+48
 49
-50
-51</pre>
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_open'>on_open</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_handler'>handler</span><span class='rparen'>)</span>
   <span class='ivar'>@on_open_handler</span> <span class='op'>=</span> <span class='id identifier rubyid_handler'>handler</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reconnect-instance_method">
+  
+    #<strong>reconnect</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Close the websocket and reconnect</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reconnect'>reconnect</span>
+  <span class='ivar'>@ws</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
+  <span class='id identifier rubyid_run'>run</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -443,7 +551,6 @@
       <pre class="lines">
 
 
-62
 63
 64
 65
@@ -463,10 +570,11 @@
 79
 80
 81
-82</pre>
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span>
   <span class='const'>EM</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='kw'>do</span>
@@ -503,18 +611,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Transmit data over the socket</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-45
-46
-47</pre>
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/websocket.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='ivar'>@ws</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
@@ -529,7 +648,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:38 2019 by
+  Generated on Fri Aug 16 00:57:56 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

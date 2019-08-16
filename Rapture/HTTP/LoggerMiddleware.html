@@ -101,7 +101,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Middleware used to log incoming and outgoing HTTP requests</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -133,7 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The method that is called on request Used to call our logging methods.</p>
+</div></span>
   
 </li>
 
@@ -157,22 +170,33 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The method that is called on request Used to call our logging methods</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-41
-42
-43
-44
 45
 46
-47</pre>
+47
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/http.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/http.rb', line 45</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_req_env'>req_env</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_log_request'>log_request</span><span class='lparen'>(</span><span class='id identifier rubyid_req_env'>req_env</span><span class='rparen'>)</span>
@@ -191,7 +215,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:36 2019 by
+  Generated on Fri Aug 16 00:57:55 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

@@ -104,9 +104,134 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p><a
+href="https://discordapp.com/developers/docs/topics/teams#data-models-team-members-object">discordapp.com/developers/docs/topics/teams#data-models-team-members-object</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#membership_state-instance_method" title="#membership_state (instance method)">#<strong>membership_state</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#permissions-instance_method" title="#permissions (instance method)">#<strong>permissions</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#team_id-instance_method" title="#team_id (instance method)">#<strong>team_id</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user-instance_method" title="#user (instance method)">#<strong>user</strong>  &#x21d2; User </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+    
+  </ul>
 
 
 
@@ -123,11 +248,216 @@
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../Mapping.html" title="Rapture::Mapping (module)">Mapping</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="../Mapping.html#to_h-instance_method" title="Rapture::Mapping#to_h (method)">#to_h</a></span>, <span class='object_link'><a href="../Mapping.html#to_json-instance_method" title="Rapture::Mapping#to_json (method)">#to_json</a></span></p>
 
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="membership_state-instance_method">
+  
+    #<strong>membership_state</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/oauth.rb', line 14</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:membership_state</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="permissions-instance_method">
+  
+    #<strong>permissions</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/oauth.rb', line 18</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:permissions</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="team_id-instance_method">
+  
+    #<strong>team_id</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/oauth.rb', line 22</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:team_id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="../Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='const'>Snowflake</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="user-instance_method">
+  
+    #<strong>user</strong>  &#x21d2; <tt><span class='object_link'><a href="../User.html" title="Rapture::User (class)">User</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../User.html" title="Rapture::User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/oauth.rb', line 26</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:user</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="../User.html" title="Rapture::User (class)">User</a></span></span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:39 2019 by
+  Generated on Fri Aug 16 00:57:58 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

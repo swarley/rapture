@@ -101,7 +101,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Struct used for constructing a converter that passes procs for conversions</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -192,7 +203,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Pass a from_json proc that creates an array of objects if neccesary.</p>
+</div></span>
   
 </li>
 
@@ -214,7 +227,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Pass the to_json proc.</p>
+</div></span>
   
 </li>
 
@@ -273,12 +288,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_json_proc'>from_json_proc</span>
   <span class='ivar'>@from_json_proc</span>
@@ -334,12 +349,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_json_proc'>to_json_proc</span>
   <span class='ivar'>@to_json_proc</span>
@@ -365,24 +380,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pass a from_json proc that creates an array of objects if neccesary</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-14
-15
-16
-17
-18
 19
 20
 21
-22</pre>
+22
+23
+24
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_json'>from_json</span>
   <span class='id identifier rubyid_proc'>proc</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
@@ -407,18 +433,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pass the to_json proc</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-10
-11
-12</pre>
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mapping.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_json'>to_json</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid__args'>_args</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_to_json_proc'>to_json_proc</span>
@@ -433,7 +470,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:38 2019 by
+  Generated on Fri Aug 16 00:57:56 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

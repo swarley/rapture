@@ -104,7 +104,19 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Represets a set of permissions attached to a group of users <a
+href="https://discordapp.com/developers/docs/topics/permissions#role-object">discordapp.com/developers/docs/topics/permissions#role-object</a></p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -144,6 +156,8 @@
       <a href="#hoist-instance_method" title="#hoist (instance method)">#<strong>hoist</strong>  &#x21d2; true, false </a>
     
 
+    
+      (also: #hoist?)
     
   </span>
   
@@ -199,6 +213,8 @@
     
 
     
+      (also: #managed?)
+    
   </span>
   
   
@@ -225,6 +241,8 @@
       <a href="#mentionable-instance_method" title="#mentionable (instance method)">#<strong>mentionable</strong>  &#x21d2; true, false </a>
     
 
+    
+      (also: #mentionable?)
     
   </span>
   
@@ -386,10 +404,10 @@
       <pre class="lines">
 
 
-17</pre>
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 19</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:color</span></pre>
     </td>
@@ -405,6 +423,10 @@
     #<strong>hoist</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt>  <span class="extras">(readonly)</span>
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='hoist?-instance_method'>hoist?</span></span>
+    </span>
   
 
   
@@ -436,10 +458,10 @@
       <pre class="lines">
 
 
-21</pre>
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 23</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:hoist</span></pre>
     </td>
@@ -486,10 +508,10 @@
       <pre class="lines">
 
 
-9</pre>
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 11</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='const'>Snowflake</span></pre>
     </td>
@@ -506,55 +528,9 @@
   
 
   
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-33</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 33</span>
-
-<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:managed</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="mentionable-instance_method">
-  
-    #<strong>mentionable</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt>  <span class="extras">(readonly)</span>
-  
-
+    <span class="aliases">Also known as:
+    <span class="names"><span id='managed?-instance_method'>managed?</span></span>
+    </span>
   
 
   
@@ -590,6 +566,60 @@
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 37</span>
+
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:managed</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="mentionable-instance_method">
+  
+    #<strong>mentionable</strong>  &#x21d2; <tt>true</tt>, <tt>false</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='mentionable?-instance_method'>mentionable?</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 43</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:mentionable</span></pre>
     </td>
@@ -636,10 +666,10 @@
       <pre class="lines">
 
 
-13</pre>
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 15</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:name</span></pre>
     </td>
@@ -686,10 +716,10 @@
       <pre class="lines">
 
 
-29</pre>
+33</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 33</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:permissions</span></pre>
     </td>
@@ -736,10 +766,10 @@
       <pre class="lines">
 
 
-25</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/permissions.rb', line 29</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:position</span></pre>
     </td>
@@ -753,7 +783,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:41 2019 by
+  Generated on Fri Aug 16 00:57:59 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

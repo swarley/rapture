@@ -101,7 +101,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A cache to be used when no caching is desired</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -119,7 +130,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#cache-instance_method" title="#cache (instance method)">#<strong>cache</strong>(key, value)  &#x21d2; Object </a>
+      <a href="#cache-instance_method" title="#cache (instance method)">#<strong>cache</strong>(_key, value)  &#x21d2; Object </a>
     
 
     
@@ -133,7 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Return the value without storing it.</p>
+</div></span>
   
 </li>
 
@@ -162,26 +175,37 @@
       <div class="method_details first">
   <h3 class="signature first" id="cache-instance_method">
   
-    #<strong>cache</strong>(key, value)  &#x21d2; <tt>Object</tt> 
+    #<strong>cache</strong>(_key, value)  &#x21d2; <tt>Object</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Return the value without storing it</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-38
-39
-40</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/cache.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/cache.rb', line 36</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid__key'>_key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -194,7 +218,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Aug 15 16:34:37 2019 by
+  Generated on Fri Aug 16 00:57:56 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
