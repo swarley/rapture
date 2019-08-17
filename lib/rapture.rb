@@ -25,6 +25,7 @@ require "rapture/websocket"
 require "rapture/cache"
 require "rapture/client"
 require "rapture/cached_client"
+require "rapture/cached_objects/guild"
 require "rapture/logger"
 require "rapture/cdn"
 
