@@ -5,6 +5,7 @@ require "faraday"
 require "faye/websocket"
 
 require "rapture/version"
+require "rapture/flags"
 require "rapture/mapping"
 require "rapture/mappings/gateway"
 require "rapture/mappings/user"

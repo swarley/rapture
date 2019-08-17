@@ -260,5 +260,83 @@ module Rapture
     # @!attribute [r] premium_subscription_count
     # @return [Integer, nil]
     getter :premium_subscription_count
+
+    # Get the permissions for a member in a given channel
+    # @param member [Member] The member to calculate permissions for
+    # @param channel [Channel] A channel to apply overwrites from
+    # @return [Permissions]
+    def compute_permissions(member, channel = nil)
+      base = compute_base_permissions(member)
+
+      perms = if channel
+                compute_overwrites(base, member, channel)
+              else
+                base
+              end
+      Rapture::Permissions.new(perms)
+    end
+
+    private
+
+    # @!visibility private
+    def compute_overwrites(base, member, channel)
+      if base & PermissionFlags::ADMINISTRATOR == PermissionFlags::ADMINISTRATOR
+        return PermissionFlags::ALL
+      end
+
+      permissions = base
+
+      overwrites = channel.permission_overwrites.dup
+      everyone_ow = overwrites.delete { |ow| ow.id == @id }
+
+      if everyone_ow
+        permissions &= ~everyone_ow.deny
+        permissions |= everyone_ow.allow
+      end
+
+      allow = 0
+      deny = 0
+      member.roles.each do |role|
+        overwrite = overwrites.find { |ow| ow.id == role.id }
+        if overwrite
+          allow |= overwrite.allow
+          deny |= overwrite.deny
+        end
+      end
+
+      permissions &= ~deny
+      permissions |= allow
+
+      member_ow = overwrites.find { |ow| ow.id == member.id }
+      if member_ow
+        permissions &= ~member_ow.deny
+        permissions |= member_ow.allow
+      end
+
+      return permissions
+    end
+
+    # @!visibility private
+    def compute_base_permissions(member)
+      if @owner_id == member_id
+        return PermissionFlags::ALL
+      end
+
+      everyone = @roles.find { |role| role.id == @id }
+      permissions = everyone.permissions
+
+      member_role_ids = member.roles
+      role_perms = @roles.select do |role|
+        member_role_ids.include? role.id
+      end.collect(&:permissions)
+
+      permissions = member_roles.reduce(permissions, &:|)
+
+      if permissions & PermissionFlags::ADMINISTRATOR == PermissionFlags::ADMINISTRATOR
+        return PermissionFlags::ALL
+      else
+        return permissions
+      end
+    end
   end
 end

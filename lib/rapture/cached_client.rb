@@ -150,7 +150,7 @@ module Rapture
     # @param id [Integer]
     # @return [User]
     def get_user(id, cached: true)
-      @user_cache.fetch(id) { super(id) } if cached
+      return @user_cache.fetch(id) { super(id) } if cached
 
       user = super(id)
       @user_cache.cache(id, user)
@@ -161,7 +161,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Channel]
     def get_channel(id, cached: true)
-      @channel_cache.fetch(id) { super(id) } if cached
+      return @channel_cache.fetch(id) { p id; super(id) } if cached
 
       channel = super(id)
       @channel_cache.cache(id, channel)
@@ -183,7 +183,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Member]
     def get_guild_member(guild_id, user_id, cached: true)
-      @member_cache.fetch([guild_id, user_id]) { super(guild_id, user_id) } if cached
+      return @member_cache.fetch([guild_id, user_id]) { super(guild_id, user_id) } if cached
 
       member = super(guild_id, user_id)
       @member_cache.cache([guild_id, user_id], member)
@@ -201,7 +201,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Array<Role>]
     def get_guild_roles(guild_id, cached: true)
-      @guild_role_cache.fetch(guild_id) { super(guild_id) } if cached
+      return @guild_role_cache.fetch(guild_id) { super(guild_id) } if cached
 
       guild_roles = super(guild_id)
       guild_roles.each { |role| @guild_role_cache.cache(role.id, role) }
@@ -211,10 +211,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     def get_guild_channels(guild_id, cached: true)
       if cached
-        channel_list = @guild_channel_cache.fetch(guild_id) { super(guild_id) }
-        channel_list.collect do |id|
-          @channel_cache.fetch(id) { get_channel(id) }
-        end
+        @guild_channel_cache.fetch(guild_id) { super(guild_id) }
       else
         guild_channels = super(guild_id)
         @guild_channel_cache.cache(guild_id, guild_channels.collect(&:id))

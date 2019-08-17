@@ -76,6 +76,9 @@ module Rapture
     # Allows for using priority speaker in a voice channel
     PRIORITY_SPEAKER = 0x00000100
 
+    # Allows the user to go live
+    STREAM = 0x00000200
+
     # Allows for modification of own nickname
     CHANGE_NICKNAME = 0x04000000
 
@@ -90,6 +93,9 @@ module Rapture
 
     # Allows management and editing of emojis
     MANAGE_EMOJIS = 0x40000000
+
+    # All Permissions
+    ALL = 0x7FF7FFFF
   end
 
   # Flags that can appear on a User object
