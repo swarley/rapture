@@ -28,32 +28,32 @@ module Rapture
       @ignores[progname] = LEVELS[level.downcase]
     end
 
-    # (see ::Logger#debug)
+    # Log a message at the DEBUG level
     def debug(progname, &block)
       super unless @ignores[progname] >= LEVELS[:debug]
     end
 
-    # (see ::Logger#info)
+    # Log a message at the INFO level
     def info(progname, &block)
       super unless @ignores[progname] >= LEVELS[:info]
     end
 
-    # (see ::Logger#warn)
+    # Log a message at the WARN level
     def warn(progname, &block)
       super unless @ignores[progname] >= LEVELS[:warn]
     end
 
-    # (see ::Logger#error)
+    # Log a message at the ERROR level
     def error(progname, &block)
       super unless @ignores[progname] >= LEVELS[:error]
     end
 
-    # (see ::Logger#fatal)
+    # Log a message at the FATAL level
     def fatal(progname, &block)
       super unless @ignores[progname] >= LEVELS[:fatal]
     end
 
-    # (see ::Logger#unknown)
+    # Log a message at the UNKNOWN level
     def unknown(progname, &block)
       super unless @ignores[progname] >= LEVELS[:unknown]
     end

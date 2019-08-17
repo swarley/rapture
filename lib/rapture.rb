@@ -25,6 +25,7 @@ require "rapture/cache"
 require "rapture/client"
 require "rapture/cached_client"
 require "rapture/logger"
+require "rapture/cdn"
 
 # Main module containing Rapture data types and methods
 module Rapture
