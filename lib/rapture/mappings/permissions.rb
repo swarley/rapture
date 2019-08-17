@@ -58,7 +58,7 @@ module Rapture
     #   Allows kicking members
     #   @return [true, false]
 
-    # @!attributes [r] ban_members
+    # @!attribute [r] ban_members
     #   @!parse alias_method :ban_members?, :ban_members
     #   Allows banning members
     #   @return [true, false]
