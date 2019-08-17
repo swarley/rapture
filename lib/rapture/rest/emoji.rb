@@ -45,7 +45,7 @@ module Rapture::REST
       :post,
       "guilds/#{guild_id}/emojis",
       {name: name, image: image, roles: roles},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Emoji.from_json(response.body)
   end
@@ -64,7 +64,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
       {name: name, roles: roles},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Emoji.from_json(response.body)
   end
@@ -80,7 +80,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/emojis/#{emoji_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 end

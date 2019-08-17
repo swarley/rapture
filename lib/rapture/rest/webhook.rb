@@ -17,7 +17,7 @@ module Rapture::REST
       :post,
       "channels/#{channel_id}/webhooks",
       {name: name, avatar: avatar},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
 
     Rapture::Webhook.from_json(response.body)
@@ -90,7 +90,7 @@ module Rapture::REST
       :patch,
       "webhooks/#{webhook_id}",
       {name: name, avatar: avatar},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Webhook.from_json(response.body)
   end
@@ -110,7 +110,7 @@ module Rapture::REST
       :patch,
       "webhooks/#{webhook_id}/#{webhook_token}",
       {name: name, avatar: avatar, channel_id: channel_id},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Webhook.from_json(response.body)
   end
@@ -125,7 +125,7 @@ module Rapture::REST
       :delete,
       "webhooks/#{webhook_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -140,7 +140,7 @@ module Rapture::REST
       :delete,
       "webhook/#{webhook_id}/#{webhook_token}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 

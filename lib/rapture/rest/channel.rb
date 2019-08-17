@@ -40,7 +40,7 @@ module Rapture::REST
       "channels/#{channel_id}",
       {name: name, position: position, topic: topic, nsfw: nsfw, rate_limit_per_user: rate_limit_per_user,
        bitrate: bitrate, user_limit: user_limit, permission_overwrites: permission_overwrites, parent_id: parent_id},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
 
     Rapture::Channel.from_json(response.body)
@@ -58,7 +58,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
 
     Rapture::Channel.from_json(response.body)
@@ -140,7 +140,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}/messages/#{message_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -154,7 +154,7 @@ module Rapture::REST
       :post,
       "channels/#{channel_id}/messages/bulk-delete",
       {messages: messages},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -202,7 +202,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}/messages/#{message_id}/reactions/#{emoji}/#{user_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -231,7 +231,7 @@ module Rapture::REST
       :put,
       "channel/#{channel_id}/permissions/#{overwrite_id}",
       {allow: allow, deny: deny, type: type},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -261,7 +261,7 @@ module Rapture::REST
       :post,
       "channels/#{channel_id}/invites",
       {max_age: max_age, max_uses: max_uses, temporary: temporary, unique: unique},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
 
     Rapture::Invite.from_json(response.body)
@@ -277,7 +277,7 @@ module Rapture::REST
       :delete,
       "channels/#{channel_id}/permissions/#{overwrite_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 

@@ -71,7 +71,7 @@ module Rapture::REST
       {name: name, region: region, verification_level: verification_level, default_message_notifications: default_message_notifications,
        explicit_content_filter: explicit_content_filter, afk_channel_id: afk_channel_id, afk_timeout: afk_timeout,
        icon: icon, owner_id: owner_id, splash: splash, system_channel_id: system_channel_id},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Guild.from_json(response.body)
   end
@@ -124,7 +124,7 @@ module Rapture::REST
       {name: name, type: type, topic: topic, bitrate: bitrate, user_limit: user_limit,
        rate_limit_per_user: rate_limit_per_user, position: position,
        permission_overwrites: permission_overwrites, parent_id: parent_id, nsfw: nsfw},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Channel.from_json(response.body)
   end
@@ -139,7 +139,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/channels",
       positions,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -212,7 +212,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/members/#{user_id}",
       {nick: nick, roles: roles, mute: mute, deaf: deaf, channel_id: channel_id},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -228,7 +228,7 @@ module Rapture::REST
       "guilds/#{guild_id}/members/@me/nick",
       nick: nick,
     )
-    response.body
+    Oj.load(response.body)["nick"]
   end
 
   # Add a role to a guild member
@@ -243,7 +243,7 @@ module Rapture::REST
       :put,
       "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -259,7 +259,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/members/#{user_id}/roles/#{role_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -274,7 +274,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/members/#{user_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -318,7 +318,7 @@ module Rapture::REST
       :put,
       "guilds/#{guild_id}/bans/#{user_id}?" + query,
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -333,7 +333,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/bans/#{user_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -366,7 +366,7 @@ module Rapture::REST
       :post,
       "guilds/#{guild_id}/roles",
       {name: name, permissions: permissions, color: color, hoist: hoist, mentionable: mentionable},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Rapture::Role.from_json(response.body)
   end
@@ -383,7 +383,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/roles",
       positions,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
 
     Rapture::Role.from_json_array(response.body)
@@ -406,7 +406,7 @@ module Rapture::REST
       :patch,
       "guilds/#{guild_id}/roles/#{role_id}",
       {name: name, permissions: permissions, color: color, hoist: hoist, mentionable: mentionable},
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
 
     Rapture::Role.from_json(response.body)
@@ -423,7 +423,7 @@ module Rapture::REST
       :delete,
       "guilds/#{guild_id}/roles/#{role_id}",
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
   end
 
@@ -431,12 +431,14 @@ module Rapture::REST
   # be removed in a prune operation
   # https://discordapp.com/developers/docs/resources/guild#get-guild-prune-count
   # @param guild_id [String, Integer]
+  # @param days [Integer]
   # @return [Integer]
-  def get_guild_prune_count(guild_id)
+  def get_guild_prune_count(guild_id, days: nil)
+    query = URI.encode_www_form(days: days)
     response = request(
       :guilds_gid_prune, guild_id,
       :get,
-      "guilds/#{guild_id}/prune"
+      "guilds/#{guild_id}/prune" + "?#{query}"
     )
     Oj.load(response.body)["pruned"]
   end
@@ -454,7 +456,7 @@ module Rapture::REST
       :post,
       "guilds/#{guild_id}/prune" + query,
       nil,
-      'X-Audit-Log-Reason': reason,
+      "X-Audit-Log-Reason": reason,
     )
     Oj.load(response.body)["pruned"]
   end
@@ -470,6 +472,18 @@ module Rapture::REST
       "guilds/#{guild_id}/regions"
     )
     Rapture::Voice::Region.from_json_array(response.body)
+  end
+
+  # Get a list of guild invites
+  # @param guild_id [String, Integer]
+  # @return [Array<Invite>]
+  def get_guild_invites(guild_id)
+    response = request(
+      :guilds_gid_invites, guild_id,
+      :get,
+      "guilds/#{guild_id}/invites"
+    )
+    Rapture::Invite.from_json_array(response.body)
   end
 
   # A list of {Integration} objects for a guild

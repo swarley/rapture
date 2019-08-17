@@ -43,7 +43,7 @@ module Rapture
     # Add handlers that cache data sent over the gateway
     def initialize_cache_handlers
       on_guild_create do |guild|
-        @guild_cache.cache(guild.id, guild)
+        @guild_cache.cache(guild.id, CachedObjects::CachedGuild.new(self, guild))
         guild.channels.each do |channel|
           channel.instance_variable_set(:@guild_id, guild.id)
           @channel_cache.cache(channel.id, channel)
@@ -80,7 +80,7 @@ module Rapture
       end
 
       on_guild_update do |guild|
-        @guild_cache.cache(guild.id, guild)
+        @guild_cache.cache(guild.id, CachedObjects::CachedGuild.new(self, guild))
       end
 
       on_guild_delete do |guild|
@@ -140,9 +140,9 @@ module Rapture
     # @param id [Integer]
     # @return [Guild]
     def get_guild(id, cached: true)
-      return @guild_cache.fetch(id) { super(id) } if cached
+      return @guild_cache.fetch(id) { CachedObjects::CachedGuild.new(self, super(id)) } if cached
 
-      guild = super(id)
+      guild = CachedObjects::CachedGuild.new(self, id)
       @guild_cache.cache(id, guild)
     end
 
@@ -161,7 +161,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Channel]
     def get_channel(id, cached: true)
-      return @channel_cache.fetch(id) { p id; super(id) } if cached
+      return @channel_cache.fetch(id) { super(id) } if cached
 
       channel = super(id)
       @channel_cache.cache(id, channel)

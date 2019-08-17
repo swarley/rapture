@@ -82,7 +82,7 @@ describe Rapture::REST do
   rest_method(c, :modify_guild, Rapture::Guild, json_data("guild"), nil)
   rest_method(c, :modify_guild_role_positions, Rapture::Role, "[#{json_data("role")}]", nil, nil)
   rest_method(c, :modify_guild_role, Rapture::Role, json_data("role"), nil, nil)
-  rest_method_opts(c, :modify_current_user_nick, String, "newnick", nil, nick: "newnick_arg")
+  rest_method_opts(c, :modify_current_user_nick, String, %({"nick": "newnick"}), nil, nick: "newnick_arg")
   rest_method(c, :edit_message, Rapture::Message, json_data("message"), nil, nil)
 
   rest_method(c, :list_guild_emojis, Rapture::Emoji, "[#{json_data("emoji")}]", nil)

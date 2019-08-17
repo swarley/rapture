@@ -10,9 +10,8 @@ module Rapture::CachedObjects
         end
       end
 
-      define_method(:initialize) do |client, cache, data|
+      define_method(:initialize) do |client, data|
         @client = client
-        @cache = cache
         @delegate = data
       end
 
@@ -24,10 +23,20 @@ module Rapture::CachedObjects
         @delegate.to_json
       end
 
-      define_private_method(:client) { @client }
-      define_private_method(:cache) { @cache }
+      define_method(:is_a?) do |_klass|
+        return true if @delegate.is_a? _klass
+        super(_klass)
+      end
+
+      alias_method :kind_of?, :is_a?
+
+      define_method(:client) { @client }
+      define_method(:cache) { @cache }
+
+      private :client
+      private :cache
     end
-    
+
     delegate_klass
   end
 end
