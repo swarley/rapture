@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rapture/mappings/permissions"
+
 # Module that holds methods for interacting with the REST portion of the API
 module Rapture::REST
   include Rapture::HTTP

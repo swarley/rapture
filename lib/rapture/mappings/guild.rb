@@ -127,8 +127,9 @@ module Rapture
     getter :owner_id, converter: Converters.Snowflake
 
     # @!attribute [r] permissions
-    # @return [Integer]
-    getter :permissions
+    # @return [Permissions] The current user's total permissions in the guild.
+    #   Does not include overwrites
+    getter :permissions, converter: Converters.Permissions
 
     # @!attribute [r] region
     # @return [String]
@@ -330,7 +331,7 @@ module Rapture
         member_role_ids.include? role.id
       end.collect(&:permissions)
 
-      permissions = member_roles.reduce(permissions, &:|)
+      permissions = role_perms.reduce(permissions, &:|)
 
       if permissions & PermissionFlags::ADMINISTRATOR == PermissionFlags::ADMINISTRATOR
         return PermissionFlags::ALL

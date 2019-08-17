@@ -64,27 +64,31 @@ module Rapture::Mapping
 
     # Snowflake serde
     # @!method Snowflake
-    #   @return Converter
+    #   @return [Converter]
     # @!method Snowflake?
-    #   @return NilableConverter
+    #   @return [NilableConverter]
     converter(
       :Snowflake,
       nilable: true,
       from_json: proc { |id| Integer(id) },
-      to_json: proc { |int| int.to_s },
+      to_json: :to_s,
     )
 
     # Timestamp serde
     # @!method Timestamp
-    #   @return Converter
+    #   @return [Converter]
     # @!method Timestamp?
-    #   @return NilableConverter
+    #   @return [NilableConverter]
     converter(
       :Timestamp,
       nilable: true,
       from_json: proc { |data| Time.parse(data) },
       to_json: proc { |time| time.iso8601(6) },
     )
+
+    converter(:Permissions,
+              to_json: :to_i,
+              from_json: proc { |mask| Rapture::Permissions.new(mask) })
 
     # @!endgroup
   end

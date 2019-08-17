@@ -215,4 +215,34 @@ describe Rapture::Mapping::Converters do
       end
     end
   end
+
+  describe "Converters.Permissions" do
+    class PermissionsTest
+      include Rapture::Mapping
+      getter :data, converter: Converters.Permissions
+    end
+
+    before do
+      @raw_json = %({"data":2112})
+      @object = PermissionsTest.from_json(@raw_json)
+    end
+
+    describe ".from_json" do
+      it "converts to a Permissions object from an Integer" do
+        assert_kind_of(
+          Rapture::Permissions,
+          @object.data
+        )
+      end
+    end
+
+    describe ".to_json" do
+      it "converts to an Integer from a Permissions object" do
+        assert_equal(
+          @raw_json,
+          @object.to_json
+        )
+      end
+    end
+  end
 end
