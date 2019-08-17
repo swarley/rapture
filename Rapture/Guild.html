@@ -789,7 +789,7 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#permissions-instance_method" title="#permissions (instance method)">#<strong>permissions</strong>  &#x21d2; Integer </a>
+      <a href="#permissions-instance_method" title="#permissions (instance method)">#<strong>permissions</strong>  &#x21d2; Permissions </a>
     
 
     
@@ -808,7 +808,9 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>The current user&#39;s total permissions in the guild.</p>
+</div></span>
   
 </li>
 
@@ -1260,10 +1262,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-139</pre>
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 140</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:afk_channel_id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_Snowflake?'><span class='object_link'><a href="Mapping/Converters.html#Snowflake%3F-instance_method" title="Rapture::Mapping::Converters#Snowflake? (method)">Snowflake?</a></span></span></pre>
     </td>
@@ -1310,10 +1312,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-143</pre>
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 144</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:afk_timeout</span></pre>
     </td>
@@ -1360,10 +1362,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-187</pre>
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 188</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:application_id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_Snowflake?'><span class='object_link'><a href="Mapping/Converters.html#Snowflake%3F-instance_method" title="Rapture::Mapping::Converters#Snowflake? (method)">Snowflake?</a></span></span></pre>
     </td>
@@ -1410,10 +1412,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-253</pre>
+254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 254</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:banner</span></pre>
     </td>
@@ -1460,10 +1462,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-229</pre>
+230</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 229</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 230</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:channels</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></span></pre>
     </td>
@@ -1517,10 +1519,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-162</pre>
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 163</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:default_message_notifications</span></pre>
     </td>
@@ -1567,10 +1569,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-249</pre>
+250</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 250</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:description</span></pre>
     </td>
@@ -1617,10 +1619,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-152</pre>
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 152</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 153</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:embed_channel_id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_Snowflake?'><span class='object_link'><a href="Mapping/Converters.html#Snowflake%3F-instance_method" title="Rapture::Mapping::Converters#Snowflake? (method)">Snowflake?</a></span></span></pre>
     </td>
@@ -1671,10 +1673,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-147</pre>
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 148</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:embed_enabled</span></pre>
     </td>
@@ -1721,10 +1723,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-174</pre>
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 175</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:emojis</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span></span></pre>
     </td>
@@ -1765,10 +1767,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-166</pre>
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 166</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 167</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:explicit_content_filter</span></pre>
     </td>
@@ -1815,10 +1817,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-178</pre>
+179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 179</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:features</span></pre>
     </td>
@@ -1965,10 +1967,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-204</pre>
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 205</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:joined_at</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_Timestamp?'><span class='object_link'><a href="Mapping/Converters.html#Timestamp%3F-instance_method" title="Rapture::Mapping::Converters#Timestamp? (method)">Timestamp?</a></span></span></pre>
     </td>
@@ -2019,10 +2021,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-208</pre>
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 209</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:large</span></pre>
     </td>
@@ -2069,10 +2071,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-241</pre>
+242</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 241</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 242</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:max_members</span></pre>
     </td>
@@ -2119,10 +2121,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-237</pre>
+238</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 237</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 238</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:max_presences</span></pre>
     </td>
@@ -2169,10 +2171,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-217</pre>
+218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 218</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:member_count</span></pre>
     </td>
@@ -2219,10 +2221,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-225</pre>
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 225</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 226</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:members</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="Member.html" title="Rapture::Member (class)">Member</a></span></span></pre>
     </td>
@@ -2276,10 +2278,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-183</pre>
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 184</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:mfa_level</span></pre>
     </td>
@@ -2442,7 +2444,7 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <div class="method_details ">
   <h3 class="signature " id="permissions-instance_method">
   
-    #<strong>permissions</strong>  &#x21d2; <tt>Integer</tt>  <span class="extras">(readonly)</span>
+    #<strong>permissions</strong>  &#x21d2; <tt><span class='object_link'><a href="Permissions.html" title="Rapture::Permissions (class)">Permissions</a></span></tt>  <span class="extras">(readonly)</span>
   
 
   
@@ -2451,6 +2453,9 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>Returns The current user&#39;s total permissions in the guild. Does not
+include overwrites</p>
+
 
   </div>
 </div>
@@ -2462,9 +2467,15 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
     <li>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Permissions.html" title="Rapture::Permissions (class)">Permissions</a></span></tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>The current user&#39;s total permissions in the guild. Does not include
+overwrites</p>
+</div>
       
     </li>
   
@@ -2476,12 +2487,12 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-131</pre>
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 131</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 132</span>
 
-<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:permissions</span></pre>
+<span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:permissions</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='const'>Permissions</span></pre>
     </td>
   </tr>
 </table>
@@ -2526,10 +2537,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-262</pre>
+263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 262</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 263</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:premium_subscription_count</span></pre>
     </td>
@@ -2583,10 +2594,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-258</pre>
+259</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 258</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 259</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:premium_tier</span></pre>
     </td>
@@ -2633,10 +2644,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-233</pre>
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 233</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 234</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:presences</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Gateway/PresenceUpdate.html" title="Rapture::Gateway::PresenceUpdate (class)">PresenceUpdate</a></span></span></pre>
     </td>
@@ -2683,10 +2694,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-135</pre>
+136</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 136</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:region</span></pre>
     </td>
@@ -2733,10 +2744,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-170</pre>
+171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 171</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:roles</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Role.html" title="Rapture::Role (class)">Role</a></span></span></pre>
     </td>
@@ -2833,10 +2844,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-200</pre>
+201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 200</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 201</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:system_channel_id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_Snowflake?'><span class='object_link'><a href="Mapping/Converters.html#Snowflake%3F-instance_method" title="Rapture::Mapping::Converters#Snowflake? (method)">Snowflake?</a></span></span></pre>
     </td>
@@ -2883,10 +2894,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-213</pre>
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 213</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 214</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:unavailable</span></pre>
     </td>
@@ -2933,10 +2944,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-245</pre>
+246</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 246</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:vanity_url_code</span></pre>
     </td>
@@ -2990,10 +3001,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-157</pre>
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 158</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:verification_level</span></pre>
     </td>
@@ -3040,10 +3051,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-221</pre>
+222</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 221</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 222</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:voice_states</span><span class='comma'>,</span> <span class='label'>from_json:</span> <span class='const'><span class='object_link'><a href="Voice.html" title="Rapture::Voice (module)">Voice</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Voice/State.html" title="Rapture::Voice::State (class)">State</a></span></span></pre>
     </td>
@@ -3090,10 +3101,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-196</pre>
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 197</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:widget_channel_id</span><span class='comma'>,</span> <span class='label'>converter:</span> <span class='const'><span class='object_link'><a href="Mapping/Converters.html" title="Rapture::Mapping::Converters (module)">Converters</a></span></span><span class='period'>.</span><span class='id identifier rubyid_Snowflake?'><span class='object_link'><a href="Mapping/Converters.html#Snowflake%3F-instance_method" title="Rapture::Mapping::Converters#Snowflake? (method)">Snowflake?</a></span></span></pre>
     </td>
@@ -3144,10 +3155,10 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-191</pre>
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 192</span>
 
 <span class='id identifier rubyid_getter'>getter</span> <span class='symbol'>:widget_enabled</span></pre>
     </td>
@@ -3239,7 +3250,6 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
       <pre class="lines">
 
 
-268
 269
 270
 271
@@ -3248,10 +3258,11 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
 274
 275
 276
-277</pre>
+277
+278</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 268</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 269</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_compute_permissions'>compute_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_member'>member</span><span class='comma'>,</span> <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_base'>base</span> <span class='op'>=</span> <span class='id identifier rubyid_compute_base_permissions'>compute_base_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_member'>member</span><span class='rparen'>)</span>
@@ -3273,7 +3284,7 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
 </div>
 
       <div id="footer">
-  Generated on Sat Aug 17 07:11:41 2019 by
+  Generated on Sat Aug 17 13:52:09 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
