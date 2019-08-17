@@ -7,6 +7,7 @@ require "rapture_test/user_test"
 require "rapture_test/cache_test"
 require "rapture_test/cached_client_test"
 require "rapture_test/rate_limiter_test"
+require "rapture_test/logger_test"
 
 Rapture::LOGGER.level = :fatal
 
