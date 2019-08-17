@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/rapture.rb<span class="defines">,<br />
-  lib/rapture/cache.rb,<br /> lib/rapture/flags.rb,<br /> lib/rapture/client.rb,<br /> lib/rapture/errors.rb,<br /> lib/rapture/version.rb,<br /> lib/rapture/websocket.rb,<br /> lib/rapture/cached_client.rb,<br /> lib/rapture/mappings/user.rb,<br /> lib/rapture/mappings/emoji.rb,<br /> lib/rapture/mappings/guild.rb,<br /> lib/rapture/mappings/oauth.rb,<br /> lib/rapture/mappings/voice.rb,<br /> lib/rapture/mappings/invite.rb,<br /> lib/rapture/mappings/member.rb,<br /> lib/rapture/mappings/channel.rb,<br /> lib/rapture/mappings/gateway.rb,<br /> lib/rapture/mappings/message.rb,<br /> lib/rapture/mappings/webhook.rb,<br /> lib/rapture/mappings/audit_log.rb,<br /> lib/rapture/mappings/permissions.rb</span>
+  lib/rapture/cache.rb,<br /> lib/rapture/flags.rb,<br /> lib/rapture/client.rb,<br /> lib/rapture/errors.rb,<br /> lib/rapture/logger.rb,<br /> lib/rapture/version.rb,<br /> lib/rapture/websocket.rb,<br /> lib/rapture/cached_client.rb,<br /> lib/rapture/mappings/user.rb,<br /> lib/rapture/mappings/emoji.rb,<br /> lib/rapture/mappings/guild.rb,<br /> lib/rapture/mappings/oauth.rb,<br /> lib/rapture/mappings/voice.rb,<br /> lib/rapture/mappings/invite.rb,<br /> lib/rapture/mappings/member.rb,<br /> lib/rapture/mappings/channel.rb,<br /> lib/rapture/mappings/gateway.rb,<br /> lib/rapture/mappings/message.rb,<br /> lib/rapture/mappings/webhook.rb,<br /> lib/rapture/mappings/audit_log.rb,<br /> lib/rapture/mappings/permissions.rb</span>
 </dd>
   </dl>
   
@@ -104,7 +104,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Rapture/Activity.html" title="Rapture::Activity (class)">Activity</a></span>, <span class='object_link'><a href="Rapture/Application.html" title="Rapture::Application (class)">Application</a></span>, <span class='object_link'><a href="Rapture/Attachment.html" title="Rapture::Attachment (class)">Attachment</a></span>, <span class='object_link'><a href="Rapture/AuditLog.html" title="Rapture::AuditLog (class)">AuditLog</a></span>, <span class='object_link'><a href="Rapture/Ban.html" title="Rapture::Ban (class)">Ban</a></span>, <span class='object_link'><a href="Rapture/Cache.html" title="Rapture::Cache (class)">Cache</a></span>, <span class='object_link'><a href="Rapture/CachedClient.html" title="Rapture::CachedClient (class)">CachedClient</a></span>, <span class='object_link'><a href="Rapture/Channel.html" title="Rapture::Channel (class)">Channel</a></span>, <span class='object_link'><a href="Rapture/Client.html" title="Rapture::Client (class)">Client</a></span>, <span class='object_link'><a href="Rapture/DefaultCache.html" title="Rapture::DefaultCache (class)">DefaultCache</a></span>, <span class='object_link'><a href="Rapture/Embed.html" title="Rapture::Embed (class)">Embed</a></span>, <span class='object_link'><a href="Rapture/Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span>, <span class='object_link'><a href="Rapture/GatewayInfo.html" title="Rapture::GatewayInfo (class)">GatewayInfo</a></span>, <span class='object_link'><a href="Rapture/Guild.html" title="Rapture::Guild (class)">Guild</a></span>, <span class='object_link'><a href="Rapture/HTTPException.html" title="Rapture::HTTPException (class)">HTTPException</a></span>, <span class='object_link'><a href="Rapture/Integration.html" title="Rapture::Integration (class)">Integration</a></span>, <span class='object_link'><a href="Rapture/Invite.html" title="Rapture::Invite (class)">Invite</a></span>, <span class='object_link'><a href="Rapture/JSONError.html" title="Rapture::JSONError (class)">JSONError</a></span>, <span class='object_link'><a href="Rapture/Member.html" title="Rapture::Member (class)">Member</a></span>, <span class='object_link'><a href="Rapture/Message.html" title="Rapture::Message (class)">Message</a></span>, <span class='object_link'><a href="Rapture/NullCache.html" title="Rapture::NullCache (class)">NullCache</a></span>, <span class='object_link'><a href="Rapture/OauthApplication.html" title="Rapture::OauthApplication (class)">OauthApplication</a></span>, <span class='object_link'><a href="Rapture/Reaction.html" title="Rapture::Reaction (class)">Reaction</a></span>, <span class='object_link'><a href="Rapture/Role.html" title="Rapture::Role (class)">Role</a></span>, <span class='object_link'><a href="Rapture/SerdeError.html" title="Rapture::SerdeError (class)">SerdeError</a></span>, <span class='object_link'><a href="Rapture/Team.html" title="Rapture::Team (class)">Team</a></span>, <span class='object_link'><a href="Rapture/TooManyRequests.html" title="Rapture::TooManyRequests (class)">TooManyRequests</a></span>, <span class='object_link'><a href="Rapture/User.html" title="Rapture::User (class)">User</a></span>, <span class='object_link'><a href="Rapture/WebSocket.html" title="Rapture::WebSocket (class)">WebSocket</a></span>, <span class='object_link'><a href="Rapture/Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Rapture/Activity.html" title="Rapture::Activity (class)">Activity</a></span>, <span class='object_link'><a href="Rapture/Application.html" title="Rapture::Application (class)">Application</a></span>, <span class='object_link'><a href="Rapture/Attachment.html" title="Rapture::Attachment (class)">Attachment</a></span>, <span class='object_link'><a href="Rapture/AuditLog.html" title="Rapture::AuditLog (class)">AuditLog</a></span>, <span class='object_link'><a href="Rapture/Ban.html" title="Rapture::Ban (class)">Ban</a></span>, <span class='object_link'><a href="Rapture/Cache.html" title="Rapture::Cache (class)">Cache</a></span>, <span class='object_link'><a href="Rapture/CachedClient.html" title="Rapture::CachedClient (class)">CachedClient</a></span>, <span class='object_link'><a href="Rapture/Channel.html" title="Rapture::Channel (class)">Channel</a></span>, <span class='object_link'><a href="Rapture/Client.html" title="Rapture::Client (class)">Client</a></span>, <span class='object_link'><a href="Rapture/DefaultCache.html" title="Rapture::DefaultCache (class)">DefaultCache</a></span>, <span class='object_link'><a href="Rapture/Embed.html" title="Rapture::Embed (class)">Embed</a></span>, <span class='object_link'><a href="Rapture/Emoji.html" title="Rapture::Emoji (class)">Emoji</a></span>, <span class='object_link'><a href="Rapture/GatewayInfo.html" title="Rapture::GatewayInfo (class)">GatewayInfo</a></span>, <span class='object_link'><a href="Rapture/Guild.html" title="Rapture::Guild (class)">Guild</a></span>, <span class='object_link'><a href="Rapture/HTTPException.html" title="Rapture::HTTPException (class)">HTTPException</a></span>, <span class='object_link'><a href="Rapture/Integration.html" title="Rapture::Integration (class)">Integration</a></span>, <span class='object_link'><a href="Rapture/Invite.html" title="Rapture::Invite (class)">Invite</a></span>, <span class='object_link'><a href="Rapture/JSONError.html" title="Rapture::JSONError (class)">JSONError</a></span>, <span class='object_link'><a href="Rapture/Logger.html" title="Rapture::Logger (class)">Logger</a></span>, <span class='object_link'><a href="Rapture/Member.html" title="Rapture::Member (class)">Member</a></span>, <span class='object_link'><a href="Rapture/Message.html" title="Rapture::Message (class)">Message</a></span>, <span class='object_link'><a href="Rapture/NullCache.html" title="Rapture::NullCache (class)">NullCache</a></span>, <span class='object_link'><a href="Rapture/OauthApplication.html" title="Rapture::OauthApplication (class)">OauthApplication</a></span>, <span class='object_link'><a href="Rapture/Reaction.html" title="Rapture::Reaction (class)">Reaction</a></span>, <span class='object_link'><a href="Rapture/Role.html" title="Rapture::Role (class)">Role</a></span>, <span class='object_link'><a href="Rapture/SerdeError.html" title="Rapture::SerdeError (class)">SerdeError</a></span>, <span class='object_link'><a href="Rapture/Team.html" title="Rapture::Team (class)">Team</a></span>, <span class='object_link'><a href="Rapture/TooManyRequests.html" title="Rapture::TooManyRequests (class)">TooManyRequests</a></span>, <span class='object_link'><a href="Rapture/User.html" title="Rapture::User (class)">User</a></span>, <span class='object_link'><a href="Rapture/WebSocket.html" title="Rapture::WebSocket (class)">WebSocket</a></span>, <span class='object_link'><a href="Rapture/Webhook.html" title="Rapture::Webhook (class)">Webhook</a></span>
     
   
 </p>
@@ -131,7 +131,7 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>STDOUT</span><span class='rparen'>)</span></pre></dd>
+        <dd><pre class="code"><span class='const'>Rapture</span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Rapture/Logger.html" title="Rapture::Logger (class)">Logger</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Rapture/Logger.html#initialize-instance_method" title="Rapture::Logger#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='const'>STDOUT</span><span class='rparen'>)</span></pre></dd>
       
         <dt id="VERSION-constant" class="">VERSION =
           <div class="docstring">
@@ -227,16 +227,16 @@ values to a <code>nil</code> value that persists through a json dump</p>
       <pre class="lines">
 
 
-37
 38
 39
 40
 41
 42
-43</pre>
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_encode_json'>encode_json</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -255,7 +255,7 @@ values to a <code>nil</code> value that persists through a json dump</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Aug 16 02:58:15 2019 by
+  Generated on Sat Aug 17 00:28:27 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
