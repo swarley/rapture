@@ -7,11 +7,11 @@ require "rapture/version"
 Gem::Specification.new do |spec|
   spec.name = "rapture"
   spec.version = Rapture::VERSION
-  spec.authors = ["Zac Nowicki"]
-  spec.email = ["zachnowicki@gmail.com"]
+  spec.authors = ["Zac Nowicki", "Matt Carey"]
+  spec.email = ["zachnowicki@gmail.com", "matthew.b.carey@gmail.com"]
 
   spec.summary = "A Discord API library for Ruby"
-  spec.homepage = "https://github.com/z64/rapture"
+  spec.homepage = "https://github.com/swarley/rapture"
   spec.license = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -33,7 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "faraday", "~> 0.13"
   spec.add_dependency "faraday_middleware", "~> 0.13"
   spec.add_dependency "faye-websocket"
-  spec.add_dependency "permessage_deflate", "~> 0.1.4"
   spec.add_dependency "mime-types", "~> 3.2"
   spec.add_dependency "oj", "~> 3.3"
 
