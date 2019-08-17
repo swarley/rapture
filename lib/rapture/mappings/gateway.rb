@@ -48,7 +48,7 @@ module Rapture
 
       # @!attribute [r] roles
       # @return [Array<Integer>]
-      getter :roles, from_json: Converters.Snowflake
+      getter :roles, converter: Converters.Snowflake
 
       # @!attribute [r] game
       # @return [Activity, nil]

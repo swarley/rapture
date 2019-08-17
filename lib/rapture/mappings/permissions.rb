@@ -48,6 +48,23 @@ module Rapture
   # A class that adds methods for checking if a permission
   # is present in a bitmask
   class Permissions
+
+    # Create a Permission object from a list of permission names
+    # @param list [Array<Symbol>] symbolized names of {PermissionFlags} constants
+    # @example
+    #   perms = Permissions[:mention_everyone, :send_messages]
+    #   perms.send_messages?
+    #   # => true
+    #   perms.manage_messages?
+    #   # => false
+    # @return [Permissions]
+    def self.[](*list)
+      perms = list.collect do |perm|
+        Rapture::PermissionFlags.const_get(perm.upcase)
+      end.reduce(0, &:|)
+      self.new(perms)
+    end
+
     # @!attribute [r] create_instant_invite
     #   @!parse alias_method :create_instant_invite?, :create_instant_invite
     #   Allows creation of instant invites
