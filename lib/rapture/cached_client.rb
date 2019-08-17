@@ -140,7 +140,7 @@ module Rapture
     # @param id [Integer]
     # @return [Guild]
     def get_guild(id, cached: true)
-      return @guild_cache.fetch(id) { get_guild(id) } if cached
+      return @guild_cache.fetch(id) { super(id) } if cached
 
       guild = super(id)
       @guild_cache.cache(id, guild)
@@ -150,7 +150,7 @@ module Rapture
     # @param id [Integer]
     # @return [User]
     def get_user(id, cached: true)
-      @user_cache.fetch(id) { get_user(id) } if cached
+      @user_cache.fetch(id) { super(id) } if cached
 
       user = super(id)
       @user_cache.cache(id, user)
@@ -161,7 +161,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Channel]
     def get_channel(id, cached: true)
-      @channel_cache.fetch(id) { get_channel(id) } if cached
+      @channel_cache.fetch(id) { super(id) } if cached
 
       channel = super(id)
       @channel_cache.cache(id, channel)
