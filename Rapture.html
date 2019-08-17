@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/rapture.rb<span class="defines">,<br />
-  lib/rapture/cache.rb,<br /> lib/rapture/flags.rb,<br /> lib/rapture/client.rb,<br /> lib/rapture/errors.rb,<br /> lib/rapture/logger.rb,<br /> lib/rapture/version.rb,<br /> lib/rapture/websocket.rb,<br /> lib/rapture/cached_client.rb,<br /> lib/rapture/mappings/user.rb,<br /> lib/rapture/mappings/emoji.rb,<br /> lib/rapture/mappings/guild.rb,<br /> lib/rapture/mappings/oauth.rb,<br /> lib/rapture/mappings/voice.rb,<br /> lib/rapture/mappings/invite.rb,<br /> lib/rapture/mappings/member.rb,<br /> lib/rapture/mappings/channel.rb,<br /> lib/rapture/mappings/gateway.rb,<br /> lib/rapture/mappings/message.rb,<br /> lib/rapture/mappings/webhook.rb,<br /> lib/rapture/mappings/audit_log.rb,<br /> lib/rapture/mappings/permissions.rb</span>
+  lib/rapture/cdn.rb,<br /> lib/rapture/cache.rb,<br /> lib/rapture/flags.rb,<br /> lib/rapture/client.rb,<br /> lib/rapture/errors.rb,<br /> lib/rapture/logger.rb,<br /> lib/rapture/version.rb,<br /> lib/rapture/websocket.rb,<br /> lib/rapture/cached_client.rb,<br /> lib/rapture/mappings/user.rb,<br /> lib/rapture/mappings/emoji.rb,<br /> lib/rapture/mappings/guild.rb,<br /> lib/rapture/mappings/oauth.rb,<br /> lib/rapture/mappings/voice.rb,<br /> lib/rapture/mappings/invite.rb,<br /> lib/rapture/mappings/member.rb,<br /> lib/rapture/mappings/channel.rb,<br /> lib/rapture/mappings/gateway.rb,<br /> lib/rapture/mappings/message.rb,<br /> lib/rapture/mappings/webhook.rb,<br /> lib/rapture/mappings/audit_log.rb,<br /> lib/rapture/mappings/permissions.rb</span>
 </dd>
   </dl>
   
@@ -100,7 +100,7 @@
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Rapture/Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span>, <span class='object_link'><a href="Rapture/HTTP.html" title="Rapture::HTTP (module)">HTTP</a></span>, <span class='object_link'><a href="Rapture/Mapping.html" title="Rapture::Mapping (module)">Mapping</a></span>, <span class='object_link'><a href="Rapture/PermissionFlags.html" title="Rapture::PermissionFlags (module)">PermissionFlags</a></span>, <span class='object_link'><a href="Rapture/REST.html" title="Rapture::REST (module)">REST</a></span>, <span class='object_link'><a href="Rapture/UserFlags.html" title="Rapture::UserFlags (module)">UserFlags</a></span>, <span class='object_link'><a href="Rapture/Voice.html" title="Rapture::Voice (module)">Voice</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Rapture/CDN.html" title="Rapture::CDN (module)">CDN</a></span>, <span class='object_link'><a href="Rapture/Gateway.html" title="Rapture::Gateway (module)">Gateway</a></span>, <span class='object_link'><a href="Rapture/HTTP.html" title="Rapture::HTTP (module)">HTTP</a></span>, <span class='object_link'><a href="Rapture/Mapping.html" title="Rapture::Mapping (module)">Mapping</a></span>, <span class='object_link'><a href="Rapture/PermissionFlags.html" title="Rapture::PermissionFlags (module)">PermissionFlags</a></span>, <span class='object_link'><a href="Rapture/REST.html" title="Rapture::REST (module)">REST</a></span>, <span class='object_link'><a href="Rapture/UserFlags.html" title="Rapture::UserFlags (module)">UserFlags</a></span>, <span class='object_link'><a href="Rapture/Voice.html" title="Rapture::Voice (module)">Voice</a></span>
     
   
     
@@ -227,16 +227,16 @@ values to a <code>nil</code> value that persists through a json dump</p>
       <pre class="lines">
 
 
-38
 39
 40
 41
 42
 43
-44</pre>
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rapture.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/rapture.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_encode_json'>encode_json</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -255,7 +255,7 @@ values to a <code>nil</code> value that persists through a json dump</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Aug 17 02:48:37 2019 by
+  Generated on Sat Aug 17 02:51:41 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
