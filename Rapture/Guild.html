@@ -1171,6 +1171,41 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
 
 
 
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compute_permissions-instance_method" title="#compute_permissions (instance method)">#<strong>compute_permissions</strong>(member, channel = nil)  &#x21d2; Permissions </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get the permissions for a member in a given channel.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
 
   
   
@@ -1178,7 +1213,7 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
   
   
   
-  <h2>Method Summary</h2>
+  
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Mapping.html" title="Rapture::Mapping (module)">Mapping</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Mapping.html#to_h-instance_method" title="Rapture::Mapping#to_h (method)">#to_h</a></span>, <span class='object_link'><a href="Mapping.html#to_json-instance_method" title="Rapture::Mapping#to_json (method)">#to_json</a></span></p>
@@ -3123,10 +3158,122 @@ href="https://discordapp.com/developers/docs/resources/guild#guild-object-guild-
   </div>
 
 
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="compute_permissions-instance_method">
+  
+    #<strong>compute_permissions</strong>(member, channel = nil)  &#x21d2; <tt><span class='object_link'><a href="Permissions.html" title="Rapture::Permissions (class)">Permissions</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get the permissions for a member in a given channel</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>member</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Member.html" title="Rapture::Member (class)">Member</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The member to calculate permissions for</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>channel</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Channel.html" title="Rapture::Channel (class)">Channel</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A channel to apply overwrites from</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Permissions.html" title="Rapture::Permissions (class)">Permissions</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/rapture/mappings/guild.rb', line 268</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_compute_permissions'>compute_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_member'>member</span><span class='comma'>,</span> <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_base'>base</span> <span class='op'>=</span> <span class='id identifier rubyid_compute_base_permissions'>compute_base_permissions</span><span class='lparen'>(</span><span class='id identifier rubyid_member'>member</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_perms'>perms</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_channel'>channel</span>
+            <span class='id identifier rubyid_compute_overwrites'>compute_overwrites</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='comma'>,</span> <span class='id identifier rubyid_member'>member</span><span class='comma'>,</span> <span class='id identifier rubyid_channel'>channel</span><span class='rparen'>)</span>
+          <span class='kw'>else</span>
+            <span class='id identifier rubyid_base'>base</span>
+          <span class='kw'>end</span>
+  <span class='const'><span class='object_link'><a href="../Rapture.html" title="Rapture (module)">Rapture</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Permissions.html" title="Rapture::Permissions (class)">Permissions</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Permissions.html#initialize-instance_method" title="Rapture::Permissions#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_perms'>perms</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Sat Aug 17 05:19:27 2019 by
+  Generated on Sat Aug 17 07:11:41 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>

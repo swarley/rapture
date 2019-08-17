@@ -1173,7 +1173,7 @@ not actively cache one.</p>
       <pre class="code"><span class="info file"># File 'lib/rapture/cached_client.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_channel'>get_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>cached:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='ivar'>@channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
+  <span class='kw'>return</span> <span class='ivar'>@channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_id'>id</span><span class='semicolon'>;</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
 
   <span class='id identifier rubyid_channel'>channel</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='ivar'>@channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_channel'>channel</span><span class='rparen'>)</span>
@@ -1313,20 +1313,14 @@ fetched</p>
 217
 218
 219
-220
-221
-222
-223</pre>
+220</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rapture/cached_client.rb', line 212</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_channels'>get_guild_channels</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>cached:</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
-    <span class='id identifier rubyid_channel_list'>channel_list</span> <span class='op'>=</span> <span class='ivar'>@guild_channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_channel_list'>channel_list</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_id'>id</span><span class='op'>|</span>
-      <span class='ivar'>@channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_get_channel'>get_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-    <span class='kw'>end</span>
+    <span class='ivar'>@guild_channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_guild_channels'>guild_channels</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
     <span class='ivar'>@guild_channel_cache</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_guild_channels'>guild_channels</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1431,7 +1425,7 @@ not cached, it will be fetched</p>
       <pre class="code"><span class="info file"># File 'lib/rapture/cached_client.rb', line 185</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_member'>get_guild_member</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='label'>cached:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='ivar'>@member_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
+  <span class='kw'>return</span> <span class='ivar'>@member_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
 
   <span class='id identifier rubyid_member'>member</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
   <span class='ivar'>@member_cache</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_member'>member</span><span class='rparen'>)</span>
@@ -1591,7 +1585,7 @@ not cached, it will be fetched</p>
       <pre class="code"><span class="info file"># File 'lib/rapture/cached_client.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_guild_roles'>get_guild_roles</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='comma'>,</span> <span class='label'>cached:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='ivar'>@guild_role_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
+  <span class='kw'>return</span> <span class='ivar'>@guild_role_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
 
   <span class='id identifier rubyid_guild_roles'>guild_roles</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_guild_id'>guild_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_guild_roles'>guild_roles</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_role'>role</span><span class='op'>|</span> <span class='ivar'>@guild_role_cache</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid_role'>role</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_role'>role</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1667,7 +1661,7 @@ fetched</p>
       <pre class="code"><span class="info file"># File 'lib/rapture/cached_client.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_user'>get_user</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>cached:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='ivar'>@user_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
+  <span class='kw'>return</span> <span class='ivar'>@user_cache</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_cached'>cached</span>
 
   <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
   <span class='ivar'>@user_cache</span><span class='period'>.</span><span class='id identifier rubyid_cache'>cache</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
@@ -1976,7 +1970,7 @@ have their roles cached at all times.</p>
 </div>
 
       <div id="footer">
-  Generated on Sat Aug 17 05:19:26 2019 by
+  Generated on Sat Aug 17 07:11:40 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.20 (ruby-2.4.6).
 </div>
