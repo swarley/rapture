@@ -1,5 +1,5 @@
 --markup markdown
 -
-docs/Introduction.md
-docs/Cache.md
+docs/*
 LICENSE.txt
+README.md

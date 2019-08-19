@@ -12,20 +12,16 @@ to have full API coverage and name methods and classes in a way that allows for 
 **Compared to Discordrb, Rapture**:
 
 - Is more closely mapped to official documentation
-- Is lower level library, you get the most out of it from reading official
-  documentation.
 - Operates on the principal of least surprise for most user facing methods.
 - Has stateful rate limiting, including bucketing logic
-- Has a stateless client as default
 - Has the option to configure custom caches
 - Recieves updates quickly
-- You want a finer control over internal workings
+- Gives finer control over internal workings
 
 **Discordrb might be better suited to you if**:
 
 - You are a beginner to the Discord API
 - You want a more established library with higher level abstractions
-- You want easy omniauth support
 - You need a library with voice send support (However Rapture voice send is on the way)
 
 
