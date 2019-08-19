@@ -1,1 +1,5 @@
 --markup markdown
+-
+docs/Introduction.md
+docs/Cache.md
+LICENSE.txt

@@ -22,6 +22,7 @@ module Rapture
       @heartbeat_interval = 1
       @send_heartbeats = false
       @event_handlers = Hash.new { |hash, key| hash[key] = [] }
+      @heartbeat_acked = true
       setup_heartbeats
     end
 
@@ -267,11 +268,19 @@ module Rapture
     def setup_heartbeats
       Thread.new do
         loop do
+          unless @heartbeat_acked
+            Rapture::LOGGER.error("Gateway") { "Last heartbeat was not acked. Reconnecting" }
+            @heartbeat_acked = true
+            @send_heartbeats = false
+            @websocket.reconnect
+          end
+
           if @send_heartbeats
             # TODO: Heartbeat ack checking
             sequence = @session&.sequence
             # puts "Sending heartbeat (sequence: #{sequence}, interval: #{@heartbeat_interval})"
             @websocket.send({op: OP_HEARTBEAT, d: sequence}.to_json)
+            @heartbeat_acked = false
           end
           sleep @heartbeat_interval
         end
@@ -293,7 +302,8 @@ module Rapture
       when OP_RECONNECT
         @websocket.reconnect
       when OP_HEARTBEAT_ACK
-        Rapture::LOGGER.info("Gateway") { "Recieved heartbeat ack: #{packet.d}" }
+        @heartbeat_acked = true
+        Rapture::LOGGER.debug("Gateway") { "Recieved heartbeat ack" }
       else
         puts "Unknown opcode: #{packet.inspect}"
       end

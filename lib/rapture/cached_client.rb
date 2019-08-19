@@ -95,9 +95,9 @@ module Rapture
       on_guild_member_update do |payload|
         @user_cache.cache(payload.user.id, payload.user)
         if (existing = @member_cache.resolve([payload.guild_id, payload.user.id]))
-          existing.roles = payload.roles
-          existing.nick = payload.nick
-          @member_cache.cache([member.guild_id, member.user.id], existing)
+          existing.instance_variable_set(:@roles, payload.roles)
+          existing.instance_variable_set(:@nick, payload.nick)
+          @member_cache.cache([existing.guild_id, existing.user.id], existing)
         else
           member = get_guild_member(payload.guild_id, payload.user.id)
           @member_cache.cache([member.guild_id, member.user.id], member)
@@ -138,6 +138,7 @@ module Rapture
 
     # Return a guild object from its ID. If the guild is not cached, it will be fetched
     # @param id [Integer]
+    # @param cached [true, false] If false, the guild will be recached
     # @return [Guild]
     def get_guild(id, cached: true)
       return @guild_cache.fetch(id) { super(id) } if cached
@@ -148,12 +149,23 @@ module Rapture
 
     # Return a user object from its ID. If the user is not cached, it will be fetched
     # @param id [Integer]
+    # @param cached [true, false] If false the user will be recached
     # @return [User]
     def get_user(id, cached: true)
       return @user_cache.fetch(id) { super(id) } if cached
 
       user = super(id)
       @user_cache.cache(id, user)
+    end
+
+    # Get the current user object. If the user is not cached it will be fetched
+    # @param cached [true, false] If false, the current user will be recached
+    # @return [User]
+    def get_current_user(cached: true)
+      return @user_cache.fetch(:@me) { super() } if cached
+
+      me = super()
+      @user_cache.cache(:@me, me)
     end
 
     # Return a channel object from its ID.

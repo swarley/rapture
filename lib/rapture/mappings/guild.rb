@@ -288,7 +288,8 @@ module Rapture
       permissions = base
 
       overwrites = channel.permission_overwrites.dup
-      everyone_ow = overwrites.delete { |ow| ow.id == @id }
+      everyone_ow = overwrites.find { |ow| ow.id == @id }
+      overwrites.delete(everyone_ow)
 
       if everyone_ow
         permissions &= ~everyone_ow.deny
@@ -308,7 +309,7 @@ module Rapture
       permissions &= ~deny
       permissions |= allow
 
-      member_ow = overwrites.find { |ow| ow.id == member.id }
+      member_ow = overwrites.find { |ow| ow.id == member.user.id }
       if member_ow
         permissions &= ~member_ow.deny
         permissions |= member_ow.allow
@@ -319,7 +320,7 @@ module Rapture
 
     # @!visibility private
     def compute_base_permissions(member)
-      if @owner_id == member_id
+      if @owner_id == member.user.id
         return PermissionFlags::ALL
       end
 

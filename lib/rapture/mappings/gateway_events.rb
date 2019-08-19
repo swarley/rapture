@@ -115,10 +115,6 @@ module Rapture::Gateway
     end
   end
 
-  # Reconnect event stub for gateway event dispatching
-  class Reconnect
-  end
-
   # Invalid session stub for event dispatching
   InvalidSession = Struct.new(:resumable)
 
@@ -159,18 +155,26 @@ module Rapture::Gateway
     getter :session_id
   end
 
-  # An event stub for when a `RESUME` is preformed in the gateway
-  class Resumed
-  end
-
-  # An event that is fired when a new {Channel} is created.
+  # @!visibility hidden
   ChannelCreate = Rapture::Channel.dup
 
-  # An event that is fired when a {Channel} is updated
+  # @!parse
+  #   # An event that is fired when a new {Channel} is created.
+  #   class ChannelCreate < Rapture::Channel; end
+
+  # @!visibility hidden
   ChannelUpdate = Rapture::Channel.dup
 
-  # An event that is fired when a {Channel} is deleted
+  # @!parse
+  #   # An event that is fired when a {Channel} is updated
+  #   class ChannelUpdate < Rapture::Channel; end
+
+  # @!visibility hidden
   ChannelDelete = Rapture::Channel.dup
+
+  # @!parse
+  #   # An event that is fired when a {Channel} is deleted
+  #   class ChannelDelete < Rapture::Channel; end
 
   # An event that is fired when a channel's pins change
   class ChannelPinsUpdate
@@ -189,14 +193,26 @@ module Rapture::Gateway
     getter :last_pin_timestamp, converter: Converters.Timestamp?
   end
 
-  # An event that is fired when a new {Guild} is created.
+  # @!visibility hidden
   GuildCreate = Rapture::Guild.dup
 
-  # An event that is fired when a {Guild} is updated.
+  # @!parse
+  #   # An event that is fired when a new {Guild} is created.
+  #   class GuildCreate < Rapture::Guild; end
+
+  # @!visibility hidden
   GuildUpdate = Rapture::Guild.dup
+
+  # @!parse
+  #   # An event that is fired when a {Guild} is updated.
+  #   class GuildUpdate < Rapture::Guild; end
 
   # An event that is fired when a {Guild} is deleted.
   GuildDelete = Rapture::Guild.dup
+
+  # @!parse
+  #   # An event that is fired when a {Guild} is deleted.
+  #   class GuildDelete < Rapture::Guild; end
 
   # An event that is fired when a {Ban} is added.
   class GuildBanAdd
@@ -211,8 +227,12 @@ module Rapture::Gateway
     getter :user, from_json: Rapture::User
   end
 
-  # An event that is fired when a {Ban} is removed.
+  # @!visibility hidden
   GuildBanRemove = GuildBanAdd.dup
+
+  # @!parse
+  #   # An event that is fired when a {Ban} is removed.
+  #   class GuildBanRemove < GuildBanAdd; end
 
   # An event that is fired when a guild's emojis are updated.
   class GuildEmojisUpdate
@@ -236,8 +256,17 @@ module Rapture::Gateway
     getter :guild_id, converter: Converters.Snowflake
   end
 
+  # @!visibility hidden
+  # We can't do inheritance for this because of the way
+  # Mapping works.
+  GuildMemberAdd = Rapture::Member
+  # @!parse
+  #   class GuildMemberAdd < Rapture::Member
+  #     include Mapping
+  #   end
+
   # An event that is fired when a member is added to a guild.
-  class GuildMemberAdd < Rapture::Member
+  class GuildMemberAdd
     include Rapture::Mapping
 
     # @!attribute [r] guild_id
