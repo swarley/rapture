@@ -2,6 +2,15 @@
 
 module Rapture::CachedObjects
   class CachedGuild < Base(Rapture::Guild)
+    def initialize(client, data)
+      super(client, data)
+
+      cached_channels = @delegate.channels.collect { |channel| CachedChannel.new(client, channel) }
+      @delegate.instance_variable_set(:@channels, cached_channels)
+
+      cached_roles = @delegate.roles.collect { |role| CachedRole.new(client, role, data.id) }
+      @delegate.instance_variable_set(:@roles, cached_roles)
+    end
 
     # Modify this guild's settings
     # @param guild_id [String, Integer]
@@ -21,12 +30,13 @@ module Rapture::CachedObjects
     def modify(name: nil, region: nil, verification_level: nil, default_message_notifications: nil,
                explicit_content_filter: nil, afk_channel_id: nil, afk_timeout: nil,
                icon: nil, owner_id: nil, splash: nil, system_channel_id: nil, reason: nil)
-      client.modify_guild(
+      updated = client.modify_guild(
         self.id, name: name, region: region, verification_level: verification_level,
                  default_message_notifications: default_message_notifications, explicit_content_filter: explicit_content_filter,
                  afk_channel_id: afk_channel_id, afk_timeout: afk_timeout, icon: icon, owner_id: owner_id,
                  splash: splash, system_channel_id: system_channel_id, reason: reason,
       )
+      @delegate = updated
     end
 
     # Delete this guild. Can only be done if the bot is the guild's owner.
@@ -39,12 +49,6 @@ module Rapture::CachedObjects
     # @return [Array<CachedChannel>]
     def channels
       client.get_guild_channels(self.id)
-    end
-
-    # Get an array of {CachedMember} for this guild
-    # @return [Array<CachedMember>]
-    def members
-      client.get_guild_members(self.id)
     end
 
     # Create a new channel

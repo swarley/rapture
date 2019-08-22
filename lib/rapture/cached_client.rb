@@ -51,25 +51,25 @@ module Rapture
         end
 
         guild.roles.each do |role|
-          @role_cache.cache(role.id, role)
+          @role_cache.cache(role.id, CachedObjects::CachedRole.new(self, role, guild.id))
           @guild_role_cache.fetch(guild.id) { [] } << role.id
         end
 
         guild.members.each do |member|
-          @member_cache.cache([guild.id, member.user.id], member)
+          @member_cache.cache([guild.id, member.user.id], CachedObjects::CachedMember.new(self, member, guild.id))
           @user_cache.cache(member.user.id, member.user)
         end
       end
 
       on_channel_create do |channel|
-        @channel_cache.cache(channel.id, channel)
+        @channel_cache.cache(channel.id, CachedObjects::CachedChannel.new(channel))
         if (guild_id = channel.guild_id)
           @guild_channel_cache.fetch(guild_id) { [] } << channel.id
         end
       end
 
       on_channel_update do |channel|
-        @channel_cache.cache(channel.id, channel)
+        @channel_cache.cache(channel.id, CachedObjects::CachedChannel.new(self, channel))
       end
 
       on_channel_delete do |channel|
@@ -88,35 +88,35 @@ module Rapture
       end
 
       on_guild_member_add do |member|
-        @user_cache.cache(member.user.id, member.user)
-        @member_cache.cache([member.guild_id, member.user.id], member)
+        @user_cache.cache(member.user.id, CachedObjects::CachedUser.new(self, member.user))
+        @member_cache.cache([member.guild_id, member.user.id], CachedObjects::CachedMember.new(self, member, member.guild_id))
       end
 
       on_guild_member_update do |payload|
         @user_cache.cache(payload.user.id, payload.user)
         if (existing = @member_cache.resolve([payload.guild_id, payload.user.id]))
-          existing.roles = payload.roles
-          existing.nick = payload.nick
-          @member_cache.cache([member.guild_id, member.user.id], existing)
+          existing.instance_variable_set(:@roles, payload.roles)
+          existing.instance_variable_set(:@nick, payload.nick)
+          @member_cache.cache([existing.guild_id, existing.user.id], existing)
         else
           member = get_guild_member(payload.guild_id, payload.user.id)
-          @member_cache.cache([member.guild_id, member.user.id], member)
+          @member_cache.cache([member.guild_id, member.user.id], CachedObjects::CachedUser.new(self, member))
         end
       end
 
       on_guild_member_remove do |payload|
-        @user_cache.cache(payload.user.id, payload.user)
-        @member_cache.remove([payload.guild_id, member.user.id])
+        @user_cache.cache(payload.user.id, CachedObjects::CachedUser.new(self, payload.user))
+        @member_cache.remove([payload.guild_id, payload.user.id])
       end
 
       on_guild_members_chunk do |payload|
         payload.members.each do |member|
-          @member_cache.cache([member.guild_id, member.user.id], member)
+          @member_cache.cache([member.guild_id, member.user.id], CachedObjects::CachedMember.new(self, member, member.guild_id))
         end
       end
 
       on_guild_role_create do |payload|
-        @role_cache.cache(payload.role.id, payload.role)
+        @role_cache.cache(payload.role.id, CachedObjects::CachedRole.new(self, payload.role))
         @guild_role_cache.fetch(payload.guild_id) { [] } << payload.role.id
       end
 
@@ -130,7 +130,7 @@ module Rapture
       end
 
       on_presence_update do |payload|
-        @user_cache.cache(payload.user.id, payload.user) if payload.user
+        @user_cache.cache(payload.user.id, CachedObjects::CachedUser.new(self, payload.user)) if payload.user
 
         @member_cache.cache([payload.guild_id, payload.user.id], payload) if payload.roles && payload.user && payload.guild_id
       end
@@ -142,7 +142,7 @@ module Rapture
     def get_guild(id, cached: true)
       return @guild_cache.fetch(id) { CachedObjects::CachedGuild.new(self, super(id)) } if cached
 
-      guild = CachedObjects::CachedGuild.new(self, id)
+      guild = CachedObjects::CachedGuild.new(self, super(id))
       @guild_cache.cache(id, guild)
     end
 
@@ -150,9 +150,9 @@ module Rapture
     # @param id [Integer]
     # @return [User]
     def get_user(id, cached: true)
-      return @user_cache.fetch(id) { super(id) } if cached
+      return @user_cache.fetch(id) { CachedObjects::CachedUser.new(self, super(id)) } if cached
 
-      user = super(id)
+      user = CachedObjects::CachedUser.new(self, super(id))
       @user_cache.cache(id, user)
     end
 
@@ -161,9 +161,9 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Channel]
     def get_channel(id, cached: true)
-      return @channel_cache.fetch(id) { super(id) } if cached
+      return @channel_cache.fetch(id) { CachedObjects::CachedChannel.new(self, super(id)) } if cached
 
-      channel = super(id)
+      channel = CachedObjects::CachedChannel.new(self, super(id))
       @channel_cache.cache(id, channel)
     end
 
@@ -183,7 +183,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Member]
     def get_guild_member(guild_id, user_id, cached: true)
-      return @member_cache.fetch([guild_id, user_id]) { super(guild_id, user_id) } if cached
+      return @member_cache.fetch([guild_id, user_id]) { CachedMember.new(self, super(guild_id, user_id), guild_id) } if cached
 
       member = super(guild_id, user_id)
       @member_cache.cache([guild_id, user_id], member)
@@ -193,7 +193,7 @@ module Rapture
     # @param guild_id [Integer]
     # @return [Array<Member>]
     def get_guild_members(guild_id)
-      @member_cache.select { |key| key[0] == guild_id }.values
+      @member_cache.select { |key| key[0] == guild_id }.collect(&:last)
     end
 
     # Return a list of cached guild_roles
@@ -204,16 +204,16 @@ module Rapture
       return @guild_role_cache.fetch(guild_id) { super(guild_id) } if cached
 
       guild_roles = super(guild_id)
-      guild_roles.each { |role| @guild_role_cache.cache(role.id, role) }
+      guild_roles.each { |role| @guild_role_cache.cache(role.id, CachedObjects::CachedRole.new(self, role)) }
     end
 
     # Return a list of guild_channels
     # @param cached [true, false] values will be recached if false
     def get_guild_channels(guild_id, cached: true)
       if cached
-        @guild_channel_cache.fetch(guild_id) { super(guild_id) }
+        @guild_channel_cache.fetch(guild_id) { CachedObjects::CachedChannel.new(self, super(guild_id)) }
       else
-        guild_channels = super(guild_id)
+        guild_channels = CachedObjects::CachedChannel.new(self, super(guild_id))
         @guild_channel_cache.cache(guild_id, guild_channels.collect(&:id))
         guild_channels.each { |channel| @channel_cache.cache(channel.id, channel) }
       end

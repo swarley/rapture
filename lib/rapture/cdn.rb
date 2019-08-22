@@ -154,7 +154,7 @@ module Rapture
 
     # Return a size query if size is defined
     def self.get_query(size = nil)
-      query = size ? "?size=#{size}" : ""
+      size ? "?size=#{size}" : ""
     end
 
     private_class_method :check_extension!

@@ -2,7 +2,7 @@
 
 module Rapture::CachedObjects
   def self.Base(klass)
-    delegate_klass = Class.new
+    delegate_klass = Class.new(klass)
     delegate_klass.instance_exec do
       klass.properties.each_key do |prop|
         define_method(prop) do
@@ -22,13 +22,6 @@ module Rapture::CachedObjects
       define_method(:to_json) do
         @delegate.to_json
       end
-
-      define_method(:is_a?) do |_klass|
-        return true if @delegate.is_a? _klass
-        super(_klass)
-      end
-
-      alias_method :kind_of?, :is_a?
 
       define_method(:client) { @client }
       define_method(:cache) { @cache }
