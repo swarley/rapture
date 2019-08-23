@@ -94,5 +94,9 @@ module Rapture
     # @!attribute [r] application
     # @return [Application, nil]
     getter :application, from_json: Application
+
+    # @!attribute [r] flags 
+    # @return [Integer, nil]
+    getter :flags
   end
 end
