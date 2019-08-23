@@ -113,6 +113,22 @@ module Rapture::REST
     Rapture::Message.from_json(response.body)
   end
 
+  # Set the embed suppression value for this post. Embed suppression can be disabled
+  # with a suppress value of `false`
+  # @todo docs link
+  # @param channel_id [Integer]
+  # @param message_id [Integer]
+  # @param suppress [true, false]
+  # @return [true, false] if the action was successful
+  def suppress_message_embeds(channel_id, message_id, suppress: true)
+    request(
+      :channels_cid_messages_mid_suppress_embeds, channel_id,
+      :post,
+      "channels#{channel_id}/messages/#{message_id}/suppress-embeds",
+      suppress: suppress
+    ).status == 204
+  end
+
   # Edits a message in a channel.
   # https://discordapp.com/developers/docs/resources/channel#edit-message
   # @param channel_id [String, Integer]
