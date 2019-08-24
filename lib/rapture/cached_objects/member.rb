@@ -2,6 +2,14 @@
 
 module Rapture::CachedObjects
   class CachedMember < Base(Rapture::Member)
+    extend ModifySetter
+
+    setter :nick
+    setter :roles
+    setter :mute
+    setter :deaf
+    setter :channel_id
+
     attr_reader :guild_id
 
     def initialize(client, member, guild_id)
@@ -41,12 +49,11 @@ module Rapture::CachedObjects
       modify(channel_id: channel_id, reason: reason)
     end
 
-    def mute(reason: nil)
-      modify(mute: true, reason: reason)
-    end
+    private
 
-    def deafen(reason: nil)
-      modify(deaf: true, reason: reason)
+    def update(roles: [], nick: nil)
+      @delegate.instance_variable_set(:@roles, roles)
+      @delegate.instance_variable_set(:@nick, nick)
     end
   end
 end

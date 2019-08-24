@@ -35,5 +35,13 @@ module Rapture
     # @!attribute [r] mute
     # @return [true, false]
     getter :mute
+
+    private
+
+    # This exists to make our life easier within the cached client.
+    def update(roles: [], nick: nil)
+      @roles = roles
+      @nick = nick
+    end
   end
 end

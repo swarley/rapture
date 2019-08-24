@@ -27,23 +27,24 @@ module Rapture
     # @return [Cache<(Integer, Integer), Member>] caches a member with (guild_id, user_id) as the key
     attr_accessor :member_cache
 
-    # # @!visibility private
-    def initialize(*)
-      @user_cache = Rapture::DefaultCache.new
-      @guild_cache = Rapture::DefaultCache.new
-      @guild_role_cache = Rapture::DefaultCache.new
-      @guild_channel_cache = Rapture::DefaultCache.new
-      @channel_cache = Rapture::DefaultCache.new
-      @role_cache = Rapture::DefaultCache.new
-      @member_cache = Rapture::DefaultCache.new
-      super
+    # (see Client#initialize)
+    # @param default_cache [Rapture::Cache] the default cache type for all caches
+    def initialize(*args, default_cache: Rapture::DefaultCache)
+      @user_cache = default_cache.new
+      @guild_cache = default_cache.new
+      @guild_role_cache = default_cache.new
+      @guild_channel_cache = default_cache.new
+      @channel_cache = default_cache.new
+      @role_cache = default_cache.new
+      @member_cache = default_cache.new
+      super(*args)
       initialize_cache_handlers
     end
 
     # Add handlers that cache data sent over the gateway
     def initialize_cache_handlers
       on_guild_create do |guild|
-        @guild_cache.cache(guild.id, CachedObjects::CachedGuild.new(self, guild))
+        @guild_cache.cache(guild.id, guild)
         guild.channels.each do |channel|
           channel.instance_variable_set(:@guild_id, guild.id)
           @channel_cache.cache(channel.id, channel)
@@ -95,8 +96,7 @@ module Rapture
       on_guild_member_update do |payload|
         @user_cache.cache(payload.user.id, payload.user)
         if (existing = @member_cache.resolve([payload.guild_id, payload.user.id]))
-          existing.instance_variable_set(:@roles, payload.roles)
-          existing.instance_variable_set(:@nick, payload.nick)
+          existing.__send__(:update, roles: payload.roles, nick: payload.nick)
           @member_cache.cache([existing.guild_id, existing.user.id], existing)
         else
           member = get_guild_member(payload.guild_id, payload.user.id)
@@ -134,10 +134,19 @@ module Rapture
 
         @member_cache.cache([payload.guild_id, payload.user.id], payload) if payload.roles && payload.user && payload.guild_id
       end
+
+      on_ready do |payload|
+        @user_cache.cache(:@me, CachedObjects::CachedUser.new(self, payload.user))
+      end
+
+      on_user_update do |payload|
+        @user_cache.cache(:@me, CachedObjects::CachedUser.new(self, payload))
+      end
     end
 
     # Return a guild object from its ID. If the guild is not cached, it will be fetched
     # @param id [Integer]
+    # @param cached [true, false] value will be recached if set to false
     # @return [Guild]
     def get_guild(id, cached: true)
       return @guild_cache.fetch(id) { CachedObjects::CachedGuild.new(self, super(id)) } if cached
@@ -148,12 +157,22 @@ module Rapture
 
     # Return a user object from its ID. If the user is not cached, it will be fetched
     # @param id [Integer]
+    # @param cached [true, false] value will be recached if set to false
     # @return [User]
     def get_user(id, cached: true)
       return @user_cache.fetch(id) { CachedObjects::CachedUser.new(self, super(id)) } if cached
 
       user = CachedObjects::CachedUser.new(self, super(id))
       @user_cache.cache(id, user)
+    end
+
+    # @param cached [true, false] value will be recached if set to false
+    # @return [User] current user
+    def get_current_user(cached: true)
+      return @user_cache.fetch(id) { CachedObjects::CachedUser.new(self, super()) } if cached
+
+      user = CachedObjects::CachedUser.new(self, super())
+      @user_cache.cache(:@me, user)
     end
 
     # Return a channel object from its ID.
@@ -183,7 +202,7 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Member]
     def get_guild_member(guild_id, user_id, cached: true)
-      return @member_cache.fetch([guild_id, user_id]) { CachedMember.new(self, super(guild_id, user_id), guild_id) } if cached
+      return @member_cache.fetch([guild_id, user_id]) { CachedObjects::CachedMember.new(self, super(guild_id, user_id), guild_id) } if cached
 
       member = super(guild_id, user_id)
       @member_cache.cache([guild_id, user_id], member)
@@ -201,22 +220,76 @@ module Rapture
     # @param cached [true, false] values will be recached if false
     # @return [Array<Role>]
     def get_guild_roles(guild_id, cached: true)
-      return @guild_role_cache.fetch(guild_id) { super(guild_id) } if cached
+      if cached
+        ret_array = []
+        guild_roles = @guild_role_cache.fetch(guild_id) do
+          roles = super(guild_id)
+          roles.each { |role| ret_array << @role_cache.cache(role.id, CachedObjects::CachedRole.new(self, role)) }
+          roles.collect(&:id)
+        end
+        return ret_array
+      end
 
-      guild_roles = super(guild_id)
-      guild_roles.each { |role| @guild_role_cache.cache(role.id, CachedObjects::CachedRole.new(self, role)) }
+      guild_roles = super(guild_id).collect { |role| CachedObjects::CachedRole.new(self, role) }
+      guild_roles.each_with_object([]) { |role, ret_array| ret_array << @role_cache.cache(role.id, role) }
     end
 
     # Return a list of guild_channels
+    # @param guild_id [Integer]
     # @param cached [true, false] values will be recached if false
     def get_guild_channels(guild_id, cached: true)
       if cached
-        @guild_channel_cache.fetch(guild_id) { CachedObjects::CachedChannel.new(self, super(guild_id)) }
+        channels = @guild_channel_cache.fetch(guild_id) { super(guild_id).collect(&:id) }
+        channels.collect { |channel_id| get_channel(channel_id) }
       else
-        guild_channels = CachedObjects::CachedChannel.new(self, super(guild_id))
+        guild_channels = super(guild_id)
         @guild_channel_cache.cache(guild_id, guild_channels.collect(&:id))
-        guild_channels.each { |channel| @channel_cache.cache(channel.id, channel) }
+        guild_channels.each do |channel|
+          channel = CachedObjects::CachedChannel.new(self, channel)
+          @channel_cache.cache(channel.id, channel)
+        end
       end
     end
+
+    # @!visibility private
+    def self.__event(name, klass, coerce_klass = nil)
+      return super if coerce_klass.nil?
+      define_method(:"on_#{name}") do |&block|
+        handler = lambda do |payload|
+          block.call(coerce_klass.new(self, klass.from_h(payload, :from_json)))
+        end
+        @event_handlers[name.upcase].push(handler)
+      end
+    end
+
+    # @!macro gateway_event
+    __event(:channel_create, Gateway::ChannelCreate, CachedObjects::CachedChannel)
+
+    # @!macro gateway_event
+    __event(:channel_update, Gateway::ChannelUpdate, CachedObjects::CachedChannel)
+
+    # @!macro gateway_event
+    __event(:channel_delete, Gateway::ChannelDelete, CachedObjects::CachedChannel)
+
+    # @!macro gateway_event
+    __event(:guild_create, Gateway::GuildCreate, CachedObjects::CachedGuild)
+
+    # @!macro gateway_event
+    __event(:guild_update, Gateway::GuildUpdate, CachedObjects::CachedGuild)
+
+    # @!macro gateway_event
+    __event(:guild_delete, Gateway::GuildDelete, CachedObjects::CachedGuild)
+
+    # @!macro gateway_event
+    __event(:guild_member_add, Gateway::GuildMemberAdd, CachedObjects::CachedMember)
+
+    # @!macro gateway_event
+    __event(:message_create, Gateway::MessageCreate, CachedObjects::CachedMessage)
+
+    # @!macro gateway_event
+    __event(:message_update, Gateway::MessageUpdate, CachedObjects::CachedMessage)
+
+    # @!macro gateway_event
+    __event(:user_update, Gateway::UserUpdate, CachedObjects::CachedUser)
   end
 end

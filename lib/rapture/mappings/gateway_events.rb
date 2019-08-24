@@ -159,10 +159,6 @@ module Rapture::Gateway
     getter :session_id
   end
 
-  # An event stub for when a `RESUME` is preformed in the gateway
-  class Resumed
-  end
-
   # An event that is fired when a new {Channel} is created.
   ChannelCreate = Rapture::Channel.dup
 
@@ -237,7 +233,10 @@ module Rapture::Gateway
   end
 
   # An event that is fired when a member is added to a guild.
-  class GuildMemberAdd < Rapture::Member
+  # @!parse
+  #   class GuildMemberAdd < Rapture::Member; end
+  GuildMemberAdd = Rapture::Member.dup
+  class GuildMemberAdd
     include Rapture::Mapping
 
     # @!attribute [r] guild_id

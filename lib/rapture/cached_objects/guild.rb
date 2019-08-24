@@ -2,18 +2,33 @@
 
 module Rapture::CachedObjects
   class CachedGuild < Base(Rapture::Guild)
+    extend ModifySetter
+
+    setter :name
+    setter :region
+    setter :verification_level
+    setter :default_message_notifications
+    setter :explicit_content_filter
+    setter :afk_channel_id
+    setter :afk_timeout
+    setter :icon
+    setter :owner_id
+    setter :splash
+    setter :system_channel_id
+
     def initialize(client, data)
       super(client, data)
 
-      cached_channels = @delegate.channels.collect { |channel| CachedChannel.new(client, channel) }
-      @delegate.instance_variable_set(:@channels, cached_channels)
+      if @delegate.channels
+        cached_channels = @delegate.channels.collect { |channel| CachedChannel.new(client, channel) }
+        @delegate.instance_variable_set(:@channels, cached_channels)
+      end
 
       cached_roles = @delegate.roles.collect { |role| CachedRole.new(client, role, data.id) }
       @delegate.instance_variable_set(:@roles, cached_roles)
     end
 
     # Modify this guild's settings
-    # @param guild_id [String, Integer]
     # @param name [String]
     # @param region [String]
     # @param verification_level [Integer]
@@ -48,7 +63,7 @@ module Rapture::CachedObjects
     # Get an array of {CachedChannel} for this guild
     # @return [Array<CachedChannel>]
     def channels
-      client.get_guild_channels(self.id)
+      @delegate.channels ||= client.get_guild_channels(self.id)
     end
 
     # Create a new channel

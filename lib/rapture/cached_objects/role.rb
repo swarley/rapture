@@ -2,6 +2,14 @@
 
 module Rapture::CachedObjects
   class CachedRole < Base(Rapture::Role)
+    extend ModifySetter
+
+    setter :name
+    setter :permissions
+    setter :color
+    setter :hoist
+    setter :mentionable
+
     attr_reader :guild_id
 
     def initialize(client, data, guild_id)
@@ -9,12 +17,18 @@ module Rapture::CachedObjects
       @guild_id = guild_id
     end
 
+    # @param name [String]
+    # @param permissions [Integer]
+    # @param color [Integer]
+    # @param hoist [true, false]
+    # @param mentionable [true, false]
+    # @param reason [String]
     def modify(name: nil, permissions: nil, color: nil, hoist: nil, mentionable: nil, reason: nil)
-      updated = client.modify_guild_role(
+      @delegate = client.modify_guild_role(
         self.guild_id, self.id, name: name, permissions: permissions,
                                 color: color, hoist: hoist, mentionable: mentionable, reason: reason,
       )
-      @delegate = updated
+      self
     end
 
     def color=(value, reason: nil)

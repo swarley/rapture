@@ -32,4 +32,24 @@ module Rapture::CachedObjects
 
     delegate_klass
   end
+
+  module ModifySetter
+    private
+
+    # @!macro [attach] modify_setter
+    #   @!attribute [rw] $1
+    #     @return [self]
+    #   @!method set_$1(value, reason: nil)
+    #     @return [self]
+    #     @param reason [String] audit log reason
+    def setter(name)
+      define_method(:"#{name}=") do |value|
+        self.modify(name => value)
+      end
+
+      define_method(:"set_#{name}") do |value, reason: nil|
+        self.modify(name => value, :reason => reason)
+      end
+    end
+  end
 end
